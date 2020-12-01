@@ -5,6 +5,7 @@
 #include "base/message_loop/message_pump.h"
 
 #include "base/check.h"
+#include "base/herqules_buildflags.h"
 #include "base/message_loop/message_pump_default.h"
 #include "base/message_loop/message_pump_for_io.h"
 #include "base/message_loop/message_pump_for_ui.h"
@@ -59,6 +60,11 @@ std::unique_ptr<MessagePump> MessagePump::Create(MessagePumpType type) {
 
     case MessagePumpType::IO:
       return std::make_unique<MessagePumpForIO>();
+
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case MessagePumpType::SHM:
+      return std::make_unique<MessagePumpForSHM>();
+#endif
 
 #if defined(OS_ANDROID)
     case MessagePumpType::JAVA:

@@ -8,6 +8,7 @@
 #include <memory>
 
 #include "base/compiler_specific.h"
+#include "base/herqules_buildflags.h"
 #include "base/macros.h"
 #include "base/memory/ref_counted.h"
 #include "base/observer_list.h"
@@ -130,6 +131,9 @@ class TaskEnvironment {
     // The main thread pumps asynchronous IO messages and supports the
     // FileDescriptorWatcher API on POSIX.
     IO,
+#if BUILDFLAG(USE_HERQULES)
+    SHM,
+#endif
   };
 
   // Note that this is irrelevant (and ignored) under

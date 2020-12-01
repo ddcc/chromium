@@ -62,6 +62,10 @@ base::MessagePumpType GetMessagePumpTypeForMainThreadType(
       return MessagePumpType::UI;
     case TaskEnvironment::MainThreadType::IO:
       return MessagePumpType::IO;
+#if BUILDFLAG(USE_HERQULES)
+    case TaskEnvironment::MainThreadType::SHM:
+      return MessagePumpType::SHM;
+#endif
   }
   NOTREACHED();
   return MessagePumpType::DEFAULT;

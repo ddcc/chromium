@@ -7,6 +7,7 @@
 #include <atomic>
 
 #include "base/bind.h"
+#include "base/herqules_buildflags.h"
 #include "base/memory/ptr_util.h"
 #include "base/message_loop/message_pump_type.h"
 #include "base/optional.h"
@@ -253,15 +254,27 @@ class ChannelTestShutdownAndWriteDelegate : public Channel::Delegate {
 };
 
 TEST(ChannelTest, PeerShutdownDuringRead) {
+#if BUILDFLAG(USE_HERQULES)
+  base::test::SingleThreadTaskEnvironment task_environment(
+      base::test::TaskEnvironment::MainThreadType::SHM);
+#else
   base::test::SingleThreadTaskEnvironment task_environment(
       base::test::TaskEnvironment::MainThreadType::IO);
+#endif
   PlatformChannel channel;
 
   // Create a "client" Channel with one end of the pipe, and Start() it.
+#if BUILDFLAG(USE_HERQULES)
+  std::unique_ptr<base::Thread> client_thread =
+      std::make_unique<base::Thread>("clientshm_thread");
+  client_thread->StartWithOptions(
+      base::Thread::Options(base::MessagePumpType::SHM, 0));
+#else
   std::unique_ptr<base::Thread> client_thread =
       std::make_unique<base::Thread>("clientio_thread");
   client_thread->StartWithOptions(
       base::Thread::Options(base::MessagePumpType::IO, 0));
+#endif
 
   scoped_refptr<Channel> client_channel = Channel::Create(
       nullptr, ConnectionParams(channel.TakeRemoteEndpoint()),
@@ -318,8 +331,13 @@ class RejectHandlesDelegate : public Channel::Delegate {
 };
 
 TEST(ChannelTest, RejectHandles) {
+#if BUILDFLAG(USE_HERQULES)
+  base::test::SingleThreadTaskEnvironment task_environment(
+      base::test::TaskEnvironment::MainThreadType::SHM);
+#else
   base::test::SingleThreadTaskEnvironment task_environment(
       base::test::TaskEnvironment::MainThreadType::IO);
+#endif
   PlatformChannel platform_channel;
 
   RejectHandlesDelegate receiver_delegate;
@@ -374,7 +392,7 @@ TEST(ChannelTest, DeserializeMessage_BadExtraHeaderSize) {
                                                    base::kNullProcessHandle));
 }
 
-#if !defined(OS_WIN) && !defined(OS_APPLE) && !defined(OS_FUCHSIA)
+#if !defined(OS_WIN) && !defined(OS_APPLE) && !defined(OS_FUCHSIA) && !BUILDFLAG(USE_HERQULES)
 TEST(ChannelTest, DeserializeMessage_NonZeroExtraHeaderSize) {
   // Verifies that a message payload is rejected when the extra header chunk
   // size anything but zero on Linux, even if it's aligned.
@@ -428,9 +446,13 @@ class CountingChannelDelegate : public Channel::Delegate {
 
 TEST(ChannelTest, PeerStressTest) {
   constexpr size_t kLotsOfMessages = 1024;
-
+#if BUILDFLAG(USE_HERQULES)
+  base::test::SingleThreadTaskEnvironment task_environment(
+      base::test::TaskEnvironment::MainThreadType::SHM);
+#else
   base::test::SingleThreadTaskEnvironment task_environment(
       base::test::TaskEnvironment::MainThreadType::IO);
+#endif
   base::RunLoop run_loop;
 
   // Both channels should receive all the messages that each is sent. When
@@ -449,7 +471,11 @@ TEST(ChannelTest, PeerStressTest) {
 
   // Create a second IO thread for the peer channel.
   base::Thread::Options thread_options;
+#if BUILDFLAG(USE_HERQULES)
+  thread_options.message_pump_type = base::MessagePumpType::SHM;
+#else
   thread_options.message_pump_type = base::MessagePumpType::IO;
+#endif
   base::Thread peer_thread("peer_b_io");
   peer_thread.StartWithOptions(thread_options);
 
@@ -550,8 +576,13 @@ class CallbackChannelDelegate : public Channel::Delegate {
 };
 
 TEST(ChannelTest, MessageSizeTest) {
+#if BUILDFLAG(USE_HERQULES)
+  base::test::SingleThreadTaskEnvironment task_environment(
+      base::test::TaskEnvironment::MainThreadType::SHM);
+#else
   base::test::SingleThreadTaskEnvironment task_environment(
       base::test::TaskEnvironment::MainThreadType::IO);
+#endif
   PlatformChannel platform_channel;
 
   CallbackChannelDelegate receiver_delegate;

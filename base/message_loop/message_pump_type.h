@@ -5,6 +5,7 @@
 #ifndef BASE_MESSAGE_LOOP_MESSAGE_PUMP_TYPE_H_
 #define BASE_MESSAGE_LOOP_MESSAGE_PUMP_TYPE_H_
 
+#include "base/herqules_buildflags.h"
 #include "build/build_config.h"
 
 namespace base {
@@ -25,6 +26,11 @@ enum class MessagePumpType {
 
   // This type of pump also supports asynchronous IO.
   IO,
+
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  // This type of pump is used for shared memory IPC
+  SHM,
+#endif
 
 #if defined(OS_ANDROID)
   // This type of pump is backed by a Java message handler which is

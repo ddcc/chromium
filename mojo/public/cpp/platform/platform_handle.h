@@ -8,6 +8,7 @@
 #include "base/check_op.h"
 #include "base/component_export.h"
 #include "base/files/platform_file.h"
+#include "base/herqules_buildflags.h"
 #include "base/macros.h"
 #include "build/build_config.h"
 #include "mojo/public/c/system/platform_handle.h"
@@ -52,6 +53,10 @@ class COMPONENT_EXPORT(MOJO_CPP_PLATFORM) PlatformHandle {
 #endif
 #if defined(OS_POSIX) || defined(OS_FUCHSIA)
     kFd,
+#if BUILDFLAG(USE_HERQULES)
+    kFdShmRx,
+    kFdShmTx,
+#endif
 #endif
   };
 
@@ -69,6 +74,9 @@ class COMPONENT_EXPORT(MOJO_CPP_PLATFORM) PlatformHandle {
 
 #if defined(OS_POSIX) || defined(OS_FUCHSIA)
   explicit PlatformHandle(base::ScopedFD fd);
+#if BUILDFLAG(USE_HERQULES)
+  explicit PlatformHandle(base::ScopedFD fd, bool rx);
+#endif
 #endif
 
   ~PlatformHandle();
@@ -171,18 +179,44 @@ class COMPONENT_EXPORT(MOJO_CPP_PLATFORM) PlatformHandle {
 
 #if defined(OS_POSIX) || defined(OS_FUCHSIA)
   bool is_valid_fd() const { return fd_.is_valid(); }
-  bool is_fd() const { return type_ == Type::kFd; }
   const base::ScopedFD& GetFD() const { return fd_; }
   base::ScopedFD TakeFD() {
-    if (type_ == Type::kFd)
+    if (type_ != Type::kNone)
       type_ = Type::kNone;
     return std::move(fd_);
   }
   int ReleaseFD() WARN_UNUSED_RESULT {
-    if (type_ == Type::kFd)
+    if (type_ != Type::kNone)
       type_ = Type::kNone;
     return fd_.release();
   }
+
+  bool is_raw_fd() const { return type_ == Type::kFd; }
+
+#if BUILDFLAG(USE_HERQULES)
+  bool is_shm_rx_fd() const { return type_ == Type::kFdShmRx; }
+  bool is_shm_tx_fd() const { return type_ == Type::kFdShmTx; }
+  bool is_shm_fd() const { return is_shm_rx_fd() || is_shm_tx_fd(); }
+  bool is_fd() const { return is_raw_fd() || is_shm_fd(); }
+
+  bool convert_to_rx() {
+    if (is_shm_tx_fd()) {
+      type_ = Type::kFdShmRx;
+      return true;
+    }
+    return false;
+  }
+
+  bool convert_to_tx() {
+    if (is_shm_rx_fd()) {
+      type_ = Type::kFdShmTx;
+      return true;
+    }
+    return false;
+  }
+#else
+  bool is_fd() const { return is_raw_fd(); }
+#endif
 #endif
 
   bool is_valid_platform_file() const {

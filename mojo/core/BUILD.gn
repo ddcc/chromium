@@ -5,6 +5,7 @@
 import("//build/config/chromeos/ui_mode.gni")
 import("//build/config/compiler/compiler.gni")
 import("//build/config/nacl/config.gni")
+import("//build/config/posix/herqules.gni")
 import("//testing/libfuzzer/fuzzer_test.gni")
 import("//testing/test.gni")
 
@@ -129,10 +130,17 @@ template("core_impl_source_set") {
 
     if (is_posix && !is_mac) {
       if (!is_nacl || is_nacl_nonsfi) {
-        sources += [
-          "broker_posix.cc",
-          "channel_posix.cc",
-        ]
+        if (use_herqules) {
+          sources += [
+            "broker_herqules.cc",
+            "channel_herqules.cc",
+          ]
+        } else {
+          sources += [
+            "broker_posix.cc",
+            "channel_posix.cc",
+          ]
+        }
       }
     }
 

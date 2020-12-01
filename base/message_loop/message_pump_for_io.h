@@ -8,6 +8,7 @@
 // This header is a forwarding header to coalesce the various platform specific
 // types representing MessagePumpForIO.
 
+#include "base/herqules_buildflags.h"
 #include "build/build_config.h"
 
 #if defined(OS_WIN)
@@ -22,6 +23,9 @@
 #include "base/message_loop/message_pump_fuchsia.h"
 #elif defined(OS_POSIX)
 #include "base/message_loop/message_pump_libevent.h"
+# if BUILDFLAG(USE_HERQULES)
+#include "base/message_loop/message_pump_herqules.h"
+# endif
 #endif
 
 namespace base {
@@ -39,6 +43,9 @@ using MessagePumpForIO = MessagePumpDefault;
 using MessagePumpForIO = MessagePumpFuchsia;
 #elif defined(OS_POSIX)
 using MessagePumpForIO = MessagePumpLibevent;
+# if BUILDFLAG(USE_HERQULES)
+using MessagePumpForSHM = MessagePumpHerQules;
+# endif
 #else
 #error Platform does not define MessagePumpForIO
 #endif

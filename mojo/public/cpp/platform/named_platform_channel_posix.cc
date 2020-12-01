@@ -11,10 +11,13 @@
 
 #include "base/files/file_util.h"
 #include "base/files/scoped_file.h"
+#include "base/herqules_buildflags.h"
 #include "base/logging.h"
 #include "base/posix/eintr_wrapper.h"
 #include "base/rand_util.h"
 #include "base/strings/string_number_conversions.h"
+#include "base/threading/thread_restrictions.h"
+#include "mojo/core/herqules.h"
 
 namespace mojo {
 
@@ -22,11 +25,33 @@ namespace {
 
 NamedPlatformChannel::ServerName GenerateRandomServerName(
     const NamedPlatformChannel::Options& options) {
-  return options.socket_dir
-      .AppendASCII(base::NumberToString(base::RandUint64()))
+  base::FilePath directory = options.socket_dir;
+#if BUILDFLAG(USE_HERQULES)
+  GetShmemTempDir(false, &directory);
+#endif
+  return directory.AppendASCII(base::NumberToString(base::RandUint64()))
       .value();
 }
 
+#if BUILDFLAG(USE_HERQULES)
+PlatformHandle GetShmFile(const NamedPlatformChannel::ServerName& server_name,
+                          bool server) {
+  DCHECK(!server_name.empty());
+
+  base::ThreadRestrictions::ScopedAllowIO allow_io;
+  base::File shm_file = base::FILEToFile(
+      base::OpenFile(base::FilePath(server_name), server ? "wb+" : "rb+"));
+  if (!shm_file.IsValid()) {
+    return PlatformHandle();
+  }
+
+  if (server && !AllocateFileRegion(&shm_file, 0, core::kHerQulesBufferSize)) {
+    return PlatformHandle();
+  }
+
+  return PlatformHandle(base::ScopedFD(shm_file.TakePlatformFile()), !server);
+}
+#else
 // This function fills in |unix_addr| with the appropriate data for the socket,
 // and sets |unix_addr_len| to the length of the data therein.
 // Returns true on success, or false on failure (typically because |server_name|
@@ -74,6 +99,7 @@ PlatformHandle CreateUnixDomainSocket() {
   }
   return handle;
 }
+#endif
 
 }  // namespace
 
@@ -85,6 +111,12 @@ PlatformChannelServerEndpoint NamedPlatformChannel::CreateServerEndpoint(
   if (name.empty())
     name = GenerateRandomServerName(options);
 
+#if BUILDFLAG(USE_HERQULES)
+  PlatformHandle handle = GetShmFile(name, true);
+  if (!handle.is_valid()) {
+    return PlatformChannelServerEndpoint();
+  }
+#else
   // Make sure the path we need exists.
   base::FilePath socket_dir = base::FilePath(name).DirName();
   if (!base::CreateDirectory(socket_dir)) {
@@ -120,7 +152,7 @@ PlatformChannelServerEndpoint NamedPlatformChannel::CreateServerEndpoint(
     unlink(name.c_str());
     return PlatformChannelServerEndpoint();
   }
-
+#endif
   *server_name = name;
   return PlatformChannelServerEndpoint(std::move(handle));
 }
@@ -130,6 +162,12 @@ PlatformChannelEndpoint NamedPlatformChannel::CreateClientEndpoint(
     const ServerName& server_name) {
   DCHECK(!server_name.empty());
 
+#if BUILDFLAG(USE_HERQULES)
+  PlatformHandle handle = GetShmFile(server_name, false);
+  if (!handle.is_valid()) {
+    return PlatformChannelEndpoint();
+  }
+#else
   struct sockaddr_un unix_addr;
   size_t unix_addr_len;
   if (!MakeUnixAddr(server_name, &unix_addr, &unix_addr_len))
@@ -145,6 +183,8 @@ PlatformChannelEndpoint NamedPlatformChannel::CreateClientEndpoint(
     PLOG(ERROR) << "connect " << server_name;
     return PlatformChannelEndpoint();
   }
+#endif
+
   return PlatformChannelEndpoint(std::move(handle));
 }
 

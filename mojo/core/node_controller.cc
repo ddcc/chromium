@@ -10,6 +10,7 @@
 
 #include "base/bind.h"
 #include "base/containers/queue.h"
+#include "base/herqules_buildflags.h"
 #include "base/location.h"
 #include "base/logging.h"
 #include "base/macros.h"
@@ -1288,6 +1289,10 @@ void NodeController::AttemptShutdownIfRequested() {
     }
 
     callback = std::move(shutdown_callback_);
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    // Destroy the broker, which will notify peers of disconnection
+    broker_.reset();
+#endif
     shutdown_callback_flag_.Set(false);
   }
 

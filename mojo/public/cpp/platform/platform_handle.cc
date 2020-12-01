@@ -107,6 +107,11 @@ PlatformHandle::PlatformHandle(base::ScopedFD fd)
   DCHECK_LT(fd_.get(), FDIO_MAX_FD);
 #endif
 }
+
+#if BUILDFLAG(USE_HERQULES)
+PlatformHandle::PlatformHandle(base::ScopedFD fd, bool rx)
+    : type_(rx ? Type::kFdShmRx : Type::kFdShmTx), fd_(std::move(fd)) {}
+#endif
 #endif
 
 PlatformHandle::~PlatformHandle() = default;
@@ -169,8 +174,22 @@ void PlatformHandle::ToMojoPlatformHandle(PlatformHandle handle,
 
 #if defined(OS_POSIX) || defined(OS_FUCHSIA)
     DCHECK(handle.is_fd());
-    out_handle->type = MOJO_PLATFORM_HANDLE_TYPE_FILE_DESCRIPTOR;
-    out_handle->value = static_cast<uint64_t>(handle.TakeFD().release());
+    if (handle.is_raw_fd()) {
+      out_handle->type = MOJO_PLATFORM_HANDLE_TYPE_FILE_DESCRIPTOR;
+      out_handle->value = static_cast<uint64_t>(handle.TakeFD().release());
+      break;
+    }
+#if BUILDFLAG(USE_HERQULES)
+    else if (handle.is_shm_rx_fd()) {
+      out_handle->type = MOJO_PLATFORM_HANDLE_TYPE_FILE_DESCRIPTOR_SHM_RX;
+      out_handle->value = static_cast<uint64_t>(handle.TakeFD().release());
+      break;
+    } else if (handle.is_shm_tx_fd()) {
+      out_handle->type = MOJO_PLATFORM_HANDLE_TYPE_FILE_DESCRIPTOR_SHM_TX;
+      out_handle->value = static_cast<uint64_t>(handle.TakeFD().release());
+      break;
+    }
+#endif
 #endif
   } while (false);
 
@@ -205,6 +224,14 @@ PlatformHandle PlatformHandle::FromMojoPlatformHandle(
 #endif
 
 #if defined(OS_POSIX) || defined(OS_FUCHSIA)
+#if BUILDFLAG(USE_HERQULES)
+  if (handle->type == MOJO_PLATFORM_HANDLE_TYPE_FILE_DESCRIPTOR_SHM_RX)
+    return PlatformHandle(base::ScopedFD(static_cast<int>(handle->value)),
+                          true);
+  else if (handle->type == MOJO_PLATFORM_HANDLE_TYPE_FILE_DESCRIPTOR_SHM_TX)
+    return PlatformHandle(base::ScopedFD(static_cast<int>(handle->value)),
+                          false);
+#endif
   if (handle->type != MOJO_PLATFORM_HANDLE_TYPE_FILE_DESCRIPTOR)
     return PlatformHandle();
   return PlatformHandle(base::ScopedFD(static_cast<int>(handle->value)));

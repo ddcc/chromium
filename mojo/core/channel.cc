@@ -107,10 +107,15 @@ Channel::Message::Message(size_t capacity,
   // serialised into the message buffer. Since there could be a mix of fds and
   // mach ports, we store the mach ports as an <index, port> pair (of uint32_t),
   // so that the original ordering of handles can be re-created.
-  if (max_handles) {
+  if (max_handles_) {
     extra_header_size =
-        sizeof(MachPortsExtraHeader) + (max_handles * sizeof(MachPortsEntry));
+        sizeof(MachPortsExtraHeader) + (max_handles_ * sizeof(MachPortsEntry));
   }
+#elif defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  if (max_handles_) {
+      extra_header_size =
+          sizeof(HerQulesExtraHeader) + (max_handles_ * sizeof(HerQulesEntry));
+    }
 #endif
   // Pad extra header data to be aliged to |kChannelMessageAlignment| bytes.
   if (!IsAlignedForChannelMessage(extra_header_size)) {
@@ -159,6 +164,13 @@ Channel::Message::Message(size_t capacity,
     // Initialize all handles to invalid values.
     for (size_t i = 0; i < max_handles_; ++i) {
       mach_ports_header_->entries[i] = {0};
+    }
+#elif defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    handles_ = reinterpret_cast<HerQulesExtraHeader*>(mutable_extra_header());
+    handles_->num_fds = 0;
+    // Initialize all handles to invalid values.
+    for (size_t i = 0; i < max_handles_; ++i) {
+      handles_->entries[i].fd = -1;
     }
 #endif
   }
@@ -241,6 +253,16 @@ Channel::MessagePtr Channel::Message::Deserialize(
           ? 0
           : (extra_header_size - sizeof(MachPortsExtraHeader)) /
                 sizeof(MachPortsEntry);
+#elif defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  if (extra_header_size > 0 &&
+      extra_header_size < sizeof(HerQulesExtraHeader)) {
+    return nullptr;
+  }
+  uint32_t max_handles =
+      extra_header_size == 0
+          ? 0
+          : (extra_header_size - sizeof(HerQulesExtraHeader)) /
+                sizeof(HerQulesEntry);
 #else
   const uint32_t max_handles = 0;
   // No extra header expected. Fail if this is detected.
@@ -327,6 +349,8 @@ void Channel::Message::ExtendPayload(size_t new_payload_size) {
 #elif defined(OS_MAC)
       mach_ports_header_ =
           reinterpret_cast<MachPortsExtraHeader*>(mutable_extra_header());
+#elif defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+      handles_ = reinterpret_cast<HerQulesExtraHeader*>(mutable_extra_header());
 #endif
     }
   }
@@ -428,9 +452,7 @@ void Channel::Message::SetHandles(
       handle = handle_vector_[i].handle().GetHandle().Get();
     handles_[i].handle = base::win::HandleToUint32(handle);
   }
-#endif  // defined(OS_WIN)
-
-#if defined(OS_MAC)
+#elif defined(OS_MAC)
   if (mach_ports_header_) {
     for (size_t i = 0; i < max_handles_; ++i) {
       mach_ports_header_->entries[i] = {0};
@@ -440,6 +462,18 @@ void Channel::Message::SetHandles(
           static_cast<uint8_t>(handle_vector_[i].handle().type());
     }
     mach_ports_header_->num_ports = handle_vector_.size();
+  }
+#elif defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  if (handles_) {
+    for (size_t i = 0; i < max_handles_; ++i) {
+      handles_->entries[i] = {0};
+    }
+    for (size_t i = 0; i < handle_vector_.size(); i++) {
+      handles_->entries[i].type =
+          static_cast<uint8_t>(handle_vector_[i].handle().type());
+      handles_->entries[i].fd = handle_vector_[i].handle().GetFD().get();
+    }
+    handles_->num_fds = handle_vector_.size();
   }
 #endif
 }
@@ -480,9 +514,7 @@ class Channel::ReadBuffer {
     data_ = MakeAlignedBuffer(size_);
   }
 
-  ~ReadBuffer() {
-    DCHECK(data_);
-  }
+  ~ReadBuffer() { DCHECK(data_); }
 
   const char* occupied_bytes() const {
     return data_.get() + num_discarded_bytes_;

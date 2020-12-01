@@ -225,8 +225,13 @@ mojo::IncomingInvitation InitializeMojoIPCChannel() {
   endpoint =
       mojo::PlatformChannelEndpoint(mojo::PlatformHandle(std::move(receive)));
 #elif defined(OS_POSIX)
+#if BUILDFLAG(USE_HERQULES)
+  endpoint = mojo::PlatformChannelEndpoint(mojo::PlatformHandle(base::ScopedFD(
+      base::GlobalDescriptors::GetInstance()->Get(kMojoIPCChannel)), true));
+#else
   endpoint = mojo::PlatformChannelEndpoint(mojo::PlatformHandle(base::ScopedFD(
       base::GlobalDescriptors::GetInstance()->Get(kMojoIPCChannel))));
+#endif
 #endif
 
   return mojo::IncomingInvitation::Accept(

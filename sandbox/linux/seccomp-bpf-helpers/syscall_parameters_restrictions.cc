@@ -19,10 +19,12 @@
 #include <time.h>
 #include <unistd.h>
 
+#include "base/herqules_buildflags.h"
 #include "base/macros.h"
 #include "base/notreached.h"
 #include "base/synchronization/synchronization_buildflags.h"
 #include "build/build_config.h"
+#include "mojo/core/herqules.h"
 #include "sandbox/linux/bpf_dsl/bpf_dsl.h"
 #include "sandbox/linux/bpf_dsl/seccomp_macros.h"
 #include "sandbox/linux/seccomp-bpf-helpers/sigsys_handlers.h"
@@ -250,7 +252,12 @@ ResultExpr RestrictFcntlCommands() {
               F_SETLKW,
               F_GETLK,
               F_DUPFD,
-              F_DUPFD_CLOEXEC),
+              F_DUPFD_CLOEXEC
+#if BUILDFLAG(USE_HERQULES)
+              , mojo::core::F_PUSHFD
+              , mojo::core::F_POPFD
+#endif
+              ),
              Allow())
       .Case(F_SETFL,
             If((long_arg & ~kAllowedMask) == 0, Allow()).Else(CrashSIGSYS()))

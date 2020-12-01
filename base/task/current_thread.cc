@@ -259,4 +259,37 @@ bool CurrentIOThread::WatchZxHandle(
 }
 #endif
 
+//------------------------------------------------------------------------------
+// CurrentSHMThread
+
+#if BUILDFLAG(USE_HERQULES)
+// static
+CurrentSHMThread CurrentSHMThread::Get() {
+  auto* sequence_manager = GetCurrentSequenceManagerImpl();
+  DCHECK(sequence_manager);
+  DCHECK(sequence_manager->IsType(MessagePumpType::SHM));
+  return CurrentSHMThread(sequence_manager);
+}
+
+// static
+bool CurrentSHMThread::IsSet() {
+  auto* sequence_manager = GetCurrentSequenceManagerImpl();
+  return sequence_manager && sequence_manager->IsType(MessagePumpType::SHM);
+}
+
+MessagePumpForSHM* CurrentSHMThread::GetMessagePumpForSHM() const {
+  return static_cast<MessagePumpForSHM*>(current_->GetMessagePump());
+}
+
+bool CurrentSHMThread::WatchMemoryRegion(
+    UnsafeSharedMemoryRegion& region,
+    MessagePumpForSHM::Mode mode,
+    MessagePumpForSHM::ShmWatchController* controller,
+    MessagePumpForSHM::ShmWatcher* delegate) {
+  DCHECK(current_->IsBoundToCurrentThread());
+  return GetMessagePumpForSHM()->WatchMemoryRegion(region, mode, controller,
+                                                   delegate);
+}
+#endif
+
 }  // namespace base
