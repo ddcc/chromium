@@ -10,6 +10,8 @@ enum MessagePumpType {
   kUi,
   kCustom,
   kIo,
+  [EnableIf=use_herqules]
+  kShm,
   [EnableIf=is_android]
   kJava,
   [EnableIf=is_mac]

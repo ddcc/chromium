@@ -9,7 +9,9 @@
 
 #include "base/base_export.h"
 #include "base/check.h"
+#include "base/herqules_buildflags.h"
 #include "base/memory/scoped_refptr.h"
+#include "base/memory/writable_shared_memory_region.h"
 #include "base/message_loop/message_pump_for_io.h"
 #include "base/message_loop/message_pump_for_ui.h"
 #include "base/pending_task.h"
@@ -273,7 +275,7 @@ class BASE_EXPORT CurrentIOThread : public CurrentThread {
                            MessagePumpForIO::Mode mode,
                            MessagePumpForIO::FdWatchController* controller,
                            MessagePumpForIO::FdWatcher* delegate);
-#endif  // defined(OS_WIN)
+#endif
 
 #if defined(OS_MAC)
   bool WatchMachReceivePort(
@@ -300,6 +302,34 @@ class BASE_EXPORT CurrentIOThread : public CurrentThread {
 
   MessagePumpForIO* GetMessagePumpForIO() const;
 };
+
+#if BUILDFLAG(USE_HERQULES)
+// ForSHM extension of CurrentThread.
+class BASE_EXPORT CurrentSHMThread : public CurrentThread {
+ public:
+  // Returns an interface for the CurrentIOThread of the current thread.
+  // Asserts that IsSet().
+  static CurrentSHMThread Get();
+
+  // Returns true if the current thread is running a CurrentIOThread.
+  static bool IsSet();
+
+  CurrentSHMThread* operator->() { return this; }
+
+  bool WatchMemoryRegion(UnsafeSharedMemoryRegion& region,
+                         bool persistent,
+                         MessagePumpForSHM::Mode mode,
+                         MessagePumpForSHM::ShmWatchController* controller,
+                         MessagePumpForSHM::ShmWatcher* delegate);
+
+ private:
+  explicit CurrentSHMThread(
+      sequence_manager::internal::SequenceManagerImpl* current)
+      : CurrentThread(current) {}
+
+  MessagePumpForSHM* GetMessagePumpForSHM() const;
+};
+#endif
 
 }  // namespace base
 

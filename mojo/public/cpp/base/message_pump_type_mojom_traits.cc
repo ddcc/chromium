@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+#include "base/herqules_buildflags.h"
 #include "mojo/public/cpp/base/message_pump_type_mojom_traits.h"
 #include "build/build_config.h"
 
@@ -20,6 +21,10 @@ EnumTraits<mojo_base::mojom::MessagePumpType, base::MessagePumpType>::ToMojom(
       return mojo_base::mojom::MessagePumpType::kCustom;
     case base::MessagePumpType::IO:
       return mojo_base::mojom::MessagePumpType::kIo;
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case base::MessagePumpType::SHM:
+        return mojo_base::mojom::MessagePumpType::kShm;
+#endif
 #if defined(OS_ANDROID)
     case base::MessagePumpType::JAVA:
       return mojo_base::mojom::MessagePumpType::kJava;
@@ -54,6 +59,11 @@ bool EnumTraits<mojo_base::mojom::MessagePumpType, base::MessagePumpType>::
     case mojo_base::mojom::MessagePumpType::kIo:
       *output = base::MessagePumpType::IO;
       return true;
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case mojo_base::mojom::MessagePumpType::kShm:
+      *output = base::MessagePumpType::SHM;
+      return true;
+#endif
 #if defined(OS_ANDROID)
     case mojo_base::mojom::MessagePumpType::kJava:
       *output = base::MessagePumpType::JAVA;

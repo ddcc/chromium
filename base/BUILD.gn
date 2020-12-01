@@ -27,6 +27,7 @@ import("//build/config/compiler/compiler.gni")
 import("//build/config/dcheck_always_on.gni")
 import("//build/config/logging.gni")
 import("//build/config/nacl/config.gni")
+import("//build/config/posix/herqules.gni")
 import("//build/config/profiling/profiling.gni")
 import("//build/config/sysroot.gni")
 import("//build/config/ui.gni")
@@ -1280,6 +1281,7 @@ component("base") {
     ":cfi_buildflags",
     ":clang_profiling_buildflags",
     ":debugging_buildflags",
+    ":herqules_buildflags",
     ":logging_buildflags",
     ":orderfile_buildflags",
     ":partition_alloc_buildflags",
@@ -2059,6 +2061,13 @@ component("base") {
     ]
   }
 
+  if (use_herqules) {
+    sources += [
+      "message_loop/message_pump_herqules.cc",
+      "message_loop/message_pump_herqules.h",
+    ]
+  }
+
   # Android and MacOS have their own custom shared memory handle
   # implementations. e.g. due to supporting both POSIX and native handles.
   if (is_posix && !is_android && !is_mac) {
@@ -2259,6 +2268,12 @@ buildflag_header("debugging_buildflags") {
     "ENABLE_GDBINIT_WARNING=$enable_gdbinit_warning",
     "ENABLE_LLDBINIT_WARNING=$enable_lldbinit_warning",
   ]
+}
+
+buildflag_header("herqules_buildflags") {
+  header = "herqules_buildflags.h"
+
+  flags = [ "USE_HERQULES=$use_herqules" ]
 }
 
 buildflag_header("logging_buildflags") {

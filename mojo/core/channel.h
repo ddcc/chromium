@@ -8,6 +8,7 @@
 #include <vector>
 
 #include "base/containers/span.h"
+#include "base/herqules_buildflags.h"
 #include "base/macros.h"
 #include "base/memory/aligned_memory.h"
 #include "base/memory/ref_counted.h"
@@ -144,6 +145,22 @@ class MOJO_SYSTEM_IMPL_EXPORT Channel
     };
     static_assert(sizeof(HandleEntry) == 4,
                   "sizeof(HandleEntry) must be 4 bytes");
+#elif defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    struct HerQulesEntry {
+      uint16_t type;
+      int fd;
+    };
+    static_assert(sizeof(HerQulesEntry) == 6,
+                  "sizeof(HerQulesEntry) must be 6 bytes");
+
+    struct HerQulesExtraHeader {
+      uint16_t num_fds;
+
+      HerQulesEntry entries[0];
+    };
+
+    static_assert(sizeof(HerQulesExtraHeader) == 2,
+                  "sizeof(HerQulesExtraHeader) must be 2 bytes");
 #endif
 #pragma pack(pop)
 
@@ -231,6 +248,9 @@ class MOJO_SYSTEM_IMPL_EXPORT Channel
 #elif defined(OS_MAC)
     // On OSX, handles are serialised into the extra header section.
     MachPortsExtraHeader* mach_ports_header_ = nullptr;
+#elif defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    // On HerQules, handles are serialised in to the extra header section.
+    HerQulesExtraHeader* handles_ = nullptr;
 #endif
 
     DISALLOW_COPY_AND_ASSIGN(Message);

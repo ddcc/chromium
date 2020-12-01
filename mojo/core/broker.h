@@ -5,9 +5,11 @@
 #ifndef MOJO_CORE_BROKER_H_
 #define MOJO_CORE_BROKER_H_
 
+#include "base/herqules_buildflags.h"
 #include "base/macros.h"
 #include "base/memory/ref_counted.h"
 #include "base/memory/writable_shared_memory_region.h"
+#include "base/memory/unsafe_shared_memory_region.h"
 #include "base/synchronization/lock.h"
 #include "mojo/public/cpp/platform/platform_channel_endpoint.h"
 #include "mojo/public/cpp/platform/platform_handle.h"
@@ -49,6 +51,12 @@ class Broker {
   // with message ordering since we can only have one request at a time
   // in-flight.
   base::Lock lock_;
+
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  base::UnsafeSharedMemoryRegion ro_region_, wr_region_;
+  base::WritableSharedMemoryMapping ro_mapping_, wr_mapping_;
+  size_t read_;
+#endif
 
   DISALLOW_COPY_AND_ASSIGN(Broker);
 };

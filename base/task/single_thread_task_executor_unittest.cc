@@ -12,6 +12,7 @@
 #include "base/bind.h"
 #include "base/bind_helpers.h"
 #include "base/compiler_specific.h"
+#include "base/herqules_buildflags.h"
 #include "base/logging.h"
 #include "base/macros.h"
 #include "base/memory/ptr_util.h"
@@ -558,6 +559,10 @@ class SingleThreadTaskExecutorTypedTest
         return "UI_pump";
       case MessagePumpType::CUSTOM:
         break;
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+      case MessagePumpType::SHM:
+        break;
+#endif  // defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
 #if defined(OS_ANDROID)
       case MessagePumpType::JAVA:
         break;

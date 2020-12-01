@@ -10,6 +10,7 @@
 #include "base/command_line.h"
 #include "base/debug/stack_trace.h"
 #include "base/feature_list.h"
+#include "base/herqules_buildflags.h"
 #include "base/logging.h"
 #include "base/macros.h"
 #include "base/message_loop/message_pump_type.h"
@@ -31,7 +32,11 @@ namespace {
 class IPCSupport {
  public:
   IPCSupport() : ipc_thread_("Mojo IPC") {
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    base::Thread::Options options(base::MessagePumpType::SHM, 0);
+#else
     base::Thread::Options options(base::MessagePumpType::IO, 0);
+#endif
     ipc_thread_.StartWithOptions(options);
     mojo::core::Core::Get()->SetIOTaskRunner(ipc_thread_.task_runner());
   }

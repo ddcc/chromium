@@ -33,6 +33,7 @@
 #include <unistd.h>
 
 #include "base/files/scoped_file.h"
+#include "base/herqules_buildflags.h"
 #include "base/posix/global_descriptors.h"
 #endif
 
@@ -45,6 +46,10 @@
 
 #if defined(OS_POSIX) && !defined(OS_NACL_SFI)
 #include <sys/socket.h>
+#if BUILDFLAG(USE_HERQULES)
+#include "base/memory/unsafe_shared_memory_region.h"
+#include "mojo/core/herqules.h"
+#endif
 #elif defined(OS_NACL_SFI)
 #include "native_client/src/public/imc_syscalls.h"
 #endif
@@ -139,6 +144,26 @@ bool IsTargetDescriptorUsed(const base::FileHandleMappingVector& mapping,
 }
 #endif
 
+#if BUILDFLAG(USE_HERQULES)
+void CreateChannel(PlatformHandle* local_endpoint,
+                   PlatformHandle* remote_endpoint) {
+  base::subtle::PlatformSharedMemoryRegion
+      shm = base::UnsafeSharedMemoryRegion::TakeHandleForSerialization(
+          base::UnsafeSharedMemoryRegion::Create(core::kHerQulesBufferSize)),
+      dup = shm.Duplicate();
+  DCHECK(shm.IsValid() && dup.IsValid());
+
+  // Creates one endpoint, with separate receive and send buffers.
+  // See above comment for Mac OS.
+  // FIXME: Serialize the GUID?
+  *local_endpoint =
+      PlatformHandle(std::move(shm.PassPlatformHandle().fd), false);
+  *remote_endpoint =
+      PlatformHandle(std::move(dup.PassPlatformHandle().fd), true);
+  DCHECK(local_endpoint->is_valid());
+  DCHECK(remote_endpoint->is_valid());
+}
+#else
 void CreateChannel(PlatformHandle* local_endpoint,
                    PlatformHandle* remote_endpoint) {
   int fds[2];
@@ -168,6 +193,7 @@ void CreateChannel(PlatformHandle* local_endpoint,
   DCHECK(local_endpoint->is_valid());
   DCHECK(remote_endpoint->is_valid());
 }
+#endif
 #else
 #error "Unsupported platform."
 #endif
@@ -231,9 +257,13 @@ void PlatformChannel::PrepareToPassRemoteEndpoint(HandlePassingInfo* info,
   int target_fd = base::GlobalDescriptors::kBaseDescriptor;
   while (IsTargetDescriptorUsed(*info, target_fd))
     ++target_fd;
-  info->emplace_back(remote_endpoint_.platform_handle().GetFD().get(),
-                     target_fd);
+  auto& handle = remote_endpoint_.platform_handle();
+  info->emplace_back(handle.GetFD().get(), target_fd);
   *value = base::NumberToString(target_fd);
+#if BUILDFLAG(USE_HERQULES)
+  if (handle.is_shm_fd())
+    value->insert(0, handle.is_shm_rx_fd() ? "r" : "t");
+#endif
 #endif
 }
 
@@ -321,11 +351,25 @@ PlatformChannelEndpoint PlatformChannel::RecoverPassedEndpointFromString(
   return PlatformChannelEndpoint(PlatformHandle(std::move(receive)));
 #elif defined(OS_POSIX)
   int fd = -1;
+#if BUILDFLAG(USE_HERQULES)
+  char c = '\0';
+  if (!value.empty() && (value.front() == 'r' || value.front() == 't')) {
+    c = value.front();
+    value.remove_prefix(1);
+  }
+#endif
   if (value.empty() || !base::StringToInt(value, &fd) ||
       fd < base::GlobalDescriptors::kBaseDescriptor) {
     DLOG(ERROR) << "Invalid PlatformChannel endpoint string.";
     return PlatformChannelEndpoint();
   }
+
+#if BUILDFLAG(USE_HERQULES)
+  if (c) {
+    return PlatformChannelEndpoint(
+        PlatformHandle(base::ScopedFD(fd), c == 'r'));
+  }
+#endif
   return PlatformChannelEndpoint(PlatformHandle(base::ScopedFD(fd)));
 #endif
 }

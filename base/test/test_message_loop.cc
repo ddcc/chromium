@@ -5,6 +5,7 @@
 #include "base/test/test_message_loop.h"
 
 #include "base/compiler_specific.h"
+#include "base/herqules_buildflags.h"
 #include "base/message_loop/message_pump_type.h"
 #include "base/notreached.h"
 #include "base/run_loop.h"
@@ -24,6 +25,10 @@ test::SingleThreadTaskEnvironment::MainThreadType GetMainThreadType(
       return test::SingleThreadTaskEnvironment::MainThreadType::IO;
     case MessagePumpType::UI:
       return test::SingleThreadTaskEnvironment::MainThreadType::UI;
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case MessagePumpType::SHM:
+      return test::SingleThreadTaskEnvironment::MainThreadType::SHM;
+#endif
     case MessagePumpType::CUSTOM:
 #if defined(OS_ANDROID)
     case MessagePumpType::JAVA:
