@@ -9,6 +9,7 @@
 #include "base/bind.h"
 #include "base/callback_helpers.h"
 #include "base/feature_list.h"
+#include "base/herqules_buildflags.h"
 #include "base/memory/scoped_refptr.h"
 #include "base/sequenced_task_runner.h"
 #include "base/task/sequence_manager/sequence_manager.h"
@@ -29,6 +30,10 @@ const char* GetControlTaskQueueName(BrowserThread::ID thread_id) {
       return "ui_control_tq";
     case BrowserThread::IO:
       return "io_control_tq";
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case BrowserThread::SHM:
+      return "shm_control_tq";
+#endif
     case BrowserThread::ID_COUNT:
       break;
   }
@@ -42,6 +47,10 @@ const char* GetRunAllPendingTaskQueueName(BrowserThread::ID thread_id) {
       return "ui_run_all_pending_tq";
     case BrowserThread::IO:
       return "io_run_all_pending_tq";
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case BrowserThread::SHM:
+      return "shm_run_all_pending_tq";
+#endif
     case BrowserThread::ID_COUNT:
       break;
   }
@@ -83,6 +92,25 @@ const char* GetIOTaskQueueName(BrowserTaskQueues::QueueType queue_type) {
   }
 }
 
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+const char* GetSHMTaskQueueName(BrowserTaskQueues::QueueType queue_type) {
+  switch (queue_type) {
+    case BrowserTaskQueues::QueueType::kBestEffort:
+      return "shm_best_effort_tq";
+    case BrowserTaskQueues::QueueType::kBootstrap:
+      return "shm_bootstrap_tq";
+    case BrowserTaskQueues::QueueType::kPreconnection:
+      return "shm_preconnection_tq";
+    case BrowserTaskQueues::QueueType::kDefault:
+      return "shm_default_tq";
+    case BrowserTaskQueues::QueueType::kUserBlocking:
+      return "shm_user_blocking_tq";
+    case BrowserTaskQueues::QueueType::kUserVisible:
+      return "shm_user_visible_tq";
+  }
+}
+#endif
+
 const char* GetTaskQueueName(BrowserThread::ID thread_id,
                              BrowserTaskQueues::QueueType queue_type) {
   switch (thread_id) {
@@ -90,6 +118,10 @@ const char* GetTaskQueueName(BrowserThread::ID thread_id,
       return GetUITaskQueueName(queue_type);
     case BrowserThread::IO:
       return GetIOTaskQueueName(queue_type);
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case BrowserThread::SHM:
+      return GetSHMTaskQueueName(queue_type);
+#endif
     case BrowserThread::ID_COUNT:
       break;
   }
@@ -103,6 +135,10 @@ const char* GetDefaultQueueName(BrowserThread::ID thread_id) {
       return "ui_thread_tq";
     case BrowserThread::IO:
       return "io_thread_tq";
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case BrowserThread::SHM:
+      return "shm_thread_tq";
+#endif
     case BrowserThread::ID_COUNT:
       break;
   }

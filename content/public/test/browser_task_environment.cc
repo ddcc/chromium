@@ -8,6 +8,7 @@
 
 #include "base/bind.h"
 #include "base/check.h"
+#include "base/herqules_buildflags.h"
 #include "base/macros.h"
 #include "base/memory/ptr_util.h"
 #include "base/memory/scoped_refptr.h"
@@ -181,9 +182,20 @@ void BrowserTaskEnvironment::Init() {
           ? std::make_unique<BrowserIOThreadDelegate>()
           : BrowserIOThreadDelegate::CreateForTesting(sequence_manager());
   browser_io_thread_delegate->SetAllowBlockingForTesting();
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  auto browser_shm_thread_delegate =
+      real_io_thread_
+          ? std::make_unique<BrowserSHMThreadDelegate>()
+          : BrowserSHMThreadDelegate::CreateForTesting(sequence_manager());
+#endif
 
   BrowserTaskExecutor::CreateForTesting(std::move(browser_ui_thread_scheduler),
-                                        std::move(browser_io_thread_delegate));
+                                        std::move(browser_io_thread_delegate)
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+                                            ,
+                                        std::move(browser_shm_thread_delegate)
+#endif
+  );
   BrowserTaskExecutor::BindToUIThreadForTesting();
   DeferredInitFromSubclass(std::move(default_ui_task_runner));
 

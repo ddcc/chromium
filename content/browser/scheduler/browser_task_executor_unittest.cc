@@ -198,7 +198,11 @@ class BrowserTaskExecutorWithCustomSchedulerTest : public testing::Test {
               QueueType::kDefault));
       BrowserTaskExecutor::CreateForTesting(
           std::move(browser_ui_thread_scheduler),
-          BrowserIOThreadDelegate::CreateForTesting(sequence_manager()));
+          BrowserIOThreadDelegate::CreateForTesting(sequence_manager())
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+          , BrowserSHMThreadDelegate::CreateForTesting(sequence_manager())
+#endif
+          );
       BrowserTaskExecutor::BindToUIThreadForTesting();
     }
   };

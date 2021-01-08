@@ -9,6 +9,7 @@
 #include "base/bind.h"
 #include "base/bind_helpers.h"
 #include "base/callback.h"
+#include "base/herqules_buildflags.h"
 #include "base/location.h"
 #include "base/message_loop/message_pump.h"
 #include "base/message_loop/message_pump_type.h"
@@ -54,7 +55,11 @@ class SequenceManagerThreadDelegate : public base::Thread::Delegate {
 
     BrowserTaskExecutor::CreateForTesting(
         std::move(browser_ui_thread_scheduler),
-        std::make_unique<BrowserIOThreadDelegate>());
+        std::make_unique<BrowserIOThreadDelegate>()
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+      , std::make_unique<BrowserSHMThreadDelegate>()
+#endif
+        );
     BrowserTaskExecutor::EnableAllQueues();
   }
 
@@ -308,7 +313,11 @@ class BrowserThreadWithCustomSchedulerTest : public testing::Test {
               QueueType::kDefault));
       BrowserTaskExecutor::CreateForTesting(
           std::move(browser_ui_thread_scheduler),
-          std::make_unique<BrowserIOThreadDelegate>());
+          std::make_unique<BrowserIOThreadDelegate>()
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+        , std::make_unique<BrowserSHMThreadDelegate>()
+#endif
+          );
 
       ui_thread_ = BrowserTaskExecutor::CreateIOThread();
       BrowserTaskExecutor::InitializeIOThread();

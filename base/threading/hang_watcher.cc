@@ -35,6 +35,10 @@ constexpr base::FeatureParam<bool> kHangWatchIOThread{
     &kEnableHangWatcher, "hang_watch_io_thread", false};
 constexpr base::FeatureParam<bool> kHangWatchUIThread{
     &kEnableHangWatcher, "hang_watch_ui_thread", false};
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+constexpr base::FeatureParam<bool> kHangWatchSHMThread{
+    &kEnableHangWatcher, "hang_watch_shm_thread", false};
+#endif
 constexpr base::FeatureParam<bool> kHangWatchThreadPool{
     &kEnableHangWatcher, "hang_watch_threadpool", false};
 
@@ -47,7 +51,10 @@ std::atomic<bool> g_use_hang_watcher{false};
 std::atomic<bool> g_hang_watch_workers{false};
 std::atomic<bool> g_hang_watch_io_thread{false};
 std::atomic<bool> g_hang_watch_ui_thread{false};
-}
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+std::atomic<bool> g_hang_watch_shm_thread{false};
+#endif
+}  // namespace
 
 constexpr const char* kThreadName = "HangWatcher";
 
@@ -196,6 +203,9 @@ void HangWatcher::InitializeOnMainThread() {
   DCHECK(!g_hang_watch_workers);
   DCHECK(!g_hang_watch_io_thread);
   DCHECK(!g_hang_watch_ui_thread);
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  DCHECK(!g_hang_watch_shm_thread);
+#endif
 
   g_use_hang_watcher.store(base::FeatureList::IsEnabled(kEnableHangWatcher),
                            std::memory_order_relaxed);
@@ -209,6 +219,10 @@ void HangWatcher::InitializeOnMainThread() {
                                  std::memory_order_relaxed);
     g_hang_watch_ui_thread.store(kHangWatchUIThread.Get(),
                                  std::memory_order_relaxed);
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    g_hang_watch_shm_thread.store(kHangWatchSHMThread.Get(),
+                                  std::memory_order_relaxed);
+#endif
   }
 }
 
@@ -229,6 +243,12 @@ bool HangWatcher::IsIOThreadHangWatchingEnabled() {
 bool HangWatcher::IsUIThreadHangWatchingEnabled() {
   return g_hang_watch_ui_thread.load(std::memory_order_relaxed);
 }
+
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+bool HangWatcher::IsSHMThreadHangWatchingEnabled() {
+  return g_hang_watch_shm_thread.load(std::memory_order_relaxed);
+}
+#endif
 
 HangWatcher::HangWatcher()
     : monitor_period_(kMonitoringPeriod),

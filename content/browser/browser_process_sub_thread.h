@@ -8,6 +8,7 @@
 #include <memory>
 
 #include "base/macros.h"
+#include "base/herqules_buildflags.h"
 #include "base/threading/thread.h"
 #include "base/threading/thread_checker.h"
 #include "build/build_config.h"
@@ -67,9 +68,15 @@ class CONTENT_EXPORT BrowserProcessSubThread : public base::Thread {
   // which BrowserThread this represents in stack traces.
   void UIThreadRun(base::RunLoop* run_loop);
   void IOThreadRun(base::RunLoop* run_loop);
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  void SHMThreadRun(base::RunLoop* run_loop);
+#endif
 
   // This method encapsulates cleanup that needs to happen on the IO thread.
   void IOThreadCleanUp();
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  void SHMThreadCleanUp();
+#endif
 
   const BrowserThread::ID identifier_;
 

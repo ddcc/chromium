@@ -17,6 +17,7 @@
 #include "base/callback_forward.h"
 #include "base/callback_helpers.h"
 #include "base/compiler_specific.h"
+#include "base/herqules_buildflags.h"
 #include "base/synchronization/lock.h"
 #include "base/thread_annotations.h"
 #include "base/threading/platform_thread.h"
@@ -158,6 +159,9 @@ class BASE_EXPORT HangWatcher : public DelegateSimpleThread::Delegate {
   static bool IsThreadPoolHangWatchingEnabled();
   static bool IsIOThreadHangWatchingEnabled();
   static bool IsUIThreadHangWatchingEnabled();
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  static bool IsSHMThreadHangWatchingEnabled();
+#endif
 
   // Sets up the calling thread to be monitored for threads. Returns a
   // ScopedClosureRunner that unregisters the thread. This closure has to be

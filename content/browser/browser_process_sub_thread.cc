@@ -94,6 +94,11 @@ void BrowserProcessSubThread::Run(base::RunLoop* run_loop) {
     case BrowserThread::IO:
       IOThreadRun(run_loop);
       return;
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case BrowserThread::SHM:
+      SHMThreadRun(run_loop);
+      return;
+#endif
     case BrowserThread::ID_COUNT:
       NOTREACHED();
       break;
@@ -147,6 +152,24 @@ NOINLINE void BrowserProcessSubThread::IOThreadRun(base::RunLoop* run_loop) {
   base::debug::Alias(&line_number);
 }
 
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+NOINLINE void BrowserProcessSubThread::SHMThreadRun(base::RunLoop* run_loop) {
+  // Register the SHM thread for hang watching before it starts running and set
+  // up a closure to automatically unregister it when Run() returns.
+  base::ScopedClosureRunner unregister_thread_closure;
+  if (base::HangWatcher::IsSHMThreadHangWatchingEnabled()) {
+    unregister_thread_closure =
+        base::HangWatcher::GetInstance()->RegisterThread();
+  }
+
+  Thread::Run(run_loop);
+
+  // Inhibit tail calls of Run and inhibit code folding.
+  const int line_number = __LINE__;
+  base::debug::Alias(&line_number);
+}
+#endif
+
 void BrowserProcessSubThread::IOThreadCleanUp() {
   DCHECK_CALLED_ON_VALID_THREAD(browser_thread_checker_);
 
@@ -198,5 +221,59 @@ void BrowserProcessSubThread::IOThreadCleanUp() {
   // IO thread only resources they are referencing.
   BrowserChildProcessHostImpl::TerminateAll();
 }
+
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+void BrowserProcessSubThread::SHMThreadCleanUp() {
+  DCHECK_CALLED_ON_VALID_THREAD(browser_thread_checker_);
+
+  // Kill all things that might be holding onto
+  // net::URLRequest/net::URLRequestContexts.
+
+  // Destroy all URLRequests started by URLFetchers.
+  net::URLFetcher::CancelAll();
+
+  for (BrowserChildProcessHostIterator it(PROCESS_TYPE_UTILITY); !it.Done();
+       ++it) {
+    UtilityProcessHost* utility_process =
+        static_cast<UtilityProcessHost*>(it.GetDelegate());
+    if (utility_process->sandbox_type() ==
+        sandbox::policy::SandboxType::kNetwork) {
+      // This ensures that cookies and cache are flushed to disk on shutdown.
+      // https://crbug.com/841001
+#if BUILDFLAG(CLANG_PROFILING)
+      // On profiling build, browser_tests runs 10x slower.
+      const int kMaxSecondsToWaitForNetworkProcess = 100;
+#elif defined(OS_CHROMEOS)
+      // ChromeOS will kill the browser process if it doesn't shut down within
+      // 3 seconds, so make sure we wait for less than that.
+      const int kMaxSecondsToWaitForNetworkProcess = 1;
+#else
+      const int kMaxSecondsToWaitForNetworkProcess = 10;
+#endif
+
+      ChildProcessHostImpl* child_process =
+          static_cast<ChildProcessHostImpl*>(it.GetHost());
+      auto& process = child_process->peer_process();
+      if (!process.IsValid())
+        continue;
+      base::ScopedAllowBaseSyncPrimitives scoped_allow_base_sync_primitives;
+      const base::TimeTicks start_time = base::TimeTicks::Now();
+      process.WaitForExitWithTimeout(
+          base::TimeDelta::FromSeconds(kMaxSecondsToWaitForNetworkProcess),
+          nullptr);
+      // Record time spent for the method call.
+      base::TimeDelta network_wait_time = base::TimeTicks::Now() - start_time;
+      UMA_HISTOGRAM_TIMES("NetworkService.ShutdownTime", network_wait_time);
+      DVLOG(1) << "Waited " << network_wait_time.InMilliseconds()
+               << " ms for network service";
+    }
+  }
+
+  // If any child processes are still running, terminate them and
+  // and delete the BrowserChildProcessHost instances to release whatever
+  // IO thread only resources they are referencing.
+  BrowserChildProcessHostImpl::TerminateAll();
+}
+#endif
 
 }  // namespace content

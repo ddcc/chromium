@@ -10,6 +10,7 @@
 #include <utility>
 
 #include "base/callback.h"
+#include "base/herqules_buildflags.h"
 #include "base/location.h"
 #include "base/logging.h"
 #include "base/macros.h"
@@ -55,6 +56,11 @@ GetUIThreadTaskRunner(const BrowserTaskTraits& traits);
 CONTENT_EXPORT scoped_refptr<base::SingleThreadTaskRunner>
 GetIOThreadTaskRunner(const BrowserTaskTraits& traits);
 
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+CONTENT_EXPORT scoped_refptr<base::SingleThreadTaskRunner>
+GetSHMThreadTaskRunner(const BrowserTaskTraits& traits);
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////
 // BrowserThread
 //
@@ -71,6 +77,10 @@ class CONTENT_EXPORT BrowserThread {
     // Blocking I/O should happen in base::ThreadPool. It is joined on shutdown
     // (and thus any task posted to it may block shutdown).
     IO,
+
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    SHM,
+#endif
 
     // NOTE: do not add new threads here. Instead you should just use
     // base::ThreadPool::Create*TaskRunner to run tasks on the base::ThreadPool.
@@ -185,6 +195,9 @@ class CONTENT_EXPORT BrowserThread {
   // bind to SequencedTaskRunner instead of specific BrowserThreads.
   struct DeleteOnUIThread : public DeleteOnThread<UI> {};
   struct DeleteOnIOThread : public DeleteOnThread<IO> {};
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  struct DeleteOnSHMThread : public DeleteOnThread<SHM> {};
+#endif
 
   // Returns an appropriate error message for when DCHECK_CURRENTLY_ON() fails.
   static std::string GetDCheckCurrentlyOnErrorMessage(ID expected);

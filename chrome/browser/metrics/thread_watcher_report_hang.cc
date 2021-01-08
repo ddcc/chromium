@@ -4,6 +4,7 @@
 
 #include "chrome/browser/metrics/thread_watcher_report_hang.h"
 
+#include "base/herqules_buildflags.h"
 #include "base/debug/activity_tracker.h"
 #include "base/debug/debugger.h"
 #include "base/debug/dump_without_crashing.h"
@@ -70,6 +71,17 @@ NOINLINE void ThreadUnresponsive_IO() {
   ALLOW_UNUSED_LOCAL(inhibit_comdat);
 }
 
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+NOINLINE void ThreadUnresponsive_SHM() {
+  ReportThreadHang();
+  // Defining |inhibit_comdat| *after* calling ReportThreadHang() prevents tail
+  // call optimization from not putting this function's address on the stack.
+  // https://crbug.com/905288#c10
+  volatile int inhibit_comdat = __LINE__;
+  ALLOW_UNUSED_LOCAL(inhibit_comdat);
+}
+#endif
+
 NOINLINE void CrashBecauseThreadWasUnresponsive(
     content::BrowserThread::ID thread_id) {
   switch (thread_id) {
@@ -77,6 +89,10 @@ NOINLINE void CrashBecauseThreadWasUnresponsive(
       return ThreadUnresponsive_UI();
     case content::BrowserThread::IO:
       return ThreadUnresponsive_IO();
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    case content::BrowserThread::SHM:
+      return ThreadUnresponsive_SHM();
+#endif
     case content::BrowserThread::ID_COUNT:
       NOTREACHED();
       break;

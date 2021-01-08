@@ -6,6 +6,7 @@ import("//build/buildflag_header.gni")
 import("//build/config/chromeos/ui_mode.gni")
 import("//build/config/features.gni")
 import("//build/config/linux/pangocairo/pangocairo.gni")
+import("//build/config/posix/herqules.gni")
 import("//build/config/ui.gni")
 import("//chromeos/assistant/assistant.gni")
 import("//components/ui_devtools/devtools.gni")
@@ -2396,6 +2397,12 @@ source_set("browser") {
     if (is_linux || is_chromeos) {
       deps += [ "//components/services/font:ppapi_fontconfig_matching" ]
     }
+  }
+
+  if (is_posix && use_herqules) {
+    sources += [
+      "scheduler/browser_shm_thread_delegate.cc"
+    ]
   }
 
   if (enable_library_cdms) {

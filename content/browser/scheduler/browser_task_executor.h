@@ -8,10 +8,14 @@
 #include <memory>
 
 #include "base/gtest_prod_util.h"
+#include "base/herqules_buildflags.h"
 #include "base/memory/scoped_refptr.h"
 #include "base/task/task_executor.h"
 #include "build/build_config.h"
 #include "content/browser/scheduler/browser_io_thread_delegate.h"
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+#include "content/browser/scheduler/browser_shm_thread_delegate.h"
+#endif
 #include "content/browser/scheduler/browser_ui_thread_scheduler.h"
 #include "content/common/content_export.h"
 #include "content/public/browser/browser_task_traits.h"
@@ -77,6 +81,9 @@ class CONTENT_EXPORT BaseBrowserTaskExecutor : public base::TaskExecutor {
  protected:
   scoped_refptr<BrowserUIThreadScheduler::Handle> browser_ui_thread_handle_;
   scoped_refptr<BrowserIOThreadDelegate::Handle> browser_io_thread_handle_;
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  scoped_refptr<BrowserSHMThreadDelegate::Handle> browser_shm_thread_handle_;
+#endif
 };
 
 class CONTENT_EXPORT BrowserTaskExecutor : public BaseBrowserTaskExecutor {
@@ -120,10 +127,17 @@ class CONTENT_EXPORT BrowserTaskExecutor : public BaseBrowserTaskExecutor {
   // Attention: Must be called after Create()
   // Attention: Can not be called after Shutdown() or ResetForTesting()
   static std::unique_ptr<BrowserProcessSubThread> CreateIOThread();
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  static std::unique_ptr<BrowserProcessSubThread> CreateSHMThread();
+#endif
 
   // Enables non best effort queues on the IO thread. Usually called from
   // BrowserMainLoop::CreateThreads.
   static void InitializeIOThread();
+
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  static void InitializeSHMThread();
+#endif
 
   // Enables all queues on all threads.
   // Can be called multiple times.
@@ -138,12 +152,21 @@ class CONTENT_EXPORT BrowserTaskExecutor : public BaseBrowserTaskExecutor {
       const BrowserTaskTraits& traits);
   static scoped_refptr<base::SingleThreadTaskRunner> GetIOThreadTaskRunner(
       const BrowserTaskTraits& traits);
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  static scoped_refptr<base::SingleThreadTaskRunner> GetSHMThreadTaskRunner(
+      const BrowserTaskTraits& traits);
+#endif
 
   // As Create but with the user provided objects. Must call
   // BindToUIThreadForTesting before tasks can be run on the UI thread.
   static void CreateForTesting(
       std::unique_ptr<BrowserUIThreadScheduler> browser_ui_thread_scheduler,
-      std::unique_ptr<BrowserIOThreadDelegate> browser_io_thread_delegate);
+      std::unique_ptr<BrowserIOThreadDelegate> browser_io_thread_delegate
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+      ,
+      std::unique_ptr<BrowserSHMThreadDelegate> browser_shm_thread_delegate
+#endif
+  );
 
   // Completes ui-thread set up. Must be called on the UI thread.
   static void BindToUIThreadForTesting();
@@ -190,6 +213,10 @@ class CONTENT_EXPORT BrowserTaskExecutor : public BaseBrowserTaskExecutor {
 
     void SetIOThreadHandle(
         scoped_refptr<BrowserUIThreadScheduler::Handle> io_thread_handle);
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    void SetSHMThreadHandle(
+        scoped_refptr<BrowserUIThreadScheduler::Handle> shm_thread_handle);
+#endif
 
     void BindToCurrentThread();
 
@@ -211,6 +238,10 @@ class CONTENT_EXPORT BrowserTaskExecutor : public BaseBrowserTaskExecutor {
 
     void SetUIThreadHandle(
         scoped_refptr<BrowserUIThreadScheduler::Handle> ui_thread_handle);
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+    void SetSHMThreadHandle(
+        scoped_refptr<BrowserUIThreadScheduler::Handle> shm_thread_handle);
+#endif
 
     std::unique_ptr<BrowserIOThreadDelegate> TakeDelegate() {
       return std::move(browser_io_thread_delegate_);
@@ -220,15 +251,48 @@ class CONTENT_EXPORT BrowserTaskExecutor : public BaseBrowserTaskExecutor {
     std::unique_ptr<BrowserIOThreadDelegate> browser_io_thread_delegate_;
   };
 
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  class SHMThreadExecutor : public BaseBrowserTaskExecutor {
+   public:
+    explicit SHMThreadExecutor(
+        std::unique_ptr<BrowserSHMThreadDelegate> browser_shm_thread_delegate);
+
+    ~SHMThreadExecutor() override;
+
+    scoped_refptr<BrowserUIThreadScheduler::Handle> GetSHMThreadHandle();
+
+    void SetIOThreadHandle(
+        scoped_refptr<BrowserUIThreadScheduler::Handle> io_thread_handle);
+    void SetUIThreadHandle(
+        scoped_refptr<BrowserUIThreadScheduler::Handle> ui_thread_handle);
+
+    std::unique_ptr<BrowserSHMThreadDelegate> TakeDelegate() {
+      return std::move(browser_shm_thread_delegate_);
+    }
+
+   private:
+    std::unique_ptr<BrowserSHMThreadDelegate> browser_shm_thread_delegate_;
+  };
+#endif
+
   static void CreateInternal(
       std::unique_ptr<BrowserUIThreadScheduler> browser_ui_thread_scheduler,
-      std::unique_ptr<BrowserIOThreadDelegate> browser_io_thread_delegate);
+      std::unique_ptr<BrowserIOThreadDelegate> browser_io_thread_delegate
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+      ,
+      std::unique_ptr<BrowserSHMThreadDelegate> browser_shm_thread_scheduler
+#endif
+  );
 
   // For GetProxyTaskRunnerForThread().
   FRIEND_TEST_ALL_PREFIXES(BrowserTaskExecutorTest,
                            EnsureUIThreadTraitPointsToExpectedQueue);
   FRIEND_TEST_ALL_PREFIXES(BrowserTaskExecutorTest,
                            EnsureIOThreadTraitPointsToExpectedQueue);
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  FRIEND_TEST_ALL_PREFIXES(BrowserTaskExecutorTest,
+                           EnsureSHMThreadTraitPointsToExpectedQueue);
+#endif
   FRIEND_TEST_ALL_PREFIXES(BrowserTaskExecutorTest,
                            BestEffortTasksRunAfterStartup);
 
@@ -237,13 +301,21 @@ class CONTENT_EXPORT BrowserTaskExecutor : public BaseBrowserTaskExecutor {
                            RegisterExecutorForBothThreads);
   explicit BrowserTaskExecutor(
       std::unique_ptr<BrowserUIThreadScheduler> browser_ui_thread_scheduler,
-      std::unique_ptr<BrowserIOThreadDelegate> browser_io_thread_delegate);
+      std::unique_ptr<BrowserIOThreadDelegate> browser_io_thread_delegate
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+      ,
+      std::unique_ptr<BrowserSHMThreadDelegate> browser_shm_thread_delegate
+#endif
+  );
   ~BrowserTaskExecutor() override;
 
   static BrowserTaskExecutor* Get();
 
   std::unique_ptr<UIThreadExecutor> ui_thread_executor_;
   std::unique_ptr<IOThreadExecutor> io_thread_executor_;
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+  std::unique_ptr<SHMThreadExecutor> shm_thread_executor_;
+#endif
 
   DISALLOW_COPY_AND_ASSIGN(BrowserTaskExecutor);
 };
