@@ -18,6 +18,7 @@
 #include <vector>
 
 #include "base/callback.h"
+#include "base/herqules_buildflags.h"
 #include "base/logging.h"
 #include "base/posix/eintr_wrapper.h"
 #include "base/process/process_metrics.h"
@@ -110,7 +111,7 @@ bool BrokerProcess::Init(
     base::OnceCallback<bool(void)> broker_process_init_callback) {
   CHECK(!initialized_);
 
-#if !defined(THREAD_SANITIZER)
+#if !defined(THREAD_SANITIZER) && !BUILDFLAG(USE_HERQULES)
   DCHECK_EQ(1, base::GetNumberOfThreads(base::GetCurrentProcessHandle()));
 #endif
 

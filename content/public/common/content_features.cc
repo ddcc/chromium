@@ -4,6 +4,7 @@
 
 #include "content/public/common/content_features.h"
 #include "base/feature_list.h"
+#include "base/herqules_buildflags.h"
 #include "build/build_config.h"
 
 #if defined(OS_WIN)
@@ -388,7 +389,12 @@ const base::Feature kMediaDevicesSystemMonitorCache {
 // If enabled Mojo uses a dedicated background thread to listen for incoming
 // IPCs. Otherwise it's configured to use Content's IO thread for that purpose.
 const base::Feature kMojoDedicatedThread{"MojoDedicatedThread",
-                                         base::FEATURE_DISABLED_BY_DEFAULT};
+#if BUILDFLAG(USE_HERQULES)
+                                         base::FEATURE_ENABLED_BY_DEFAULT
+#else
+                                         base::FEATURE_DISABLED_BY_DEFAULT
+#endif
+};
 
 // Enables/disables the video capture service.
 const base::Feature kMojoVideoCapture{"MojoVideoCapture",

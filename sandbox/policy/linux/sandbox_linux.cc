@@ -24,6 +24,7 @@
 #include "base/feature_list.h"
 #include "base/files/scoped_file.h"
 #include "base/logging.h"
+#include "base/herqules_buildflags.h"
 #include "base/macros.h"
 #include "base/memory/singleton.h"
 #include "base/posix/eintr_wrapper.h"
@@ -341,8 +342,10 @@ bool SandboxLinux::InitializeSandbox(SandboxType sandbox_type,
 
   // For now, restrict the |options.allow_threads_during_sandbox_init| option to
   // the GPU process
+#if !BUILDFLAG(USE_HERQULES)
   DCHECK(process_type == switches::kGpuProcess ||
          !options.allow_threads_during_sandbox_init);
+#endif
   if (has_threads && !options.allow_threads_during_sandbox_init) {
     std::string error_message =
         "InitializeSandbox() called with multiple threads in process " +

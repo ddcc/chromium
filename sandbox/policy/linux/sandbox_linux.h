@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "base/check_op.h"
+#include "base/herqules_buildflags.h"
 #include "base/macros.h"
 #include "base/posix/global_descriptors.h"
 #include "sandbox/linux/syscall_broker/broker_command.h"
@@ -104,7 +105,12 @@ class SANDBOX_POLICY_EXPORT SandboxLinux {
     // Allow starting the sandbox with multiple threads already running. This
     // will enable TSYNC for seccomp-BPF, which syncs the seccomp-BPF policy
     // across all running threads.
+#if BUILDFLAG(USE_HERQULES)
+    // FIXME: Check library calls in Mojo IPC thread are reentrant-safe
+    bool allow_threads_during_sandbox_init = true;
+#else
     bool allow_threads_during_sandbox_init = false;
+#endif
 
     // Enables the CHECK for open directories. The open directory check is only
     // useful for the chroot jail (from the semantic layer of the sandbox), and

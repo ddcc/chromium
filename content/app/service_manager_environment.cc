@@ -7,6 +7,7 @@
 #include <utility>
 
 #include "base/command_line.h"
+#include "base/herqules_buildflags.h"
 #include "build/build_config.h"
 #include "content/browser/browser_process_sub_thread.h"
 #include "content/browser/service_manager/service_manager_context.h"
@@ -28,8 +29,13 @@ ServiceManagerEnvironment::ServiceManagerEnvironment(
     // NOTE: If Mojo Core was loaded via shared library, IPC support is already
     // initialized.
     if (base::FeatureList::IsEnabled(features::kMojoDedicatedThread)) {
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+      mojo_ipc_thread_.StartWithOptions(
+          base::Thread::Options(base::MessagePumpType::SHM, 0));
+#else
       mojo_ipc_thread_.StartWithOptions(
           base::Thread::Options(base::MessagePumpType::IO, 0));
+#endif
       mojo_ipc_task_runner = mojo_ipc_thread_.task_runner();
     }
     mojo_ipc_support_ = std::make_unique<mojo::core::ScopedIPCSupport>(

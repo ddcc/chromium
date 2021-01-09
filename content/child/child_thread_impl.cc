@@ -19,6 +19,7 @@
 #include "base/debug/leak_annotations.h"
 #include "base/debug/profiler.h"
 #include "base/files/file.h"
+#include "base/herqules_buildflags.h"
 #include "base/lazy_instance.h"
 #include "base/location.h"
 #include "base/logging.h"
@@ -570,8 +571,13 @@ void ChildThreadImpl::Init(const Options& options) {
       scoped_refptr<base::SingleThreadTaskRunner> mojo_ipc_task_runner =
           GetIOTaskRunner();
       if (base::FeatureList::IsEnabled(features::kMojoDedicatedThread)) {
+#if defined(OS_POSIX) && BUILDFLAG(USE_HERQULES)
+        mojo_ipc_thread_.StartWithOptions(
+            base::Thread::Options(base::MessagePumpType::SHM, 0));
+#else
         mojo_ipc_thread_.StartWithOptions(
             base::Thread::Options(base::MessagePumpType::IO, 0));
+#endif
         mojo_ipc_task_runner = mojo_ipc_thread_.task_runner();
       }
       mojo_ipc_support_ = std::make_unique<mojo::core::ScopedIPCSupport>(
