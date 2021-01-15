@@ -6,7 +6,9 @@
 #define MOJO_CORE_HERQULES_INLINE_H_
 
 #include <fcntl.h>
+#include <linux/futex.h>
 #include <sys/mman.h>
+#include <sys/syscall.h>
 
 #include "base/logging.h"
 #include "base/memory/unsafe_shared_memory_region.h"
@@ -132,39 +134,34 @@ static inline Channel::MessagePtr HerQulesParseHandshake(
 // Requires lock
 static inline void HerQulesReset(struct HerQulesShmHdr* header) {
   header->status_ = 0;
+  if (syscall(SYS_futex, &header->status_, FUTEX_WAKE, INT_MAX, nullptr,
+              nullptr, 0) < 0)
+    PLOG(ERROR) << "Cannot wake write futex!";
 }
 
 static inline void HerQulesInit(struct HerQulesShmHdr* header) {
-  pthread_mutexattr_t attr;
-  pthread_mutexattr_init(&attr);
-  pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
-  pthread_mutex_init(&header->mutex_, &attr);
-  pthread_mutexattr_destroy(&attr);
-  pthread_cond_init(&header->cond_, nullptr);
-  HerQulesReset(header);
+  header->status_ = 0;
   header->close_ = false;
 }
 
 static inline void HerQulesLock(struct HerQulesShmHdr* header) {
-  if (pthread_mutex_lock(&header->mutex_) == EOWNERDEAD) {
-    pthread_mutex_consistent(&header->mutex_);
-    header->close_ = true;
+  while (base::subtle::Acquire_CompareAndSwap(&header->lock_, 0, 1)) {
   }
 }
 
 // Requires lock
 static inline void HerQulesUnlock(struct HerQulesShmHdr* header) {
-  pthread_mutex_unlock(&header->mutex_);
+  DCHECK(base::subtle::Acquire_Load(&header->lock_) == 1);
+  base::subtle::Release_Store(&header->lock_, 0);
 }
 
 static inline void HerQulesDestroy(struct HerQulesShmHdr* header) {
-  HerQulesLock(header);
-  // pthread_cond_broadcast(&header->cond_);
-  pthread_mutex_destroy(&header->mutex_);
-  // pthread_cond_destroy(&header->cond_);
+  if (syscall(SYS_futex, &header->status_, FUTEX_WAKE, INT_MAX, nullptr, nullptr,
+              0) < 0)
+    PLOG(ERROR) << "Cannot wake write futex!";
+
   DCHECK(!header->close_);
   header->close_ = true;
-  HerQulesUnlock(header);
 }
 
 static inline uint8_t* HerQulesGetMessage(struct HerQulesShmHdr* header,
@@ -224,17 +221,18 @@ static inline bool HerQulesSend(int fd,
 static inline void HerQulesUpdateSend(struct HerQulesShmHdr* header,
                                       HerQulesStatus sz) {
   header->status_ += sz;
-  pthread_cond_broadcast(&header->cond_);
+  if (syscall(SYS_futex, &header->status_, FUTEX_WAKE, INT_MAX, nullptr, nullptr,
+              0) < 0)
+    PLOG(ERROR) << "Cannot wake write futex!";
 }
 
 static inline void HerQulesWaitWrite(struct HerQulesShmHdr* header,
+                                     const HerQulesStatus val,
                                      const struct timespec* timeout) {
-  HerQulesLock(header);
-  if (timeout)
-    pthread_cond_timedwait(&header->cond_, &header->mutex_, timeout);
-  else
-    pthread_cond_wait(&header->cond_, &header->mutex_);
-  HerQulesUnlock(header);
+  if (syscall(SYS_futex, &header->status_, FUTEX_WAIT | FUTEX_CLOCK_REALTIME,
+              val, timeout, nullptr, 0) &&
+      errno != EAGAIN)
+    PLOG(ERROR) << "Cannot wait on write futex!";
 }
 
 static inline bool HerQulesResetFull(struct HerQulesShmHdr* header,

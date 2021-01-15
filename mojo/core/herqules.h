@@ -5,7 +5,7 @@
 #ifndef MOJO_CORE_HERQULES_H_
 #define MOJO_CORE_HERQULES_H_
 
-#include <pthread.h>
+#include "base/atomicops.h"
 
 namespace mojo {
 namespace core {
@@ -14,8 +14,7 @@ typedef uint32_t HerQulesStatus;
 
 struct HerQulesShmHdr {
   // Prevents concurrent writes
-  pthread_mutex_t mutex_;
-  pthread_cond_t cond_;
+  base::subtle::Atomic32 lock_;
   // Tracks next write offset and/or full (1U << 31)
   HerQulesStatus status_;
   // Indicates writer has disconnected
