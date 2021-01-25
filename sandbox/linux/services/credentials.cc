@@ -20,6 +20,7 @@
 #include "base/compiler_specific.h"
 #include "base/files/file_path.h"
 #include "base/files/file_util.h"
+#include "base/herqules_buildflags.h"
 #include "base/logging.h"
 #include "base/posix/eintr_wrapper.h"
 #include "base/process/launch.h"
@@ -90,7 +91,7 @@ bool ChrootToSafeEmptyDir() {
 
   int clone_flags = CLONE_FS | LINUX_SIGCHLD;
   void* tls = nullptr;
-#if defined(ARCH_CPU_X86_64) || defined(ARCH_CPU_ARM_FAMILY)
+#if !BUILDFLAG(USE_HERQULES_DFI) && (defined(ARCH_CPU_X86_64) || defined(ARCH_CPU_ARM_FAMILY))
   // Use CLONE_VM | CLONE_VFORK as an optimization to avoid copying page tables.
   // Since clone writes to the new child's TLS before returning, we must set a
   // new TLS to avoid corrupting the current process's TLS. On ARCH_CPU_X86,

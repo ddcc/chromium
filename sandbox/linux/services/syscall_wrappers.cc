@@ -15,11 +15,18 @@
 #include <cstring>
 
 #include "base/compiler_specific.h"
+#include "base/herqules_buildflags.h"
 #include "base/logging.h"
 #include "build/build_config.h"
 #include "sandbox/linux/system_headers/capability.h"
 #include "sandbox/linux/system_headers/linux_signal.h"
 #include "sandbox/linux/system_headers/linux_syscalls.h"
+
+#if defined(OS_LINUX) && BUILDFLAG(USE_HERQULES_DFI)
+extern "C" {
+void __hq_init(int);
+}
+#endif
 
 namespace sandbox {
 
@@ -55,13 +62,19 @@ long sys_clone(unsigned long flags,
   if (ctid) MSAN_UNPOISON(ctid, sizeof(*ctid));
   // See kernel/fork.c in Linux. There is different ordering of sys_clone
   // parameters depending on CONFIG_CLONE_BACKWARDS* configuration options.
+  long ret;
 #if defined(ARCH_CPU_X86_64)
-  return syscall(__NR_clone, flags, child_stack, ptid, ctid, tls);
+  ret = syscall(__NR_clone, flags, child_stack, ptid, ctid, tls);
 #elif defined(ARCH_CPU_X86) || defined(ARCH_CPU_ARM_FAMILY) || \
     defined(ARCH_CPU_MIPS_FAMILY)
   // CONFIG_CLONE_BACKWARDS defined.
-  return syscall(__NR_clone, flags, child_stack, ptid, tls, ctid);
+  ret = syscall(__NR_clone, flags, child_stack, ptid, tls, ctid);
 #endif
+#if defined(OS_LINUX) && BUILDFLAG(USE_HERQULES_DFI)
+  if (!ret)
+    __hq_init(1);
+#endif
+  return ret;
 }
 
 long sys_clone(unsigned long flags) {

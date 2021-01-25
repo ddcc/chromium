@@ -25,7 +25,7 @@ const int kInvalidSyscallNumber = 0x351d3;
 #error Unrecognized architecture
 #endif
 
-asm(// We need to be able to tell the kernel exactly where we made a
+    // We need to be able to tell the kernel exactly where we made a
     // system call. The C++ compiler likes to sometimes clone or
     // inline code, which would inadvertently end up duplicating
     // the entry point.
@@ -39,6 +39,7 @@ asm(// We need to be able to tell the kernel exactly where we made a
     // ever be called from assembly code and thus can pick more
     // suitable calling conventions.
 #if defined(__i386__)
+asm(
     ".text\n"
     ".align 16, 0x90\n"
     ".type SyscallAsm, @function\n"
@@ -85,12 +86,11 @@ asm(// We need to be able to tell the kernel exactly where we made a
     "pop  %esi; .cfi_restore esi; .cfi_adjust_cfa_offset -4\n"
     "ret\n"
     ".cfi_endproc\n"
-    "9:.size SyscallAsm, 9b-SyscallAsm\n"
+    "9:.size SyscallAsm, 9b-SyscallAsm\n");
 #elif defined(__x86_64__)
-    ".text\n"
-    ".align 16, 0x90\n"
-    ".type SyscallAsm, @function\n"
-    "SyscallAsm:.cfi_startproc\n"
+extern "C" {
+intptr_t __attribute__((always_inline, naked)) SyscallAsm(intptr_t nr, const intptr_t args[6]) {
+    asm(
     // Check if "%rdi" is negative. If so, do not attempt to make a
     // system call. Instead, compute the return address that is visible
     // to the kernel after we execute "syscall". This address can be
@@ -116,10 +116,11 @@ asm(// We need to be able to tell the kernel exactly where we made a
     // Enter the kernel.
     "syscall\n"
     // This is our "magic" return address that the BPF filter sees.
-    "2:ret\n"
-    ".cfi_endproc\n"
-    "9:.size SyscallAsm, 9b-SyscallAsm\n"
+    "2:ret\n");
+}
+}
 #elif defined(__arm__)
+asm(
     // Throughout this file, we use the same mode (ARM vs. thumb)
     // that the C++ compiler uses. This means, when transfering control
     // from C++ to assembly code, we do not need to switch modes (e.g.
@@ -190,8 +191,9 @@ asm(// We need to be able to tell the kernel exactly where we made a
     // for more details.
     ".fnend\n"
 #endif
-    "9:.size SyscallAsm, 9b-SyscallAsm\n"
+    "9:.size SyscallAsm, 9b-SyscallAsm\n");
 #elif (defined(ARCH_CPU_MIPS_FAMILY) && defined(ARCH_CPU_32_BITS))
+asm(
     ".text\n"
     ".option pic2\n"
     ".align 4\n"
@@ -242,8 +244,9 @@ asm(// We need to be able to tell the kernel exactly where we made a
     " addiu  $sp, $sp, 40\n"
     ".set    pop\n"
     ".end    SyscallAsm\n"
-    ".size   SyscallAsm,.-SyscallAsm\n"
+    ".size   SyscallAsm,.-SyscallAsm\n");
 #elif defined(ARCH_CPU_MIPS_FAMILY) && defined(ARCH_CPU_64_BITS)
+asm(
     ".text\n"
     ".option pic2\n"
     ".global SyscallAsm\n"
@@ -289,8 +292,9 @@ asm(// We need to be able to tell the kernel exactly where we made a
     "daddiu  $sp, $sp, 16\n"
     ".set    pop\n"
     ".end    SyscallAsm\n"
-    ".size   SyscallAsm,.-SyscallAsm\n"
+    ".size   SyscallAsm,.-SyscallAsm\n");
 #elif defined(__aarch64__)
+asm(
     ".text\n"
     ".align 2\n"
     ".type SyscallAsm, %function\n"
@@ -311,15 +315,10 @@ asm(// We need to be able to tell the kernel exactly where we made a
     "svc 0\n"
     "2:ret\n"
     ".cfi_endproc\n"
-    ".size SyscallAsm, .-SyscallAsm\n"
+    ".size SyscallAsm, .-SyscallAsm\n");
 #endif
-    );  // asm
 
-#if defined(__x86_64__)
-extern "C" {
-intptr_t SyscallAsm(intptr_t nr, const intptr_t args[6]);
-}
-#elif defined(__mips__)
+#if defined(__mips__)
 extern "C" {
 intptr_t SyscallAsm(intptr_t nr, const intptr_t args[8]);
 }

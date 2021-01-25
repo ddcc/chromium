@@ -1414,81 +1414,9 @@ struct kernel_stat {
     LSS_INLINE int LSS_NAME(clone)(int (*fn)(void *), void *child_stack,
                                    int flags, void *arg, int *parent_tidptr,
                                    void *newtls, int *child_tidptr) {
-      long long __res;
-      {
-        __asm__ __volatile__(/* if (fn == NULL)
-                              *   return -EINVAL;
-                              */
-                             "testq  %4,%4\n"
-                             "jz     1f\n"
-
-                             /* if (child_stack == NULL)
-                              *   return -EINVAL;
-                              */
-                             "testq  %5,%5\n"
-                             "jz     1f\n"
-
-                             /* Set up alignment of the child stack:
-                              * child_stack = (child_stack & ~0xF) - 16;
-                              */
-                             "andq   $-16,%5\n"
-                             "subq   $16,%5\n"
-
-                             /* Push "arg" and "fn" onto the stack that will be
-                              * used by the child.
-                              */
-                             "movq   %7,8(%5)\n"
-                             "movq   %4,0(%5)\n"
-
-                             /* %rax = syscall(%rax = __NR_clone,
-                              *                %rdi = flags,
-                              *                %rsi = child_stack,
-                              *                %rdx = parent_tidptr,
-                              *                %r8  = new_tls,
-                              *                %r10 = child_tidptr)
-                              */
-                             "movq   %2,%%rax\n"
-                             "movq   %9,%%r8\n"
-                             "movq   %10,%%r10\n"
-                             "syscall\n"
-
-                             /* if (%rax != 0)
-                              *   return;
-                              */
-                             "testq  %%rax,%%rax\n"
-                             "jnz    1f\n"
-
-                             /* In the child. Terminate frame pointer chain.
-                              */
-                             "xorq   %%rbp,%%rbp\n"
-
-                             /* Call "fn(arg)".
-                              */
-                             "popq   %%rax\n"
-                             "popq   %%rdi\n"
-                             "call   *%%rax\n"
-
-                             /* Call _exit(%ebx).
-                              */
-                             "movq   %%rax,%%rdi\n"
-                             "movq   %3,%%rax\n"
-                             "syscall\n"
-
-                             /* Return to parent.
-                              */
-                           "1:\n"
-                             : "=a" (__res)
-                             : "0"(-EINVAL), "i"(__NR_clone), "i"(__NR_exit),
-                               "r"(LSS_SYSCALL_ARG(fn)),
-                               "S"(LSS_SYSCALL_ARG(child_stack)),
-                               "D"(LSS_SYSCALL_ARG(flags)),
-                               "r"(LSS_SYSCALL_ARG(arg)),
-                               "d"(LSS_SYSCALL_ARG(parent_tidptr)),
-                               "r"(LSS_SYSCALL_ARG(newtls)),
-                               "r"(LSS_SYSCALL_ARG(child_tidptr))
-                             : "rsp", "memory", "r8", "r10", "r11", "rcx");
-      }
-      LSS_RETURN(int, __res);
+      if (!fn || !child_stack)
+        return -EINVAL;
+      return clone(fn, child_stack, flags, arg, parent_tidptr, newtls, child_tidptr);
     }
 
     LSS_INLINE void (*LSS_NAME(restore_rt)(void))(void) {
@@ -1498,16 +1426,8 @@ struct kernel_stat {
        * Unfortunately, we cannot just reference the glibc version of this
        * function, as glibc goes out of its way to make it inaccessible.
        */
-      long long res;
-      __asm__ __volatile__("call   2f\n"
-                         "0:.align 16\n"
-                         "1:movq   %1,%%rax\n"
-                           "syscall\n"
-                         "2:popq   %0\n"
-                           "addq   $(1b-0b),%0\n"
-                           : "=a" (res)
-                           : "i"  (__NR_rt_sigreturn));
-      return (void (*)(void))(uintptr_t)res;
+      void __restore_rt();
+      return __restore_rt;
     }
   #elif defined(__arm__)
     /* Most definitions of _syscallX() neglect to mark "memory" as being

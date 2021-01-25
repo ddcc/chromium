@@ -2273,7 +2273,10 @@ buildflag_header("debugging_buildflags") {
 buildflag_header("herqules_buildflags") {
   header = "herqules_buildflags.h"
 
-  flags = [ "USE_HERQULES=$use_herqules" ]
+  flags = [
+    "USE_HERQULES=$use_herqules",
+    "USE_HERQULES_DFI=$use_herqules_dfi",
+  ]
 }
 
 buildflag_header("logging_buildflags") {

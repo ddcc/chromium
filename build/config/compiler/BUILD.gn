@@ -13,7 +13,9 @@ import("//build/config/coverage/coverage.gni")
 import("//build/config/dcheck_always_on.gni")
 import("//build/config/gclient_args.gni")
 import("//build/config/host_byteorder.gni")
+import("//build/config/posix/herqules.gni")
 import("//build/config/sanitizers/sanitizers.gni")
+import("//build/config/sysroot.gni")
 import("//build/config/ui.gni")
 import("//build/toolchain/cc_wrapper.gni")
 import("//build/toolchain/goma.gni")
@@ -459,6 +461,20 @@ config("compiler") {
     # but for now it looks like our build might rely on it
     # (https://crbug.com/829795).
     cflags += [ "-fmerge-all-constants" ]
+
+    if (use_herqules_dfi) {
+      cflags += [ "-fplugin=" + clang_base_path + "/../../../../build/llvm/libdfi.so" ]
+      ldflags += [ "-nolibc", "-lc.musl-x86_64-hq", "-lgcc_s" ]
+    }
+
+    if (use_sysroot && (use_herqules || use_herqules_dfi)) {
+      cflags += [ "--target=x86_64-alpine-linux-musl" ]
+      ldflags += [ "--target=x86_64-alpine-linux-musl" ]
+
+      if (!use_herqules_dfi) {
+        ldflags += [ "-Wl,--dynamic-linker=/lib/ld-musl-x86_64.so.1" ]
+      }
+    }
   }
 
   if (use_lld) {
