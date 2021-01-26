@@ -5,6 +5,7 @@
 #include "components/metrics/serialization/serialization_utils.h"
 
 #include <errno.h>
+#include <fcntl.h>
 #include <stdint.h>
 #include <sys/file.h>
 

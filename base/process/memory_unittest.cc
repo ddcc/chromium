@@ -316,6 +316,7 @@ TEST_F(OutOfMemoryDeathTest, SecurityValloc) {
   });
 }
 
+#ifdef __GLIBC__
 TEST_F(OutOfMemoryDeathTest, Pvalloc) {
   ASSERT_OOM_DEATH({
     SetUpInDeathAssert();
@@ -329,6 +330,7 @@ TEST_F(OutOfMemoryDeathTest, SecurityPvalloc) {
     value_ = pvalloc(insecure_test_size_);
   });
 }
+#endif
 
 TEST_F(OutOfMemoryDeathTest, Memalign) {
   ASSERT_OOM_DEATH({

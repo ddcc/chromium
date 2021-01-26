@@ -1,0 +1,174 @@
+diff -Nur '--exclude=.git' a/src/third_party/angle/util/posix/crash_handler_posix.cpp b/src/third_party/angle/util/posix/crash_handler_posix.cpp
+--- a/src/third_party/angle/util/posix/crash_handler_posix.cpp
++++ b/src/third_party/angle/util/posix/crash_handler_posix.cpp
+@@ -27,7 +27,9 @@
+ // both 32 and 64 bit on bots.  Doesn't matter much: catchsegv is best anyway.
+ #        include <cxxabi.h>
+ #        include <dlfcn.h>
++#ifdef __GLIBC__
+ #        include <execinfo.h>
++#endif
+ #        include <signal.h>
+ #        include <string.h>
+ #    endif  // defined(ANGLE_PLATFORM_APPLE)
+@@ -35,7 +37,7 @@
+ 
+ namespace angle
+ {
+-#if defined(ANGLE_PLATFORM_ANDROID) || defined(ANGLE_PLATFORM_FUCHSIA)
++#if defined(ANGLE_PLATFORM_ANDROID) || defined(ANGLE_PLATFORM_FUCHSIA) || (defined(ANGLE_PLATFORM_POSIX) && !defined(__GLIBC__))
+ 
+ void PrintStackBacktrace()
+ {
+@@ -100,7 +102,7 @@
+     _Exit(sig);
+ }
+ 
+-#    elif defined(ANGLE_PLATFORM_POSIX)
++#    elif defined(ANGLE_PLATFORM_POSIX) && defined(__GLIBC__)
+ 
+ void PrintStackBacktrace()
+ {
+diff -Nur '--exclude=.git' a/src/third_party/breakpad/breakpad/src/common/stabs_reader.cc b/src/third_party/breakpad/breakpad/src/common/stabs_reader.cc
+--- a/src/third_party/breakpad/breakpad/src/common/stabs_reader.cc
++++ b/src/third_party/breakpad/breakpad/src/common/stabs_reader.cc
+@@ -34,7 +34,11 @@
+ #include "common/stabs_reader.h"
+ 
+ #include <assert.h>
++#ifdef __GLIBC__
+ #include <stab.h>
++#else
++#include "android/include/stab.h"
++#endif
+ #include <string.h>
+ 
+ #include <string>
+diff -Nur '--exclude=.git' a/src/third_party/catapult/telemetry/telemetry/internal/image_processing/bitmaptools.cc b/src/third_party/catapult/telemetry/telemetry/internal/image_processing/bitmaptools.cc
+--- a/src/third_party/catapult/telemetry/telemetry/internal/image_processing/bitmaptools.cc
++++ b/src/third_party/catapult/telemetry/telemetry/internal/image_processing/bitmaptools.cc
+@@ -237,8 +237,8 @@
+   _setmode(_fileno(stdin), _O_BINARY);
+   _setmode(_fileno(stdout), _O_BINARY);
+ #else
+-  stdin = freopen(NULL, "rb", stdin);
+-  stdout = freopen(NULL, "wb", stdout);
++  *(FILE **)&stdin = freopen(NULL, "rb", stdin);
++  *(FILE **)&stdout = freopen(NULL, "wb", stdout);
+ #endif
+ 
+   if (!bmp.Read()) return -1;
+diff -Nur '--exclude=.git' a/src/third_party/grpc/src/src/core/lib/gpr/log_linux.cc b/src/third_party/grpc/src/src/core/lib/gpr/log_linux.cc
+--- a/src/third_party/grpc/src/src/core/lib/gpr/log_linux.cc
++++ b/src/third_party/grpc/src/src/core/lib/gpr/log_linux.cc
+@@ -40,7 +40,7 @@
+ #include <time.h>
+ #include <unistd.h>
+ 
+-static long gettid(void) { return syscall(__NR_gettid); }
++//static long gettid(void) { return syscall(__NR_gettid); }
+ 
+ void gpr_log(const char* file, int line, gpr_log_severity severity,
+              const char* format, ...) {
+diff -Nur '--exclude=.git' a/src/third_party/grpc/src/src/core/lib/iomgr/ev_epollex_linux.cc b/src/third_party/grpc/src/src/core/lib/iomgr/ev_epollex_linux.cc
+--- a/src/third_party/grpc/src/src/core/lib/iomgr/ev_epollex_linux.cc
++++ b/src/third_party/grpc/src/src/core/lib/iomgr/ev_epollex_linux.cc
+@@ -1102,7 +1102,7 @@
+ }
+ 
+ #ifndef NDEBUG
+-static long gettid(void) { return syscall(__NR_gettid); }
++//static long gettid(void) { return syscall(__NR_gettid); }
+ #endif
+ 
+ /* pollset->mu lock must be held by the caller before calling this.
+diff -Nur '--exclude=.git' a/src/third_party/nasm/config/config-linux.h b/src/third_party/nasm/config/config-linux.h
+--- a/src/third_party/nasm/config/config-linux.h
++++ b/src/third_party/nasm/config/config-linux.h
+@@ -139,7 +139,7 @@
+ #define HAVE_ACCESS 1
+ 
+ /* Define to 1 if you have the `canonicalize_file_name' function. */
+-#define HAVE_CANONICALIZE_FILE_NAME 1
++//#define HAVE_CANONICALIZE_FILE_NAME 1
+ 
+ /* Define to 1 if you have the `cpu_to_le16' intrinsic function. */
+ /* #undef HAVE_CPU_TO_LE16 */
+diff -Nur '--exclude=.git' a/src/third_party/swiftshader/third_party/llvm-10.0/configs/linux/include/llvm/Config/config.h b/src/third_party/swiftshader/third_party/llvm-10.0/configs/linux/include/llvm/Config/config.h
+--- a/src/third_party/swiftshader/third_party/llvm-10.0/configs/linux/include/llvm/Config/config.h
++++ b/src/third_party/swiftshader/third_party/llvm-10.0/configs/linux/include/llvm/Config/config.h
+@@ -125,7 +125,7 @@
+ /* #undef HAVE_MALLCTL */
+ 
+ /* Define to 1 if you have the `mallinfo' function. */
+-#define HAVE_MALLINFO 1
++//#define HAVE_MALLINFO 1
+ 
+ /* Define to 1 if you have the <malloc/malloc.h> header file. */
+ /* #undef HAVE_MALLOC_MALLOC_H */
+diff -Nur '--exclude=.git' a/src/third_party/swiftshader/third_party/llvm-subzero/build/Linux/include/llvm/Config/config.h b/src/third_party/swiftshader/third_party/llvm-subzero/build/Linux/include/llvm/Config/config.h
+--- a/src/third_party/swiftshader/third_party/llvm-subzero/build/Linux/include/llvm/Config/config.h
++++ b/src/third_party/swiftshader/third_party/llvm-subzero/build/Linux/include/llvm/Config/config.h
+@@ -55,7 +55,7 @@
+ #define HAVE_ERRNO_H 1
+ 
+ /* Define to 1 if you have the <execinfo.h> header file. */
+-#define HAVE_EXECINFO_H 1
++//#define HAVE_EXECINFO_H 1
+ 
+ /* Define to 1 if you have the <fcntl.h> header file. */
+ #define HAVE_FCNTL_H 1
+@@ -130,7 +130,7 @@
+ /* #undef HAVE_MALLCTL */
+ 
+ /* Define to 1 if you have the `mallinfo' function. */
+-#define HAVE_MALLINFO 1
++//#define HAVE_MALLINFO 1
+ 
+ /* Define to 1 if you have the <malloc.h> header file. */
+ #define HAVE_MALLOC_H 1
+diff -Nur '--exclude=.git' a/src/codegen/external-reference-table.cc b/src/codegen/external-reference-table.cc
+--- a/src/codegen/external-reference-table.cc
++++ b/src/codegen/external-reference-table.cc
+@@ -9,7 +9,7 @@
+ #include "src/ic/stub-cache.h"
+ #include "src/logging/counters.h"
+
+-#if defined(DEBUG) && defined(V8_OS_LINUX) && !defined(V8_OS_ANDROID)
++#if defined(DEBUG) && defined(V8_OS_LINUX) && !defined(V8_OS_ANDROID) && defined(__GLIBC__)
+ #define SYMBOLIZE_FUNCTION
+ #include <execinfo.h>
+ #include <vector>
+diff -Nur '--exclude=.git' a/src/v8/src/base/platform/condition-variable.cc b/src/v8/src/base/platform/condition-variable.cc
+--- a/v8/src/base/platform/condition-variable.cc
++++ b/v8/src/base/platform/condition-variable.cc
+@@ -16,7 +16,7 @@
+ 
+ ConditionVariable::ConditionVariable() {
+ #if (V8_OS_FREEBSD || V8_OS_NETBSD || V8_OS_OPENBSD || \
+-     (V8_OS_LINUX && V8_LIBC_GLIBC))
++     V8_OS_LINUX)
+   // On Free/Net/OpenBSD and Linux with glibc we can change the time
+   // source for pthread_cond_timedwait() to use the monotonic clock.
+   pthread_condattr_t attr;
+@@ -92,7 +92,7 @@
+       &native_handle_, &mutex->native_handle(), &ts);
+ #else
+ #if (V8_OS_FREEBSD || V8_OS_NETBSD || V8_OS_OPENBSD || \
+-     (V8_OS_LINUX && V8_LIBC_GLIBC))
++     V8_OS_LINUX)
+   // On Free/Net/OpenBSD and Linux with glibc we can change the time
+   // source for pthread_cond_timedwait() to use the monotonic clock.
+   result = clock_gettime(CLOCK_MONOTONIC, &ts);
+diff -Nur '--exclude=.git' a/src/v8/src/base/platform/platform-posix.cc b/src/v8/src/base/platform/platform-posix.cc
+--- a/src/v8/src/base/platform/platform-posix.cc
++++ b/src/v8/src/base/platform/platform-posix.cc
+@@ -857,6 +857,8 @@
+ #elif V8_OS_AIX
+     // Default on AIX is 96kB -- bump up to 2MB
+     stack_size = 2 * 1024 * 1024;
++#elif V8_OS_LINUX && !defined(V8_LIBC_GLIBC)
++    stack_size = 8 * 1024 * 1024;
+ #endif
+   }
+   if (stack_size > 0) {

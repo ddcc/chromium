@@ -29,12 +29,12 @@ NativeLibrary LoadNativeLibraryWithOptions(const FilePath& library_path,
   // http://crbug.com/17943, http://crbug.com/17557, http://crbug.com/36892,
   // and http://crbug.com/40794.
   int flags = RTLD_LAZY;
-#if defined(OS_ANDROID) || !defined(RTLD_DEEPBIND)
+#if (defined(OS_ANDROID) || defined(OS_LINUX)) && !defined(RTLD_DEEPBIND)
   // Certain platforms don't define RTLD_DEEPBIND. Android dlopen() requires
   // further investigation, as it might vary across versions. Crash here to
   // warn developers that they're trying to rely on uncertain behavior.
   CHECK(!options.prefer_own_symbols);
-#else
+#elif defined(RTLD_DEEPBIND)
   if (options.prefer_own_symbols)
     flags |= RTLD_DEEPBIND;
 #endif

@@ -49,7 +49,9 @@
 #endif  // defined(OS_ANDROID) && defined(__arm__)
 
 #if defined(OS_LINUX) && !defined(OS_CHROMEOS)
+#ifdef __GLIBC__
 #include <gnu/libc-version.h>
+#endif
 
 #include "base/linux_util.h"
 #include "base/strings/string_split.h"
@@ -264,7 +266,7 @@ void RecordLinuxDistro() {
 #endif  // defined(OS_LINUX) && !defined(OS_CHROMEOS)
 
 void RecordLinuxGlibcVersion() {
-#if defined(OS_LINUX) && !defined(OS_CHROMEOS)
+#if defined(OS_LINUX) && !defined(OS_CHROMEOS) && defined(__GLIBC__)
   base::Version version(gnu_get_libc_version());
 
   UMALinuxGlibcVersion glibc_version_result = UMA_LINUX_GLIBC_NOT_PARSEABLE;

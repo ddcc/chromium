@@ -1737,7 +1737,11 @@ ResultExpr PthreadPolicyEquality::EvaluateSyscall(int sysno) const {
     const uint64_t kGlibcCloneMask = CLONE_VM | CLONE_FS | CLONE_FILES |
                                      CLONE_SIGHAND | CLONE_THREAD |
                                      CLONE_SYSVSEM | CLONE_SETTLS |
-                                     CLONE_PARENT_SETTID | CLONE_CHILD_CLEARTID;
+                                     CLONE_PARENT_SETTID | CLONE_CHILD_CLEARTID
+#if defined(OS_LINUX) && !defined(__GLIBC__)
+                                     | CLONE_DETACHED
+#endif
+        ;
     const uint64_t kBaseAndroidCloneMask = CLONE_VM | CLONE_FS | CLONE_FILES |
                                            CLONE_SIGHAND | CLONE_THREAD |
                                            CLONE_SYSVSEM;

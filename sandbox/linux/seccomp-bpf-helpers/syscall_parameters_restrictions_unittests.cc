@@ -237,8 +237,8 @@ class RestrictPrlimit64Policy : public bpf_dsl::Policy {
 };
 
 BPF_TEST_C(ParameterRestrictions, prlimit64_allowed, RestrictPrlimit64Policy) {
-  BPF_ASSERT_EQ(0, sys_prlimit64(0, RLIMIT_AS, NULL, NULL));
-  BPF_ASSERT_EQ(0, sys_prlimit64(getpid(), RLIMIT_AS, NULL, NULL));
+  BPF_ASSERT_EQ(0, syscall(SYS_prlimit64, 0, RLIMIT_AS, NULL, NULL));
+  BPF_ASSERT_EQ(0, syscall(SYS_prlimit64, getpid(), RLIMIT_AS, NULL, NULL));
 }
 
 BPF_DEATH_TEST_C(ParameterRestrictions,
@@ -247,7 +247,7 @@ BPF_DEATH_TEST_C(ParameterRestrictions,
                  RestrictPrlimit64Policy) {
   const pid_t kInitPID = 1;
   BPF_ASSERT_NE(kInitPID, getpid());
-  sys_prlimit64(kInitPID, RLIMIT_AS, NULL, NULL);
+  syscall(SYS_prlimit64, kInitPID, RLIMIT_AS, NULL, NULL);
 }
 
 class RestrictGetrusagePolicy : public bpf_dsl::Policy {

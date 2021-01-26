@@ -70,7 +70,7 @@ class BASE_EXPORT SimpleThread : public PlatformThread::Delegate {
     Options& operator=(const Options& other) = default;
 
     // A custom stack size, or 0 for the system default.
-    size_t stack_size = 0;
+    size_t stack_size = 8UL * 1024UL * 1024UL;
 
     ThreadPriority priority = ThreadPriority::NORMAL;
 

@@ -33,7 +33,7 @@ typedef MultiProcessTest StackTraceTest;
 typedef testing::Test StackTraceTest;
 #endif
 
-#if !defined(__UCLIBC__) && !defined(_AIX)
+#if !defined(__UCLIBC__) && !defined(_AIX) && defined(__GLIBC__)
 // StackTrace::OutputToStream() is not implemented under uclibc, nor AIX.
 // See https://crbug.com/706728
 
@@ -170,7 +170,7 @@ TEST_F(StackTraceTest, DebugOutputToStreamWithNullPrefix) {
   trace.ToStringWithPrefix(nullptr);
 }
 
-#endif  // !defined(__UCLIBC__) && !defined(_AIX)
+#endif  // !defined(__UCLIBC__) && !defined(_AIX) && defined(__GLIBC__)
 
 #if defined(OS_POSIX) && !defined(OS_ANDROID)
 #if !defined(OS_IOS)
@@ -274,7 +274,7 @@ TEST_F(StackTraceTest, itoa_r) {
 }
 #endif  // defined(OS_POSIX) && !defined(OS_ANDROID)
 
-#if BUILDFLAG(CAN_UNWIND_WITH_FRAME_POINTERS)
+#if BUILDFLAG(CAN_UNWIND_WITH_FRAME_POINTERS) && !defined(OS_LINUX) || defined(__GLIBC__)
 
 class CopyFunction : public StackCopier {
  public:
@@ -383,7 +383,7 @@ TEST_F(StackTraceTest, MAYBE_StackEnd) {
   EXPECT_NE(0u, GetStackEnd());
 }
 
-#endif  // BUILDFLAG(CAN_UNWIND_WITH_FRAME_POINTERS)
+#endif  // BUILDFLAG(CAN_UNWIND_WITH_FRAME_POINTERS) && !defined(OS_LINUX) || defined(__GLIBC__)
 
 }  // namespace debug
 }  // namespace base
