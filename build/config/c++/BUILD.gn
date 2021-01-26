@@ -59,7 +59,7 @@ config("runtime_library") {
     }
   }
 
-  defines += [ "_LIBCPP_ENABLE_NODISCARD" ]
+  defines += [ "_LIBCPP_ENABLE_NODISCARD", "_LIBCPP_HAS_MUSL_LIBC" ]
 
   # The Windows component build fails to link with libc++'s debug mode. See
   # https://crbug.com/923166#c33, https://crbug.com/923166#c44, and

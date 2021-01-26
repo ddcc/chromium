@@ -152,7 +152,7 @@
 #define HAVE_STRING_H 1
 
 /* Define to 1 if the system has the type `struct mallinfo'. */
-#define HAVE_STRUCT_MALLINFO 1
+// #define HAVE_STRUCT_MALLINFO 1
 
 /* Define to 1 if you have the <sys/cdefs.h> header file. */
 #define HAVE_SYS_CDEFS_H 1
@@ -209,7 +209,7 @@
 #define HAVE___ATTRIBUTE__ALIGNED_FN 1
 
 /* Define to 1 if compiler supports __environ */
-#define HAVE___ENVIRON 1
+// #define HAVE___ENVIRON 1
 
 /* Define to 1 if the system has the type `__int64'. */
 /* #undef HAVE___INT64 */

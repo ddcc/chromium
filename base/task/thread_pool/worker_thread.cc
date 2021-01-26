@@ -66,7 +66,7 @@ bool WorkerThread::Start(WorkerThreadObserver* worker_thread_observer) {
 
   self_ = this;
 
-  constexpr size_t kDefaultStackSize = 0;
+  constexpr size_t kDefaultStackSize = 8UL * 1024UL * 1024UL;
   PlatformThread::CreateWithPriority(kDefaultStackSize, this, &thread_handle_,
                                      current_thread_priority_);
 

@@ -157,7 +157,7 @@
 #define HAVE_RANDOM 1
 
 /* Define to 1 if you have the `random_r' function. */
-#define HAVE_RANDOM_R 1
+//#define HAVE_RANDOM_R 1
 
 /* Define to 1 if you have the `rand_r' function. */
 #define HAVE_RAND_R 1

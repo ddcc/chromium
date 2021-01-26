@@ -143,9 +143,12 @@ Optional<StringPiece> ReadElfLibraryName(const void* elf_mapped_base) {
     for (const Dyn* dynamic_iter = dynamic_start; dynamic_iter < dynamic_end;
          ++dynamic_iter) {
       if (dynamic_iter->d_tag == DT_STRTAB) {
-#if defined(OS_FUCHSIA) || defined(OS_ANDROID)
+#if defined(OS_FUCHSIA) || defined(OS_ANDROID) || (defined(OS_LINUX) && !defined(__GLIBC__))
         // Fuchsia and Android do not relocate the symtab pointer on ELF load.
-        strtab_addr = static_cast<size_t>(dynamic_iter->d_un.d_ptr) +
+        strtab_addr =
+        static_cast<size_t>(dynamic_iter->d_un.d_ptr) > relocation_offset ?
+                      reinterpret_cast<const char *>(dynamic_iter->d_un.d_ptr) :
+                      static_cast<size_t>(dynamic_iter->d_un.d_ptr) +
                       reinterpret_cast<const char*>(relocation_offset);
 #else
         strtab_addr = reinterpret_cast<const char*>(dynamic_iter->d_un.d_ptr);

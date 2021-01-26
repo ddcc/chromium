@@ -80,7 +80,7 @@ using NativeCPUContext = ucontext_t;
 
 void InitializeContext(NativeCPUContext* context) {
   context->uc_mcontext.gregs[REG_RAX] = 0xabcd1234abcd1234;
-  context->uc_mcontext.fpregs = &context->__fpregs_mem;
+  context->uc_mcontext.fpregs = reinterpret_cast<fpregset_t>(&context->__fpregs_mem);
   memset(&context->__fpregs_mem, 44, sizeof(context->__fpregs_mem));
 }
 

@@ -138,7 +138,11 @@ ResultExpr RestrictCloneToThreadsAndEPERMFork() {
 
   const uint64_t kGlibcPthreadFlags =
       CLONE_VM | CLONE_FS | CLONE_FILES | CLONE_SIGHAND | CLONE_THREAD |
-      CLONE_SYSVSEM | CLONE_SETTLS | CLONE_PARENT_SETTID | CLONE_CHILD_CLEARTID;
+      CLONE_SYSVSEM | CLONE_SETTLS | CLONE_PARENT_SETTID | CLONE_CHILD_CLEARTID
+#if defined(OS_LINUX) && !defined(__GLIBC__)
+      | CLONE_DETACHED
+#endif
+      ;
   const BoolExpr glibc_test = flags == kGlibcPthreadFlags;
 
   const BoolExpr android_test =

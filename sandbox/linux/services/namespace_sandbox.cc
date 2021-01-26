@@ -130,7 +130,7 @@ void MaybeUpdateGlibcTidCache() {
     CHECK_EQ(real_tid, GetGlibcCachedTid());
   }
 }
-#endif  // defined(LIBC_GLIBC)
+#endif
 
 }  // namespace
 

@@ -384,6 +384,13 @@ OSMetrics::MappedAndResidentPagesDumpState OSMetrics::GetMappedAndResidentPages(
   const size_t end_page = (end_address - 1) / kPageSize;
   const size_t total_pages = end_page - start_page + 1;
 
+#ifndef __GLIBC__
+  if (setvbuf(pagemap_file.get(), NULL, _IONBF, 0) != 0) {
+    DLOG(ERROR) << "Error in setvbuf " << kPagemap;
+    return OSMetrics::MappedAndResidentPagesDumpState::kFailure;
+  }
+#endif
+
   // The pagemap has one 64 bit entry per page or 8 bytes.
   auto offset = static_cast<long>(start_page * 8);
   if (fseek(pagemap_file.get(), offset, SEEK_SET) != 0) {

@@ -44,7 +44,11 @@
 
 static bool DropRoot();
 
+#ifdef TEMP_FAILURE_RETRY
 #define HANDLE_EINTR(x) TEMP_FAILURE_RETRY(x)
+#else
+#define HANDLE_EINTR(x) ({ long int __result; do { __result = (long int)(x); } while (__result == -1 && errno == EINTR); __result; })
+#endif
 
 static void FatalError(const char* msg, ...)
     __attribute__((noreturn, format(printf, 1, 2)));
