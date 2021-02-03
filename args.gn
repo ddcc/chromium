@@ -1,0 +1,16 @@
+use_herqules=true
+cc_wrapper="ccache"
+enable_linux_installer=false
+
+clang_base_path="/home/ddchen/hw-ccfi/llvm/llvm-project/llvm/build_release"
+clang_use_chrome_plugins=false
+sysroot="/home/ddchen/alpine-3.13.0"
+treat_warnings_as_errors=false
+fieldtrial_testing_like_official_build=true
+enable_nacl=false
+use_pulseaudio=false
+rtc_use_pipewire=false
+
+google_api_key="TODO"
+google_default_client_id="TODO"
+google_default_client_secret="TODO"
