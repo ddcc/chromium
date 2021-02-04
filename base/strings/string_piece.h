@@ -27,6 +27,7 @@
 #include <iosfwd>
 #include <ostream>
 #include <string>
+#include <hq_string>
 #include <type_traits>
 
 #include "base/base_export.h"
@@ -178,6 +179,8 @@ template <typename STRING_TYPE> class BasicStringPiece {
                   "the default constructor instead.");
   }
   BasicStringPiece(const STRING_TYPE& str)
+      : ptr_(str.data()), length_(str.size()) {}
+  BasicStringPiece(const std::hq_basic_string<value_type, traits_type>& str)
       : ptr_(str.data()), length_(str.size()) {}
   constexpr BasicStringPiece(const value_type* offset, size_type len)
       : ptr_(offset), length_(len) {}

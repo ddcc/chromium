@@ -13,6 +13,7 @@
 #include "base/strings/string16.h"
 #include "base/strings/string_piece.h"
 #include "url/third_party/mozilla/url_parse.h"
+#include "url/third_party/mozilla/hq_url_parse.h"
 #include "url/url_canon.h"
 #include "url/url_constants.h"
 
@@ -213,12 +214,26 @@ bool Canonicalize(const char* spec,
                   CanonOutput* output,
                   Parsed* output_parsed);
 COMPONENT_EXPORT(URL)
+bool Canonicalize(const char* spec,
+                  int spec_len,
+                  bool trim_path_end,
+                  CharsetConverter* charset_converter,
+                  CanonOutput* output,
+                  HQ_Parsed* output_parsed);
+COMPONENT_EXPORT(URL)
 bool Canonicalize(const base::char16* spec,
                   int spec_len,
                   bool trim_path_end,
                   CharsetConverter* charset_converter,
                   CanonOutput* output,
                   Parsed* output_parsed);
+COMPONENT_EXPORT(URL)
+bool Canonicalize(const base::char16* spec,
+                  int spec_len,
+                  bool trim_path_end,
+                  CharsetConverter* charset_converter,
+                  CanonOutput* output,
+                  HQ_Parsed* output_parsed);
 
 // Resolves a potentially relative URL relative to the given parsed base URL.
 // The base MUST be valid. The resulting canonical URL and parsed information
@@ -242,12 +257,30 @@ bool ResolveRelative(const char* base_spec,
 COMPONENT_EXPORT(URL)
 bool ResolveRelative(const char* base_spec,
                      int base_spec_len,
+                     const HQ_Parsed& base_parsed,
+                     const char* relative,
+                     int relative_length,
+                     CharsetConverter* charset_converter,
+                     CanonOutput* output,
+                     HQ_Parsed* output_parsed);
+COMPONENT_EXPORT(URL)
+bool ResolveRelative(const char* base_spec,
+                     int base_spec_len,
                      const Parsed& base_parsed,
                      const base::char16* relative,
                      int relative_length,
                      CharsetConverter* charset_converter,
                      CanonOutput* output,
                      Parsed* output_parsed);
+COMPONENT_EXPORT(URL)
+bool ResolveRelative(const char* base_spec,
+                     int base_spec_len,
+                     const HQ_Parsed& base_parsed,
+                     const base::char16* relative,
+                     int relative_length,
+                     CharsetConverter* charset_converter,
+                     CanonOutput* output,
+                     HQ_Parsed* output_parsed);
 
 // Replaces components in the given VALID input URL. The new canonical URL info
 // is written to output and out_parsed.
@@ -264,11 +297,27 @@ bool ReplaceComponents(const char* spec,
 COMPONENT_EXPORT(URL)
 bool ReplaceComponents(const char* spec,
                        int spec_len,
+                       const HQ_Parsed& parsed,
+                       const Replacements<char>& replacements,
+                       CharsetConverter* charset_converter,
+                       CanonOutput* output,
+                       HQ_Parsed* out_parsed);
+COMPONENT_EXPORT(URL)
+bool ReplaceComponents(const char* spec,
+                       int spec_len,
                        const Parsed& parsed,
                        const Replacements<base::char16>& replacements,
                        CharsetConverter* charset_converter,
                        CanonOutput* output,
                        Parsed* out_parsed);
+COMPONENT_EXPORT(URL)
+bool ReplaceComponents(const char* spec,
+                       int spec_len,
+                       const HQ_Parsed& parsed,
+                       const Replacements<base::char16>& replacements,
+                       CharsetConverter* charset_converter,
+                       CanonOutput* output,
+                       HQ_Parsed* out_parsed);
 
 // String helper functions -----------------------------------------------------
 

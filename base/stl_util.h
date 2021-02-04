@@ -15,16 +15,20 @@
 #include <iterator>
 #include <list>
 #include <map>
+#include <hq_map>
 #include <set>
+#include <hq_set>
 #include <string>
 #include <type_traits>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include <hq_vector>
 
 #include "base/check.h"
 #include "base/optional.h"
+#include "base/hq_optional.h"
 #include "base/template_util.h"
 
 namespace base {
@@ -716,8 +720,24 @@ size_t Erase(std::vector<T, Allocator>& container, const Value& value) {
   return removed;
 }
 
+template <class T, class Allocator, class Value>
+size_t Erase(std::hq_vector<T, Allocator>& container, const Value& value) {
+  auto it = std::remove(container.begin(), container.end(), value);
+  size_t removed = std::distance(it, container.end());
+  container.erase(it, container.end());
+  return removed;
+}
+
 template <class T, class Allocator, class Predicate>
 size_t EraseIf(std::vector<T, Allocator>& container, Predicate pred) {
+  auto it = std::remove_if(container.begin(), container.end(), pred);
+  size_t removed = std::distance(it, container.end());
+  container.erase(it, container.end());
+  return removed;
+}
+
+template <class T, class Allocator, class Predicate>
+size_t EraseIf(std::hq_vector<T, Allocator>& container, Predicate pred) {
   auto it = std::remove_if(container.begin(), container.end(), pred);
   size_t removed = std::distance(it, container.end());
   container.erase(it, container.end());
@@ -748,6 +768,12 @@ size_t EraseIf(std::map<Key, T, Compare, Allocator>& container,
 }
 
 template <class Key, class T, class Compare, class Allocator, class Predicate>
+size_t EraseIf(std::hq_map<Key, T, Compare, Allocator>& container,
+               Predicate pred) {
+  return internal::IterateAndEraseIf(container, pred);
+}
+
+template <class Key, class T, class Compare, class Allocator, class Predicate>
 size_t EraseIf(std::multimap<Key, T, Compare, Allocator>& container,
                Predicate pred) {
   return internal::IterateAndEraseIf(container, pred);
@@ -755,6 +781,11 @@ size_t EraseIf(std::multimap<Key, T, Compare, Allocator>& container,
 
 template <class Key, class Compare, class Allocator, class Predicate>
 size_t EraseIf(std::set<Key, Compare, Allocator>& container, Predicate pred) {
+  return internal::IterateAndEraseIf(container, pred);
+}
+
+template <class Key, class Compare, class Allocator, class Predicate>
+size_t EraseIf(std::hq_set<Key, Compare, Allocator>& container, Predicate pred) {
   return internal::IterateAndEraseIf(container, pred);
 }
 
@@ -861,6 +892,16 @@ T* OptionalOrNullptr(base::Optional<T>& optional) {
 
 template <class T>
 const T* OptionalOrNullptr(const base::Optional<T>& optional) {
+  return optional.has_value() ? &optional.value() : nullptr;
+}
+
+template <class T>
+T* OptionalOrNullptr(base::HQ_Optional<T>& optional) {
+  return optional.has_value() ? &optional.value() : nullptr;
+}
+
+template <class T>
+const T* OptionalOrNullptr(const base::HQ_Optional<T>& optional) {
   return optional.has_value() ? &optional.value() : nullptr;
 }
 

@@ -723,6 +723,19 @@ bool Canonicalize(const char* spec,
                         charset_converter, output, output_parsed);
 }
 
+bool Canonicalize(const char* spec,
+                  int spec_len,
+                  bool trim_path_end,
+                  CharsetConverter* charset_converter,
+                  CanonOutput* output,
+                  HQ_Parsed* output_parsed) {
+  Parsed p;
+  bool ret = DoCanonicalize(spec, spec_len, trim_path_end, REMOVE_WHITESPACE,
+                        charset_converter, output, &p);
+  *output_parsed = p;
+  return ret;
+}
+
 bool Canonicalize(const base::char16* spec,
                   int spec_len,
                   bool trim_path_end,
@@ -731,6 +744,19 @@ bool Canonicalize(const base::char16* spec,
                   Parsed* output_parsed) {
   return DoCanonicalize(spec, spec_len, trim_path_end, REMOVE_WHITESPACE,
                         charset_converter, output, output_parsed);
+}
+
+bool Canonicalize(const base::char16* spec,
+                  int spec_len,
+                  bool trim_path_end,
+                  CharsetConverter* charset_converter,
+                  CanonOutput* output,
+                  HQ_Parsed* output_parsed) {
+  Parsed p;
+  bool ret = DoCanonicalize(spec, spec_len, trim_path_end, REMOVE_WHITESPACE,
+                        charset_converter, output, &p);
+  *output_parsed = p;
+  return ret;
 }
 
 bool ResolveRelative(const char* base_spec,
@@ -748,6 +774,22 @@ bool ResolveRelative(const char* base_spec,
 
 bool ResolveRelative(const char* base_spec,
                      int base_spec_len,
+                     const HQ_Parsed& base_parsed,
+                     const char* relative,
+                     int relative_length,
+                     CharsetConverter* charset_converter,
+                     CanonOutput* output,
+                     HQ_Parsed* output_parsed) {
+  Parsed p;
+  bool ret = DoResolveRelative(base_spec, base_spec_len, base_parsed,
+                           relative, relative_length,
+                           charset_converter, output, &p);
+  *output_parsed = p;
+  return ret;
+}
+
+bool ResolveRelative(const char* base_spec,
+                     int base_spec_len,
                      const Parsed& base_parsed,
                      const base::char16* relative,
                      int relative_length,
@@ -757,6 +799,22 @@ bool ResolveRelative(const char* base_spec,
   return DoResolveRelative(base_spec, base_spec_len, base_parsed,
                            relative, relative_length,
                            charset_converter, output, output_parsed);
+}
+
+bool ResolveRelative(const char* base_spec,
+                     int base_spec_len,
+                     const HQ_Parsed& base_parsed,
+                     const base::char16* relative,
+                     int relative_length,
+                     CharsetConverter* charset_converter,
+                     CanonOutput* output,
+                     HQ_Parsed* output_parsed) {
+  Parsed p;
+  bool ret = DoResolveRelative(base_spec, base_spec_len, base_parsed,
+                           relative, relative_length,
+                           charset_converter, output, &p);
+  *output_parsed = p;
+  return ret;
 }
 
 bool ReplaceComponents(const char* spec,
@@ -772,6 +830,20 @@ bool ReplaceComponents(const char* spec,
 
 bool ReplaceComponents(const char* spec,
                        int spec_len,
+                       const HQ_Parsed& parsed,
+                       const Replacements<char>& replacements,
+                       CharsetConverter* charset_converter,
+                       CanonOutput* output,
+                       HQ_Parsed* out_parsed) {
+  Parsed p;
+  bool ret = DoReplaceComponents(spec, spec_len, parsed, replacements,
+                             charset_converter, output, &p);
+  *out_parsed = p;
+  return ret;
+}
+
+bool ReplaceComponents(const char* spec,
+                       int spec_len,
                        const Parsed& parsed,
                        const Replacements<base::char16>& replacements,
                        CharsetConverter* charset_converter,
@@ -779,6 +851,20 @@ bool ReplaceComponents(const char* spec,
                        Parsed* out_parsed) {
   return DoReplaceComponents(spec, spec_len, parsed, replacements,
                              charset_converter, output, out_parsed);
+}
+
+bool ReplaceComponents(const char* spec,
+                       int spec_len,
+                       const HQ_Parsed& parsed,
+                       const Replacements<base::char16>& replacements,
+                       CharsetConverter* charset_converter,
+                       CanonOutput* output,
+                       HQ_Parsed* out_parsed) {
+  Parsed p;
+  bool ret = DoReplaceComponents(spec, spec_len, parsed, replacements,
+                             charset_converter, output, &p);
+  *out_parsed = p;
+  return ret;
 }
 
 void DecodeURLEscapeSequences(const char* input,

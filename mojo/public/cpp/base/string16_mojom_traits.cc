@@ -19,6 +19,16 @@ bool StructTraits<mojo_base::mojom::String16DataView, base::string16>::Read(
 }
 
 // static
+bool StructTraits<mojo_base::mojom::String16DataView, base::hq_string16>::Read(
+    mojo_base::mojom::String16DataView data,
+    base::hq_string16* out) {
+  ArrayDataView<uint16_t> view;
+  data.GetDataDataView(&view);
+  out->assign(reinterpret_cast<const base::char16*>(view.data()), view.size());
+  return true;
+}
+
+// static
 mojo_base::BigBuffer
 StructTraits<mojo_base::mojom::BigString16DataView, base::string16>::data(
     const base::string16& str) {

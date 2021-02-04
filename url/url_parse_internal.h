@@ -8,6 +8,7 @@
 // Contains common inline helper functions used by the URL parsing routines.
 
 #include "url/third_party/mozilla/url_parse.h"
+#include "url/third_party/mozilla/hq_url_parse.h"
 
 namespace url {
 
@@ -67,11 +68,21 @@ void ParsePathInternal(const char* spec,
                        Component* filepath,
                        Component* query,
                        Component* ref);
+void ParsePathInternal(const char* spec,
+                       const HQ_Component& path,
+                       HQ_Component* filepath,
+                       HQ_Component* query,
+                       HQ_Component* ref);
 void ParsePathInternal(const base::char16* spec,
                        const Component& path,
                        Component* filepath,
                        Component* query,
                        Component* ref);
+void ParsePathInternal(const base::char16* spec,
+                       const HQ_Component& path,
+                       HQ_Component* filepath,
+                       HQ_Component* query,
+                       HQ_Component* ref);
 
 
 // Given a spec and a pointer to the character after the colon following the

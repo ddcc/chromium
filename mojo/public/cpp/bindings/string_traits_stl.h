@@ -5,6 +5,7 @@
 #ifndef MOJO_PUBLIC_CPP_BINDINGS_STRING_TRAITS_STL_H_
 #define MOJO_PUBLIC_CPP_BINDINGS_STRING_TRAITS_STL_H_
 
+#include <hq_string>
 #include <string>
 
 #include "mojo/public/cpp/bindings/string_traits.h"
@@ -16,6 +17,16 @@ struct StringTraits<std::string> {
   static const std::string& GetUTF8(const std::string& input) { return input; }
 
   static bool Read(StringDataView input, std::string* output) {
+    output->assign(input.storage(), input.size());
+    return true;
+  }
+};
+
+template <>
+struct StringTraits<std::hq_string> {
+  static const std::hq_string& GetUTF8(const std::hq_string& input) { return input; }
+
+  static bool Read(StringDataView input, std::hq_string* output) {
     output->assign(input.storage(), input.size());
     return true;
   }

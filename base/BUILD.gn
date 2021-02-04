@@ -879,6 +879,19 @@ component("base") {
       "timer/hi_res_timer_manager_posix.cc",
     ]
 
+    if (use_herqules_dfi) {
+      sources += [
+        "hq_optional.h",
+        "herqules/hq.h",
+        "herqules/hq_functions.h",
+        "herqules/hq_wrapper.h",
+        "strings/hq_string16.cc",
+        "strings/hq_string16.h",
+        "time/hq_time.cc",
+        "time/hq_time.h",
+      ]
+    }
+
     if (!is_nacl && !is_apple) {
       sources += [
         "cpu_affinity_posix.cc",

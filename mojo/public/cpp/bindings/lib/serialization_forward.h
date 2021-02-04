@@ -6,6 +6,7 @@
 #define MOJO_PUBLIC_CPP_BINDINGS_LIB_SERIALIZATION_FORWARD_H_
 
 #include "base/optional.h"
+#include "base/hq_optional.h"
 #include "mojo/public/cpp/bindings/array_traits.h"
 #include "mojo/public/cpp/bindings/enum_traits.h"
 #include "mojo/public/cpp/bindings/lib/buffer.h"
@@ -28,10 +29,15 @@ struct Serializer;
 
 template <typename T>
 struct IsOptionalWrapper {
-  static const bool value = IsSpecializationOf<
-      base::Optional,
-      typename std::remove_const<
-          typename std::remove_reference<T>::type>::type>::value;
+  static const bool value =
+      IsSpecializationOf<
+          base::Optional,
+          typename std::remove_const<
+              typename std::remove_reference<T>::type>::type>::value ||
+      IsSpecializationOf<
+          base::HQ_Optional,
+          typename std::remove_const<
+              typename std::remove_reference<T>::type>::type>::value;
 };
 
 template <typename MojomType,

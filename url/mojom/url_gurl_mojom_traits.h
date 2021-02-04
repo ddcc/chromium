@@ -9,6 +9,7 @@
 #include "base/strings/string_piece.h"
 #include "mojo/public/cpp/bindings/struct_traits.h"
 #include "url/gurl.h"
+#include "url/hq_gurl.h"
 #include "url/mojom/url.mojom-shared.h"
 
 namespace mojo {
@@ -18,6 +19,13 @@ struct COMPONENT_EXPORT(URL_MOJOM_TRAITS)
     StructTraits<url::mojom::UrlDataView, GURL> {
   static base::StringPiece url(const GURL& r);
   static bool Read(url::mojom::UrlDataView data, GURL* out);
+};
+
+template <>
+struct COMPONENT_EXPORT(URL_MOJOM_TRAITS)
+    StructTraits<url::mojom::UrlDataView, HQ_GURL> {
+  static base::StringPiece url(const HQ_GURL& r);
+  static bool Read(url::mojom::UrlDataView data, HQ_GURL* out);
 };
 
 }  // namespace mojo

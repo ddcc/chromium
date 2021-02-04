@@ -6,6 +6,7 @@
 #define BASE_CONTAINERS_UNIQUE_PTR_ADAPTERS_H_
 
 #include <memory>
+#include <hq_memory>
 
 namespace base {
 
@@ -34,12 +35,28 @@ struct UniquePtrComparator {
   }
 
   template <typename T, class Deleter = std::default_delete<T>>
+  bool operator()(const std::hq_unique_ptr<T, Deleter>& lhs,
+                  const std::hq_unique_ptr<T, Deleter>& rhs) const {
+    return lhs < rhs;
+  }
+
+  template <typename T, class Deleter = std::default_delete<T>>
   bool operator()(const T* lhs, const std::unique_ptr<T, Deleter>& rhs) const {
     return lhs < rhs.get();
   }
 
   template <typename T, class Deleter = std::default_delete<T>>
+  bool operator()(const T* lhs, const std::hq_unique_ptr<T, Deleter>& rhs) const {
+    return lhs < rhs.get();
+  }
+
+  template <typename T, class Deleter = std::default_delete<T>>
   bool operator()(const std::unique_ptr<T, Deleter>& lhs, const T* rhs) const {
+    return lhs.get() < rhs;
+  }
+
+  template <typename T, class Deleter = std::default_delete<T>>
+  bool operator()(const std::hq_unique_ptr<T, Deleter>& lhs, const T* rhs) const {
     return lhs.get() < rhs;
   }
 };

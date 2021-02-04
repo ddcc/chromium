@@ -11,6 +11,8 @@
 #include "base/containers/flat_map.h"
 #include "base/optional.h"
 #include "mojo/public/cpp/bindings/lib/template_util.h"
+#include "mojo/public/cpp/bindings/hq_struct_ptr.h"
+#include "mojo/public/cpp/bindings/struct_ptr.h"
 
 namespace mojo {
 
@@ -79,6 +81,11 @@ struct CloneTraits<base::flat_map<K, V>, false> {
 template <typename T>
 T Clone(const T& input) {
   return CloneTraits<T>::Clone(input);
+}
+
+template <typename T>
+StructPtr<typename T::BaseType> Clone(const HQ_StructPtr<T>& input) {
+  return input.Clone();
 }
 
 }  // namespace mojo

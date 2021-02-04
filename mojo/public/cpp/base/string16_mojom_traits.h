@@ -9,6 +9,7 @@
 
 #include "base/component_export.h"
 #include "base/containers/span.h"
+#include "base/strings/hq_string16.h"
 #include "base/strings/string_piece.h"
 #include "mojo/public/cpp/base/big_buffer.h"
 #include "mojo/public/cpp/bindings/struct_traits.h"
@@ -35,6 +36,18 @@ struct COMPONENT_EXPORT(MOJO_BASE_TRAITS)
 
   static bool Read(mojo_base::mojom::String16DataView data,
                    base::string16* out);
+};
+
+template <>
+struct COMPONENT_EXPORT(MOJO_BASE_TRAITS)
+    StructTraits<mojo_base::mojom::String16DataView, base::hq_string16> {
+  static base::span<const uint16_t> data(const base::hq_string16& str) {
+    return StructTraits<mojo_base::mojom::String16DataView,
+                        base::StringPiece16>::data(str.str());
+  }
+
+  static bool Read(mojo_base::mojom::String16DataView data,
+                   base::hq_string16* out);
 };
 
 template <>

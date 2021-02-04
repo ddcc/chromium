@@ -13,6 +13,7 @@
 #include <stdint.h>
 
 #include <initializer_list>
+#include <hq_string>
 #include <string>
 #include <type_traits>
 #include <vector>
@@ -153,6 +154,7 @@ BASE_EXPORT bool EqualsCaseInsensitiveASCII(StringPiece16 a, StringPiece16 b);
 // These should not be used as initializers, function arguments, or return
 // values for functions which return by value or outparam.
 BASE_EXPORT const std::string& EmptyString();
+BASE_EXPORT const std::hq_string& EmptyHQString();
 BASE_EXPORT const string16& EmptyString16();
 
 // Contains the set of characters representing whitespace in the corresponding

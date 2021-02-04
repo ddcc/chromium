@@ -16,10 +16,12 @@
 #include <set>
 #include <stack>
 #include <string>
+#include <hq_string>
 #include <type_traits>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#include <hq_utility>
 
 #include "base/base_export.h"
 #include "base/containers/circular_deque.h"
@@ -94,6 +96,9 @@ auto EstimateMemoryUsage(const T& object)
 template <class C, class T, class A>
 size_t EstimateMemoryUsage(const std::basic_string<C, T, A>& string);
 
+template <class C, class T, class A>
+size_t EstimateMemoryUsage(const std::hq_basic_string<C, T, A>& string);
+
 // Arrays
 
 template <class T, size_t N>
@@ -109,6 +114,9 @@ size_t EstimateMemoryUsage(const T* array, size_t array_length);
 
 template <class T, class D>
 size_t EstimateMemoryUsage(const std::unique_ptr<T, D>& ptr);
+
+template <class T, class D>
+size_t EstimateMemoryUsage(const std::hq_unique_ptr<T, D>& ptr);
 
 template <class T, class D>
 size_t EstimateMemoryUsage(const std::unique_ptr<T[], D>& array,
@@ -347,6 +355,21 @@ size_t EstimateMemoryUsage(const std::basic_string<C, T, A>& string) {
   }
   return (string.capacity() + 1) * sizeof(value_type);
 }
+template <class C, class T, class A>
+size_t EstimateMemoryUsage(const std::hq_basic_string<C, T, A>& string) {
+  using string_type = std::hq_basic_string<C, T, A>;
+  using value_type = typename string_type::value_type;
+  // C++11 doesn't leave much room for implementors - std::string can
+  // use short string optimization, but that's about it. We detect SSO
+  // by checking that c_str() points inside |string|.
+  const uint8_t* cstr = reinterpret_cast<const uint8_t*>(string.c_str());
+  const uint8_t* inline_cstr = reinterpret_cast<const uint8_t*>(&string);
+  if (cstr >= inline_cstr && cstr < inline_cstr + sizeof(string)) {
+    // SSO string
+    return 0;
+  }
+  return (string.capacity() + 1) * sizeof(value_type);
+}
 
 // Use explicit instantiations from the .cc file (reduces bloat).
 extern template BASE_EXPORT size_t EstimateMemoryUsage(const std::string&);
@@ -377,6 +400,11 @@ size_t EstimateMemoryUsage(const T* array, size_t array_length) {
 
 template <class T, class D>
 size_t EstimateMemoryUsage(const std::unique_ptr<T, D>& ptr) {
+  return ptr ? (sizeof(T) + EstimateItemMemoryUsage(*ptr)) : 0;
+}
+
+template <class T, class D>
+size_t EstimateMemoryUsage(const std::hq_unique_ptr<T, D>& ptr) {
   return ptr ? (sizeof(T) + EstimateItemMemoryUsage(*ptr)) : 0;
 }
 

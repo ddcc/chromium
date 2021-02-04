@@ -5,6 +5,7 @@
 import("//build/buildflag_header.gni")
 import("//build/config/compiler/compiler.gni")
 import("//build/config/nacl/config.gni")
+import("//build/config/posix/herqules.gni")
 import("//tools/ipc_fuzzer/ipc_fuzzer.gni")
 
 declare_args() {
@@ -116,6 +117,12 @@ component("bindings_base") {
     "//base",
     "//mojo/public/cpp/system",
   ]
+
+  if (use_herqules_dfi) {
+    sources += [
+      "hq_struct_ptr.h",
+    ]
+  }
 
   if (enable_ipc_fuzzer) {
     all_dependent_configs = [ "//tools/ipc_fuzzer:ipc_fuzzer_config" ]

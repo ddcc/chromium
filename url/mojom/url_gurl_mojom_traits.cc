@@ -20,6 +20,17 @@ base::StringPiece StructTraits<url::mojom::UrlDataView, GURL>::url(
 }
 
 // static
+base::StringPiece StructTraits<url::mojom::UrlDataView, HQ_GURL>::url(
+    const HQ_GURL& r) {
+  if (r.possibly_invalid_spec().length() > url::kMaxURLChars || !r.is_valid()) {
+    return base::StringPiece();
+  }
+
+  return base::StringPiece(r.possibly_invalid_spec().c_str(),
+                           r.possibly_invalid_spec().length());
+}
+
+// static
 bool StructTraits<url::mojom::UrlDataView, GURL>::Read(
     url::mojom::UrlDataView data,
     GURL* out) {
@@ -31,6 +42,24 @@ bool StructTraits<url::mojom::UrlDataView, GURL>::Read(
     return false;
 
   *out = GURL(url_string);
+  if (!url_string.empty() && !out->is_valid())
+    return false;
+
+  return true;
+}
+
+// static
+bool StructTraits<url::mojom::UrlDataView, HQ_GURL>::Read(
+    url::mojom::UrlDataView data,
+    HQ_GURL* out) {
+  base::StringPiece url_string;
+  if (!data.ReadUrl(&url_string))
+    return false;
+
+  if (url_string.length() > url::kMaxURLChars)
+    return false;
+
+  *out = HQ_GURL(url_string);
   if (!url_string.empty() && !out->is_valid())
     return false;
 
