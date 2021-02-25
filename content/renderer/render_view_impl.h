@@ -13,6 +13,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <hq_wrapper>
 
 #include "base/containers/flat_map.h"
 #include "base/containers/id_map.h"
@@ -420,7 +421,7 @@ class CONTENT_EXPORT RenderViewImpl : public blink::WebViewClient,
 
   // Routing ID that allows us to communicate with the corresponding
   // RenderViewHost in the parent browser process.
-  const int32_t routing_id_;
+  const std::hq_wrapper<int32_t> routing_id_;
 
   // Whether lookup of frames in the created RenderView (e.g. lookup via
   // window.open or via <a target=...>) should be renderer-wide (i.e. going

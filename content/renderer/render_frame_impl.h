@@ -15,6 +15,7 @@
 #include <unordered_set>
 #include <utility>
 #include <vector>
+#include <hq_wrapper>
 
 #include "base/callback.h"
 #include "base/containers/id_map.h"
@@ -1408,11 +1409,11 @@ class CONTENT_EXPORT RenderFrameImpl
 
   // A bitwise OR of bindings types that have been enabled for this RenderFrame.
   // See BindingsPolicy for details.
-  int enabled_bindings_ = 0;
+  std::hq_wrapper<int> enabled_bindings_;
 
   // This boolean indicates whether JS bindings for Mojo should be enabled at
   // the time the next script context is created.
-  bool enable_mojo_js_bindings_ = false;
+  std::hq_wrapper<bool> enable_mojo_js_bindings_;
 
   mojo::AssociatedRemote<mojom::FrameHost> frame_host_remote_;
   mojo::ReceiverSet<service_manager::mojom::InterfaceProvider>
