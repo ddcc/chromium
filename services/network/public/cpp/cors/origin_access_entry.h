@@ -6,6 +6,8 @@
 #define SERVICES_NETWORK_PUBLIC_CPP_CORS_ORIGIN_ACCESS_ENTRY_H_
 
 #include <string>
+#include <hq_string>
+#include <hq_wrapper>
 
 #include "base/component_export.h"
 #include "base/macros.h"
@@ -61,23 +63,23 @@ class COMPONENT_EXPORT(NETWORK_CPP) OriginAccessEntry final {
 
   bool host_is_ip_address() const { return host_is_ip_address_; }
   mojom::CorsOriginAccessMatchPriority priority() const { return priority_; }
-  const std::string& registrable_domain() const { return registrable_domain_; }
+  const std::hq_string& registrable_domain() const { return registrable_domain_; }
 
   // Creates mojom::CorsOriginPattern instance that represents |this|
   // OriginAccessEntry instance.
   mojo::StructPtr<mojom::CorsOriginPattern> CreateCorsOriginPattern() const;
 
  private:
-  const std::string protocol_;
-  const std::string host_;
-  const uint16_t port_;
-  const mojom::CorsDomainMatchMode domain_match_mode_;
-  const mojom::CorsPortMatchMode port_match_mode_;
-  const mojom::CorsOriginAccessMatchPriority priority_;
-  const bool host_is_ip_address_;
+  const std::hq_string protocol_;
+  const std::hq_string host_;
+  const std::hq_wrapper<uint16_t> port_;
+  const std::hq_wrapper<mojom::CorsDomainMatchMode> domain_match_mode_;
+  const std::hq_wrapper<mojom::CorsPortMatchMode> port_match_mode_;
+  const std::hq_wrapper<mojom::CorsOriginAccessMatchPriority> priority_;
+  const std::hq_wrapper<bool> host_is_ip_address_;
 
-  std::string registrable_domain_;
-  bool host_is_public_suffix_;
+  std::hq_string registrable_domain_;
+  std::hq_wrapper<bool> host_is_public_suffix_;
 
   DISALLOW_COPY_AND_ASSIGN(OriginAccessEntry);
 };

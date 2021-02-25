@@ -6,11 +6,15 @@
 #define SERVICES_NETWORK_CORS_CORS_URL_LOADER_FACTORY_H_
 
 #include <memory>
+#include <hq_memory>
 #include <set>
+#include <hq_set>
+#include <hq_wrapper>
 
 #include "base/callback_forward.h"
 #include "base/containers/flat_set.h"
 #include "base/containers/unique_ptr_adapters.h"
+#include "base/hq_optional.h"
 #include "base/macros.h"
 #include "mojo/public/cpp/bindings/pending_receiver.h"
 #include "mojo/public/cpp/bindings/pending_remote.h"
@@ -100,35 +104,35 @@ class COMPONENT_EXPORT(NETWORK_SERVICE) CorsURLLoaderFactory final
   scoped_refptr<ResourceSchedulerClient> resource_scheduler_client_;
 
   // If false, ResourceRequests cannot have their |trusted_params| fields set.
-  bool is_trusted_;
+  std::hq_wrapper<bool> is_trusted_;
 
   // Retained from URLLoaderFactoryParams:
-  const bool disable_web_security_;
-  const int32_t process_id_ = mojom::kInvalidProcessId;
-  const base::Optional<url::Origin> request_initiator_origin_lock_;
-  const bool ignore_isolated_world_origin_;
-  const mojom::TrustTokenRedemptionPolicy trust_token_redemption_policy_;
+  const std::hq_wrapper<bool> disable_web_security_;
+  const std::hq_wrapper<int32_t> process_id_ = mojom::kInvalidProcessId;
+  const base::HQ_Optional<url::Origin> request_initiator_origin_lock_;
+  const std::hq_wrapper<bool> ignore_isolated_world_origin_;
+  const std::hq_wrapper<mojom::TrustTokenRedemptionPolicy> trust_token_redemption_policy_;
   net::IsolationInfo isolation_info_;
   const std::string debug_tag_;
 
   // Relative order of |network_loader_factory_| and |loaders_| matters -
   // URLLoaderFactory needs to live longer than URLLoaders created using the
   // factory.  See also https://crbug.com/906305.
-  std::unique_ptr<mojom::URLLoaderFactory> network_loader_factory_;
+  std::hq_unique_ptr<mojom::URLLoaderFactory> network_loader_factory_;
 
   // Used when the network loader factory is overridden.
-  std::unique_ptr<FactoryOverride> factory_override_;
+  std::hq_unique_ptr<FactoryOverride> factory_override_;
 
-  std::set<std::unique_ptr<mojom::URLLoader>, base::UniquePtrComparator>
+  std::hq_set<std::hq_unique_ptr<mojom::URLLoader>, base::UniquePtrComparator>
       loaders_;
 
   // Accessed by instances in |loaders_| too. Since the factory outlives them,
   // it's safe.
-  const OriginAccessList* const origin_access_list_;
+  const std::hq_wrapper<const OriginAccessList*> origin_access_list_;
 
   // Owns factory bound OriginAccessList that to have factory specific
   // additional allowed access list.
-  std::unique_ptr<OriginAccessList> factory_bound_origin_access_list_;
+  std::hq_unique_ptr<OriginAccessList> factory_bound_origin_access_list_;
 
   static bool allow_external_preflights_for_testing_;
 

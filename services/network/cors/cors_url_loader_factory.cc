@@ -146,7 +146,7 @@ class CorsURLLoaderFactory::FactoryOverride final {
     }
 
    private:
-    std::unique_ptr<URLLoaderFactory> network_loader_factory_;
+    std::hq_unique_ptr<URLLoaderFactory> network_loader_factory_;
     mojo::ReceiverSet<mojom::URLLoaderFactory> receivers_;
   };
 
@@ -170,7 +170,7 @@ class CorsURLLoaderFactory::FactoryOverride final {
  private:
   ExposedNetworkLoaderFactory network_loader_factory_;
   mojo::Remote<mojom::URLLoaderFactory> overriding_factory_;
-  bool skip_cors_enabled_scheme_check_;
+  std::hq_wrapper<bool> skip_cors_enabled_scheme_check_;
 };
 
 bool CorsURLLoaderFactory::allow_external_preflights_for_testing_ = false;
@@ -202,7 +202,7 @@ CorsURLLoaderFactory::CorsURLLoaderFactory(
     // assigned IsolationInfo, to prevent cross-site information leaks.
     DCHECK_EQ(mojom::kBrowserProcessId, process_id_);
   }
-  factory_bound_origin_access_list_ = std::make_unique<OriginAccessList>();
+  factory_bound_origin_access_list_ = std::make_hq_unique<OriginAccessList>();
   if (params->factory_bound_access_patterns) {
     factory_bound_origin_access_list_->SetAllowListForOrigin(
         params->factory_bound_access_patterns->source_origin,
@@ -218,7 +218,7 @@ CorsURLLoaderFactory::CorsURLLoaderFactory(
 
   if (factory_override) {
     DCHECK(factory_override->overriding_factory);
-    factory_override_ = std::make_unique<FactoryOverride>(
+    factory_override_ = std::make_hq_unique<FactoryOverride>(
         std::move(factory_override), std::move(network_loader_factory));
   } else {
     network_loader_factory_ = std::move(network_loader_factory);

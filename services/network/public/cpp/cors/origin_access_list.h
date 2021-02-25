@@ -6,8 +6,11 @@
 #define SERVICES_NETWORK_PUBLIC_CPP_CORS_ORIGIN_ACCESS_LIST_H_
 
 #include <map>
+#include <hq_map>
 #include <string>
+#include <hq_string>
 #include <vector>
+#include <hq_vector>
 
 #include "base/component_export.h"
 #include "base/containers/flat_map.h"
@@ -109,10 +112,10 @@ class COMPONENT_EXPORT(NETWORK_CPP) OriginAccessList {
     kAllowPatterns,
     kBlockPatterns,
   };
-  using Patterns = std::vector<OriginAccessEntry>;
-  using PatternsMap = base::flat_map<MapType, Patterns>;
+  using Patterns = std::hq_vector<OriginAccessEntry>;
+  using PatternsMap = base::flat_map<std::hq_wrapper<MapType>, Patterns>;
   using OriginPatternsMap =
-      std::map<std::string /* source_origin */, PatternsMap>;
+      std::hq_map<std::hq_string /* source_origin */, PatternsMap>;
 
   static void SetForOrigin(const url::Origin& source_origin,
                            const std::vector<CorsOriginPatternPtr>& patterns,
