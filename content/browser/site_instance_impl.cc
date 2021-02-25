@@ -1306,7 +1306,7 @@ GURL SiteInstanceImpl::GetSiteForOrigin(const url::Origin& origin) {
   std::string domain = net::registry_controlled_domains::GetDomainAndRegistry(
       origin, net::registry_controlled_domains::INCLUDE_PRIVATE_REGISTRIES);
   return SchemeAndHostToSite(origin.scheme(),
-                             domain.empty() ? origin.host() : domain);
+                             domain.empty() ? origin.host().str() : domain);
 }
 
 // static

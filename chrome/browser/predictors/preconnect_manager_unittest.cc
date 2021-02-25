@@ -224,7 +224,7 @@ TEST_F(PreconnectManagerTest, TestStartOneUrlPreresolve) {
       *mock_delegate_,
       PreconnectInitiated(main_frame_url, origin_to_preresolve.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preresolve.host()));
+              ResolveHostProxy(origin_to_preresolve.host().str()));
   EXPECT_CALL(*mock_delegate_, PreconnectFinishedProxy(main_frame_url));
   preconnect_manager_->Start(
       main_frame_url,
@@ -246,7 +246,7 @@ TEST_F(PreconnectManagerTest, TestStartOneUrlPreconnect) {
       *mock_delegate_,
       PreconnectInitiated(main_frame_url, origin_to_preconnect.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect.host()));
+              ResolveHostProxy(origin_to_preconnect.host().str()));
   preconnect_manager_->Start(
       main_frame_url,
       {PreconnectRequest(origin_to_preconnect, 1, network_isolation_key)});
@@ -271,7 +271,7 @@ TEST_F(PreconnectManagerTest,
       *mock_delegate_,
       PreconnectInitiated(main_frame_url, origin_to_preconnect.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect.host()));
+              ResolveHostProxy(origin_to_preconnect.host().str()));
   preconnect_manager_->Start(
       main_frame_url,
       {PreconnectRequest(origin_to_preconnect, 1, network_isolation_key)});
@@ -307,7 +307,7 @@ TEST_F(PreconnectManagerTest, TestStartOneUrlPreconnect_MultipleTimes) {
         *mock_delegate_,
         PreconnectInitiated(main_frame_url, requests[i].origin.GetURL()));
     EXPECT_CALL(*mock_network_context_,
-                ResolveHostProxy(requests[i].origin.host()));
+                ResolveHostProxy(requests[i].origin.host().str()));
   }
   EXPECT_CALL(*mock_delegate_, PreconnectFinishedProxy(main_frame_url));
   preconnect_manager_->Start(main_frame_url, requests);
@@ -327,7 +327,7 @@ TEST_F(PreconnectManagerTest, TestStartOneUrlPreconnect_MultipleTimes) {
       PreconnectSockets(1, requests.back().origin.GetURL(),
                         true /* allow credentials */, network_isolation_key));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(requests.back().origin.host()));
+              ResolveHostProxy(requests.back().origin.host().str()));
   for (size_t i = 0; i < count; ++i) {
     EXPECT_CALL(
         *mock_delegate_,
@@ -337,7 +337,7 @@ TEST_F(PreconnectManagerTest, TestStartOneUrlPreconnect_MultipleTimes) {
         PreconnectSockets(1, requests[i].origin.GetURL(),
                           true /* allow credentials */, network_isolation_key));
     EXPECT_CALL(*mock_network_context_,
-                ResolveHostProxy(requests[i].origin.host()));
+                ResolveHostProxy(requests[i].origin.host().str()));
   }
   EXPECT_CALL(*mock_delegate_, PreconnectFinishedProxy(main_frame_url));
 
@@ -380,7 +380,7 @@ TEST_F(PreconnectManagerTest, TestTwoConcurrentMainFrameUrls_MultipleTimes) {
                                   requests[count - 1].origin.GetURL()));
   for (size_t i = 0; i < count; ++i) {
     EXPECT_CALL(*mock_network_context_,
-                ResolveHostProxy(requests[i].origin.host()));
+                ResolveHostProxy(requests[i].origin.host().str()));
   }
   EXPECT_CALL(*mock_delegate_, PreconnectFinishedProxy(main_frame_url_1));
   for (size_t i = 0; i < count - 1; ++i) {
@@ -415,12 +415,12 @@ TEST_F(PreconnectManagerTest, TestTwoConcurrentMainFrameUrls_MultipleTimes) {
               PreconnectInitiated(main_frame_url_2,
                                   requests[count - 1].origin.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(requests[count - 1].origin.host()));
+              ResolveHostProxy(requests[count - 1].origin.host().str()));
   EXPECT_CALL(
       *mock_delegate_,
       PreconnectInitiated(main_frame_url_2, requests[count].origin.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(requests[count].origin.host()));
+              ResolveHostProxy(requests[count].origin.host().str()));
   EXPECT_CALL(*mock_delegate_, PreconnectFinishedProxy(main_frame_url_2));
   // Since state related to |main_frame_url_2| has been cleared,
   // re-issuing a request for connect to |main_frame_url_2| should be
@@ -485,7 +485,7 @@ TEST_F(PreconnectManagerTest,
       *mock_delegate_,
       PreconnectInitiated(main_frame_url_2, origin_to_preconnect_1.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect_1.host()));
+              ResolveHostProxy(origin_to_preconnect_1.host().str()));
   // Starting and stopping preconnect request for |main_frame_url_2|
   // should still dispatch the request for |origin_to_preconnect_1| on the
   // network.
@@ -508,12 +508,12 @@ TEST_F(PreconnectManagerTest,
       *mock_delegate_,
       PreconnectInitiated(main_frame_url_2, origin_to_preconnect_1.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect_1.host()));
+              ResolveHostProxy(origin_to_preconnect_1.host().str()));
   EXPECT_CALL(
       *mock_delegate_,
       PreconnectInitiated(main_frame_url_2, origin_to_preconnect_2.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect_2.host()));
+              ResolveHostProxy(origin_to_preconnect_2.host().str()));
   EXPECT_CALL(*mock_delegate_, PreconnectFinishedProxy(main_frame_url_2));
   EXPECT_CALL(
       *mock_network_context_,
@@ -553,9 +553,9 @@ TEST_F(PreconnectManagerTest,
       *mock_delegate_,
       PreconnectInitiated(main_frame_url, origin_to_preconnect_2.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect_1.host()));
+              ResolveHostProxy(origin_to_preconnect_1.host().str()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect_2.host()));
+              ResolveHostProxy(origin_to_preconnect_2.host().str()));
 
   preconnect_manager_->Start(
       main_frame_url,
@@ -578,9 +578,9 @@ TEST_F(PreconnectManagerTest,
       *mock_delegate_,
       PreconnectInitiated(main_frame_url, origin_to_preconnect_2.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect_1.host()));
+              ResolveHostProxy(origin_to_preconnect_1.host().str()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect_2.host()));
+              ResolveHostProxy(origin_to_preconnect_2.host().str()));
   EXPECT_CALL(
       *mock_network_context_,
       PreconnectSockets(1, origin_to_preconnect_1.GetURL(),
@@ -612,7 +612,7 @@ TEST_F(PreconnectManagerTest, TestStopOneUrlBeforePreconnect) {
       PreconnectInitiated(main_frame_url, origin_to_preconnect.GetURL()));
   // Preconnect job isn't started before preresolve is completed asynchronously.
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect.host()));
+              ResolveHostProxy(origin_to_preconnect.host().str()));
   preconnect_manager_->Start(
       main_frame_url,
       {PreconnectRequest(origin_to_preconnect, 1, network_isolation_key)});
@@ -634,7 +634,7 @@ TEST_F(PreconnectManagerTest, TestGetCallbackAfterDestruction) {
       *mock_delegate_,
       PreconnectInitiated(main_frame_url, origin_to_preconnect.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect.host()));
+              ResolveHostProxy(origin_to_preconnect.host().str()));
   preconnect_manager_->Start(
       main_frame_url,
       {PreconnectRequest(origin_to_preconnect, 1, network_isolation_key)});
@@ -659,7 +659,7 @@ TEST_F(PreconnectManagerTest, TestUnqueuedPreresolvesCanceled) {
     EXPECT_CALL(*mock_delegate_,
                 PreconnectInitiated(main_frame_url, GURL(url)));
     EXPECT_CALL(*mock_network_context_,
-                ResolveHostProxy(requests.back().origin.host()));
+                ResolveHostProxy(requests.back().origin.host().str()));
   }
   // This url shouldn't be preresolved.
   requests.emplace_back(url::Origin::Create(GURL("http://no.preresolve.com")),
@@ -690,12 +690,12 @@ TEST_F(PreconnectManagerTest, TestTwoConcurrentMainFrameUrls) {
       *mock_delegate_,
       PreconnectInitiated(main_frame_url1, origin_to_preconnect1.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect1.host()));
+              ResolveHostProxy(origin_to_preconnect1.host().str()));
   EXPECT_CALL(
       *mock_delegate_,
       PreconnectInitiated(main_frame_url2, origin_to_preconnect2.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect2.host()));
+              ResolveHostProxy(origin_to_preconnect2.host().str()));
   preconnect_manager_->Start(
       main_frame_url1,
       {PreconnectRequest(origin_to_preconnect1, 1, network_isolation_key1)});
@@ -738,7 +738,7 @@ TEST_F(PreconnectManagerTest, TestTwoConcurrentSameHostMainFrameUrls) {
       *mock_delegate_,
       PreconnectInitiated(main_frame_url1, origin_to_preconnect1.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect1.host()));
+              ResolveHostProxy(origin_to_preconnect1.host().str()));
   preconnect_manager_->Start(
       main_frame_url1,
       {PreconnectRequest(origin_to_preconnect1, 1, network_isolation_key1)});
@@ -746,7 +746,7 @@ TEST_F(PreconnectManagerTest, TestTwoConcurrentSameHostMainFrameUrls) {
       *mock_delegate_,
       PreconnectInitiated(main_frame_url2, origin_to_preconnect2.GetURL()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect2.host()));
+              ResolveHostProxy(origin_to_preconnect2.host().str()));
   preconnect_manager_->Start(
       main_frame_url2,
       {PreconnectRequest(origin_to_preconnect2, 1, network_isolation_key2)});
@@ -854,7 +854,7 @@ TEST_F(PreconnectManagerTest, TestDetachedRequestHasHigherPriority) {
     EXPECT_CALL(*mock_delegate_,
                 PreconnectInitiated(main_frame_url, GURL(url)));
     EXPECT_CALL(*mock_network_context_,
-                ResolveHostProxy(requests.back().origin.host()));
+                ResolveHostProxy(requests.back().origin.host().str()));
   }
   // This url will wait in the queue.
   url::Origin queued_origin =
@@ -877,7 +877,7 @@ TEST_F(PreconnectManagerTest, TestDetachedRequestHasHigherPriority) {
 
   EXPECT_CALL(*mock_delegate_,
               PreconnectInitiated(main_frame_url, queued_origin.GetURL()));
-  EXPECT_CALL(*mock_network_context_, ResolveHostProxy(queued_origin.host()));
+  EXPECT_CALL(*mock_network_context_, ResolveHostProxy(queued_origin.host().str()));
   mock_network_context_->CompleteHostLookup(detached_preresolve.host(),
                                             network_isolation_key, net::OK);
   mock_network_context_->CompleteHostLookup(queued_origin.host(),
@@ -935,9 +935,9 @@ TEST_F(PreconnectManagerTest, TestSuccessfulHostLookupAfterProxyLookupFailure) {
       {PreconnectRequest(origin_to_preconnect, 1, network_isolation_key),
        PreconnectRequest(origin_to_preconnect2, 1, network_isolation_key)});
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect.host()));
+              ResolveHostProxy(origin_to_preconnect.host().str()));
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect2.host()));
+              ResolveHostProxy(origin_to_preconnect2.host().str()));
   // First URL uses direct connection.
   mock_network_context_->CompleteProxyLookup(origin_to_preconnect.GetURL(),
                                              GetDirectProxyInfo());
@@ -978,7 +978,7 @@ TEST_F(PreconnectManagerTest, TestBothProxyAndHostLookupFailed) {
       {PreconnectRequest(origin_to_preconnect, 1, network_isolation_key)});
 
   EXPECT_CALL(*mock_network_context_,
-              ResolveHostProxy(origin_to_preconnect.host()));
+              ResolveHostProxy(origin_to_preconnect.host().str()));
   mock_network_context_->CompleteProxyLookup(origin_to_preconnect.GetURL(),
                                              base::nullopt);
   Mock::VerifyAndClearExpectations(mock_network_context_.get());

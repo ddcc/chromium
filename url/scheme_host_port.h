@@ -8,6 +8,8 @@
 #include <stdint.h>
 
 #include <string>
+#include <hq_string>
+#include <hq_wrapper>
 
 #include "base/component_export.h"
 #include "base/strings/string_piece.h"
@@ -119,8 +121,8 @@ class COMPONENT_EXPORT(URL) SchemeHostPort {
   // Returns the host component, in URL form. That is all IDN domain names will
   // be expressed as A-Labels ('☃.net' will be returned as 'xn--n3h.net'), and
   // and all IPv6 addresses will be enclosed in brackets ("[2001:db8::1]").
-  const std::string& host() const { return host_; }
-  const std::string& scheme() const { return scheme_; }
+  const std::hq_string& host() const { return host_; }
+  const std::hq_string& scheme() const { return scheme_; }
   uint16_t port() const { return port_; }
   bool IsValid() const;
 
@@ -156,9 +158,9 @@ class COMPONENT_EXPORT(URL) SchemeHostPort {
  private:
   std::string SerializeInternal(url::Parsed* parsed) const;
 
-  std::string scheme_;
-  std::string host_;
-  uint16_t port_ = 0;
+  std::hq_string scheme_;
+  std::hq_string host_;
+  std::hq_wrapper<uint16_t> port_;
 };
 
 COMPONENT_EXPORT(URL)

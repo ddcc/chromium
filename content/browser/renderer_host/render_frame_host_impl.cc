@@ -7558,7 +7558,7 @@ void RenderFrameHostImpl::BindMediaMetricsProviderReceiver(
       base::BindRepeating(
           [](RenderFrameHostImpl* frame) {
             return ::media::learning::FeatureValue(
-                frame->GetLastCommittedOrigin().host());
+                frame->GetLastCommittedOrigin().host().str());
           },
           // Same as above.
           base::Unretained(this)),

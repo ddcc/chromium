@@ -600,8 +600,8 @@ void ParamTraits<net::SiteForCookies>::Log(const param_type& p,
 }
 
 void ParamTraits<url::Origin>::Write(base::Pickle* m, const url::Origin& p) {
-  WriteParam(m, p.GetTupleOrPrecursorTupleIfOpaque().scheme());
-  WriteParam(m, p.GetTupleOrPrecursorTupleIfOpaque().host());
+  WriteParam(m, p.GetTupleOrPrecursorTupleIfOpaque().scheme().str());
+  WriteParam(m, p.GetTupleOrPrecursorTupleIfOpaque().host().str());
   WriteParam(m, p.GetTupleOrPrecursorTupleIfOpaque().port());
   WriteParam(m, p.GetNonceForSerialization());
 }

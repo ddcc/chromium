@@ -69,7 +69,7 @@ CrowdDenyPreloadData::GetReputationDataForSite(
   if (origin.scheme() != url::kHttpsScheme)
     return nullptr;
 
-  const auto it_exact_match = domain_to_reputation_map_.find(origin.host());
+  const auto it_exact_match = domain_to_reputation_map_.find(origin.host().str());
   if (it_exact_match != domain_to_reputation_map_.end())
     return &it_exact_match->second;
 

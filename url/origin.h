@@ -9,11 +9,13 @@
 
 #include <memory>
 #include <string>
+#include <hq_string>
 
 #include "base/component_export.h"
 #include "base/debug/alias.h"
 #include "base/debug/crash_logging.h"
 #include "base/optional.h"
+#include "base/hq_optional.h"
 #include "base/strings/string16.h"
 #include "base/strings/string_piece.h"
 #include "base/strings/string_util.h"
@@ -199,11 +201,11 @@ class COMPONENT_EXPORT(URL) Origin {
   ~Origin();
 
   // For opaque origins, these return ("", "", 0).
-  const std::string& scheme() const {
-    return !opaque() ? tuple_.scheme() : base::EmptyString();
+  const std::hq_string& scheme() const {
+    return !opaque() ? tuple_.scheme() : base::EmptyHQString();
   }
-  const std::string& host() const {
-    return !opaque() ? tuple_.host() : base::EmptyString();
+  const std::hq_string& host() const {
+    return !opaque() ? tuple_.host() : base::EmptyHQString();
   }
   uint16_t port() const { return !opaque() ? tuple_.port() : 0; }
 
@@ -413,7 +415,7 @@ class COMPONENT_EXPORT(URL) Origin {
   // The nonce is used for maintaining identity of an opaque origin. This
   // nonce is preserved when an opaque origin is copied or moved. An Origin
   // is considered opaque if and only if |nonce_| holds a value.
-  base::Optional<Nonce> nonce_;
+  base::HQ_Optional<Nonce> nonce_;
 };
 
 // Pretty-printers for logging. These expose the internal state of the nonce.

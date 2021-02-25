@@ -232,7 +232,7 @@ class VideoDecodePerfHistoryTest : public testing::Test {
     EXPECT_CALL(*this, UkmVerifyDoneCb());
 
     perf_history_->GetSaveCallback().Run(
-        source_id, learning::FeatureValue(kOrigin.host()), is_top_frame,
+        source_id, learning::FeatureValue(kOrigin.host().str()), is_top_frame,
         features, targets, player_id, std::move(save_done_cb));
   }
 

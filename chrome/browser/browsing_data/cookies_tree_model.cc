@@ -1227,7 +1227,7 @@ base::string16 CookieTreeHostNode::TitleForUrl(const GURL& url) {
       std::string(url::kFileScheme) + url::kStandardSchemeSeparator);
   return base::UTF8ToUTF16(url.SchemeIsFile()
                                ? file_origin_node_name
-                               : url::Origin::Create(url).host());
+                               : url::Origin::Create(url).host().str());
 }
 
 CookieTreeHostNode::CookieTreeHostNode(const GURL& url)

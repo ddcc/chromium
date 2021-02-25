@@ -42,7 +42,7 @@ bool MatchesOrigin(const std::set<url::Origin>& origins,
       GetDomainAndRegistry(origin, INCLUDE_PRIVATE_REGISTRIES);
   bool found_domain = base::Contains(
       registerable_domains,
-      registerable_domain == "" ? origin.host() : registerable_domain);
+      registerable_domain == "" ? origin.host().str() : registerable_domain);
   bool found_origin = base::Contains(origins, origin);
   return ((found_domain || found_origin) ==
           (mode == BrowsingDataFilterBuilder::Mode::kDelete));

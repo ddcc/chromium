@@ -17,10 +17,10 @@ namespace mojo {
 template <>
 struct COMPONENT_EXPORT(URL_MOJOM_TRAITS)
     StructTraits<url::mojom::OriginDataView, url::Origin> {
-  static const std::string& scheme(const url::Origin& r) {
+  static const std::string scheme(const url::Origin& r) {
     return r.GetTupleOrPrecursorTupleIfOpaque().scheme();
   }
-  static const std::string& host(const url::Origin& r) {
+  static const std::string host(const url::Origin& r) {
     return r.GetTupleOrPrecursorTupleIfOpaque().host();
   }
   static uint16_t port(const url::Origin& r) {
