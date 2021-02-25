@@ -61,7 +61,7 @@ struct OptionalStorageBase {
   template <class... Args>
   void Init(Args&&... args) {
     DCHECK(!is_populated_);
-    ::new (std::addressof(value_)) T(std::forward<Args>(args)...);
+    ::new (const_cast<typename std::remove_const<T>::type *>(std::addressof(value_))) T(std::forward<Args>(args)...);
     is_populated_ = true;
   }
 

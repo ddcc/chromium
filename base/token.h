@@ -9,6 +9,7 @@
 
 #include <string>
 #include <tuple>
+#include <hq_wrapper>
 
 #include "base/base_export.h"
 #include "base/hash/hash.h"
@@ -25,15 +26,15 @@ namespace base {
 class BASE_EXPORT Token {
  public:
   // Constructs a zero Token.
-  constexpr Token() = default;
+  Token() = default;
 
   // Constructs a Token with |high| and |low| as its contents.
-  constexpr Token(uint64_t high, uint64_t low) : high_(high), low_(low) {}
+  Token(uint64_t high, uint64_t low) : high_(high), low_(low) {}
 
-  constexpr Token(const Token&) = default;
-  constexpr Token& operator=(const Token&) = default;
-  constexpr Token(Token&&) noexcept = default;
-  constexpr Token& operator=(Token&&) = default;
+  Token(const Token&) = default;
+  Token& operator=(const Token&) = default;
+  Token(Token&&) noexcept = default;
+  Token& operator=(Token&&) = default;
 
   // Constructs a new Token with random |high| and |low| values taken from a
   // cryptographically strong random source.
@@ -64,8 +65,8 @@ class BASE_EXPORT Token {
   // Note: Two uint64_t are used instead of uint8_t[16] in order to have a
   // simpler implementation, paricularly for |ToString()|, |is_zero()|, and
   // constexpr value construction.
-  uint64_t high_ = 0;
-  uint64_t low_ = 0;
+  std::hq_wrapper<uint64_t> high_;
+  std::hq_wrapper<uint64_t> low_;
 };
 
 // For use in std::unordered_map.

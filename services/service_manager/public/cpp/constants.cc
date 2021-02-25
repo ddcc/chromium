@@ -8,7 +8,7 @@
 
 namespace service_manager {
 
-const base::Token kSystemInstanceGroup{mojom::kSystemInstanceGroupHigh,
+const base::Token __attribute__((no_destroy)) kSystemInstanceGroup{mojom::kSystemInstanceGroupHigh,
                                        mojom::kSystemInstanceGroupLow};
 
 }  // namespace service_manager

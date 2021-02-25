@@ -18,12 +18,13 @@ Token Token::CreateRandom() {
 
   // Use base::RandBytes instead of crypto::RandBytes, because crypto calls the
   // base version directly, and to prevent the dependency from base/ to crypto/.
-  base::RandBytes(&token, sizeof(token));
+  base::RandBytes(&token.low_, sizeof(token.low_.v()));
+  base::RandBytes(&token.high_, sizeof(token.high_.v()));
   return token;
 }
 
 std::string Token::ToString() const {
-  return base::StringPrintf("%016" PRIX64 "%016" PRIX64, high_, low_);
+  return base::StringPrintf("%016" PRIX64 "%016" PRIX64, high_.v(), low_.v());
 }
 
 void WriteTokenToPickle(Pickle* pickle, const Token& token) {

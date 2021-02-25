@@ -12,7 +12,7 @@
 // "alpha" is a temporary name until a convention is defined.
 const char kWidevineKeySystem[] = "com.widevine.alpha";
 
-const base::Token kWidevineCdmGuid{0x05d908e5dcca9960ull,
+const __attribute__((no_destroy)) base::Token kWidevineCdmGuid{0x05d908e5dcca9960ull,
                                    0xcd92d30eac98157aull};
 
 // Widevine CDM files are in a directory with this name. This path is also

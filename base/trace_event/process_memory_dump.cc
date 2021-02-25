@@ -52,7 +52,7 @@ size_t GetSystemPageCount(size_t mapped_size, size_t page_size) {
 #endif
 
 UnguessableToken GetTokenForCurrentProcess() {
-  static UnguessableToken instance = UnguessableToken::Create();
+  static UnguessableToken __attribute__((no_destroy)) instance = UnguessableToken::Create();
   return instance;
 }
 
