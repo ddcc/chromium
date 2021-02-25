@@ -11,10 +11,12 @@
 #include <list>
 #include <map>
 #include <memory>
+#include <hq_memory>
 #include <set>
 #include <string>
 #include <utility>
 #include <vector>
+#include <hq_wrapper>
 
 #include "base/callback.h"
 #include "base/compiler_specific.h"
@@ -68,6 +70,7 @@
 #include "media/mojo/services/media_metrics_provider.h"
 #include "mojo/public/cpp/bindings/associated_receiver.h"
 #include "mojo/public/cpp/bindings/associated_remote.h"
+#include "mojo/public/cpp/bindings/hq_struct_ptr.h"
 #include "mojo/public/cpp/bindings/message.h"
 #include "mojo/public/cpp/bindings/pending_associated_remote.h"
 #include "mojo/public/cpp/bindings/pending_receiver.h"
@@ -87,6 +90,9 @@
 #include "services/network/public/cpp/content_security_policy/csp_context.h"
 #include "services/network/public/cpp/cross_origin_embedder_policy.h"
 #include "services/network/public/cpp/cross_origin_opener_policy.h"
+#include "services/network/public/cpp/hq_cross_origin_embedder_policy.h"
+#include "services/network/public/cpp/hq_cross_origin_opener_policy.h"
+#include "services/network/public/cpp/hq_client_security_state.h"
 #include "services/network/public/mojom/fetch_api.mojom-forward.h"
 #include "services/network/public/mojom/network_context.mojom.h"
 #include "services/network/public/mojom/trust_tokens.mojom.h"
@@ -1463,9 +1469,9 @@ class CONTENT_EXPORT RenderFrameHostImpl
       mojo::PendingReceiver<blink::mojom::ScreenEnumeration> receiver);
 
   // https://mikewest.github.io/corpp/#initialize-embedder-policy-for-global
-  const network::CrossOriginEmbedderPolicy& cross_origin_embedder_policy()
+  const network::CrossOriginEmbedderPolicy cross_origin_embedder_policy()
       const {
-    return cross_origin_embedder_policy_;
+    return cross_origin_embedder_policy_.coep();
   }
   void set_cross_origin_embedder_policy(
       network::CrossOriginEmbedderPolicy policy) {
@@ -1482,7 +1488,7 @@ class CONTENT_EXPORT RenderFrameHostImpl
   // Semi-formal definition of COOP:
   // https://gist.github.com/annevk/6f2dd8c79c77123f39797f6bdac43f3e
   network::CrossOriginOpenerPolicy cross_origin_opener_policy() const {
-    return cross_origin_opener_policy_;
+    return cross_origin_opener_policy_.coop();
   }
   void set_cross_origin_opener_policy_for_testing(
       const network::CrossOriginOpenerPolicy& cross_origin_opener_policy) {
@@ -1495,7 +1501,7 @@ class CONTENT_EXPORT RenderFrameHostImpl
     return virtual_browsing_context_group_;
   }
 
-  const network::mojom::ClientSecurityStatePtr&
+  const network::mojom::HQ_ClientSecurityStatePtr&
   last_committed_client_security_state() const {
     return last_committed_client_security_state_;
   }
@@ -2615,9 +2621,9 @@ class CONTENT_EXPORT RenderFrameHostImpl
   // Track this frame's last committed origin.
   url::Origin last_committed_origin_;
 
-  network::CrossOriginEmbedderPolicy cross_origin_embedder_policy_;
+  network::HQ_CrossOriginEmbedderPolicy cross_origin_embedder_policy_;
 
-  network::CrossOriginOpenerPolicy cross_origin_opener_policy_;
+  network::HQ_CrossOriginOpenerPolicy cross_origin_opener_policy_;
 
   // Track the SiteInfo of the last site we committed successfully, as obtained
   // from SiteInstanceImpl::GetSiteInfoForURL().
@@ -2925,10 +2931,10 @@ class CONTENT_EXPORT RenderFrameHostImpl
 
   // A bitwise OR of bindings types that have been enabled for this RenderFrame.
   // See BindingsPolicy for details.
-  int enabled_bindings_ = 0;
+  std::hq_wrapper<int> enabled_bindings_;
 
   // Tracks the feature policy which has been set on this frame.
-  std::unique_ptr<blink::FeaturePolicy> feature_policy_;
+  std::hq_unique_ptr<blink::FeaturePolicy> feature_policy_;
 
   // Tracks the sandbox flags which are in effect on this frame. This includes
   // any flags which have been set by a Content-Security-Policy header, in
@@ -2936,7 +2942,7 @@ class CONTENT_EXPORT RenderFrameHostImpl
   // copy of the active sandbox flags which are stored in the FrameTreeNode for
   // this RenderFrameHost, but may diverge if this RenderFrameHost is pending
   // deletion.
-  network::mojom::WebSandboxFlags active_sandbox_flags_;
+  std::hq_wrapper<network::mojom::WebSandboxFlags> active_sandbox_flags_;
 
   // Same as |active_sandbox_flags_|, except this is computed:
   // - outside of the renderer process.
@@ -2946,7 +2952,7 @@ class CONTENT_EXPORT RenderFrameHostImpl
   // computation. Later this will be used as the source of truth.
   //
   // [OutOfBlinkSandbox](https://crbug.com/1041376)
-  base::Optional<network::mojom::WebSandboxFlags> active_sandbox_flags_control_;
+  base::HQ_Optional<std::hq_wrapper<network::mojom::WebSandboxFlags>> active_sandbox_flags_control_;
 
   // Tracks the document policy which has been set on this frame.
   std::unique_ptr<blink::DocumentPolicy> document_policy_;
@@ -3097,7 +3103,7 @@ class CONTENT_EXPORT RenderFrameHostImpl
   // commit time based on the MIME type of the NavigationRequest that resulted
   // in the navigation commit. Setting the value should be based only on
   // browser side state as this value is used in security checks.
-  bool is_mhtml_document_ = false;
+  std::hq_wrapper<bool> is_mhtml_document_;
 
   // The last reported character encoding, not canonicalized.
   std::string last_reported_encoding_;
@@ -3130,7 +3136,7 @@ class CONTENT_EXPORT RenderFrameHostImpl
   // every cross-document commit. When a new frame is created, the new frame
   // inherits the IsolationInfo from the creator frame, similarly to the last
   // committed origin.
-  net::IsolationInfo isolation_info_;
+  std::hq_wrapper<net::IsolationInfo> isolation_info_;
 
   // The factory to load resources from the WebBundle source bound to
   // this file.
@@ -3144,7 +3150,7 @@ class CONTENT_EXPORT RenderFrameHostImpl
 
   // Keeps track of various security properties of the last committed document
   // that are needed by the network service.
-  network::mojom::ClientSecurityStatePtr last_committed_client_security_state_;
+  network::mojom::HQ_ClientSecurityStatePtr last_committed_client_security_state_;
 
   // Keep the list of ServiceWorkerContainerHosts so that they can observe when
   // the frame goes in/out of BackForwardCache.

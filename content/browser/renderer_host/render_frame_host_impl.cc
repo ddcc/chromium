@@ -1463,14 +1463,14 @@ const url::Origin& RenderFrameHostImpl::GetLastCommittedOrigin() {
 }
 
 const net::NetworkIsolationKey& RenderFrameHostImpl::GetNetworkIsolationKey() {
-  DCHECK(!isolation_info_.IsEmpty());
-  return isolation_info_.network_isolation_key();
+  DCHECK(!isolation_info_.v().IsEmpty());
+  return isolation_info_.v().network_isolation_key();
 }
 
 const net::IsolationInfo&
 RenderFrameHostImpl::GetIsolationInfoForSubresources() {
-  DCHECK(!isolation_info_.IsEmpty());
-  return isolation_info_;
+  DCHECK(!isolation_info_.v().IsEmpty());
+  return isolation_info_.v();
 }
 
 void RenderFrameHostImpl::GetCanonicalUrlForSharing(
@@ -1571,7 +1571,7 @@ bool RenderFrameHostImpl::IsSandboxed(network::mojom::WebSandboxFlags flags) {
     if (feature != blink::mojom::FeaturePolicyFeature::kNotFound)
       return !IsFeatureEnabled(feature);
   }
-  return static_cast<int>(active_sandbox_flags_) & static_cast<int>(flags);
+  return static_cast<int>(active_sandbox_flags_.v()) & static_cast<int>(flags);
 }
 
 blink::web_pref::WebPreferences
@@ -2555,7 +2555,7 @@ net::IsolationInfo RenderFrameHostImpl::ComputeIsolationInfoForNavigation(
 }
 
 net::SiteForCookies RenderFrameHostImpl::ComputeSiteForCookies() {
-  return isolation_info_.site_for_cookies();
+  return isolation_info_.v().site_for_cookies();
 }
 
 net::IsolationInfo RenderFrameHostImpl::ComputeIsolationInfoInternal(
@@ -2609,7 +2609,7 @@ void RenderFrameHostImpl::SetOriginDependentStateOfNewFrame(
   // a navigation yet.
   DCHECK(!has_committed_any_navigation_);
   DCHECK(GetLastCommittedOrigin().opaque());
-  DCHECK(isolation_info_.IsEmpty());
+  DCHECK(isolation_info_.v().IsEmpty());
 
   // Calculate and set |new_frame_origin|.
   bool new_frame_should_be_sandboxed =
@@ -6108,7 +6108,7 @@ void RenderFrameHostImpl::CommitNavigation(
         main_world_origin_for_url_loader_factory,
         net::IsolationInfo::RedirectMode::kUpdateNothing);
   }
-  DCHECK(!isolation_info_.IsEmpty());
+  DCHECK(!isolation_info_.v().IsEmpty());
 
   if (navigation_request->appcache_handle()) {
     // AppCache may create a subresource URLLoaderFactory later, so make sure it
@@ -7604,7 +7604,7 @@ void RenderFrameHostImpl::CreateQuicTransportConnector(
   mojo::MakeSelfOwnedReceiver(
       std::make_unique<QuicTransportConnectorImpl>(
           GetProcess()->GetID(), weak_ptr_factory_.GetWeakPtr(),
-          last_committed_origin_, isolation_info_.network_isolation_key()),
+          last_committed_origin_, isolation_info_.v().network_isolation_key()),
       std::move(receiver));
 }
 
@@ -7766,7 +7766,7 @@ void RenderFrameHostImpl::BindRestrictedCookieManager(
   static_cast<StoragePartitionImpl*>(GetProcess()->GetStoragePartition())
       ->CreateRestrictedCookieManager(
           network::mojom::RestrictedCookieManagerRole::SCRIPT,
-          GetLastCommittedOrigin(), isolation_info_.site_for_cookies(),
+          GetLastCommittedOrigin(), isolation_info_.v().site_for_cookies(),
           ComputeTopFrameOrigin(GetLastCommittedOrigin()),
           /* is_service_worker = */ false, GetProcess()->GetID(), routing_id(),
           std::move(receiver), CreateCookieAccessObserver());
@@ -7966,8 +7966,8 @@ RenderFrameHostImpl::CreateNavigationRequestForCommit(
   if (!is_same_document) {
     coep_reporter = std::make_unique<CrossOriginEmbedderPolicyReporter>(
         GetProcess()->GetStoragePartition(), params.url,
-        cross_origin_embedder_policy_.reporting_endpoint,
-        cross_origin_embedder_policy_.report_only_reporting_endpoint);
+        cross_origin_embedder_policy_.reporting_endpoint.opt<std::string>(),
+        cross_origin_embedder_policy_.report_only_reporting_endpoint.opt<std::string>());
   }
   std::unique_ptr<WebBundleNavigationInfo> web_bundle_navigation_info;
   if (is_same_document && web_bundle_handle_ &&

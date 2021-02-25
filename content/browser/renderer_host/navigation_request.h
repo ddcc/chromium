@@ -6,9 +6,11 @@
 #define CONTENT_BROWSER_RENDERER_HOST_NAVIGATION_REQUEST_H_
 
 #include <memory>
+#include <hq_wrapper>
 
 #include "base/callback.h"
 #include "base/callback_forward.h"
+#include "base/hq_optional.h"
 #include "base/macros.h"
 #include "base/memory/ref_counted.h"
 #include "base/memory/weak_ptr.h"
@@ -43,8 +45,9 @@
 #include "mojo/public/cpp/system/data_pipe.h"
 #include "net/base/proxy_server.h"
 #include "net/dns/public/resolve_error_info.h"
-#include "services/metrics/public/cpp/ukm_source_id.h"
+#include "services/network/public/cpp/hq_client_security_state.h"
 #include "services/network/public/cpp/origin_policy.h"
+#include "services/metrics/public/cpp/ukm_source_id.h"
 #include "services/network/public/mojom/blocked_by_response_reason.mojom-shared.h"
 #include "services/network/public/mojom/content_security_policy.mojom.h"
 #include "services/network/public/mojom/web_sandbox_flags.mojom-shared.h"
@@ -622,10 +625,10 @@ class CONTENT_EXPORT NavigationRequest
     return response_should_be_rendered_;
   }
 
-  const network::mojom::ClientSecurityStatePtr& client_security_state() const {
+  const network::mojom::HQ_ClientSecurityStatePtr& client_security_state() const {
     return client_security_state_;
   }
-  network::mojom::ClientSecurityStatePtr TakeClientSecurityState();
+  network::mojom::HQ_ClientSecurityStatePtr TakeClientSecurityState();
 
   bool ua_change_requires_reload() const { return ua_change_requires_reload_; }
 
@@ -1133,7 +1136,7 @@ class CONTENT_EXPORT NavigationRequest
   mojom::CommonNavigationParamsPtr common_params_;
   mojom::BeginNavigationParamsPtr begin_params_;
   mojom::CommitNavigationParamsPtr commit_params_;
-  bool browser_initiated_;
+  std::hq_wrapper<bool> browser_initiated_;
 
   // Stores the NavigationUIData for this navigation until the NavigationHandle
   // is created. This can be null if the embedded did not provide a
@@ -1427,7 +1430,7 @@ class CONTENT_EXPORT NavigationRequest
 
   // Holds a set of values needed to enforce several WebPlatform security APIs
   // at the network request level.
-  network::mojom::ClientSecurityStatePtr client_security_state_;
+  network::mojom::HQ_ClientSecurityStatePtr client_security_state_;
 
   // Holds the required CSP for this navigation. This will be moved into
   // the RenderFrameHost at DidCommitNavigation time.
@@ -1471,9 +1474,9 @@ class CONTENT_EXPORT NavigationRequest
 
   // The sandbox flags of the document to be loaded. This is computed at
   // 'ReadyToCommit' time.
-  base::Optional<network::mojom::WebSandboxFlags> sandbox_flags_to_commit_;
+  base::HQ_Optional<std::hq_wrapper<network::mojom::WebSandboxFlags>> sandbox_flags_to_commit_;
 
-  OptInOriginIsolationEndResult origin_isolation_end_result_ =
+  std::hq_wrapper<OptInOriginIsolationEndResult> origin_isolation_end_result_ =
       OptInOriginIsolationEndResult::kNotRequestedAndNotIsolated;
 
   base::WeakPtrFactory<NavigationRequest> weak_factory_{this};

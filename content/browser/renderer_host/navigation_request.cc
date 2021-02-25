@@ -1063,7 +1063,7 @@ NavigationRequest::NavigationRequest(
           frame_tree_node->current_frame_host()->GetProcess()->GetID(),
           frame_tree_node->current_frame_host()->GetRoutingID())),
       initiator_routing_id_(initiator_routing_id),
-      client_security_state_(network::mojom::ClientSecurityState::New()),
+      client_security_state_(network::mojom::HQ_ClientSecurityState::New()),
       coop_status_(frame_tree_node, common_params_->initiator_origin),
       previous_page_ukm_source_id_(
           frame_tree_node_->current_frame_host()->GetPageUkmSourceId()) {
@@ -1624,7 +1624,7 @@ mojom::NavigationClient* NavigationRequest::GetCommitNavigationClient() {
   return commit_navigation_client_.get();
 }
 
-network::mojom::ClientSecurityStatePtr
+network::mojom::HQ_ClientSecurityStatePtr
 NavigationRequest::TakeClientSecurityState() {
   return std::move(client_security_state_);
 }
@@ -1647,9 +1647,10 @@ network::mojom::ContentSecurityPolicyPtr NavigationRequest::TakeRequiredCSP() {
 void NavigationRequest::CreateCoepReporter(
     StoragePartition* storage_partition) {
   const auto& coep = client_security_state_->cross_origin_embedder_policy;
+  base::Optional<std::string> reporting_endpoint, report_only_reporting_endpoint;
   coep_reporter_ = std::make_unique<CrossOriginEmbedderPolicyReporter>(
-      storage_partition, common_params_->url, coep.reporting_endpoint,
-      coep.report_only_reporting_endpoint);
+      storage_partition, common_params_->url, coep.reporting_endpoint.opt<std::string>(),
+      coep.report_only_reporting_endpoint.opt<std::string>());
 }
 
 std::unique_ptr<CrossOriginEmbedderPolicyReporter>
