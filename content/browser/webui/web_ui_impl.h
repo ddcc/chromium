@@ -10,6 +10,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <hq_wrapper>
 
 #include "base/compiler_specific.h"
 #include "base/macros.h"
@@ -113,7 +114,7 @@ class CONTENT_EXPORT WebUIImpl : public WebUI,
   // Options that may be overridden by individual Web UI implementations. The
   // bool options default to false. See the public getters for more information.
   base::string16 overridden_title_;  // Defaults to empty string.
-  int bindings_;  // The bindings from BindingsPolicy that should be enabled for
+  std::hq_wrapper<int> bindings_;  // The bindings from BindingsPolicy that should be enabled for
                   // this page.
 
   // The URL schemes that can be requested by this document.
