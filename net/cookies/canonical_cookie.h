@@ -7,11 +7,16 @@
 
 #include <memory>
 #include <string>
+#include <hq_string>
 #include <tuple>
 #include <vector>
+#include <hq_vector>
+#include <hq_wrapper>
 
 #include "base/gtest_prod_util.h"
+#include "base/hq_optional.h"
 #include "base/optional.h"
+#include "base/time/hq_time.h"
 #include "base/time/time.h"
 #include "net/base/net_export.h"
 #include "net/cookies/cookie_access_result.h"
@@ -106,18 +111,18 @@ class NET_EXPORT CanonicalCookie {
       CookieSameSite same_site,
       CookiePriority priority);
 
-  const std::string& Name() const { return name_; }
-  const std::string& Value() const { return value_; }
+  const std::hq_string& Name() const { return name_; }
+  const std::hq_string& Value() const { return value_; }
   // We represent the cookie's host-only-flag as the absence of a leading dot in
   // Domain(). See IsDomainCookie() and IsHostCookie() below.
   // If you want the "cookie's domain" as described in RFC 6265bis, use
   // DomainWithoutDot().
-  const std::string& Domain() const { return domain_; }
-  const std::string& Path() const { return path_; }
-  const base::Time& CreationDate() const { return creation_date_; }
-  const base::Time& LastAccessDate() const { return last_access_date_; }
+  const std::hq_string& Domain() const { return domain_; }
+  const std::hq_string& Path() const { return path_; }
+  const base::HQ_Time& CreationDate() const { return creation_date_; }
+  const base::HQ_Time& LastAccessDate() const { return last_access_date_; }
   bool IsPersistent() const { return !expiry_date_.is_null(); }
-  const base::Time& ExpiryDate() const { return expiry_date_; }
+  const base::HQ_Time& ExpiryDate() const { return expiry_date_; }
   bool IsSecure() const { return secure_; }
   bool IsHttpOnly() const { return httponly_; }
   CookieSameSite SameSite() const { return same_site_; }
@@ -155,7 +160,7 @@ class NET_EXPORT CanonicalCookie {
   // Returns a key such that two cookies with the same UniqueKey() are
   // guaranteed to be equivalent in the sense of IsEquivalent().
   UniqueCookieKey UniqueKey() const {
-    return std::make_tuple(name_, domain_, path_);
+    return std::make_tuple(name_.str(), domain_.str(), path_.str());
   }
 
   // Checks a looser set of equivalency rules than 'IsEquivalent()' in order
@@ -347,18 +352,18 @@ class NET_EXPORT CanonicalCookie {
   // Returns whether the cookie was created at most |age_threshold| ago.
   bool IsRecentlyCreated(base::TimeDelta age_threshold) const;
 
-  std::string name_;
-  std::string value_;
-  std::string domain_;
-  std::string path_;
-  base::Time creation_date_;
-  base::Time expiry_date_;
-  base::Time last_access_date_;
-  bool secure_;
-  bool httponly_;
-  CookieSameSite same_site_;
-  CookiePriority priority_;
-  CookieSourceScheme source_scheme_;
+  std::hq_string name_;
+  std::hq_string value_;
+  std::hq_string domain_;
+  std::hq_string path_;
+  base::HQ_Time creation_date_;
+  base::HQ_Time expiry_date_;
+  base::HQ_Time last_access_date_;
+  std::hq_wrapper<bool> secure_;
+  std::hq_wrapper<bool> httponly_;
+  std::hq_wrapper<CookieSameSite> same_site_;
+  std::hq_wrapper<CookiePriority> priority_;
+  std::hq_wrapper<CookieSourceScheme> source_scheme_;
 };
 
 // Used to pass excluded cookie information when it's possible that the

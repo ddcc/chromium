@@ -228,7 +228,7 @@ bool BrowserAccessibilityManager::never_suppress_or_delay_events_for_testing_ =
 base::Optional<int32_t> BrowserAccessibilityManager::last_focused_node_id_ = {};
 
 // static
-base::Optional<ui::AXTreeID>
+base::Optional<ui::AXTreeID> __attribute__((no_destroy))
     BrowserAccessibilityManager::last_focused_node_tree_id_ = {};
 
 // static

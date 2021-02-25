@@ -6,6 +6,7 @@
 #define NET_COOKIES_SITE_FOR_COOKIES_H_
 
 #include <string>
+#include <hq_wrapper>
 
 #include "base/strings/string_piece.h"
 #include "net/base/net_export.h"
@@ -161,7 +162,7 @@ class NET_EXPORT SiteForCookies {
   // will only go false via MarkIfCrossScheme(), otherwise this value is
   // irrelevant (For tests this value can also be modified by
   // SetSchemefullySameForTesting()).
-  bool schemefully_same_;
+  std::hq_wrapper<bool> schemefully_same_;
 };
 
 }  // namespace net

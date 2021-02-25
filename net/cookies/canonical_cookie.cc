@@ -801,7 +801,7 @@ bool CanonicalCookie::IsCanonical() const {
     return false;
 
   url::CanonHostInfo canon_host_info;
-  std::string canonical_domain(CanonicalizeHost(domain_, &canon_host_info));
+  std::string canonical_domain(CanonicalizeHost(domain_.str(), &canon_host_info));
 
   // TODO(rdsmith): This specifically allows for empty domains.  The spec
   // suggests this is invalid (if a domain attribute is empty, the cookie's

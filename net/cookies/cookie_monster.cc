@@ -650,7 +650,7 @@ void CookieMonster::DeleteCanonicalCookie(const CanonicalCookie& cookie,
   uint32_t result = 0u;
   for (CookieMapItPair its = cookies_.equal_range(GetKey(cookie.Domain()));
        its.first != its.second; ++its.first) {
-    const std::unique_ptr<CanonicalCookie>& candidate = its.first->second;
+    const std::hq_unique_ptr<CanonicalCookie>& candidate = its.first->second;
     // Historically, this has refused modification if the cookie has changed
     // value in between the CanonicalCookie object was returned by a getter
     // and when this ran.  The later parts of the conditional (everything but
@@ -870,7 +870,7 @@ void CookieMonster::TrimDuplicateCookiesForKey(const std::string& key,
   // Iterate through all of the cookies in our range, and insert them into
   // the equivalence map.
   for (auto it = begin; it != end; ++it) {
-    DCHECK_EQ(key, it->first);
+    DCHECK_EQ(key, it->first.str());
     CanonicalCookie* cookie = it->second.get();
 
     CanonicalCookie::UniqueCookieKey signature(cookie->UniqueKey());
@@ -1150,14 +1150,14 @@ CookieMonster::CookieMap::iterator CookieMonster::InternalInsertCookie(
   // If this is the first cookie in |cookies_| with this key, increment the
   // |num_keys_| counter.
   bool different_prev =
-      inserted == cookies_.begin() || std::prev(inserted)->first != key;
+      inserted == cookies_.begin() || std::prev(inserted)->first.str() != key;
   // According to std::multiqueue documentation:
   // "If the container has elements with equivalent key, inserts at the upper
   // bound of that range. (since C++11)"
   // This means that "inserted" iterator either points to the last element in
   // the map, or the element succeeding it has to have different key.
   DCHECK(std::next(inserted) == cookies_.end() ||
-         std::next(inserted)->first != key);
+         std::next(inserted)->first.str() != key);
   if (different_prev)
     ++num_keys_;
 

@@ -117,16 +117,16 @@ struct StructTraits<network::mojom::CookieOptionsDataView, net::CookieOptions> {
 template <>
 struct StructTraits<network::mojom::CanonicalCookieDataView,
                     net::CanonicalCookie> {
-  static const std::string& name(const net::CanonicalCookie& c) {
+  static const std::string name(const net::CanonicalCookie& c) {
     return c.Name();
   }
-  static const std::string& value(const net::CanonicalCookie& c) {
+  static const std::string value(const net::CanonicalCookie& c) {
     return c.Value();
   }
-  static const std::string& domain(const net::CanonicalCookie& c) {
+  static const std::string domain(const net::CanonicalCookie& c) {
     return c.Domain();
   }
-  static const std::string& path(const net::CanonicalCookie& c) {
+  static const std::string path(const net::CanonicalCookie& c) {
     return c.Path();
   }
   static base::Time creation(const net::CanonicalCookie& c) {

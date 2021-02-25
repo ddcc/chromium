@@ -22,10 +22,10 @@ base::Value NetLogCookieMonsterCookieAdded(const CanonicalCookie* cookie,
     return base::Value();
 
   base::Value dict(base::Value::Type::DICTIONARY);
-  dict.SetStringKey("name", cookie->Name());
-  dict.SetStringKey("value", cookie->Value());
-  dict.SetStringKey("domain", cookie->Domain());
-  dict.SetStringKey("path", cookie->Path());
+  dict.SetStringKey("name", cookie->Name().str());
+  dict.SetStringKey("value", cookie->Value().str());
+  dict.SetStringKey("domain", cookie->Domain().str());
+  dict.SetStringKey("path", cookie->Path().str());
   dict.SetBoolKey("httponly", cookie->IsHttpOnly());
   dict.SetBoolKey("secure", cookie->IsSecure());
   dict.SetStringKey("priority", CookiePriorityToString(cookie->Priority()));
@@ -43,10 +43,10 @@ base::Value NetLogCookieMonsterCookieDeleted(const CanonicalCookie* cookie,
     return base::Value();
 
   base::Value dict(base::Value::Type::DICTIONARY);
-  dict.SetStringKey("name", cookie->Name());
-  dict.SetStringKey("value", cookie->Value());
-  dict.SetStringKey("domain", cookie->Domain());
-  dict.SetStringKey("path", cookie->Path());
+  dict.SetStringKey("name", cookie->Name().str());
+  dict.SetStringKey("value", cookie->Value().str());
+  dict.SetStringKey("domain", cookie->Domain().str());
+  dict.SetStringKey("path", cookie->Path().str());
   dict.SetBoolKey("is_persistent", cookie->IsPersistent());
   dict.SetStringKey("deletion_cause", CookieChangeCauseToString(cause));
   dict.SetBoolKey("sync_requested", sync_requested);
@@ -60,12 +60,12 @@ base::Value NetLogCookieMonsterCookieRejectedSecure(
   if (!NetLogCaptureIncludesSensitive(capture_mode))
     return base::Value();
   base::Value dict(base::Value::Type::DICTIONARY);
-  dict.SetStringKey("name", old_cookie->Name());
-  dict.SetStringKey("domain", old_cookie->Domain());
-  dict.SetStringKey("oldpath", old_cookie->Path());
-  dict.SetStringKey("newpath", new_cookie->Path());
-  dict.SetStringKey("oldvalue", old_cookie->Value());
-  dict.SetStringKey("newvalue", new_cookie->Value());
+  dict.SetStringKey("name", old_cookie->Name().str());
+  dict.SetStringKey("domain", old_cookie->Domain().str());
+  dict.SetStringKey("oldpath", old_cookie->Path().str());
+  dict.SetStringKey("newpath", new_cookie->Path().str());
+  dict.SetStringKey("oldvalue", old_cookie->Value().str());
+  dict.SetStringKey("newvalue", new_cookie->Value().str());
   return dict;
 }
 
@@ -76,11 +76,11 @@ base::Value NetLogCookieMonsterCookieRejectedHttponly(
   if (!NetLogCaptureIncludesSensitive(capture_mode))
     return base::Value();
   base::Value dict(base::Value::Type::DICTIONARY);
-  dict.SetStringKey("name", old_cookie->Name());
-  dict.SetStringKey("domain", old_cookie->Domain());
-  dict.SetStringKey("path", old_cookie->Path());
-  dict.SetStringKey("oldvalue", old_cookie->Value());
-  dict.SetStringKey("newvalue", new_cookie->Value());
+  dict.SetStringKey("name", old_cookie->Name().str());
+  dict.SetStringKey("domain", old_cookie->Domain().str());
+  dict.SetStringKey("path", old_cookie->Path().str());
+  dict.SetStringKey("oldvalue", old_cookie->Value().str());
+  dict.SetStringKey("newvalue", new_cookie->Value().str());
   return dict;
 }
 
@@ -92,13 +92,13 @@ base::Value NetLogCookieMonsterCookiePreservedSkippedSecure(
   if (!NetLogCaptureIncludesSensitive(capture_mode))
     return base::Value();
   base::Value dict(base::Value::Type::DICTIONARY);
-  dict.SetStringKey("name", preserved->Name());
-  dict.SetStringKey("domain", preserved->Domain());
-  dict.SetStringKey("path", preserved->Path());
-  dict.SetStringKey("securecookiedomain", skipped_secure->Domain());
-  dict.SetStringKey("securecookiepath", skipped_secure->Path());
-  dict.SetStringKey("preservedvalue", preserved->Value());
-  dict.SetStringKey("discardedvalue", new_cookie->Value());
+  dict.SetStringKey("name", preserved->Name().str());
+  dict.SetStringKey("domain", preserved->Domain().str());
+  dict.SetStringKey("path", preserved->Path().str());
+  dict.SetStringKey("securecookiedomain", skipped_secure->Domain().str());
+  dict.SetStringKey("securecookiepath", skipped_secure->Path().str());
+  dict.SetStringKey("preservedvalue", preserved->Value().str());
+  dict.SetStringKey("discardedvalue", new_cookie->Value().str());
   return dict;
 }
 

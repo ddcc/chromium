@@ -11,11 +11,16 @@
 #include <stdint.h>
 
 #include <map>
+#include <hq_map>
 #include <memory>
 #include <set>
+#include <hq_set>
 #include <string>
+#include <hq_string>
 #include <utility>
 #include <vector>
+#include <hq_vector>
+#include <hq_wrapper>
 
 #include "base/callback_forward.h"
 #include "base/containers/circular_deque.h"
@@ -101,9 +106,9 @@ class NET_EXPORT CookieMonster : public CookieStore {
   // TODO(rdsmith): This benchmark should be re-done now that we're allowing
   // substantially more entries in the map.
   using CookieMap =
-      std::multimap<std::string, std::unique_ptr<CanonicalCookie>>;
+      std::hq_multimap<std::hq_string, std::hq_unique_ptr<CanonicalCookie>>;
   using CookieMapItPair = std::pair<CookieMap::iterator, CookieMap::iterator>;
-  using CookieItVector = std::vector<CookieMap::iterator>;
+  using CookieItVector = std::hq_vector<CookieMap::iterator>;
 
   // Cookie garbage collection thresholds.  Based off of the Mozilla defaults.
   // When the number of cookies gets to k{Domain,}MaxCookies
@@ -609,27 +614,27 @@ class NET_EXPORT CookieMonster : public CookieStore {
 
   // The number of distinct keys (eTLD+1's) currently present in the |cookies_|
   // multimap. This is histogrammed periodically.
-  size_t num_keys_;
+  std::hq_wrapper<size_t> num_keys_;
 
   CookieMap cookies_;
 
   CookieMonsterChangeDispatcher change_dispatcher_;
 
   // Indicates whether the cookie store has been initialized.
-  bool initialized_;
+  std::hq_wrapper<bool> initialized_;
 
   // Indicates whether the cookie store has started fetching all cookies.
-  bool started_fetching_all_cookies_;
+  std::hq_wrapper<bool> started_fetching_all_cookies_;
   // Indicates whether the cookie store has finished fetching all cookies.
-  bool finished_fetching_all_cookies_;
+  std::hq_wrapper<bool> finished_fetching_all_cookies_;
 
   // List of domain keys that have been loaded from the DB.
-  std::set<std::string> keys_loaded_;
+  std::hq_set<std::hq_string> keys_loaded_;
 
   // Map of domain keys to their associated task queues. These tasks are blocked
   // until all cookies for the associated domain key eTLD+1 are loaded from the
   // backend store.
-  std::map<std::string, base::circular_deque<base::OnceClosure>>
+  std::hq_map<std::hq_string, base::circular_deque<base::OnceClosure>>
       tasks_pending_for_key_;
 
   // Queues tasks that are blocked until all cookies are loaded from the backend
@@ -641,7 +646,7 @@ class NET_EXPORT CookieMonster : public CookieStore {
   // view of the cookie store. This is more to ensure fancy cookie export/import
   // code has a consistent view of the CookieStore, rather than out of concern
   // for typical use.
-  bool seen_global_task_;
+  std::hq_wrapper<bool> seen_global_task_;
 
   NetLogWithSource net_log_;
 
@@ -677,7 +682,7 @@ class NET_EXPORT CookieMonster : public CookieStore {
 
   base::Time last_statistic_record_time_;
 
-  bool persist_session_cookies_;
+  std::hq_wrapper<bool> persist_session_cookies_;
 
   base::ThreadChecker thread_checker_;
 

@@ -98,7 +98,7 @@ Cookie CreateCookie(const net::CanonicalCookie& canonical_cookie,
       net::cookie_util::DomainIsHostOnly(canonical_cookie.Domain());
   // A non-UTF8 path is invalid, so we just replace it with an empty string.
   cookie.path = base::IsStringUTF8(canonical_cookie.Path())
-                    ? canonical_cookie.Path()
+                    ? canonical_cookie.Path().str()
                     : std::string();
   cookie.secure = canonical_cookie.IsSecure();
   cookie.http_only = canonical_cookie.IsHttpOnly();
