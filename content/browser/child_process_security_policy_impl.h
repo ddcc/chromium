@@ -6,15 +6,19 @@
 #define CONTENT_BROWSER_CHILD_PROCESS_SECURITY_POLICY_IMPL_H_
 
 #include <map>
+#include <hq_map>
 #include <memory>
+#include <hq_memory>
 #include <set>
 #include <string>
 #include <vector>
+#include <hq_wrapper>
 
 #include "base/compiler_specific.h"
 #include "base/containers/flat_map.h"
 #include "base/containers/flat_set.h"
 #include "base/gtest_prod_util.h"
+#include "base/hq_optional.h"
 #include "base/macros.h"
 #include "base/memory/ref_counted.h"
 #include "base/memory/singleton.h"
@@ -26,6 +30,7 @@
 #include "content/browser/site_instance_impl.h"
 #include "content/public/browser/child_process_security_policy.h"
 #include "storage/common/file_system/file_system_types.h"
+#include "url/hq_gurl.h"
 #include "url/origin.h"
 
 class GURL;
@@ -177,7 +182,7 @@ class CONTENT_EXPORT ProcessLock {
   // TODO(creis): Consider tracking multiple compatible SiteInfos in ProcessLock
   // (e.g., multiple extensions). This can better restrict what the process has
   // access to in cases that we don't currently use a ProcessLock.
-  base::Optional<SiteInfo> site_info_;
+  base::HQ_Optional<SiteInfo> site_info_;
 };
 
 class CONTENT_EXPORT ChildProcessSecurityPolicyImpl
@@ -644,8 +649,8 @@ class CONTENT_EXPORT ChildProcessSecurityPolicyImpl
   class SecurityState;
 
   typedef std::set<std::string> SchemeSet;
-  typedef std::map<int, std::unique_ptr<SecurityState>> SecurityStateMap;
-  typedef std::map<storage::FileSystemType, int> FileSystemPermissionPolicyMap;
+  typedef std::hq_map<std::hq_wrapper<int>, std::hq_unique_ptr<SecurityState>> SecurityStateMap;
+  typedef std::hq_map<std::hq_wrapper<storage::FileSystemType>, std::hq_wrapper<int>> FileSystemPermissionPolicyMap;
 
   // This class holds an isolated origin along with information such as which
   // BrowsingInstances and profile it applies to.  See |isolated_origins_|
@@ -706,14 +711,14 @@ class CONTENT_EXPORT ChildProcessSecurityPolicyImpl
 
    private:
     url::Origin origin_;
-    BrowsingInstanceId min_browsing_instance_id_;
+    std::hq_wrapper<BrowsingInstanceId> min_browsing_instance_id_;
 
     // Optional information about the profile where the isolated origin
     // applies.  |browser_context_| may be used on the UI thread, and
     // |resource_context_| may be used on the IO thread.  If these are null,
     // then the isolated origin applies globally to all profiles.
-    BrowserContext* browser_context_;
-    ResourceContext* resource_context_;
+    std::hq_wrapper<BrowserContext*> browser_context_;
+    std::hq_wrapper<ResourceContext*> resource_context_;
 
     // True if origins at this or lower level should be treated as distinct
     // isolated origins, effectively isolating all domains below a given domain,
@@ -721,12 +726,12 @@ class CONTENT_EXPORT ChildProcessSecurityPolicyImpl
     // true, then https://bar.foo.com, https://qux.bar.foo.com and all
     // subdomains of the form https://<<any pattern here>>.foo.com are
     // considered isolated origins.
-    bool isolate_all_subdomains_;
+    std::hq_wrapper<bool> isolate_all_subdomains_;
 
     // This tracks the source of each isolated origin entry, e.g., to
     // distinguish those that should be displayed to the user from those that
     // should not.  See https://crbug.com/920911.
-    IsolatedOriginSource source_;
+    std::hq_wrapper<IsolatedOriginSource> source_;
   };
 
   // Obtain an instance of ChildProcessSecurityPolicyImpl via GetInstance().
@@ -837,7 +842,7 @@ class CONTENT_EXPORT ChildProcessSecurityPolicyImpl
   // This object and Handles created by this object increment/decrement
   // the counts in this map and only destroy a SecurityState object for a
   // process when its count goes to zero.
-  std::map<int, int> process_reference_counts_ GUARDED_BY(lock_);
+  std::hq_map<std::hq_wrapper<int>, std::hq_wrapper<int>> process_reference_counts_ GUARDED_BY(lock_);
 
   // You must acquire this lock before reading or writing isolated_origins_.
   // You must not block while holding this lock.
@@ -880,7 +885,7 @@ class CONTENT_EXPORT ChildProcessSecurityPolicyImpl
   //      represents https://test.foo.com being isolated in profile1 starting
   //      with BrowsingInstance ID 4, and also in profile2 starting with
   //      BrowsingInstance ID 7.
-  base::flat_map<GURL, std::vector<IsolatedOriginEntry>> isolated_origins_
+  base::flat_map<HQ_GURL, std::hq_vector<IsolatedOriginEntry>> isolated_origins_
       GUARDED_BY(isolated_origins_lock_);
 
   // TODO(wjmaclean): Move these lists into a per-BrowserContext container, to
@@ -896,7 +901,7 @@ class CONTENT_EXPORT ChildProcessSecurityPolicyImpl
       GUARDED_BY(origins_isolation_opt_in_lock_);
   // A map to track origins that have been isolated within a given
   // BrowsingInstance.
-  base::flat_map<BrowsingInstanceId, std::vector<url::Origin>>
+  base::flat_map<std::hq_wrapper<BrowsingInstanceId>, std::hq_vector<url::Origin>>
       origin_isolation_by_browsing_instance_
           GUARDED_BY(origins_isolation_opt_in_lock_);
   // A map to track origins that have been loaded in a BrowsingInstance without
@@ -904,7 +909,7 @@ class CONTENT_EXPORT ChildProcessSecurityPolicyImpl
   // BrowsingInstance. This map makes sure we don't try to isolate the origin
   // in the associated BrowsingInstance at a later time, in order to keep the
   // isolation consistent over the lifetime of the BrowsingInstance.
-  base::flat_map<BrowsingInstanceId, std::vector<url::Origin>>
+  base::flat_map<std::hq_wrapper<BrowsingInstanceId>, std::hq_vector<url::Origin>>
       origin_isolation_non_isolated_by_browsing_instance_
           GUARDED_BY(origins_isolation_opt_in_lock_);
 

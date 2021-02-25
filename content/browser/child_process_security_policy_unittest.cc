@@ -136,7 +136,7 @@ class ChildProcessSecurityPolicyTest : public testing::Test {
   auto GetIsolatedOriginEntry(int min_browsing_instance_id,
                               const url::Origin& origin,
                               bool isolate_all_subdomains = false) {
-    return std::pair<GURL, std::vector<IsolatedOriginEntry>>(
+    return std::pair<HQ_GURL, std::hq_vector<IsolatedOriginEntry>>(
         SiteInstanceImpl::GetSiteForOrigin(origin),
         {IsolatedOriginEntry(
             origin,

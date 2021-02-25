@@ -5,6 +5,7 @@
 #include "content/browser/child_process_security_policy_impl.h"
 
 #include <algorithm>
+#include <hq_set>
 #include <utility>
 
 #include "base/bind.h"
@@ -407,19 +408,19 @@ class ChildProcessSecurityPolicyImpl::SecurityState {
   // Grant certain permissions to a file.
   void GrantPermissionsForFile(const base::FilePath& file, int permissions) {
     base::FilePath stripped = file.StripTrailingSeparators();
-    file_permissions_[stripped] |= permissions;
+    file_permissions_[stripped.value()] |= permissions;
   }
 
   // Grant navigation to a file but not the file:// scheme in general.
   void GrantRequestOfSpecificFile(const base::FilePath &file) {
-    request_file_set_.insert(file.StripTrailingSeparators());
+    request_file_set_.insert(file.StripTrailingSeparators().value());
   }
 
   // Revokes all permissions granted to a file.
   void RevokeAllPermissionsForFile(const base::FilePath& file) {
     base::FilePath stripped = file.StripTrailingSeparators();
-    file_permissions_.erase(stripped);
-    request_file_set_.erase(stripped);
+    file_permissions_.erase(stripped.value());
+    request_file_set_.erase(stripped.value());
   }
 
   // Grant certain permissions to a file.
@@ -448,7 +449,7 @@ class ChildProcessSecurityPolicyImpl::SecurityState {
     if (!permissions)
       return false;
     base::FilePath file_path = file.StripTrailingSeparators();
-    FileMap::const_iterator it = file_permissions_.find(file_path);
+    FileMap::const_iterator it = file_permissions_.find(file_path.value());
     if (it != file_permissions_.end())
       return (it->second & permissions) == permissions;
     return false;
@@ -493,7 +494,7 @@ class ChildProcessSecurityPolicyImpl::SecurityState {
     if (url.SchemeIs(url::kFileScheme)) {
       base::FilePath path;
       if (net::FileURLToFilePath(url, &path))
-        return base::Contains(request_file_set_, path);
+        return base::Contains(request_file_set_, path.value());
     }
 
     return false;  // Unmentioned schemes are disallowed.
@@ -534,7 +535,7 @@ class ChildProcessSecurityPolicyImpl::SecurityState {
         if (base_name.value() != base::FilePath::kCurrentDirectory)
           --skip;
       } else {
-        FileMap::const_iterator it = file_permissions_.find(current_path);
+        FileMap::const_iterator it = file_permissions_.find(current_path.value());
         if (it != file_permissions_.end())
           return (it->second & permissions) == permissions;
       }
@@ -552,7 +553,7 @@ class ChildProcessSecurityPolicyImpl::SecurityState {
     DCHECK_NE(SiteInstanceImpl::GetDefaultSiteURL(), lock.lock_url());
 
     if (process_lock_.is_invalid()) {
-      DCHECK(lowest_browsing_instance_id_.is_null());
+      DCHECK(lowest_browsing_instance_id_.v().is_null());
       CHECK(lock.allows_any_site() || lock.is_locked_to_site());
     } else {
       // Verify that we are not trying to update the lock with different
@@ -580,7 +581,7 @@ class ChildProcessSecurityPolicyImpl::SecurityState {
   void SetLowestBrowsingInstanceId(
       BrowsingInstanceId new_browsing_instance_id_to_include) {
     DCHECK(!new_browsing_instance_id_to_include.is_null());
-    if (lowest_browsing_instance_id_.is_null() ||
+    if (lowest_browsing_instance_id_.v().is_null() ||
         (new_browsing_instance_id_to_include < lowest_browsing_instance_id_)) {
       lowest_browsing_instance_id_ = new_browsing_instance_id_to_include;
     }
@@ -638,13 +639,13 @@ class ChildProcessSecurityPolicyImpl::SecurityState {
     return origin_map_.find(origin) != origin_map_.end();
   }
 
-  typedef std::map<std::string, CommitRequestPolicy> SchemeMap;
-  typedef std::map<url::Origin, CommitRequestPolicy> OriginMap;
+  typedef std::hq_map<std::hq_string, std::hq_wrapper<CommitRequestPolicy>> SchemeMap;
+  typedef std::hq_map<url::Origin, std::hq_wrapper<CommitRequestPolicy>> OriginMap;
 
   typedef int FilePermissionFlags;  // bit-set of base::File::Flags
-  typedef std::map<base::FilePath, FilePermissionFlags> FileMap;
-  typedef std::map<std::string, FilePermissionFlags> FileSystemMap;
-  typedef std::set<base::FilePath> FileSet;
+  typedef std::hq_map<std::hq_string, std::hq_wrapper<FilePermissionFlags>> FileMap;
+  typedef std::hq_map<std::hq_string, std::hq_wrapper<FilePermissionFlags>> FileSystemMap;
+  typedef std::hq_set<std::hq_string> FileSet;
 
   // Maps URL schemes to commit/request policies the child process has been
   // granted. There is no provision for revoking.
@@ -660,11 +661,11 @@ class ChildProcessSecurityPolicyImpl::SecurityState {
   // The set of files the child process is permitted to load.
   FileSet request_file_set_;
 
-  int enabled_bindings_;
+  std::hq_wrapper<int> enabled_bindings_;
 
-  bool can_read_raw_cookies_;
+  std::hq_wrapper<bool> can_read_raw_cookies_;
 
-  bool can_send_midi_sysex_;
+  std::hq_wrapper<bool> can_send_midi_sysex_;
 
   ProcessLock process_lock_;
 
@@ -680,7 +681,7 @@ class ChildProcessSecurityPolicyImpl::SecurityState {
   // This is needed for security checks on the IO thread, where we only know
   // the process ID and need to compute the expected origin lock, which
   // requires knowing the set of applicable isolated origins.
-  BrowsingInstanceId lowest_browsing_instance_id_;
+  std::hq_wrapper<BrowsingInstanceId> lowest_browsing_instance_id_;
 
   // The set of isolated filesystems the child process is permitted to access.
   FileSystemMap filesystem_permissions_;
@@ -2052,7 +2053,7 @@ bool ChildProcessSecurityPolicyImpl::GetMatchingIsolatedOrigin(
   }
 
   // Look up the list of origins corresponding to |origin|'s site.
-  auto it = isolated_origins_.find(site_url);
+  auto it = isolated_origins_.find(HQ_GURL(site_url));
 
   // Subtle corner case: if the site's host ends with a dot, do the lookup
   // without it.  A trailing dot shouldn't be able to bypass isolated origins:
@@ -2064,7 +2065,7 @@ bool ChildProcessSecurityPolicyImpl::GetMatchingIsolatedOrigin(
     base::StringPiece host(site_url.host_piece());
     host.remove_suffix(1);
     replacements.SetHostStr(host);
-    it = isolated_origins_.find(site_url.ReplaceComponents(replacements));
+    it = isolated_origins_.find(HQ_GURL(site_url.ReplaceComponents(replacements)));
   }
 
   // Looks for all isolated origins that were already isolated at the time
@@ -2136,10 +2137,10 @@ bool ChildProcessSecurityPolicyImpl::ShouldOriginGetOptInIsolation(
   // origin and isolated it, in which case we should continue to isolate it, and
   // (ii) we've previously seen the origin and *not* isolated it, in which case
   // we should continue to not isolate it.
-  BrowsingInstanceId browsing_instance_id(
+  std::hq_wrapper<BrowsingInstanceId> browsing_instance_id(
       isolation_context.browsing_instance_id());
 
-  if (!browsing_instance_id.is_null()) {
+  if (!browsing_instance_id.v().is_null()) {
     // Look for |origin| in the opt-in list.
     auto it_isolated =
         origin_isolation_by_browsing_instance_.find(browsing_instance_id);
@@ -2179,9 +2180,9 @@ void ChildProcessSecurityPolicyImpl::AddNonIsolatedOriginIfNeeded(
   if (!origin.GetURL().SchemeIs(url::kHttpsScheme))
     return;
 
-  BrowsingInstanceId browsing_instance_id(
+  std::hq_wrapper<BrowsingInstanceId> browsing_instance_id(
       isolation_context.browsing_instance_id());
-  CHECK(!browsing_instance_id.is_null());
+  CHECK(!browsing_instance_id.v().is_null());
 
   base::AutoLock origins_isolation_opt_in_lock(origins_isolation_opt_in_lock_);
 
@@ -2214,7 +2215,7 @@ void ChildProcessSecurityPolicyImpl::AddNonIsolatedOriginIfNeeded(
     // We need to create the entry for this BrowsingInstance. Note this
     // guarantees |origin| isn't already in the list.
     origin_isolation_non_isolated_by_browsing_instance_.emplace(
-        browsing_instance_id, std::vector<url::Origin>());
+        browsing_instance_id, std::hq_vector<url::Origin>());
     it = origin_isolation_non_isolated_by_browsing_instance_.find(
         browsing_instance_id);
   } else if (base::Contains(it->second, origin)) {
@@ -2230,10 +2231,10 @@ void ChildProcessSecurityPolicyImpl::AddNonIsolatedOriginIfNeeded(
 void ChildProcessSecurityPolicyImpl::
     RemoveOptInIsolatedOriginsForBrowsingInstance(
         const IsolationContext& isolation_context) {
-  BrowsingInstanceId browsing_instance_id(
+  std::hq_wrapper<BrowsingInstanceId> browsing_instance_id(
       isolation_context.browsing_instance_id());
   // If a BrowsingInstance is destructing, we should always have an id for it.
-  CHECK(!browsing_instance_id.is_null());
+  CHECK(!browsing_instance_id.v().is_null());
 
   base::AutoLock origins_isolation_opt_in_lock(origins_isolation_opt_in_lock_);
   origin_isolation_by_browsing_instance_.erase(browsing_instance_id);
@@ -2248,17 +2249,17 @@ void ChildProcessSecurityPolicyImpl::AddOptInIsolatedOriginForBrowsingInstance(
   if (!origin.GetURL().SchemeIs(url::kHttpsScheme))
     return;
 
-  BrowsingInstanceId browsing_instance_id(
+  std::hq_wrapper<BrowsingInstanceId> browsing_instance_id(
       isolation_context.browsing_instance_id());
   // This function should only be called when a BrowsingInstance is registering
   // a new SiteInstance, so |browsing_instance_id| should always be defined.
-  CHECK(!browsing_instance_id.is_null());
+  CHECK(!browsing_instance_id.v().is_null());
 
   base::AutoLock origins_isolation_opt_in_lock(origins_isolation_opt_in_lock_);
   auto it = origin_isolation_by_browsing_instance_.find(browsing_instance_id);
   if (it == origin_isolation_by_browsing_instance_.end()) {
     origin_isolation_by_browsing_instance_.emplace(browsing_instance_id,
-                                                   std::vector<url::Origin>());
+                                                   std::hq_vector<url::Origin>());
     it = origin_isolation_by_browsing_instance_.find(browsing_instance_id);
   }
 
@@ -2290,7 +2291,7 @@ bool ChildProcessSecurityPolicyImpl::UpdateOriginIsolationOptInListIfNecessary(
 
 void ChildProcessSecurityPolicyImpl::RemoveIsolatedOriginForTesting(
     const url::Origin& origin) {
-  GURL key(SiteInstanceImpl::GetSiteForOrigin(origin));
+  HQ_GURL key(SiteInstanceImpl::GetSiteForOrigin(origin));
   base::AutoLock isolated_origins_lock(isolated_origins_lock_);
   base::EraseIf(isolated_origins_[key],
                 [&origin](const IsolatedOriginEntry& entry) {
