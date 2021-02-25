@@ -1647,7 +1647,6 @@ network::mojom::ContentSecurityPolicyPtr NavigationRequest::TakeRequiredCSP() {
 void NavigationRequest::CreateCoepReporter(
     StoragePartition* storage_partition) {
   const auto& coep = client_security_state_->cross_origin_embedder_policy;
-  base::Optional<std::string> reporting_endpoint, report_only_reporting_endpoint;
   coep_reporter_ = std::make_unique<CrossOriginEmbedderPolicyReporter>(
       storage_partition, common_params_->url, coep.reporting_endpoint.opt<std::string>(),
       coep.report_only_reporting_endpoint.opt<std::string>());

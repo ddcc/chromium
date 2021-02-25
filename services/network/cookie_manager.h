@@ -6,8 +6,11 @@
 #define SERVICES_NETWORK_COOKIE_MANAGER_H_
 
 #include <memory>
+#include <hq_memory>
 #include <string>
 #include <vector>
+#include <hq_vector>
+#include <hq_wrapper>
 
 #include "base/component_export.h"
 #include "base/macros.h"
@@ -111,7 +114,7 @@ class COMPONENT_EXPORT(NETWORK_SERVICE) CookieManager
     void DispatchCookieStoreChange(const net::CookieChangeInfo& change);
 
     // Owns the callback registration in the store.
-    std::unique_ptr<net::CookieChangeSubscription> subscription;
+    std::hq_unique_ptr<net::CookieChangeSubscription> subscription;
 
     // The observer receiving change notifications.
     mojo::Remote<mojom::CookieChangeListener> listener;
@@ -122,7 +125,7 @@ class COMPONENT_EXPORT(NETWORK_SERVICE) CookieManager
   // Handles connection errors on change listener pipes.
   void RemoveChangeListener(ListenerRegistration* registration);
 
-  net::CookieStore* const cookie_store_;
+  std::hq_wrapper<net::CookieStore*> cookie_store_;
   scoped_refptr<SessionCleanupCookieStore> session_cleanup_cookie_store_;
   mojo::ReceiverSet<mojom::CookieManager> receivers_;
   std::vector<std::unique_ptr<ListenerRegistration>> listener_registrations_;

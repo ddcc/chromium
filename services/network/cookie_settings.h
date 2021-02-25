@@ -5,6 +5,10 @@
 #ifndef SERVICES_NETWORK_COOKIE_SETTINGS_H_
 #define SERVICES_NETWORK_COOKIE_SETTINGS_H_
 
+#include <hq_set>
+#include <hq_string>
+#include <hq_wrapper>
+
 #include "base/component_export.h"
 #include "components/content_settings/core/common/content_settings.h"
 #include "components/content_settings/core/common/cookie_settings_base.h"
@@ -99,10 +103,10 @@ class COMPONENT_EXPORT(NETWORK_SERVICE) CookieSettings
   bool HasSessionOnlyOrigins() const;
 
   ContentSettingsForOneType content_settings_;
-  bool block_third_party_cookies_ = false;
-  std::set<std::string> secure_origin_cookies_allowed_schemes_;
-  std::set<std::string> matching_scheme_cookies_allowed_schemes_;
-  std::set<std::string> third_party_cookies_allowed_schemes_;
+  std::hq_wrapper<bool> block_third_party_cookies_ = false;
+  std::hq_set<std::hq_string> secure_origin_cookies_allowed_schemes_;
+  std::hq_set<std::hq_string> matching_scheme_cookies_allowed_schemes_;
+  std::hq_set<std::hq_string> third_party_cookies_allowed_schemes_;
   ContentSettingsForOneType settings_for_legacy_cookie_access_;
   // Used to represent storage access grants provided by the StorageAccessAPI.
   // Will only be populated when the StorageAccessAPI feature is enabled
