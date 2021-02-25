@@ -432,7 +432,7 @@ WebContents* GuestViewBase::GetOwnerWebContents() {
   return owner_web_contents_;
 }
 
-const GURL& GuestViewBase::GetOwnerSiteURL() const {
+const GURL GuestViewBase::GetOwnerSiteURL() const {
   return owner_web_contents()->GetMainFrame()->GetSiteInstance()->GetSiteURL();
 }
 

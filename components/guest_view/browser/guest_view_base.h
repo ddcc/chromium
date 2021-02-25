@@ -179,7 +179,7 @@ class GuestViewBase : public content::BrowserPluginGuestDelegate,
   }
 
   // Returns the URL of the owner WebContents.
-  const GURL& GetOwnerSiteURL() const;
+  const GURL GetOwnerSiteURL() const;
 
   // Returns the host of the owner WebContents. For extensions, this is the
   // extension ID.

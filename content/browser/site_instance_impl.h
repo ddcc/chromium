@@ -7,6 +7,7 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <hq_wrapper>
 
 #include "base/observer_list.h"
 #include "content/browser/isolation_context.h"
@@ -14,6 +15,7 @@
 #include "content/common/content_export.h"
 #include "content/public/browser/render_process_host_observer.h"
 #include "content/public/browser/site_instance.h"
+#include "url/hq_gurl.h"
 #include "url/gurl.h"
 #include "url/origin.h"
 
@@ -86,7 +88,7 @@ class CONTENT_EXPORT SiteInfo {
   //   corresponds to a site URL with the host "example.com".
   // - When origin isolation is in use, there may be multiple SiteInstance with
   //   the same site_url() but that differ in other properties.
-  const GURL& site_url() const { return site_url_; }
+  const GURL site_url() const { return site_url_; }
 
   // Returns the URL which should be used in a SetProcessLock call for this
   // SiteInfo's process.  This is the same as |site_url_| except for cases
@@ -101,7 +103,7 @@ class CONTENT_EXPORT SiteInfo {
   //
   // TODO(alexmos): See if we can clean this up and not set |process_lock_url_|
   //                if the SiteInstance's process isn't going to be locked.
-  const GURL& process_lock_url() const { return process_lock_url_; }
+  const GURL process_lock_url() const { return process_lock_url_; }
 
   // Returns whether this SiteInfo is specific to an origin rather than a site,
   // such as due to opt-in origin isolation. This resolves an ambiguity of
@@ -144,22 +146,22 @@ class CONTENT_EXPORT SiteInfo {
  private:
   static auto MakeTie(const SiteInfo& site_info);
 
-  GURL site_url_;
+  HQ_GURL site_url_;
   // The URL to use when locking a process to this SiteInstance's site via
   // SetProcessLock(). This is the same as |site_url_| except for cases
   // involving effective URLs, such as hosted apps.  In those cases, this URL is
   // a site URL that is computed without the use of effective URLs.
-  GURL process_lock_url_;
+  HQ_GURL process_lock_url_;
   // Indicates whether this SiteInfo is specific to a single origin, rather than
   // including all subdomains of that origin. Only used for opt-in origin
   // isolation. In contrast, the site-level URLs that are typically used in
   // SiteInfo include subdomains, as do command-line isolated origins.
-  bool is_origin_keyed_ = false;
+  std::hq_wrapper<bool> is_origin_keyed_;
 
   // Indicates if this SiteInfo is part of a CoopCoepCrossOriginIsolated
   // BrowsingInstance. (i.e. A page that has a cross-origin-opener-policy of
   // same-origin and a cross-origin-embedder-policy of require-corp.)
-  bool is_coop_coep_cross_origin_isolated_ = false;
+  std::hq_wrapper<bool> is_coop_coep_cross_origin_isolated_;
 
   // If |is_coop_coep_cross_origin_isolated_| returns true, this returns the
   // origin shared across all top level frames in the
@@ -285,7 +287,7 @@ class CONTENT_EXPORT SiteInstanceImpl final : public SiteInstance,
   bool HasProcess() override;
   RenderProcessHost* GetProcess() override;
   BrowserContext* GetBrowserContext() override;
-  const GURL& GetSiteURL() override;
+  const GURL GetSiteURL() override;
   scoped_refptr<SiteInstance> GetRelatedSiteInstance(const GURL& url) override;
   bool IsRelatedSiteInstance(const SiteInstance* instance) override;
   size_t GetRelatedActiveContentsCount() override;
@@ -350,7 +352,7 @@ class CONTENT_EXPORT SiteInstanceImpl final : public SiteInstance,
   // Returns the URL which was used to set the |site_info_| for this
   // SiteInstance. May be empty if this SiteInstance does not have a
   // |site_info_|.
-  const GURL& original_url() {
+  const GURL original_url() {
     DCHECK(!IsDefaultSiteInstance());
     return original_url_;
   }
@@ -704,13 +706,13 @@ class CONTENT_EXPORT SiteInstanceImpl final : public SiteInstance,
   static const RenderProcessHostFactory* g_render_process_host_factory_;
 
   // The next available SiteInstance ID.
-  static int32_t next_site_instance_id_;
+  static std::hq_wrapper<int32_t> next_site_instance_id_;
 
   // A unique ID for this SiteInstance.
-  int32_t id_;
+  std::hq_wrapper<int32_t> id_;
 
   // The number of active frames in this SiteInstance.
-  size_t active_frame_count_;
+  std::hq_wrapper<size_t> active_frame_count_;
 
   // BrowsingInstance to which this SiteInstance belongs.
   scoped_refptr<BrowsingInstance> browsing_instance_;
@@ -723,37 +725,37 @@ class CONTENT_EXPORT SiteInstanceImpl final : public SiteInstance,
   // well) will only change once the RenderProcessHost is destructed. They will
   // still remain the same even if the process crashes, since in that scenario
   // the RenderProcessHost remains the same.
-  RenderProcessHost* process_;
-  AgentSchedulingGroupHost* agent_scheduling_group_;
+  std::hq_wrapper<RenderProcessHost*> process_;
+  std::hq_wrapper<AgentSchedulingGroupHost*> agent_scheduling_group_;
 
   // Describes the desired behavior when GetProcess() method needs to find a new
   // process to associate with the current SiteInstanceImpl.  If |false|, then
   // prevents the spare RenderProcessHost from being taken and stored in
   // |process_|.
-  bool can_associate_with_spare_process_;
+  std::hq_wrapper<bool> can_associate_with_spare_process_;
 
   // The SiteInfo that this SiteInstance is rendering pages for.
   SiteInfo site_info_;
 
   // Whether SetSite has been called.
-  bool has_site_;
+  std::hq_wrapper<bool> has_site_;
 
   // The URL which was used to set the |site_info_| for this SiteInstance.
-  GURL original_url_;
+  HQ_GURL original_url_;
 
   // The ProcessReusePolicy to use when creating a RenderProcessHost for this
   // SiteInstance.
-  ProcessReusePolicy process_reuse_policy_;
+  std::hq_wrapper<ProcessReusePolicy> process_reuse_policy_;
 
   // Whether the SiteInstance was created for a service worker.
-  bool is_for_service_worker_;
+  std::hq_wrapper<bool> is_for_service_worker_;
 
   // Whether the SiteInstance was created for a <webview> guest.
   // TODO(734722): Move this into the SecurityPrincipal once it is available.
-  bool is_guest_;
+  std::hq_wrapper<bool> is_guest_;
 
   // How |this| was last assigned to a renderer process.
-  SiteInstanceProcessAssignment process_assignment_;
+  std::hq_wrapper<SiteInstanceProcessAssignment> process_assignment_;
 
   base::ObserverList<Observer, true>::Unchecked observers_;
 

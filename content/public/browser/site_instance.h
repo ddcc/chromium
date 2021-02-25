@@ -133,7 +133,7 @@ class CONTENT_EXPORT SiteInstance : public base::RefCounted<SiteInstance> {
   //   derived from the origin, it only contains the scheme and the eTLD + 1,
   //   i.e. an origin with the host "deeply.nested.subdomain.example.com"
   //   corresponds to a site URL with the host "example.com".
-  virtual const GURL& GetSiteURL() = 0;
+  virtual const GURL GetSiteURL() = 0;
 
   // Gets a SiteInstance for the given URL that shares the current
   // BrowsingInstance, creating a new SiteInstance if necessary.  This ensures

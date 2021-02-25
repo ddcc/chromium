@@ -48,7 +48,7 @@ constexpr bool kCreateForURLAllowsDefaultSiteInstance = true;
 
 }  // namespace
 
-int32_t SiteInstanceImpl::next_site_instance_id_ = 1;
+__attribute__((no_destroy)) std::hq_wrapper<int32_t> SiteInstanceImpl::next_site_instance_id_ = 1;
 
 // static
 const GURL& SiteInstanceImpl::GetDefaultSiteURL() {
@@ -485,7 +485,7 @@ void SiteInstanceImpl::SetProcessInternal(RenderProcessHost* process) {
   }
 
   TRACE_EVENT2("navigation", "SiteInstanceImpl::SetProcessInternal", "site id",
-               id_, "process id", process_->GetID());
+               id_.v(), "process id", process_->GetID());
   GetContentClient()->browser()->SiteInstanceGotProcess(this);
 
   LockProcessIfNeeded();
@@ -503,7 +503,7 @@ void SiteInstanceImpl::SetSite(const UrlInfo& url_info) {
   const GURL& url = url_info.url;
   // TODO(creis): Consider calling ShouldAssignSiteForURL internally, rather
   // than before multiple call sites.  See https://crbug.com/949220.
-  TRACE_EVENT2("navigation", "SiteInstanceImpl::SetSite", "site id", id_, "url",
+  TRACE_EVENT2("navigation", "SiteInstanceImpl::SetSite", "site id", id_.v(), "url",
                url.possibly_invalid_spec());
   // A SiteInstance's site should not change.
   // TODO(creis): When following links or script navigations, we can currently
@@ -522,7 +522,7 @@ void SiteInstanceImpl::SetSite(const UrlInfo& url_info) {
 
 void SiteInstanceImpl::SetSiteInfoToDefault() {
   TRACE_EVENT1("navigation", "SiteInstanceImpl::SetSiteInfoToDefault",
-               "site id", id_);
+               "site id", id_.v());
   DCHECK(!has_site_);
   original_url_ = GetDefaultSiteURL();
   SetSiteInfoInternal(SiteInfo::CreateForDefaultSiteInstance(
@@ -590,7 +590,7 @@ SiteInstanceImpl::GetLastProcessAssignmentOutcome() {
   return process_assignment_;
 }
 
-const GURL& SiteInstanceImpl::GetSiteURL() {
+const GURL SiteInstanceImpl::GetSiteURL() {
   return site_info_.site_url();
 }
 
@@ -1476,7 +1476,7 @@ void SiteInstanceImpl::LockProcessIfNeeded() {
       // additional logic to prevent the non-isolated sites from requesting
       // resources for isolated sites. https://crbug.com/509125
       TRACE_EVENT2("navigation", "RenderProcessHost::SetProcessLock", "site id",
-                   id_, "lock", lock_to_set.ToString());
+                   id_.v(), "lock", lock_to_set.ToString());
       process_->SetProcessLock(GetIsolationContext(), lock_to_set);
     } else if (process_lock != lock_to_set) {
       // We should never attempt to reassign a different origin lock to a
