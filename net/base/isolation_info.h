@@ -5,6 +5,8 @@
 #ifndef NET_BASE_ISOLATION_INFO_H_
 #define NET_BASE_ISOLATION_INFO_H_
 
+#include <hq_wrapper>
+
 #include "base/optional.h"
 #include "net/base/net_export.h"
 #include "net/base/network_isolation_key.h"
@@ -136,10 +138,10 @@ class NET_EXPORT IsolationInfo {
 
   // These may only be nullopt if created by the empty constructor. If one is
   // nullopt, both are, and SiteForCookies is null.
-  const base::Optional<url::Origin>& top_frame_origin() const {
+  const base::Optional<url::Origin> top_frame_origin() const {
     return top_frame_origin_;
   }
-  const base::Optional<url::Origin>& frame_origin() const {
+  const base::Optional<url::Origin> frame_origin() const {
     return frame_origin_;
   }
 
@@ -166,10 +168,10 @@ class NET_EXPORT IsolationInfo {
                 const SiteForCookies& site_for_cookies,
                 bool opaque_and_non_transient);
 
-  RedirectMode redirect_mode_;
+  std::hq_wrapper<RedirectMode> redirect_mode_;
 
-  base::Optional<url::Origin> top_frame_origin_;
-  base::Optional<url::Origin> frame_origin_;
+  base::HQ_Optional<url::Origin> top_frame_origin_;
+  base::HQ_Optional<url::Origin> frame_origin_;
 
   // This can be deduced from the two origins above, but keep a cached version
   // to avoid repeated eTLD+1 calculations, when this is using eTLD+1.
@@ -177,7 +179,7 @@ class NET_EXPORT IsolationInfo {
 
   SiteForCookies site_for_cookies_;
 
-  bool opaque_and_non_transient_ = false;
+  std::hq_wrapper<bool> opaque_and_non_transient_;
 };
 
 }  // namespace net

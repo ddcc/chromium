@@ -174,7 +174,7 @@ IsolationInfo IsolationInfo::CreateForRedirect(
                          site_for_cookies_, opaque_and_non_transient_);
   }
 
-  DCHECK_EQ(RedirectMode::kUpdateTopFrame, redirect_mode_);
+  DCHECK_EQ(RedirectMode::kUpdateTopFrame, redirect_mode_.v());
   return IsolationInfo(redirect_mode_, new_origin, new_origin,
                        SiteForCookies::FromOrigin(new_origin),
                        opaque_and_non_transient_);

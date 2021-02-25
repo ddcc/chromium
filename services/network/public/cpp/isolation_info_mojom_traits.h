@@ -33,12 +33,12 @@ struct COMPONENT_EXPORT(NETWORK_CPP_BASE)
     return input.redirect_mode();
   }
 
-  static const base::Optional<url::Origin>& top_frame_origin(
+  static const base::Optional<url::Origin> top_frame_origin(
       const net::IsolationInfo& input) {
     return input.top_frame_origin();
   }
 
-  static const base::Optional<url::Origin>& frame_origin(
+  static const base::Optional<url::Origin> frame_origin(
       const net::IsolationInfo& input) {
     return input.frame_origin();
   }
