@@ -463,7 +463,7 @@ config("compiler") {
 
     if (use_sysroot) {
       cflags += [ "--target=x86_64-alpine-linux-musl" ]
-      ldflags += [ "--target=x86_64-alpine-linux-musl" ]
+      ldflags += [ "--target=x86_64-alpine-linux-musl", "-Wl,--dynamic-linker=/lib/ld-musl-x86_64.so.1" ]
     }
   }
 
