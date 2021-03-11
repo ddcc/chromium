@@ -7,6 +7,8 @@
 
 #include "base/atomicops.h"
 
+#include <pthread.h>
+
 namespace mojo {
 namespace core {
 
@@ -17,9 +19,8 @@ struct HerQulesShmHdr {
   base::subtle::Atomic32 lock_;
   // Tracks next write offset and/or full (1U << 31)
   HerQulesStatus status_;
-  // Indicates writer has disconnected
-  // FIXME: Move this notification into the kernel
-  bool close_;
+  // (Ab)use the robust mutex to detect when writer has disconnected
+  pthread_mutex_t mutex_;
 };
 
 const unsigned F_PUSHFD = 100;

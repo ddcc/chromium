@@ -13,6 +13,7 @@
 
 #include "base/check_op.h"
 #include "base/clang_profiling_buildflags.h"
+#include "base/herqules_buildflags.h"
 #include "build/build_config.h"
 #include "sandbox/linux/bpf_dsl/bpf_dsl.h"
 #include "sandbox/linux/seccomp-bpf-helpers/sigsys_handlers.h"
@@ -194,8 +195,10 @@ ResultExpr EvaluateSyscallImpl(int fs_denied_errno,
   if (sysno == __NR_futex)
     return RestrictFutex();
 
+#if !BUILDFLAG(USE_HERQULES)
   if (sysno == __NR_set_robust_list)
     return Error(EPERM);
+#endif
 
   if (sysno == __NR_getpriority || sysno ==__NR_setpriority)
     return RestrictGetSetpriority(current_pid);

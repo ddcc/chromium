@@ -7,6 +7,7 @@
 
 #include <fcntl.h>
 #include <linux/futex.h>
+#include <pthread.h>
 #include <sys/mman.h>
 #include <sys/syscall.h>
 
@@ -14,6 +15,9 @@
 #include "base/memory/unsafe_shared_memory_region.h"
 #include "mojo/core/channel.h"
 #include "mojo/core/herqules.h"
+
+// #include <internal/pthread_impl.h>
+#define _m_lock __u.__vi[1]
 
 namespace mojo {
 namespace core {
@@ -141,7 +145,14 @@ static inline void HerQulesReset(struct HerQulesShmHdr* header) {
 
 static inline void HerQulesInit(struct HerQulesShmHdr* header) {
   header->status_ = 0;
-  header->close_ = false;
+
+  // Set the mutex robust and keep it always locked
+  pthread_mutexattr_t attr;
+  pthread_mutexattr_init(&attr);
+  pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
+  pthread_mutex_init(&header->mutex_, &attr);
+  pthread_mutexattr_destroy(&attr);
+  pthread_mutex_lock(&header->mutex_);
 }
 
 static inline void HerQulesLock(struct HerQulesShmHdr* header) {
@@ -160,8 +171,11 @@ static inline void HerQulesDestroy(struct HerQulesShmHdr* header) {
               0) < 0)
     PLOG(ERROR) << "Cannot wake write futex!";
 
-  DCHECK(!header->close_);
-  header->close_ = true;
+  // Unlock to avoid SIGSEGV in robust_list after thread is unmapped
+  pthread_mutex_unlock(&header->mutex_);
+  pthread_mutex_destroy(&header->mutex_);
+  // Permanently set the died bit
+  header->mutex_._m_lock |= FUTEX_OWNER_DIED;
 }
 
 static inline uint8_t* HerQulesGetMessage(struct HerQulesShmHdr* header,
@@ -182,8 +196,12 @@ static inline HerQulesStatus HerQulesGetWrite(const HerQulesStatus status) {
   return status & ~kHerQulesFull;
 }
 
-static inline bool HerQulesIsClosed(const struct HerQulesShmHdr* header) {
-  return header->close_;
+static inline auto HerQulesGetClosed(const struct HerQulesShmHdr* header) {
+  return &header->mutex_._m_lock;
+}
+
+static inline bool HerQulesIsClosed(int status) {
+  return status & FUTEX_OWNER_DIED;
 }
 
 static inline HerQulesStatus HerQulesSetFull(struct HerQulesShmHdr* header) {

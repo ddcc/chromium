@@ -4,6 +4,7 @@
 
 #include "sandbox/linux/seccomp-bpf-helpers/syscall_sets.h"
 
+#include "base/herqules_buildflags.h"
 #include "build/build_config.h"
 #include "sandbox/linux/system_headers/linux_syscalls.h"
 
@@ -419,6 +420,9 @@ bool SyscallSets::IsAllowedFutex(int sysno) {
   switch (sysno) {
     case __NR_get_robust_list:
     case __NR_set_robust_list:
+#if BUILDFLAG(USE_HERQULES)
+      return true;
+#endif
     case __NR_futex:
     default:
       return false;
