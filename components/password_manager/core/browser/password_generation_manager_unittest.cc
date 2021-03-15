@@ -178,7 +178,7 @@ TEST_F(PasswordGenerationManagerTest, GeneratedPasswordAccepted_EmptyStore) {
   MockPasswordManagerDriver driver;
   FakeFormFetcher fetcher;
 
-  EXPECT_CALL(driver, GeneratedPasswordAccepted(generated.password_value));
+  EXPECT_CALL(driver, GeneratedPasswordAccepted(generated.password_value.str()));
   manager().GeneratedPasswordAccepted(
       std::move(generated), fetcher.GetNonFederatedMatches(),
       fetcher.GetFederatedMatches(), driver.AsWeakPtr());
@@ -196,7 +196,7 @@ TEST_F(PasswordGenerationManagerTest, GeneratedPasswordAccepted_Conflict) {
   FakeFormFetcher fetcher;
   fetcher.SetNonFederated({&saved});
 
-  EXPECT_CALL(driver, GeneratedPasswordAccepted(generated.password_value));
+  EXPECT_CALL(driver, GeneratedPasswordAccepted(generated.password_value.str()));
   manager().GeneratedPasswordAccepted(
       std::move(generated), fetcher.GetNonFederatedMatches(),
       fetcher.GetFederatedMatches(), driver.AsWeakPtr());
@@ -256,7 +256,7 @@ TEST_F(PasswordGenerationManagerTest, GeneratedPasswordAccepted_UpdateUISave) {
       SetUpOverwritingUI(driver.AsWeakPtr());
   ASSERT_TRUE(ui_form);
   EXPECT_CALL(driver,
-              GeneratedPasswordAccepted(CreateGenerated().password_value));
+              GeneratedPasswordAccepted(CreateGenerated().password_value.str()));
   ui_form->Save();
 }
 

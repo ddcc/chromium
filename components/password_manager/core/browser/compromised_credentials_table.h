@@ -41,15 +41,15 @@ enum class RemoveCompromisedCredentialsReason {
 // Represents information about the particular compromised credentials.
 struct CompromisedCredentials {
   // The signon_realm of the website where the credentials were compromised.
-  std::string signon_realm;
+  std::hq_string signon_realm;
   // The value of the compromised username.
-  base::string16 username;
+  base::hq_string16 username;
   // The date when the record was created.
   base::Time create_time;
   // The type of the credentials that was compromised.
-  CompromiseType compromise_type = CompromiseType::kLeaked;
+  std::hq_wrapper<CompromiseType> compromise_type = CompromiseType::kLeaked;
   // The store in which those credentials are stored.
-  PasswordForm::Store in_store = PasswordForm::Store::kNotSet;
+  std::hq_wrapper<PasswordForm::Store> in_store = PasswordForm::Store::kNotSet;
 };
 
 bool operator==(const CompromisedCredentials& lhs,

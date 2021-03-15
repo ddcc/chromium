@@ -32,7 +32,7 @@ class PasswordGenerationManager {
   // Returns true iff the generated password was presaved.
   bool HasGeneratedPassword() const { return presaved_.has_value(); }
 
-  const base::string16& generated_password() const {
+  const base::hq_string16& generated_password() const {
     return presaved_->password_value;
   }
 

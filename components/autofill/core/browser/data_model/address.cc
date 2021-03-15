@@ -94,13 +94,13 @@ base::string16 Address::GetRawInfo(ServerFieldType type) const {
 
   switch (type) {
     case ADDRESS_HOME_LINE1:
-      return street_address_.size() > 0 ? street_address_[0] : base::string16();
+      return street_address_.size() > 0 ? street_address_[0] : base::hq_string16();
 
     case ADDRESS_HOME_LINE2:
-      return street_address_.size() > 1 ? street_address_[1] : base::string16();
+      return street_address_.size() > 1 ? street_address_[1] : base::hq_string16();
 
     case ADDRESS_HOME_LINE3:
-      return street_address_.size() > 2 ? street_address_[2] : base::string16();
+      return street_address_.size() > 2 ? street_address_[2] : base::hq_string16();
 
     case ADDRESS_HOME_DEPENDENT_LOCALITY:
       return dependent_locality_;
@@ -121,7 +121,7 @@ base::string16 Address::GetRawInfo(ServerFieldType type) const {
       return base::ASCIIToUTF16(country_code_);
 
     case ADDRESS_HOME_STREET_ADDRESS:
-      return base::JoinString(street_address_, base::ASCIIToUTF16("\n"));
+      return base::JoinString(street_address_.vec<base::string16>(), base::ASCIIToUTF16("\n"));
 
     case ADDRESS_HOME_APT_NUM:
       return base::string16();
@@ -222,7 +222,7 @@ void Address::SetRawInfoWithVerificationStatus(ServerFieldType type,
       // If the street address changes, the structured tokens must be reset.
       if (base::SplitString(value, base::ASCIIToUTF16("\n"),
                             base::TRIM_WHITESPACE,
-                            base::SPLIT_WANT_ALL) != street_address_) {
+                            base::SPLIT_WANT_ALL) != street_address_.vec<base::string16>()) {
         ResetStructuredTokes();
         street_address_ =
             base::SplitString(value, base::ASCIIToUTF16("\n"),
@@ -278,7 +278,7 @@ void Address::GetMatchingTypes(const base::string16& text,
       structured_address::StructuredAddressesEnabled()
           ? base::UTF16ToUTF8(
                 structured_address_.GetValueForType(ADDRESS_HOME_COUNTRY))
-          : country_code_;
+          : country_code_.str();
 
   // Check to see if the |text| canonicalized as a country name is a match.
   std::string entered_country_code =
@@ -341,7 +341,7 @@ base::string16 Address::GetInfoImpl(const AutofillType& type,
       structured_address::StructuredAddressesEnabled()
           ? base::UTF16ToUTF8(
                 structured_address_.GetValueForType(ADDRESS_HOME_COUNTRY))
-          : country_code_;
+          : country_code_.str();
 
   if (type.html_type() == HTML_TYPE_COUNTRY_CODE) {
     return base::ASCIIToUTF16(country_code);

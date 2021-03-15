@@ -1031,7 +1031,7 @@ TEST_P(PasswordFormManagerTest, OverridePassword) {
   MockFormSaver& form_saver = MockFormSaver::Get(form_manager_.get());
   PasswordForm updated_form;
   EXPECT_CALL(form_saver, Update(_, ElementsAre(Pointee(saved_match_)),
-                                 saved_match_.password_value))
+                                 saved_match_.password_value.str()))
       .WillOnce(SaveArg<0>(&updated_form));
 
   form_manager_->Save();
@@ -1068,7 +1068,7 @@ TEST_P(PasswordFormManagerTest, UpdatePasswordOnChangePasswordForm) {
                      UnorderedElementsAre(
                          Pointee(saved_match_), Pointee(not_best_saved_match),
                          Pointee(saved_match_another_username)),
-                     saved_match_.password_value))
+                     saved_match_.password_value.str()))
       .WillOnce(SaveArg<0>(&updated_form));
 
   form_manager_->Save();
@@ -1789,7 +1789,7 @@ TEST_P(PasswordFormManagerTest, Update) {
                                  UnorderedElementsAre(
                                      Pointee(saved_match_),
                                      Pointee(saved_match_another_username)),
-                                 saved_match_.password_value))
+                                 saved_match_.password_value.str()))
       .WillOnce(SaveArg<0>(&updated_form));
   EXPECT_CALL(client_, UpdateFormManagers());
 
@@ -2377,7 +2377,7 @@ class MockPasswordSaveManager : public PasswordSaveManager {
                     scoped_refptr<PasswordFormMetricsRecorder>,
                     VotesUploader*));
   MOCK_CONST_METHOD0(GetPendingCredentials, const PasswordForm&());
-  MOCK_CONST_METHOD0(GetGeneratedPassword, const base::string16&());
+  MOCK_CONST_METHOD0(GetGeneratedPassword, const base::hq_string16&());
   MOCK_CONST_METHOD0(GetFormSaver, FormSaver*());
   MOCK_METHOD5(CreatePendingCredentials,
                void(const PasswordForm&,

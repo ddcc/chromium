@@ -681,7 +681,7 @@ TEST_P(PasswordSaveManagerImplTest, OverridePassword) {
 
   PasswordForm updated_form;
   EXPECT_CALL(*mock_form_saver(), Update(_, ElementsAre(Pointee(saved_match_)),
-                                         saved_match_.password_value))
+                                         saved_match_.password_value.str()))
       .WillOnce(SaveArg<0>(&updated_form));
 
   password_save_manager_impl()->Save(&observed_form_, Parse(submitted_form));
@@ -720,7 +720,7 @@ TEST_P(PasswordSaveManagerImplTest, UpdatePasswordOnChangePasswordForm) {
                      UnorderedElementsAre(
                          Pointee(saved_match_), Pointee(not_best_saved_match),
                          Pointee(saved_match_another_username)),
-                     saved_match_.password_value))
+                     saved_match_.password_value.str()))
       .WillOnce(SaveArg<0>(&updated_form));
 
   password_save_manager_impl()->Save(&observed_form_only_password_fields_,
@@ -1105,7 +1105,7 @@ TEST_P(PasswordSaveManagerImplTest, Update) {
       Update(_,
              UnorderedElementsAre(Pointee(saved_match_),
                                   Pointee(saved_match_another_username)),
-             saved_match_.password_value))
+             saved_match_.password_value.str()))
       .WillOnce(SaveArg<0>(&updated_form));
 
   const base::Time kNow = base::Time::Now();

@@ -275,8 +275,8 @@ TEST_F(SaveUpdateBubbleControllerTest, ClickSave) {
 
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
   EXPECT_CALL(*delegate(), OnPasswordsRevealed()).Times(0);
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   EXPECT_CALL(*delegate(), NeverSavePassword()).Times(0);
   EXPECT_CALL(*delegate(), OnNopeUpdateClicked()).Times(0);
   controller()->OnSaveClicked();
@@ -320,8 +320,8 @@ TEST_F(SaveUpdateBubbleControllerTest, ClickUpdate) {
 
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
   EXPECT_CALL(*delegate(), OnPasswordsRevealed()).Times(0);
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   EXPECT_CALL(*delegate(), NeverSavePassword()).Times(0);
   EXPECT_CALL(*delegate(), OnNopeUpdateClicked()).Times(0);
   controller()->OnSaveClicked();
@@ -348,7 +348,7 @@ TEST_F(SaveUpdateBubbleControllerTest, ClickUpdateInSaveState) {
 TEST_F(SaveUpdateBubbleControllerTest, GetInitialUsername_MatchedUsername) {
   PretendUpdatePasswordWaiting();
   EXPECT_EQ(base::UTF8ToUTF16(kUsername),
-            controller()->pending_password().username_value);
+            controller()->pending_password().username_value.str());
 }
 
 TEST_F(SaveUpdateBubbleControllerTest, EditCredential) {
@@ -359,8 +359,8 @@ TEST_F(SaveUpdateBubbleControllerTest, EditCredential) {
   const base::string16 kExpectedPassword = base::UTF8ToUTF16("new_password");
 
   controller()->OnCredentialEdited(kExpectedUsername, kExpectedPassword);
-  EXPECT_EQ(kExpectedUsername, controller()->pending_password().username_value);
-  EXPECT_EQ(kExpectedPassword, controller()->pending_password().password_value);
+  EXPECT_EQ(kExpectedUsername, controller()->pending_password().username_value.str());
+  EXPECT_EQ(kExpectedPassword, controller()->pending_password().password_value.str());
   EXPECT_CALL(*delegate(), SavePassword(kExpectedUsername, kExpectedPassword));
   EXPECT_CALL(*delegate(), NeverSavePassword()).Times(0);
   controller()->OnSaveClicked();
@@ -374,8 +374,8 @@ TEST_F(SaveUpdateBubbleControllerTest, SuppressSignInPromo) {
                       true);
   PretendPasswordWaiting();
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   controller()->OnSaveClicked();
 
   EXPECT_FALSE(controller()->ReplaceToShowPromotionIfNeeded());
@@ -385,8 +385,8 @@ TEST_F(SaveUpdateBubbleControllerTest, SuppressSignInPromo) {
 TEST_F(SaveUpdateBubbleControllerTest, SignInPromoOK) {
   PretendPasswordWaiting();
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   controller()->OnSaveClicked();
 
 #if defined(OS_CHROMEOS)
@@ -401,8 +401,8 @@ TEST_F(SaveUpdateBubbleControllerTest, SignInPromoCancel) {
   base::HistogramTester histogram_tester;
   PretendPasswordWaiting();
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   controller()->OnSaveClicked();
 
   EXPECT_TRUE(controller()->ReplaceToShowPromotionIfNeeded());
@@ -416,8 +416,8 @@ TEST_F(SaveUpdateBubbleControllerTest, SignInPromoDismiss) {
   base::HistogramTester histogram_tester;
   PretendPasswordWaiting();
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   controller()->OnSaveClicked();
 
   EXPECT_TRUE(controller()->ReplaceToShowPromotionIfNeeded());
@@ -478,8 +478,8 @@ TEST_F(SaveUpdateBubbleControllerTest, RecordUKMs) {
             EXPECT_CALL(*GetStore(),
                         RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
             EXPECT_CALL(*delegate(),
-                        SavePassword(pending_password().username_value,
-                                     pending_password().password_value));
+                        SavePassword(pending_password().username_value.str(),
+                                     pending_password().password_value.str()));
             controller()->OnSaveClicked();
           } else if (interaction == BubbleDismissalReason::kDeclined &&
                      update) {

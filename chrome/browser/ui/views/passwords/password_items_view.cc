@@ -211,7 +211,7 @@ std::unique_ptr<views::Label> CreatePasswordLabel(
     bool are_passwords_revealed) {
   base::string16 text =
       form.federation_origin.opaque()
-          ? form.password_value
+          ? form.password_value.str()
           : l10n_util::GetStringFUTF16(federation_message_id,
                                        GetDisplayFederation(form));
   int text_style = form.federation_origin.opaque()

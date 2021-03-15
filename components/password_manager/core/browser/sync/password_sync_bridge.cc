@@ -60,7 +60,7 @@ sync_pb::PasswordSpecifics SpecificsFromPassword(
   sync_pb::PasswordSpecifics specifics;
   sync_pb::PasswordSpecificsData* password_data =
       specifics.mutable_client_only_encrypted_data();
-  password_data->set_scheme(static_cast<int>(password_form.scheme));
+  password_data->set_scheme(static_cast<int>(password_form.scheme.v()));
   password_data->set_signon_realm(password_form.signon_realm);
   password_data->set_origin(password_form.url.spec());
   password_data->set_action(password_form.action.spec());
@@ -77,7 +77,7 @@ sync_pb::PasswordSpecifics SpecificsFromPassword(
   password_data->set_date_created(
       password_form.date_created.ToDeltaSinceWindowsEpoch().InMicroseconds());
   password_data->set_blacklisted(password_form.blocked_by_user);
-  password_data->set_type(static_cast<int>(password_form.type));
+  password_data->set_type(static_cast<int>(password_form.type.v()));
   password_data->set_times_used(password_form.times_used);
   password_data->set_display_name(
       base::UTF16ToUTF8(password_form.display_name));
@@ -151,7 +151,7 @@ int ParsePrimaryKey(const std::string& storage_key) {
 bool AreLocalAndRemotePasswordsEqual(
     const sync_pb::PasswordSpecificsData& password_specifics,
     const PasswordForm& password_form) {
-  return (static_cast<int>(password_form.scheme) ==
+  return (static_cast<int>(password_form.scheme.v()) ==
               password_specifics.scheme() &&
           password_form.signon_realm == password_specifics.signon_realm() &&
           password_form.url.spec() == password_specifics.origin() &&
@@ -173,7 +173,7 @@ bool AreLocalAndRemotePasswordsEqual(
                   base::TimeDelta::FromMicroseconds(
                       password_specifics.date_created())) &&
           password_form.blocked_by_user == password_specifics.blacklisted() &&
-          static_cast<int>(password_form.type) == password_specifics.type() &&
+          static_cast<int>(password_form.type.v()) == password_specifics.type() &&
           password_form.times_used == password_specifics.times_used() &&
           base::UTF16ToUTF8(password_form.display_name) ==
               password_specifics.display_name() &&

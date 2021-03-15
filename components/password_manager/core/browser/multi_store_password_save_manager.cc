@@ -129,11 +129,11 @@ void MultiStorePasswordSaveManager::SavePendingToStoreImpl(
 
   base::string16 old_account_password =
       states.similar_saved_form_from_account_store
-          ? states.similar_saved_form_from_account_store->password_value
+          ? states.similar_saved_form_from_account_store->password_value.str()
           : base::string16();
   base::string16 old_profile_password =
       states.similar_saved_form_from_profile_store
-          ? states.similar_saved_form_from_profile_store->password_value
+          ? states.similar_saved_form_from_profile_store->password_value.str()
           : base::string16();
 
   if (states.profile_store_state == PendingCredentialsState::NEW_LOGIN &&

@@ -7,9 +7,11 @@
 
 #include <string>
 #include <vector>
+#include <hq_vector>
 
 #include "base/compiler_specific.h"
 #include "base/strings/string16.h"
+#include "base/strings/hq_string16.h"
 #include "components/autofill/core/browser/data_model/autofill_structured_address.h"
 #include "components/autofill/core/browser/data_model/form_group.h"
 
@@ -80,15 +82,15 @@ class Address : public FormGroup {
   // TODO(crbug.com/1130194): Clean legacy implementation once structured
   // addresses are fully launched.
   // The lines of the street address.
-  std::vector<base::string16> street_address_;
+  std::hq_vector<base::hq_string16> street_address_;
   // A subdivision of city, e.g. inner-city district or suburb.
-  base::string16 dependent_locality_;
-  base::string16 city_;
-  base::string16 state_;
-  base::string16 zip_code_;
+  base::hq_string16 dependent_locality_;
+  base::hq_string16 city_;
+  base::hq_string16 state_;
+  base::hq_string16 zip_code_;
   // Similar to a ZIP code, but used by entities that might not be
   // geographically contiguous.  The canonical example is CEDEX in France.
-  base::string16 sorting_code_;
+  base::hq_string16 sorting_code_;
 
   // The following entries are only popluated by Sync and
   // used to create type votes, but are not used for filling fields.
@@ -100,7 +102,7 @@ class Address : public FormGroup {
 
   // The ISO 3166 2-letter country code, or an empty string if there is no
   // country data specified for this address.
-  std::string country_code_;
+  std::hq_string country_code_;
 
   // This data structure holds the address information if the structured address
   // feature is enabled.

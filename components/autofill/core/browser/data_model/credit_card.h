@@ -7,12 +7,15 @@
 
 #include <iosfwd>
 #include <string>
+#include <hq_string>
 #include <utility>
 #include <vector>
+#include <hq_wrapper>
 
 #include "base/compiler_specific.h"
 #include "base/gtest_prod_util.h"
 #include "base/strings/string16.h"
+#include "base/strings/hq_string16.h"
 #include "base/strings/string_piece_forward.h"
 #include "build/build_config.h"
 #include "components/autofill/core/browser/data_model/autofill_data_model.h"
@@ -128,9 +131,9 @@ class CreditCard : public AutofillDataModel {
   // Special method to set value for HTML5 month input type.
   void SetInfoForMonthInputType(const base::string16& value);
 
-  const std::string& network() const { return network_; }
+  const std::hq_string& network() const { return network_; }
 
-  const std::string& bank_name() const { return bank_name_; }
+  const std::hq_string& bank_name() const { return bank_name_; }
   void set_bank_name(const std::string& bank_name) { bank_name_ = bank_name; }
 
   int expiration_month() const { return expiration_month_; }
@@ -215,7 +218,7 @@ class CreditCard : public AutofillDataModel {
   bool IsValid() const;
 
   // Returns the card number.
-  const base::string16& number() const { return number_; }
+  const base::hq_string16& number() const { return number_; }
   // Sets |number_| to |number| and computes the appropriate card issuer
   // |network_|.
   void SetNumber(const base::string16& number);
@@ -338,26 +341,26 @@ class CreditCard : public AutofillDataModel {
   void SetNameOnCardFromSeparateParts();
 
   // See enum definition above.
-  RecordType record_type_;
+  std::hq_wrapper<RecordType> record_type_;
 
   // The card number. For MASKED_SERVER_CARDs, this number will just contain the
   // last four digits of the card number.
-  base::string16 number_;
+  base::hq_string16 number_;
 
   // The cardholder's name. May be empty.
-  base::string16 name_on_card_;
+  base::hq_string16 name_on_card_;
 
   // The network issuer of the card. This is one of the k...Card constants
   // below.
-  std::string network_;
+  std::hq_string network_;
 
   // bank_name is no longer actively used but remains for legacy reasons.
   // The issuer bank name of the card.
-  std::string bank_name_;
+  std::hq_string bank_name_;
 
   // These members are zero if not present.
-  int expiration_month_;
-  int expiration_year_;
+  std::hq_wrapper<int> expiration_month_;
+  std::hq_wrapper<int> expiration_year_;
 
   // For server cards (both MASKED and UNMASKED) this is the ID assigned by the
   // server to uniquely identify this card.

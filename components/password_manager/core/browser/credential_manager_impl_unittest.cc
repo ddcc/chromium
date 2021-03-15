@@ -713,7 +713,7 @@ TEST_P(CredentialManagerImplTest, CredentialManagerGetOverwriteZeroClick) {
 TEST_P(CredentialManagerImplTest,
        CredentialManagerSignInWithSavingDisabledForCurrentPage) {
   CredentialInfo info(form_, CredentialType::CREDENTIAL_TYPE_PASSWORD);
-  EXPECT_CALL(*client_, IsSavingAndFillingEnabled(form_.url))
+  EXPECT_CALL(*client_, IsSavingAndFillingEnabled(form_.url.gurl()))
       .WillRepeatedly(testing::Return(false));
   EXPECT_CALL(*client_, PromptUserToSavePasswordPtr(_))
       .Times(testing::Exactly(0));
@@ -1691,7 +1691,7 @@ TEST_P(CredentialManagerImplTest, BlockedFederatedCredential) {
 
   // Verify that the site is blocked.
   TestPasswordStore::PasswordMap passwords = store_->stored_passwords();
-  ASSERT_TRUE(passwords.count(form_.url.spec()));
+  ASSERT_TRUE(passwords.count(form_.url.spec().str()));
   PasswordForm blocked_form;
   blocked_form.blocked_by_user = true;
   blocked_form.url = form_.url;
@@ -1799,7 +1799,7 @@ TEST_P(CredentialManagerImplTest, StorePasswordCredentialStartsLeakDetection) {
 
   auto check_instance = std::make_unique<MockLeakDetectionCheck>();
   EXPECT_CALL(*check_instance,
-              Start(form_.url, form_.username_value, form_.password_value));
+              Start(form_.url.gurl(), form_.username_value.str(), form_.password_value.str()));
   EXPECT_CALL(*weak_factory, TryCreateLeakCheck)
       .WillOnce(testing::Return(testing::ByMove(std::move(check_instance))));
   CallStore({form_, CredentialType::CREDENTIAL_TYPE_PASSWORD},

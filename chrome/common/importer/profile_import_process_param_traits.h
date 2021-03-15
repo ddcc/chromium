@@ -53,31 +53,31 @@ struct StructTraits<chrome::mojom::ImportedPasswordFormDataView,
     return r.scheme;
   }
 
-  static const std::string& signon_realm(const autofill::PasswordForm& r) {
+  static const std::hq_string& signon_realm(const autofill::PasswordForm& r) {
     return r.signon_realm;
   }
 
-  static const GURL& url(const autofill::PasswordForm& r) { return r.url; }
+  static const HQ_GURL& url(const autofill::PasswordForm& r) { return r.url; }
 
   static const GURL& action(const autofill::PasswordForm& r) {
     return r.action;
   }
 
-  static const base::string16& username_element(
+  static const base::hq_string16& username_element(
       const autofill::PasswordForm& r) {
     return r.username_element;
   }
 
-  static const base::string16& username_value(const autofill::PasswordForm& r) {
+  static const base::hq_string16& username_value(const autofill::PasswordForm& r) {
     return r.username_value;
   }
 
-  static const base::string16& password_element(
+  static const base::hq_string16& password_element(
       const autofill::PasswordForm& r) {
     return r.password_element;
   }
 
-  static const base::string16& password_value(const autofill::PasswordForm& r) {
+  static const base::hq_string16& password_value(const autofill::PasswordForm& r) {
     return r.password_value;
   }
 

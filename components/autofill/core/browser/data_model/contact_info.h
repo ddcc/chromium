@@ -10,6 +10,7 @@
 
 #include "base/compiler_specific.h"
 #include "base/strings/string16.h"
+#include "base/strings/hq_string16.h"
 #include "components/autofill/core/browser/data_model/autofill_structured_address_name.h"
 #include "components/autofill/core/browser/data_model/form_group.h"
 
@@ -129,7 +130,7 @@ class EmailInfo : public FormGroup {
   // FormGroup:
   void GetSupportedTypes(ServerFieldTypeSet* supported_types) const override;
 
-  base::string16 email_;
+  base::hq_string16 email_;
 };
 
 class CompanyInfo : public FormGroup {

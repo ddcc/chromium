@@ -166,7 +166,7 @@ TEST_F(LeakDetectionDelegateTest, StartCheck) {
   EXPECT_CALL(client(), IsIncognito).WillOnce(Return(false));
   auto check_instance = std::make_unique<MockLeakDetectionCheck>();
   EXPECT_CALL(*check_instance,
-              Start(form.url, form.username_value, form.password_value));
+              Start(form.url.gurl(), form.username_value.str(), form.password_value.str()));
   EXPECT_CALL(factory(), TryCreateLeakCheck(&delegate(), _, _))
       .WillOnce(Return(ByMove(std::move(check_instance))));
   delegate().StartLeakCheck(form);
@@ -192,7 +192,7 @@ TEST_F(LeakDetectionDelegateTest, StartCheckWithStandardProtection) {
   EXPECT_CALL(client(), IsIncognito).WillOnce(Return(false));
   auto check_instance = std::make_unique<MockLeakDetectionCheck>();
   EXPECT_CALL(*check_instance,
-              Start(form.url, form.username_value, form.password_value));
+              Start(form.url.gurl(), form.username_value.str(), form.password_value.str()));
   EXPECT_CALL(factory(), TryCreateLeakCheck(&delegate(), _, _))
       .WillOnce(Return(ByMove(std::move(check_instance))));
   delegate().StartLeakCheck(form);
@@ -211,7 +211,7 @@ TEST_F(LeakDetectionDelegateTest, StartCheckWithEnhancedProtection) {
   EXPECT_CALL(client(), IsIncognito).WillOnce(Return(false));
   auto check_instance = std::make_unique<MockLeakDetectionCheck>();
   EXPECT_CALL(*check_instance,
-              Start(form.url, form.username_value, form.password_value));
+              Start(form.url.gurl(), form.username_value.str(), form.password_value.str()));
   EXPECT_CALL(factory(), TryCreateLeakCheck(&delegate(), _, _))
       .WillOnce(Return(ByMove(std::move(check_instance))));
   delegate().StartLeakCheck(form);
@@ -292,7 +292,7 @@ TEST_F(LeakDetectionDelegateTest,
               NotifyUserCredentialsWereLeaked(
                   password_manager::CreateLeakType(
                       IsSaved(false), IsReused(false), IsSyncing(false)),
-                  CompromisedSitesCount(0), form.url, form.username_value));
+                  CompromisedSitesCount(0), form.url.gurl(), form.username_value.str()));
 
   delegate_interface->OnLeakDetectionDone(
       /*is_leaked=*/false, form.url, form.username_value, form.password_value);
@@ -316,7 +316,7 @@ TEST_F(LeakDetectionDelegateTest, LeakDetectionDoneWithTrueResult) {
               NotifyUserCredentialsWereLeaked(
                   password_manager::CreateLeakType(
                       IsSaved(false), IsReused(false), IsSyncing(false)),
-                  CompromisedSitesCount(0), form.url, form.username_value));
+                  CompromisedSitesCount(0), form.url.gurl(), form.username_value.str()));
   delegate_interface->OnLeakDetectionDone(
       /*is_leaked=*/true, form.url, form.username_value, form.password_value);
   WaitForPasswordStore();
@@ -343,7 +343,7 @@ TEST_F(LeakDetectionDelegateTest, LeakHistoryAddCredentials) {
 
   EXPECT_CALL(client(),
               NotifyUserCredentialsWereLeaked(_, CompromisedSitesCount(1),
-                                              form.url, form.username_value));
+                                              form.url.gurl(), form.username_value.str()));
   delegate_interface->OnLeakDetectionDone(
       /*is_leaked=*/true, form.url, form.username_value, form.password_value);
 

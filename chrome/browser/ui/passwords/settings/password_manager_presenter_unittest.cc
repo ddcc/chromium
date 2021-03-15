@@ -527,7 +527,7 @@ TEST_F(PasswordManagerPresenterTest, BlocklistDoesNotPreventExporting) {
   std::vector<std::unique_ptr<autofill::PasswordForm>> passwords_for_export =
       GetUIController().GetPasswordManagerPresenter()->GetAllPasswords();
   ASSERT_EQ(1u, passwords_for_export.size());
-  EXPECT_EQ(kSameOrigin, passwords_for_export[0]->url);
+  EXPECT_EQ(kSameOrigin, passwords_for_export[0]->url.gurl());
 }
 
 #if !defined(OS_ANDROID)

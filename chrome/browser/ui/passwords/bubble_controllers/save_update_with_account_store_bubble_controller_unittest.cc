@@ -293,8 +293,8 @@ TEST_F(SaveUpdateWithAccountStoreBubbleControllerTest, ClickSaveInLocalStore) {
 
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
   EXPECT_CALL(*delegate(), OnPasswordsRevealed()).Times(0);
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   EXPECT_CALL(*delegate(), NeverSavePassword()).Times(0);
   EXPECT_CALL(*delegate(), OnNopeUpdateClicked()).Times(0);
   EXPECT_CALL(*delegate(), AuthenticateUserForAccountStoreOptInAndSavePassword)
@@ -317,8 +317,8 @@ TEST_F(SaveUpdateWithAccountStoreBubbleControllerTest,
 
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
   EXPECT_CALL(*delegate(), OnPasswordsRevealed()).Times(0);
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   EXPECT_CALL(*delegate(), NeverSavePassword()).Times(0);
   EXPECT_CALL(*delegate(), OnNopeUpdateClicked()).Times(0);
   EXPECT_CALL(*delegate(), AuthenticateUserForAccountStoreOptInAndSavePassword)
@@ -344,8 +344,8 @@ TEST_F(SaveUpdateWithAccountStoreBubbleControllerTest,
   EXPECT_CALL(*delegate(), NeverSavePassword()).Times(0);
   EXPECT_CALL(*delegate(), OnNopeUpdateClicked()).Times(0);
   EXPECT_CALL(*delegate(), AuthenticateUserForAccountStoreOptInAndSavePassword(
-                               pending_password().username_value,
-                               pending_password().password_value));
+                               pending_password().username_value.str(),
+                               pending_password().password_value.str()));
   controller()->OnSaveClicked();
   DestroyModelExpectReason(password_manager::metrics_util::CLICKED_ACCEPT);
 }
@@ -365,8 +365,8 @@ TEST_F(SaveUpdateWithAccountStoreBubbleControllerTest,
   EXPECT_FALSE(controller()->IsAccountStorageOptInRequired());
 
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   EXPECT_CALL(*delegate(), NeverSavePassword()).Times(0);
   EXPECT_CALL(*delegate(), OnNopeUpdateClicked()).Times(0);
   EXPECT_CALL(*delegate(), AuthenticateUserForAccountStoreOptInAndSavePassword)
@@ -412,8 +412,8 @@ TEST_F(SaveUpdateWithAccountStoreBubbleControllerTest, ClickUpdate) {
 
   EXPECT_CALL(*GetStore(), RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
   EXPECT_CALL(*delegate(), OnPasswordsRevealed()).Times(0);
-  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value,
-                                        pending_password().password_value));
+  EXPECT_CALL(*delegate(), SavePassword(pending_password().username_value.str(),
+                                        pending_password().password_value.str()));
   EXPECT_CALL(*delegate(), NeverSavePassword()).Times(0);
   EXPECT_CALL(*delegate(), OnNopeUpdateClicked()).Times(0);
   controller()->OnSaveClicked();
@@ -452,8 +452,8 @@ TEST_F(SaveUpdateWithAccountStoreBubbleControllerTest, EditCredential) {
   const base::string16 kExpectedPassword = base::UTF8ToUTF16("new_password");
 
   controller()->OnCredentialEdited(kExpectedUsername, kExpectedPassword);
-  EXPECT_EQ(kExpectedUsername, controller()->pending_password().username_value);
-  EXPECT_EQ(kExpectedPassword, controller()->pending_password().password_value);
+  EXPECT_EQ(kExpectedUsername, controller()->pending_password().username_value.str());
+  EXPECT_EQ(kExpectedPassword, controller()->pending_password().password_value.str());
   EXPECT_CALL(*delegate(), SavePassword(kExpectedUsername, kExpectedPassword));
   EXPECT_CALL(*delegate(), NeverSavePassword()).Times(0);
   controller()->OnSaveClicked();
@@ -508,8 +508,8 @@ TEST_F(SaveUpdateWithAccountStoreBubbleControllerTest, RecordUKMs) {
             EXPECT_CALL(*GetStore(),
                         RemoveSiteStatsImpl(GURL(kSiteOrigin).GetOrigin()));
             EXPECT_CALL(*delegate(),
-                        SavePassword(pending_password().username_value,
-                                     pending_password().password_value));
+                        SavePassword(pending_password().username_value.str(),
+                                     pending_password().password_value.str()));
             controller()->OnSaveClicked();
           } else if (interaction == BubbleDismissalReason::kDeclined &&
                      update) {

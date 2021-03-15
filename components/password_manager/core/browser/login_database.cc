@@ -207,8 +207,8 @@ void BindAddStatement(const PasswordForm& form, sql::Statement* s) {
   s->BindString(COLUMN_SIGNON_REALM, form.signon_realm);
   s->BindInt64(COLUMN_DATE_CREATED, form.date_created.ToInternalValue());
   s->BindInt(COLUMN_BLACKLISTED_BY_USER, form.blocked_by_user);
-  s->BindInt(COLUMN_SCHEME, static_cast<int>(form.scheme));
-  s->BindInt(COLUMN_PASSWORD_TYPE, static_cast<int>(form.type));
+  s->BindInt(COLUMN_SCHEME, static_cast<int>(form.scheme.v()));
+  s->BindInt(COLUMN_PASSWORD_TYPE, static_cast<int>(form.type.v()));
   s->BindInt(COLUMN_TIMES_USED, form.times_used);
   base::Pickle form_data_pickle;
   autofill::SerializeFormData(form.form_data, &form_data_pickle);
@@ -1203,8 +1203,8 @@ PasswordStoreChangeList LoginDatabase::UpdateLogin(const PasswordForm& form,
   s.BindString16(next_param++, form.submit_element);
   s.BindInt64(next_param++, form.date_created.ToInternalValue());
   s.BindInt(next_param++, form.blocked_by_user);
-  s.BindInt(next_param++, static_cast<int>(form.scheme));
-  s.BindInt(next_param++, static_cast<int>(form.type));
+  s.BindInt(next_param++, static_cast<int>(form.scheme.v()));
+  s.BindInt(next_param++, static_cast<int>(form.type.v()));
   s.BindInt(next_param++, form.times_used);
   base::Pickle form_data_pickle;
   autofill::SerializeFormData(form.form_data, &form_data_pickle);

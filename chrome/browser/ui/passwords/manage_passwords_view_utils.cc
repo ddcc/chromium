@@ -152,7 +152,7 @@ base::string16 GetManagePasswordsDialogTitleText(
 base::string16 GetDisplayUsername(const autofill::PasswordForm& form) {
   return form.username_value.empty()
              ? l10n_util::GetStringUTF16(IDS_PASSWORD_MANAGER_EMPTY_LOGIN)
-             : form.username_value;
+             : form.username_value.str();
 }
 
 base::string16 GetDisplayUsername(

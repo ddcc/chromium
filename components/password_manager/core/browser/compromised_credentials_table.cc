@@ -95,7 +95,7 @@ bool CompromisedCredentialsTable::AddRow(
   DCHECK(db_->DoesTableExist(kCompromisedCredentialsTableName));
 
   base::UmaHistogramEnumeration("PasswordManager.CompromisedCredentials.Add",
-                                compromised_credentials.compromise_type);
+                                compromised_credentials.compromise_type.v());
 
   // In case there is an error, expect it to be a constraint violation.
   db_->set_error_callback(base::BindRepeating([](int error, sql::Statement*) {
@@ -120,7 +120,7 @@ bool CompromisedCredentialsTable::AddRow(
                   .InMicroseconds());
   s.BindInt64(
       GetColumnNumber(CompromisedCredentialsTableColumn::kCompromiseType),
-      static_cast<int>(compromised_credentials.compromise_type));
+      static_cast<int>(compromised_credentials.compromise_type.v()));
 
   bool result = s.Run();
   db_->reset_error_callback();
@@ -177,7 +177,7 @@ bool CompromisedCredentialsTable::UpdateRow(
   for (const auto& compromised_credential : compromised_credentials) {
     base::UmaHistogramEnumeration(
         "PasswordManager.CompromisedCredentials.Update",
-        compromised_credential.compromise_type);
+        compromised_credential.compromise_type.v());
   }
 
   sql::Statement s(db_->GetCachedStatement(SQL_FROM_HERE,
@@ -209,7 +209,7 @@ bool CompromisedCredentialsTable::RemoveRow(
   for (const auto& compromised_credential : compromised_credentials) {
     base::UmaHistogramEnumeration(
         "PasswordManager.CompromisedCredentials.Remove",
-        compromised_credential.compromise_type);
+        compromised_credential.compromise_type.v());
     base::UmaHistogramEnumeration(
         "PasswordManager.RemoveCompromisedCredentials.RemoveReason", reason);
   }
@@ -243,7 +243,7 @@ bool CompromisedCredentialsTable::RemoveRowByCompromiseType(
   for (const auto& compromised_credential : compromised_credentials) {
     base::UmaHistogramEnumeration(
         "PasswordManager.CompromisedCredentials.Remove",
-        compromised_credential.compromise_type);
+        compromised_credential.compromise_type.v());
     base::UmaHistogramEnumeration(
         "PasswordManager.RemoveCompromisedCredentials.RemoveReason", reason);
   }

@@ -18,7 +18,7 @@ namespace autofill {
 
 namespace {
 
-std::string ToString(PasswordForm::Store in_store) {
+std::string ToString(std::hq_wrapper<PasswordForm::Store> in_store) {
   switch (in_store) {
     case PasswordForm::Store::kNotSet:
       return "Not Set";
@@ -29,7 +29,7 @@ std::string ToString(PasswordForm::Store in_store) {
   }
 }
 
-std::string ToString(PasswordForm::Scheme scheme) {
+std::string ToString(std::hq_wrapper<PasswordForm::Scheme> scheme) {
   switch (scheme) {
     case PasswordForm::Scheme::kHtml:
       return "HTML";
@@ -47,7 +47,7 @@ std::string ToString(PasswordForm::Scheme scheme) {
   return std::string();
 }
 
-std::string ToString(PasswordForm::Type type) {
+std::string ToString(std::hq_wrapper<PasswordForm::Type> type) {
   switch (type) {
     case PasswordForm::Type::kManual:
       return "Manual";

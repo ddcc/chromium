@@ -318,7 +318,7 @@ ManagePasswordsUIControllerTest::CreateFormManagerWithBestMatches(
       .WillOnce(Return(std::vector<const autofill::PasswordForm*>()));
   EXPECT_CALL(*form_manager, GetURL())
       .Times(AtMost(1))
-      .WillOnce(ReturnRef(test_local_form_.url));
+      .WillOnce(Return(test_local_form_.url));
   EXPECT_CALL(*form_manager, IsBlacklisted())
       .Times(AtMost(1))
       .WillOnce(Return(is_blocklisted));
@@ -532,9 +532,9 @@ TEST_F(ManagePasswordsUIControllerTest, PasswordSavedUKMRecording) {
 
     controller()->SavePassword(
         test.edit_username ? base::UTF8ToUTF16("other_username")
-                           : submitted_form().username_value,
+                           : submitted_form().username_value.str(),
         test.change_password ? base::UTF8ToUTF16("other_pwd")
-                             : submitted_form().password_value);
+                             : submitted_form().password_value.str());
     ExpectIconAndControllerStateIs(password_manager::ui::MANAGE_STATE);
 
     // Fake navigation so that the old form manager gets destroyed and

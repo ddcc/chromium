@@ -10,13 +10,16 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <hq_wrapper>
 
+#include "base/strings/hq_string16.h"
 #include "base/time/time.h"
 #include "components/autofill/core/common/form_data.h"
 #include "components/autofill/core/common/gaia_id_hash.h"
 #include "components/autofill/core/common/mojom/autofill_types.mojom-shared.h"
 #include "components/autofill/core/common/renderer_id.h"
 #include "url/gurl.h"
+#include "url/hq_gurl.h"
 #include "url/origin.h"
 
 namespace autofill {
@@ -88,7 +91,7 @@ struct PasswordForm {
     kMaxValue = kNegativeSignalSent,
   };
 
-  Scheme scheme = Scheme::kHtml;
+  std::hq_wrapper<Scheme> scheme = Scheme::kHtml;
 
   // The "Realm" for the sign-on. This is scheme, host, port for SCHEME_HTML.
   // Dialog based forms also contain the HTTP realm. Android based forms will
@@ -96,7 +99,7 @@ struct PasswordForm {
   //
   // The signon_realm is effectively the primary key used for retrieving
   // data from the database, so it must not be empty.
-  std::string signon_realm;
+  std::hq_string signon_realm;
 
   // An URL consists of the scheme, host, port and path; the rest is stripped.
   // This is the primary data used by the PasswordManager to decide (in longest
@@ -104,7 +107,7 @@ struct PasswordForm {
   // the database is a good fit for a particular form on a page.
   //
   // This should not be empty except for Android based credentials.
-  GURL url;
+  HQ_GURL url;
 
   // The action target of the form; like |origin| URL consists of the scheme,
   // host, port and path; the rest is stripped. This is the primary data used by
@@ -146,7 +149,7 @@ struct PasswordForm {
   base::string16 submit_element;
 
   // The name of the username input element.
-  base::string16 username_element;
+  base::hq_string16 username_element;
 
   // The renderer id of the username input element. It is set during the new
   // form parsing and not persisted.
@@ -162,7 +165,7 @@ struct PasswordForm {
 
   // When parsing an HTML form, this is typically empty unless the site
   // has implemented some form of autofill.
-  base::string16 username_value;
+  base::hq_string16 username_value;
 
   // This member is populated in cases where we there are multiple input
   // elements that could possibly be the username. Used when our heuristics for
@@ -183,7 +186,7 @@ struct PasswordForm {
   // When parsing an HTML form, this will always be set, unless it is a sign-up
   // form or a change password form that does not ask for the current password.
   // In these two cases the |new_password_element| will always be set.
-  base::string16 password_element;
+  base::hq_string16 password_element;
 
   // The renderer id of the password input element. It is set during the new
   // form parsing and not persisted.
@@ -193,16 +196,16 @@ struct PasswordForm {
   // meant to be persisted to the password store.
   //
   // When parsing an HTML form, this is typically empty.
-  base::string16 password_value;
+  base::hq_string16 password_value;
 
   // The current encrypted password. Must be non-empty for PasswordForm
   // instances retrieved from the password store or coming in a
   // PasswordStoreChange that is not of type REMOVE.
-  std::string encrypted_password;
+  std::hq_string encrypted_password;
 
   // If the form was a sign-up or a change password form, the name of the input
   // element corresponding to the new password. Optional, and not persisted.
-  base::string16 new_password_element;
+  base::hq_string16 new_password_element;
 
   // The renderer id of the new password input element. It is set during the new
   // form parsing and not persisted.
@@ -217,7 +220,7 @@ struct PasswordForm {
   FieldRendererId confirmation_password_element_renderer_id;
 
   // The new password. Optional, and not persisted.
-  base::string16 new_password_value;
+  base::hq_string16 new_password_value;
 
   // When the login was last used by the user to login to the site. Defaults to
   // |date_created|, except for passwords that were migrated from the now
@@ -245,7 +248,7 @@ struct PasswordForm {
   bool blocked_by_user = false;
 
   // The form type.
-  Type type = Type::kManual;
+  std::hq_wrapper<Type> type = Type::kManual;
 
   // The number of times that this username/password has been used to
   // authenticate the user.
@@ -296,7 +299,7 @@ struct PasswordForm {
   // The type of the event that was taken as an indication that this form is
   // being or has already been submitted. This field is not persisted and filled
   // out only for submitted forms.
-  mojom::SubmissionIndicatorEvent submission_event =
+  std::hq_wrapper<mojom::SubmissionIndicatorEvent> submission_event =
       mojom::SubmissionIndicatorEvent::NONE;
 
   // True iff heuristics declined this form for normal saving or filling (e.g.
@@ -321,7 +324,7 @@ struct PasswordForm {
     kAccountStore = 2,
     kMaxValue = kAccountStore
   };
-  Store in_store = Store::kNotSet;
+  std::hq_wrapper<Store> in_store = Store::kNotSet;
 
   // Vector of hashes of the gaia id for users who prefer not to move this
   // password form to their account. This list is used to suppress the move

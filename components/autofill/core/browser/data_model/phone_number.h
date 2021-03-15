@@ -11,6 +11,7 @@
 #include <vector>
 
 #include "base/strings/string16.h"
+#include "base/strings/hq_string16.h"
 #include "components/autofill/core/browser/data_model/form_group.h"
 #include "components/autofill/core/browser/geo/phone_number_i18n.h"
 
@@ -69,10 +70,10 @@ class PhoneNumber : public FormGroup {
     bool IsEmpty() const;
 
    private:
-    base::string16 country_;
-    base::string16 city_;
-    base::string16 phone_;
-    base::string16 whole_number_;
+    base::hq_string16 country_;
+    base::hq_string16 city_;
+    base::hq_string16 phone_;
+    base::hq_string16 whole_number_;
   };
 
  private:
@@ -91,7 +92,7 @@ class PhoneNumber : public FormGroup {
   void UpdateCacheIfNeeded(const std::string& app_locale) const;
 
   // The phone number.
-  base::string16 number_;
+  base::hq_string16 number_;
   // Profile which stores the region used as hint when normalizing the number.
   const AutofillProfile* profile_;  // WEAK
 

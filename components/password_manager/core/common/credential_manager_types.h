@@ -7,13 +7,16 @@
 
 #include <stddef.h>
 
+#include <hq_wrapper>
 #include <memory>
 #include <ostream>
 #include <string>
 
 #include "base/compiler_specific.h"
 #include "base/optional.h"
+#include "base/hq_optional.h"
 #include "base/strings/string16.h"
+#include "base/strings/hq_string16.h"
 #include "url/gurl.h"
 #include "url/origin.h"
 
@@ -54,22 +57,22 @@ struct CredentialInfo {
 
   bool operator==(const CredentialInfo& rhs) const;
 
-  CredentialType type;
+  std::hq_wrapper<CredentialType> type;
 
   // An identifier (username, email address, etc). Corresponds to
   // WebCredential's id property.
-  base::Optional<base::string16> id;
+  base::HQ_Optional<base::hq_string16> id;
 
   // An user-friendly name ("Jane Doe"). Corresponds to WebCredential's name
   // property.
-  base::Optional<base::string16> name;
+  base::HQ_Optional<base::hq_string16> name;
 
   // The address of this credential's icon (e.g. the user's avatar).
   // Corresponds to WebCredential's icon property.
   GURL icon;
 
   // Corresponds to WebPasswordCredential's password property.
-  base::Optional<base::string16> password;
+  base::HQ_Optional<base::hq_string16> password;
 
   // Corresponds to WebFederatedCredential's provider property.
   url::Origin federation;

@@ -128,7 +128,7 @@ CredentialPasswordsMap JoinInsecureCredentialsWithSavedPasswords(
   }
 
   for (const auto& form : saved_passwords) {
-    if (weak_passwords.contains(form.password_value)) {
+    if (weak_passwords.contains(form.password_value.str())) {
       CredentialView weak_credential(form);
       auto& credential_to_form = credentials_to_forms[weak_credential];
       credential_to_form.type |= InsecureCredentialTypeFlags::kWeakCredential;

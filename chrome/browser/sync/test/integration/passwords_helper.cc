@@ -82,7 +82,7 @@ void ClearSyncDateField(std::vector<std::unique_ptr<PasswordForm>>* forms) {
 sync_pb::PasswordSpecificsData SpecificsDataFromPasswordForm(
     const autofill::PasswordForm& password_form) {
   sync_pb::PasswordSpecificsData password_data;
-  password_data.set_scheme(static_cast<int>(password_form.scheme));
+  password_data.set_scheme(static_cast<int>(password_form.scheme.v()));
   password_data.set_signon_realm(password_form.signon_realm);
   password_data.set_origin(password_form.url.spec());
   password_data.set_action(password_form.action.spec());
@@ -99,7 +99,7 @@ sync_pb::PasswordSpecificsData SpecificsDataFromPasswordForm(
   password_data.set_date_created(
       password_form.date_created.ToDeltaSinceWindowsEpoch().InMicroseconds());
   password_data.set_blacklisted(password_form.blocked_by_user);
-  password_data.set_type(static_cast<int>(password_form.type));
+  password_data.set_type(static_cast<int>(password_form.type.v()));
   password_data.set_times_used(password_form.times_used);
   password_data.set_display_name(base::UTF16ToUTF8(password_form.display_name));
   password_data.set_avatar_url(password_form.icon_url.spec());

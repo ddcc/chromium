@@ -243,16 +243,16 @@ FormData GetFormDataAndExpectation(const FormParsingTestCase& test_case,
 // the confirmation password value, which is not represented in PasswordForm).
 void CheckField(const std::vector<FormFieldData>& fields,
                 autofill::FieldRendererId renderer_id,
-                const base::string16& element_name,
-                const base::string16* element_value,
+                const base::hq_string16& element_name,
+                const base::hq_string16* element_value,
                 const char* element_kind) {
   SCOPED_TRACE(testing::Message("Looking for element of kind ")
                << element_kind);
 
   if (renderer_id.is_null()) {
-    EXPECT_EQ(base::string16(), element_name);
+    EXPECT_EQ(base::hq_string16(), element_name);
     if (element_value)
-      EXPECT_EQ(base::string16(), *element_value);
+      EXPECT_EQ(base::hq_string16(), *element_value);
     return;
   }
 
@@ -271,7 +271,7 @@ void CheckField(const std::vector<FormFieldData>& fields,
   EXPECT_EQ(element_name, field_it->name);
 #endif
 
-  base::string16 expected_value =
+  base::hq_string16 expected_value =
       field_it->typed_value.empty() ? field_it->value : field_it->typed_value;
 
   if (element_value)

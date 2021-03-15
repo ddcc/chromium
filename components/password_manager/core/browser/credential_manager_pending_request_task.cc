@@ -55,15 +55,15 @@ auto MakeFlatSet(KeyGetter key_getter) {
 void FilterDuplicates(std::vector<std::unique_ptr<PasswordForm>>* forms) {
   auto federated_forms_with_unique_username =
       MakeFlatSet(/*key_getter=*/[](const auto& form) {
-        return std::make_pair(form->username_value, form->federation_origin);
+        return std::make_pair(form->username_value.str(), form->federation_origin);
       });
 
   // The key is [username, signon_realm, store]. signon_realm is used only for
   // PSL matches because those entries have it in the UI.
   auto credentials = MakeFlatSet(/*key_getter=*/[](const auto& form) {
     return std::make_tuple(
-        form->username_value,
-        form->is_public_suffix_match ? form->signon_realm : std::string(),
+        form->username_value.str(),
+        form->is_public_suffix_match ? form->signon_realm.str() : std::string(),
         form->in_store);
   });
   for (auto& form : *forms) {
@@ -89,9 +89,9 @@ void FilterDuplicates(std::vector<std::unique_ptr<PasswordForm>>* forms) {
   auto credentials_with_unique_passwords =
       MakeFlatSet(/*key_getter=*/[](const auto& form) {
         return std::make_tuple(
-            form->username_value,
-            form->is_public_suffix_match ? form->signon_realm : std::string(),
-            form->password_value);
+            form->username_value.str(),
+            form->is_public_suffix_match ? form->signon_realm.str() : std::string(),
+            form->password_value.str());
       });
 
   for (auto& form : std::move(credentials).extract()) {

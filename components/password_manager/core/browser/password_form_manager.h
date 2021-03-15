@@ -143,7 +143,7 @@ class PasswordFormManager : public PasswordFormManagerForUI,
   void MarkWasUnblacklisted();
 
   // PasswordFormManagerForUI:
-  const GURL& GetURL() const override;
+  const GURL GetURL() const override;
   const std::vector<const PasswordForm*>& GetBestMatches() const override;
   std::vector<const PasswordForm*> GetFederatedMatches() const override;
   const PasswordForm& GetPendingCredentials() const override;

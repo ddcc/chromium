@@ -122,7 +122,7 @@ ManagePasswordsStateTest::CreateFormManager(
   EXPECT_CALL(*form_manager, GetFederatedMatches())
       .WillOnce(Return(federated_matches));
   EXPECT_CALL(*form_manager, GetURL())
-      .WillOnce(testing::ReturnRef(saved_match_.url));
+      .WillOnce(testing::Return(saved_match_.url));
   return form_manager;
 }
 
@@ -605,7 +605,7 @@ TEST_F(ManagePasswordsStateTest, AutofillCausedByInternalFormManager) {
     std::vector<const autofill::PasswordForm*> best_matches;
     std::vector<const autofill::PasswordForm*> federated_matches;
 
-    const GURL& GetURL() const override { return url; }
+    const GURL GetURL() const override { return url; }
     const std::vector<const autofill::PasswordForm*>& GetBestMatches()
         const override {
       return best_matches;

@@ -228,7 +228,7 @@ bool PasswordFormManager::IsEqualToSubmittedForm(
   return false;
 }
 
-const GURL& PasswordFormManager::GetURL() const {
+const GURL PasswordFormManager::GetURL() const {
   return observed_form() ? observed_form()->url : observed_digest()->url;
 }
 
