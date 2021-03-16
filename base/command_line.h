@@ -18,8 +18,12 @@
 
 #include <stddef.h>
 #include <map>
+#include <hq_map>
 #include <string>
+#include <hq_string>
 #include <vector>
+#include <hq_vector>
+#include <hq_wrapper>
 
 #include "base/base_export.h"
 #include "base/strings/string16.h"
@@ -35,13 +39,17 @@ class BASE_EXPORT CommandLine {
 #if defined(OS_WIN)
   // The native command line string type.
   using StringType = std::wstring;
+  using HQStringType = std::hq_wstring;
 #elif defined(OS_POSIX) || defined(OS_FUCHSIA)
   using StringType = std::string;
+  using HQStringType = std::hq_string;
 #endif
 
   using StringPieceType = base::BasicStringPiece<StringType>;
   using CharType = StringType::value_type;
+  using HQStringVector = std::hq_vector<HQStringType>;
   using StringVector = std::vector<StringType>;
+  using HQSwitchMap = std::hq_map<HQStringType, HQStringType, std::less<>>;
   using SwitchMap = std::map<std::string, StringType, std::less<>>;
 
   // A constructor for CommandLines that only carry switches and arguments.
@@ -135,7 +143,8 @@ class BASE_EXPORT CommandLine {
   StringType GetArgumentsString() const;
 
   // Returns the original command line string as a vector of strings.
-  const StringVector& argv() const { return argv_; }
+  const StringVector argv() const { return argv_.vec<std::string>(); }
+  HQStringVector &mutable_argv() { return argv_; }
 
   // Get and Set the program part of the command line string (the first item).
   FilePath GetProgram() const;
@@ -157,7 +166,7 @@ class BASE_EXPORT CommandLine {
   StringType GetSwitchValueNative(const StringPiece& switch_string) const;
 
   // Get a copy of all switches, along with their values.
-  const SwitchMap& GetSwitches() const { return switches_; }
+  const SwitchMap GetSwitches() const { return switches_.map<std::string, std::string, std::less<>>(); }
 
   // Append a switch [with optional value] to the command line.
   // Note: Switches will precede arguments regardless of appending order.
@@ -234,16 +243,16 @@ class BASE_EXPORT CommandLine {
 #endif
 
   // The singleton CommandLine representing the current process's command line.
-  static CommandLine* current_process_commandline_;
+  static std::hq_wrapper<CommandLine*> current_process_commandline_;
 
   // The argv array: { program, [(--|-|/)switch[=value]]*, [--], [argument]* }
-  StringVector argv_;
+  HQStringVector argv_;
 
   // Parsed-out switch keys and values.
-  SwitchMap switches_;
+  HQSwitchMap switches_;
 
   // The index after the program and switches, any arguments start here.
-  size_t begin_args_;
+  std::hq_wrapper<size_t> begin_args_;
 };
 
 }  // namespace base

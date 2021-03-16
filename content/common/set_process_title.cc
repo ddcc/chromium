@@ -92,10 +92,11 @@ void SetProcessTitleFromCommandLine(const char** main_argv) {
 
   const base::CommandLine* command_line =
       base::CommandLine::ForCurrentProcess();
-  for (size_t i = 1; i < command_line->argv().size(); ++i) {
+  auto argv = command_line->argv();
+  for (size_t i = 1; i < argv.size(); ++i) {
     if (!title.empty())
       title += " ";
-    title += command_line->argv()[i];
+    title += argv[i];
   }
   // Disable prepending argv[0] with '-' if we prepended it ourselves above.
   setproctitle(have_argv0 ? "-%s" : "%s", title.c_str());

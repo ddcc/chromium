@@ -28,7 +28,7 @@
 
 namespace base {
 
-CommandLine* CommandLine::current_process_commandline_ = nullptr;
+__attribute__((no_destroy)) std::hq_wrapper<CommandLine*> CommandLine::current_process_commandline_ = nullptr;
 
 namespace {
 
@@ -276,7 +276,9 @@ void CommandLine::SetProgram(const FilePath& program) {
 #if defined(OS_WIN)
   argv_[0] = StringType(TrimWhitespace(program.value(), TRIM_ALL));
 #elif defined(OS_POSIX) || defined(OS_FUCHSIA)
-  TrimWhitespaceASCII(program.value(), TRIM_ALL, &argv_[0]);
+  std::string argv0;
+  TrimWhitespaceASCII(program.value(), TRIM_ALL, &argv0);
+  argv_[0] = std::move(argv0);
 #else
 #error Unsupported platform
 #endif
@@ -284,7 +286,7 @@ void CommandLine::SetProgram(const FilePath& program) {
 
 bool CommandLine::HasSwitch(const StringPiece& switch_string) const {
   DCHECK_EQ(ToLowerASCII(switch_string), switch_string);
-  return Contains(switches_, switch_string);
+  return Contains(switches_, HQSwitchMap::key_type(StringType(switch_string)));
 }
 
 bool CommandLine::HasSwitch(const char switch_constant[]) const {
@@ -317,8 +319,8 @@ FilePath CommandLine::GetSwitchValuePath(
 CommandLine::StringType CommandLine::GetSwitchValueNative(
     const StringPiece& switch_string) const {
   DCHECK_EQ(ToLowerASCII(switch_string), switch_string);
-  auto result = switches_.find(switch_string);
-  return result == switches_.end() ? StringType() : result->second;
+  auto result = switches_.find(HQSwitchMap::key_type(StringType(switch_string)));
+  return result == switches_.end() ? StringType() : result->second.str();
 }
 
 void CommandLine::AppendSwitch(const std::string& switch_string) {
@@ -408,8 +410,11 @@ void CommandLine::CopySwitchesFrom(const CommandLine& source,
 }
 
 CommandLine::StringVector CommandLine::GetArgs() const {
+  StringVector args;
   // Gather all arguments after the last switch (may include kSwitchTerminator).
-  StringVector args(argv_.begin() + begin_args_, argv_.end());
+  for (auto it = argv_.begin() + begin_args_, ie = argv_.end(); it != ie; ++it) {
+    args.emplace_back(it->str());
+  }
   // Erase only the first kSwitchTerminator (maybe "--" is a legitimate page?)
   auto switch_terminator =
       std::find(args.begin(), args.end(), kSwitchTerminator);

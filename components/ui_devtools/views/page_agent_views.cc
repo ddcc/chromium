@@ -69,8 +69,7 @@ protocol::Response PageAgentViews::disable() {
   // Remove debug bounds rects if enabled.
   if (base::CommandLine::ForCurrentProcess()->HasSwitch(
           views::switches::kDrawViewBoundsRects)) {
-    base::CommandLine::ForCurrentProcess()->InitFromArgv(
-        base::CommandLine::ForCurrentProcess()->argv());
+    base::CommandLine::ForCurrentProcess()->InitFromArgv(0, nullptr);
     PaintRectVector(dom_agent_->element_root()->children());
   }
   return protocol::Response::Success();
@@ -90,8 +89,7 @@ protocol::Response PageAgentViews::reload(protocol::Maybe<bool> bypass_cache) {
     // Ctrl+R called to toggle debug bounds rectangles.
     if (base::CommandLine::ForCurrentProcess()->HasSwitch(
             views::switches::kDrawViewBoundsRects)) {
-      base::CommandLine::ForCurrentProcess()->InitFromArgv(
-          base::CommandLine::ForCurrentProcess()->argv());
+      base::CommandLine::ForCurrentProcess()->InitFromArgv(0, nullptr);
     } else {
       base::CommandLine::ForCurrentProcess()->AppendSwitch(
           views::switches::kDrawViewBoundsRects);

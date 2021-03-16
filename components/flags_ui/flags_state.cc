@@ -82,9 +82,10 @@ std::set<base::CommandLine::StringType> ExtractFlagsFromCommandLine(
   DCHECK_EQ(!!extra_flag_sentinel_begin_flag_name,
             !!extra_flag_sentinel_end_flag_name);
   std::set<base::CommandLine::StringType> flags;
+  auto argv = cmdline.argv();
   // First do the ones between --flag-switches-begin and --flag-switches-end.
   const auto flags_span = GetSwitchesBetweenSentinels(
-      cmdline.argv(), GetSwitchString(switches::kFlagSwitchesBegin),
+      argv, GetSwitchString(switches::kFlagSwitchesBegin),
       GetSwitchString(switches::kFlagSwitchesEnd));
   flags.insert(flags_span.begin(), flags_span.end());
 
@@ -92,7 +93,7 @@ std::set<base::CommandLine::StringType> ExtractFlagsFromCommandLine(
   if (extra_flag_sentinel_begin_flag_name &&
       extra_flag_sentinel_end_flag_name) {
     const auto extra_flags_span = GetSwitchesBetweenSentinels(
-        cmdline.argv(), GetSwitchString(extra_flag_sentinel_begin_flag_name),
+        argv, GetSwitchString(extra_flag_sentinel_begin_flag_name),
         GetSwitchString(extra_flag_sentinel_end_flag_name));
     flags.insert(extra_flags_span.begin(), extra_flags_span.end());
   }

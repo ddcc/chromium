@@ -65,8 +65,7 @@ base::FilePath GetAbsoluteSrcRelativePath(base::FilePath::StringType path) {
 // the end which doesn't work for us.
 void AppendArgsJustAfterProgram(base::CommandLine& cmd,
                                 base::CommandLine::StringVector args) {
-  base::CommandLine::StringVector& argv =
-      const_cast<base::CommandLine::StringVector&>(cmd.argv());
+  auto &argv = cmd.mutable_argv();
   int args_size = args.size();
   argv.resize(argv.size() + args_size);
   for (int i = argv.size() - args_size; i > 1; --i) {
