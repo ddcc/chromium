@@ -138,8 +138,7 @@ static inline Channel::MessagePtr HerQulesParseHandshake(
 // Requires lock
 static inline void HerQulesReset(struct HerQulesShmHdr* header) {
   header->status_ = 0;
-  if (syscall(SYS_futex, &header->status_, FUTEX_WAKE, INT_MAX, nullptr,
-              nullptr, 0) < 0)
+  if (futex(&header->status_, FUTEX_WAKE, INT_MAX, nullptr, nullptr, 0) < 0)
     PLOG(ERROR) << "Cannot wake write futex!";
 }
 
@@ -167,8 +166,7 @@ static inline void HerQulesUnlock(struct HerQulesShmHdr* header) {
 }
 
 static inline void HerQulesDestroy(struct HerQulesShmHdr* header) {
-  if (syscall(SYS_futex, &header->status_, FUTEX_WAKE, INT_MAX, nullptr, nullptr,
-              0) < 0)
+  if (futex(&header->status_, FUTEX_WAKE, INT_MAX, nullptr, nullptr, 0) < 0)
     PLOG(ERROR) << "Cannot wake write futex!";
 
   // Unlock to avoid SIGSEGV in robust_list after thread is unmapped
@@ -206,8 +204,7 @@ static inline bool HerQulesIsClosed(int status) {
 
 static inline HerQulesStatus HerQulesSetFull(struct HerQulesShmHdr* header) {
   auto status = (header->status_ |= (1U << 31));
-  if (syscall(SYS_futex, &header->status_, FUTEX_WAKE, INT_MAX, nullptr,
-              nullptr, 0) < 0)
+  if (futex(&header->status_, FUTEX_WAKE, INT_MAX, nullptr, nullptr, 0) < 0)
     PLOG(ERROR) << "Cannot wake write futex!";
   return status;
 }
@@ -239,16 +236,15 @@ static inline bool HerQulesSend(int fd,
 static inline void HerQulesUpdateSend(struct HerQulesShmHdr* header,
                                       HerQulesStatus sz) {
   header->status_ += sz;
-  if (syscall(SYS_futex, &header->status_, FUTEX_WAKE, INT_MAX, nullptr, nullptr,
-              0) < 0)
+  if (futex(&header->status_, FUTEX_WAKE, INT_MAX, nullptr, nullptr, 0) < 0)
     PLOG(ERROR) << "Cannot wake write futex!";
 }
 
 static inline void HerQulesWaitWrite(struct HerQulesShmHdr* header,
                                      const HerQulesStatus val,
                                      const struct timespec* timeout) {
-  if (syscall(SYS_futex, &header->status_, FUTEX_WAIT | FUTEX_CLOCK_REALTIME,
-              val, timeout, nullptr, 0) &&
+  if (futex(&header->status_, FUTEX_WAIT | FUTEX_CLOCK_REALTIME, val, timeout,
+            nullptr, 0) &&
       errno != EAGAIN)
     PLOG(ERROR) << "Cannot wait on write futex!";
 }

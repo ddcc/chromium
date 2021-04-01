@@ -36,6 +36,7 @@
 #include <sched.h>
 #include <time.h>
 #include <limits.h>
+#include <pthread.h>
 #include "base/linux_syscall_support.h"
 
 #define FUTEX_WAIT 0
@@ -63,15 +64,15 @@ void SpinLockDelay(volatile Atomic32 *w, int32 value, int loop) {
     tm.tv_sec = 0;
     tm.tv_nsec = base::internal::SuggestedDelayNS(loop);
     tm.tv_nsec *= 16;  // increase the delay; we expect explicit wakeups
-    syscall(__NR_futex, reinterpret_cast<int*>(const_cast<Atomic32*>(w)),
+    futex(reinterpret_cast<unsigned int*>(const_cast<Atomic32*>(w)),
             FUTEX_WAIT | FUTEX_PRIVATE_FLAG, value,
-            reinterpret_cast<struct kernel_timespec*>(&tm), NULL, 0);
+            reinterpret_cast<struct timespec*>(&tm), NULL, 0);
     errno = save_errno;
   }
 }
 
 void SpinLockWake(volatile Atomic32 *w, bool all) {
-  syscall(__NR_futex, reinterpret_cast<int*>(const_cast<Atomic32*>(w)),
+  futex(reinterpret_cast<unsigned int*>(const_cast<Atomic32*>(w)),
           FUTEX_WAKE | FUTEX_PRIVATE_FLAG, all ? INT_MAX : 1, NULL, NULL, 0);
 }
 
