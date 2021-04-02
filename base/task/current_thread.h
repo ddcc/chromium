@@ -316,6 +316,8 @@ class BASE_EXPORT CurrentSHMThread : public CurrentThread {
 
   CurrentSHMThread* operator->() { return this; }
 
+  MessagePumpForSHM* GetMessagePumpForSHM() const;
+
   bool WatchMemoryRegion(UnsafeSharedMemoryRegion& region,
                          MessagePumpForSHM::Mode mode,
                          MessagePumpForSHM::ShmWatchController* controller,
@@ -326,7 +328,6 @@ class BASE_EXPORT CurrentSHMThread : public CurrentThread {
       sequence_manager::internal::SequenceManagerImpl* current)
       : CurrentThread(current) {}
 
-  MessagePumpForSHM* GetMessagePumpForSHM() const;
 };
 #endif
 

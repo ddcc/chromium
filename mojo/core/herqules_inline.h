@@ -194,7 +194,7 @@ static inline HerQulesStatus HerQulesGetWrite(const HerQulesStatus status) {
   return status & ~kHerQulesFull;
 }
 
-static inline auto HerQulesGetClosed(const struct HerQulesShmHdr* header) {
+static inline auto HerQulesGetClosed(struct HerQulesShmHdr* header) {
   return &header->mutex_._m_lock;
 }
 

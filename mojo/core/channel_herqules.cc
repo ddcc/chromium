@@ -92,11 +92,21 @@ class ChannelHerQules : public Channel,
     }
 
     UMA_HISTOGRAM_BOOLEAN("Mojo.Channel.WriteQueued", queued);
+
+#ifdef HQ_INTERFACE_FUTEX_WAITV
+    if (!queued)
+      shm_task_runner_->PostTask(
+          FROM_HERE, base::BindOnce(&ChannelHerQules::NotifyWork, this));
+#endif
   }
 
   void LeakHandle() override {
     DCHECK(shm_task_runner_->RunsTasksInCurrentSequence());
     leak_handle_ = true;
+  }
+
+  void NotifyWork() {
+    base::CurrentSHMThread::Get()->GetMessagePumpForSHM()->ScheduleWork();
   }
 
   bool GetReadPlatformHandles(const void* payload,

@@ -91,6 +91,7 @@ bool MessagePumpHerQules::WatchMemoryRegion(UnsafeSharedMemoryRegion& region,
     regions_.insert(controller);
   }
 
+  ScheduleWork();
   return true;
 }
 
@@ -125,16 +126,25 @@ void MessagePumpHerQules::Run(Delegate* delegate) {
 }
 
 void MessagePumpHerQules::StopWatching(ShmWatchController* controller) {
-  base::AutoLock lock(lock_);
-  regions_.erase(controller);
+  {
+    base::AutoLock lock(lock_);
+    regions_.erase(controller);
+  }
+
+  ScheduleWork();
 }
 
 void MessagePumpHerQules::Quit() {
   keep_running_ = false;
+  ScheduleWork();
 }
 
 void MessagePumpHerQules::ScheduleWork() {
-  // FIXME: Wake up
+#ifdef HQ_INTERFACE_FUTEX_WAITV
+  has_work_ = 1;
+  futex(&has_work_, FUTEX_WAKE | FUTEX_WAITV_PRIVATE, INT_MAX, nullptr, nullptr,
+        0);
+#endif
 }
 
 void MessagePumpHerQules::ScheduleDelayedWork(
@@ -143,6 +153,12 @@ void MessagePumpHerQules::ScheduleDelayedWork(
 bool MessagePumpHerQules::DoInternalWork() {
   bool processed = false;
   base::AutoLock lock(lock_);
+
+#ifdef HQ_INTERFACE_FUTEX_WAITV
+  // Wait for work to be scheduled
+  has_work_ = 0;
+  waitv_.resize(1);
+#endif
 
   for (auto it = regions_.begin(); it != regions_.end();) {
     auto* controller = *it;
@@ -180,6 +196,15 @@ bool MessagePumpHerQules::DoInternalWork() {
         it = regions_.erase(it);
         continue;
       }
+
+#ifdef HQ_INTERFACE_FUTEX_WAITV
+      // Wait for writer to change status or disconnect
+      waitv_.emplace_back(futex_waitv_init(&header->status_, status, 0));
+      waitv_.emplace_back(
+          futex_waitv_init(reinterpret_cast<unsigned int*>(
+                               const_cast<int*>(HerQulesGetClosed(header))),
+                           val, 0));
+#endif
     } else {
       const auto avail = controller->map_.size() - sizeof(*header);
 
@@ -208,6 +233,13 @@ bool MessagePumpHerQules::DoInternalWork() {
         it = regions_.erase(it);
         continue;
       }
+
+#ifdef HQ_INTERFACE_FUTEX_WAITV
+      if (full) {
+        // Wait for reader to clear buffer
+        waitv_.emplace_back(futex_waitv_init(&header->status_, status, 0));
+      }
+#endif
     }
 
     ++it;
@@ -217,6 +249,21 @@ bool MessagePumpHerQules::DoInternalWork() {
 }
 
 void MessagePumpHerQules::WaitForWork(
-    const Delegate::NextWorkInfo& next_work_info) {}
+    const Delegate::NextWorkInfo& next_work_info) {
+#ifdef HQ_INTERFACE_FUTEX_WAITV
+  timespec timeout, *ptimeout = nullptr;
+  if (!next_work_info.delayed_run_time.is_max()) {
+    timeout = next_work_info.remaining_delay().ToTimeSpec();
+    ptimeout = &timeout;
+  }
+  if (futex_wait_multiple(reinterpret_cast<unsigned int*>(waitv_.data()),
+                          waitv_.size(), 0, ptimeout) < 0 &&
+      errno != EAGAIN && errno != EINTR) {
+    PLOG(ERROR) << "Failed to wait on futexes!";
+  }
+#else
+  sleep(0);
+#endif
+}
 
 }  // namespace base

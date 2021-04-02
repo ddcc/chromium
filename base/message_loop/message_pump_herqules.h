@@ -16,6 +16,31 @@
 #include <unordered_set>
 #include <vector>
 
+#include <linux/futex.h>
+#include <unistd.h>
+
+#ifdef FUTEX_WAIT_MULTIPLE
+#include <pthread.h>
+
+#define HQ_INTERFACE_FUTEX_WAITV
+typedef struct futex_wait_block futex_waitv_t;
+#define FUTEX_WAITV_PRIVATE 0
+#define futex_waitv_init(a, v, x) \
+  futex_waitv_t { .uaddr = a, .val = v, .bitset = FUTEX_BITSET_MATCH_ANY }
+#define futex_wait_multiple(waiters, nr_futexes, flags, timespec) \
+  futex(waiters, FUTEX_WAIT_MULTIPLE | flags, nr_futexes, timespec, NULL, 0)
+#elif defined(__NR_futex_waitv)
+#define HQ_INTERFACE_FUTEX_WAITV
+#define FUTEX_WAITV_PRIVATE FUTEX_PRIVATE_FLAG
+#define futex_waitv_init(a, v, x) \
+  futex_waitv_t { .uaddr = a, .val = v, .flags = x }
+typedef struct futex_waitv futex_waitv_t;
+#define futex_wait_multiple(waiters, nr_futexes, flags, timespec) \
+  syscall(__NR_futex_waitv, waiters, nr_futexes, flags, timespec)
+#else
+#error "Missing FUTEX_WAIT_MULTIPLE and/or futex2 support!"
+#endif
+
 namespace base {
 
 // Class to monitor shared memory and issue callbacks when ready for I/O
@@ -114,6 +139,11 @@ class BASE_EXPORT MessagePumpHerQules : public MessagePump {
   base::Lock lock_;
   // State for each region being watched
   std::unordered_set<ShmWatchController*> regions_;
+#ifdef HQ_INTERFACE_FUTEX_WAITV
+  uint32_t has_work_ = 0;
+  std::vector<futex_waitv_t> waitv_ = {
+      futex_waitv_init(&has_work_, 0, FUTEX_WAITV_PRIVATE)};
+#endif
 
   DISALLOW_COPY_AND_ASSIGN(MessagePumpHerQules);
 };
