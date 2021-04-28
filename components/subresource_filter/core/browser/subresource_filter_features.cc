@@ -230,13 +230,13 @@ base::LazyInstance<scoped_refptr<ConfigurationList>>::Leaky
 
 // Constant definitions -------------------------------------------------------
 
-const base::Feature kSafeBrowsingSubresourceFilter{
+const base::Feature __attribute__((no_destroy)) kSafeBrowsingSubresourceFilter{
     "SubresourceFilter", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kFilterAdsOnAbusiveSites{"FilterAdsOnAbusiveSites",
+const base::Feature __attribute__((no_destroy)) kFilterAdsOnAbusiveSites{"FilterAdsOnAbusiveSites",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAdsInterventionsEnforced{
+const base::Feature __attribute__((no_destroy)) kAdsInterventionsEnforced{
     "AdsInterventionsEnforced", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<base::TimeDelta> kAdsInterventionDuration = {

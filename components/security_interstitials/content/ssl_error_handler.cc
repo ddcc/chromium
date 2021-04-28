@@ -60,18 +60,18 @@
 #include "components/security_interstitials/content/captive_portal_helper_android.h"
 #endif
 
-const base::Feature kMITMSoftwareInterstitial{"MITMSoftwareInterstitial",
+const base::Feature __attribute__((no_destroy)) kMITMSoftwareInterstitial{"MITMSoftwareInterstitial",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kCaptivePortalInterstitial{
+const base::Feature __attribute__((no_destroy)) kCaptivePortalInterstitial{
     "CaptivePortalInterstitial", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kCaptivePortalCertificateList{
+const base::Feature __attribute__((no_destroy)) kCaptivePortalCertificateList{
     "CaptivePortalCertificateList", base::FEATURE_ENABLED_BY_DEFAULT};
 
 namespace {
 
-const base::Feature kSSLCommonNameMismatchHandling{
+const base::Feature __attribute__((no_destroy)) kSSLCommonNameMismatchHandling{
     "SSLCommonNameMismatchHandling", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Default delay in milliseconds before displaying the SSL interstitial.

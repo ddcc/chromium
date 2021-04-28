@@ -131,19 +131,19 @@ device::mojom::VRDisplayInfoPtr ValidateVRDisplayInfo(
 }
 
 // TODO(crbug.com/995377): Report these from the device runtime instead.
-constexpr device::mojom::XRSessionFeature kOrientationDeviceFeatures[] = {
+constexpr device::mojom::XRSessionFeature __attribute__((no_destroy)) kOrientationDeviceFeatures[] = {
     device::mojom::XRSessionFeature::REF_SPACE_VIEWER,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL_FLOOR,
 };
 
-constexpr device::mojom::XRSessionFeature kGVRDeviceFeatures[] = {
+constexpr device::mojom::XRSessionFeature __attribute__((no_destroy)) kGVRDeviceFeatures[] = {
     device::mojom::XRSessionFeature::REF_SPACE_VIEWER,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL_FLOOR,
 };
 
-constexpr device::mojom::XRSessionFeature kARCoreDeviceFeatures[] = {
+constexpr device::mojom::XRSessionFeature __attribute__((no_destroy)) kARCoreDeviceFeatures[] = {
     device::mojom::XRSessionFeature::REF_SPACE_VIEWER,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL_FLOOR,
@@ -156,7 +156,7 @@ constexpr device::mojom::XRSessionFeature kARCoreDeviceFeatures[] = {
 };
 
 #if BUILDFLAG(ENABLE_WINDOWS_MR)
-constexpr device::mojom::XRSessionFeature kWindowsMixedRealityFeatures[] = {
+constexpr device::mojom::XRSessionFeature __attribute__((no_destroy)) kWindowsMixedRealityFeatures[] = {
     device::mojom::XRSessionFeature::REF_SPACE_VIEWER,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL_FLOOR,
@@ -165,7 +165,7 @@ constexpr device::mojom::XRSessionFeature kWindowsMixedRealityFeatures[] = {
 #endif
 
 #if BUILDFLAG(ENABLE_OPENXR)
-constexpr device::mojom::XRSessionFeature kOpenXRFeatures[] = {
+constexpr device::mojom::XRSessionFeature __attribute__((no_destroy)) kOpenXRFeatures[] = {
     device::mojom::XRSessionFeature::REF_SPACE_VIEWER,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL_FLOOR,
@@ -175,7 +175,7 @@ constexpr device::mojom::XRSessionFeature kOpenXRFeatures[] = {
 #endif
 
 #if BUILDFLAG(ENABLE_OCULUS_VR)
-constexpr device::mojom::XRSessionFeature kOculusFeatures[] = {
+constexpr device::mojom::XRSessionFeature __attribute__((no_destroy)) kOculusFeatures[] = {
     device::mojom::XRSessionFeature::REF_SPACE_VIEWER,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL_FLOOR,

@@ -6,7 +6,7 @@
 
 namespace chromeos {
 
-const base::Feature kFamilyUserMetricsProvider{
+const base::Feature __attribute__((no_destroy)) kFamilyUserMetricsProvider{
     "FamilyUserMetricsProvider", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace chromeos

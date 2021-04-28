@@ -79,7 +79,7 @@ std::unique_ptr<network::NetworkService>& GetLocalNetworkService() {
 // On Chrome OS, the Network Service must run on the IO thread because
 // ProfileIOData and NetworkContext both try to set up NSS, which has to be
 // called from the IO thread.
-const base::Feature kNetworkServiceDedicatedThread {
+const base::Feature __attribute__((no_destroy)) kNetworkServiceDedicatedThread {
   "NetworkServiceDedicatedThread",
 #if defined(OS_CHROMEOS)
       base::FEATURE_DISABLED_BY_DEFAULT

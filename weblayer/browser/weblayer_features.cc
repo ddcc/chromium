@@ -8,7 +8,7 @@ namespace weblayer {
 
 #if defined(OS_ANDROID)
 // Used to disable browser-control animations.
-const base::Feature kImmediatelyHideBrowserControlsForTest{
+const base::Feature __attribute__((no_destroy)) kImmediatelyHideBrowserControlsForTest{
     "ImmediatelyHideBrowserControlsForTest", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 

@@ -8,11 +8,11 @@ namespace features {
 
 // Enables using the ClosedTabCache to instantly restore recently closed tabs
 // using the "Reopen Closed Tab" button.
-const base::Feature kClosedTabCache{"ClosedTabCache",
+const base::Feature __attribute__((no_destroy)) kClosedTabCache{"ClosedTabCache",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables executing the browser commands sent by the NTP promos.
-const base::Feature kPromoBrowserCommands{"PromoBrowserCommands",
+const base::Feature __attribute__((no_destroy)) kPromoBrowserCommands{"PromoBrowserCommands",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Parameter name for the promo browser command ID provided along with
@@ -25,36 +25,36 @@ const char kPromoBrowserCommandIdParam[] = "PromoBrowserCommandIdParam";
 #if defined(OS_CHROMEOS)
 // Enables being able to zoom a web page by double tapping in Chrome OS tablet
 // mode.
-const base::Feature kDoubleTapToZoomInTabletMode{
+const base::Feature __attribute__((no_destroy)) kDoubleTapToZoomInTabletMode{
     "DoubleTapToZoomInTabletMode", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 #if !defined(OS_ANDROID)
 // Adds an item to the context menu that copies a link to the page with the
 // selected text highlighted.
-const base::Feature kCopyLinkToText{"CopyLinkToText",
+const base::Feature __attribute__((no_destroy)) kCopyLinkToText{"CopyLinkToText",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables notification muting during screen share sessions.
-const base::Feature kMuteNotificationsDuringScreenShare{
+const base::Feature __attribute__((no_destroy)) kMuteNotificationsDuringScreenShare{
     "MuteNotificationsDuringScreenShare", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables Nearby Sharing functionality. Android already has a native
 // implementation.
-const base::Feature kNearbySharing{"NearbySharing",
+const base::Feature __attribute__((no_destroy)) kNearbySharing{"NearbySharing",
                                    base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 #if defined(OS_MAC)
 // Enables the usage of Apple's new Notification API on macOS 10.14+
-const base::Feature kNewMacNotificationAPI{"NewMacNotificationAPI",
+const base::Feature __attribute__((no_destroy)) kNewMacNotificationAPI{"NewMacNotificationAPI",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 #if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
 // Enables taking snapshots of the user data directory after a major
 // milestone update and restoring them after a version rollback.
-const base::Feature kUserDataSnapshot{"UserDataSnapshot",
+const base::Feature __attribute__((no_destroy)) kUserDataSnapshot{"UserDataSnapshot",
                                       base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
 

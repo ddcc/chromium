@@ -15,7 +15,7 @@ namespace features {
 // SiteIsolationPolicy::IsIsolationForPasswordSitesEnabled() rather than
 // checking the feature directly, since that decision is influenced by other
 // factors as well.
-const base::Feature kSiteIsolationForPasswordSites {
+const base::Feature __attribute__((no_destroy)) kSiteIsolationForPasswordSites {
   "site-isolation-for-password-sites",
 // Enabled by default on Android; see https://crbug.com/849815.  Note that this
 // should not affect Android Webview, which does not include this code.
@@ -34,7 +34,7 @@ const base::Feature kSiteIsolationForPasswordSites {
 // "low memory" device is set (in MB) via a field trial param with the name
 // defined below ("site-per-process-low-memory-cutoff-mb") and compared against
 // base::SysInfo::AmountOfPhysicalMemoryMB().
-const base::Feature kSitePerProcessOnlyForHighMemoryClients{
+const base::Feature __attribute__((no_destroy)) kSitePerProcessOnlyForHighMemoryClients{
     "site-per-process-only-for-high-memory-clients",
     base::FEATURE_DISABLED_BY_DEFAULT};
 const char kSitePerProcessOnlyForHighMemoryClientsParamName[] =

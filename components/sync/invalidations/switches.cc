@@ -6,13 +6,13 @@
 
 namespace switches {
 
-const base::Feature kSyncSendInterestedDataTypes = {
+const base::Feature __attribute__((no_destroy)) kSyncSendInterestedDataTypes = {
     "SyncSendInterestedDataTypes", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kUseSyncInvalidations = {"UseSyncInvalidations",
+const base::Feature __attribute__((no_destroy)) kUseSyncInvalidations = {"UseSyncInvalidations",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kUseSyncInvalidationsForWalletAndOffer = {
+const base::Feature __attribute__((no_destroy)) kUseSyncInvalidationsForWalletAndOffer = {
     "UseSyncInvalidationsForWalletAndOffer", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace switches

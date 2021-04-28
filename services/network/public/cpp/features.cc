@@ -11,13 +11,13 @@ namespace features {
 
 // Enables Expect CT reporting, which sends reports for opted-in sites
 // that don't serve sufficient Certificate Transparency information.
-const base::Feature kExpectCTReporting{"ExpectCTReporting",
+const base::Feature __attribute__((no_destroy)) kExpectCTReporting{"ExpectCTReporting",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kNetworkErrorLogging{"NetworkErrorLogging",
+const base::Feature __attribute__((no_destroy)) kNetworkErrorLogging{"NetworkErrorLogging",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 // Enables the network service.
-const base::Feature kNetworkService {
+const base::Feature __attribute__((no_destroy)) kNetworkService {
 #if defined(OS_ANDROID)
   "NetworkService",
 #else
@@ -26,7 +26,7 @@ const base::Feature kNetworkService {
       base::FEATURE_ENABLED_BY_DEFAULT
 };
 
-const base::Feature kReporting{"Reporting", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kReporting{"Reporting", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Based on the field trial parameters, this feature will override the value of
 // the maximum number of delayable requests allowed in flight. The number of
@@ -36,20 +36,20 @@ const base::Feature kReporting{"Reporting", base::FEATURE_ENABLED_BY_DEFAULT};
 // experiment configuration. Based on field trial parameters, this experiment
 // may also throttle delayable requests based on the number of non-delayable
 // requests in-flight times a weighting factor.
-const base::Feature kThrottleDelayable{"ThrottleDelayable",
+const base::Feature __attribute__((no_destroy)) kThrottleDelayable{"ThrottleDelayable",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 
 // When kPriorityRequestsDelayableOnSlowConnections is enabled, HTTP
 // requests fetched from a SPDY/QUIC/H2 proxies can be delayed by the
 // ResourceScheduler just as HTTP/1.1 resources are. However, requests from such
 // servers are not subject to kMaxNumDelayableRequestsPerHostPerClient limit.
-const base::Feature kDelayRequestsOnMultiplexedConnections{
+const base::Feature __attribute__((no_destroy)) kDelayRequestsOnMultiplexedConnections{
     "DelayRequestsOnMultiplexedConnections", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // When kRequestInitiatorSiteLock is enabled, then CORB, CORP and Sec-Fetch-Site
 // will validate network::ResourceRequest::request_initiator against
 // network::mojom::URLLoaderFactoryParams::request_initiator_origin_lock.
-const base::Feature kRequestInitiatorSiteLock{"RequestInitiatorSiteLock",
+const base::Feature __attribute__((no_destroy)) kRequestInitiatorSiteLock{"RequestInitiatorSiteLock",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
 // When kPauseBrowserInitiatedHeavyTrafficForP2P is enabled, then a subset of
@@ -58,62 +58,62 @@ const base::Feature kRequestInitiatorSiteLock{"RequestInitiatorSiteLock",
 // intended to throttle only the browser initiated traffic that is expected to
 // be heavy (has large request/response sizes) when real time content might be
 // streaming over an active P2P connection.
-const base::Feature kPauseBrowserInitiatedHeavyTrafficForP2P{
+const base::Feature __attribute__((no_destroy)) kPauseBrowserInitiatedHeavyTrafficForP2P{
     "PauseBrowserInitiatedHeavyTrafficForP2P",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
 // When kCORBProtectionSniffing is enabled CORB sniffs additional same-origin
 // resources if they look sensitive.
-const base::Feature kCORBProtectionSniffing{"CORBProtectionSniffing",
+const base::Feature __attribute__((no_destroy)) kCORBProtectionSniffing{"CORBProtectionSniffing",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 
 // When kProactivelyThrottleLowPriorityRequests is enabled,
 // resource scheduler proactively throttles low priority requests to avoid
 // network contention with high priority requests that may arrive soon.
-const base::Feature kProactivelyThrottleLowPriorityRequests{
+const base::Feature __attribute__((no_destroy)) kProactivelyThrottleLowPriorityRequests{
     "ProactivelyThrottleLowPriorityRequests",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables Cross-Origin Opener Policy (COOP).
 // https://gist.github.com/annevk/6f2dd8c79c77123f39797f6bdac43f3e
 // Currently this feature is enabled for all platforms except WebView.
-const base::Feature kCrossOriginOpenerPolicy{"CrossOriginOpenerPolicy",
+const base::Feature __attribute__((no_destroy)) kCrossOriginOpenerPolicy{"CrossOriginOpenerPolicy",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables Cross-Origin-Opener-Policy reporting API origin trial. It will be
 // used as a kill switch during the experiment.
-const base::Feature kCrossOriginOpenerPolicyReportingOriginTrial{
+const base::Feature __attribute__((no_destroy)) kCrossOriginOpenerPolicyReportingOriginTrial{
     "CrossOriginOpenerPolicyReportingOriginTrial",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables Cross-Origin Opener Policy (COOP) reporting.
 // https://gist.github.com/annevk/6f2dd8c79c77123f39797f6bdac43f3e
-const base::Feature kCrossOriginOpenerPolicyReporting{
+const base::Feature __attribute__((no_destroy)) kCrossOriginOpenerPolicyReporting{
     "CrossOriginOpenerPolicyReporting", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables Cross-Origin Opener Policy (COOP) access reporting.
 // https://github.com/camillelamy/explainers/blob/master/coop_reporting.md#report-blocked-accesses-to-other-windows
-const base::Feature kCrossOriginOpenerPolicyAccessReporting{
+const base::Feature __attribute__((no_destroy)) kCrossOriginOpenerPolicyAccessReporting{
     "CrossOriginOpenerPolicyAccessReporting", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables Cross-Origin Embedder Policy (COEP).
 // https://github.com/mikewest/corpp
 // Currently this feature is enabled for all platforms except WebView.
-const base::Feature kCrossOriginEmbedderPolicy{
+const base::Feature __attribute__((no_destroy)) kCrossOriginEmbedderPolicy{
     "CrossOriginEmbedderPolicy", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables the most recent developments on the crossOriginIsolated property.
 // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/crossOriginIsolated
-const base::Feature kCrossOriginIsolated{"CrossOriginIsolated",
+const base::Feature __attribute__((no_destroy)) kCrossOriginIsolated{"CrossOriginIsolated",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables or defaults splittup up server (not proxy) entries in the
 // HttpAuthCache.
-const base::Feature kSplitAuthCacheByNetworkIsolationKey{
+const base::Feature __attribute__((no_destroy)) kSplitAuthCacheByNetworkIsolationKey{
     "SplitAuthCacheByNetworkIsolationKey", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enable usage of hardcoded DoH upgrade mapping for use in automatic mode.
-const base::Feature kDnsOverHttpsUpgrade {
+const base::Feature __attribute__((no_destroy)) kDnsOverHttpsUpgrade {
   "DnsOverHttpsUpgrade",
 #if defined(OS_CHROMEOS) || defined(OS_MAC) || defined(OS_ANDROID) || \
     defined(OS_WIN)
@@ -127,7 +127,7 @@ const base::Feature kDnsOverHttpsUpgrade {
 // for TXT records associated with
 // "Generated-Names._mdns_name_generator._udp.local" with a list of generated
 // mDNS names (random UUIDs) in the TXT record data.
-const base::Feature kMdnsResponderGeneratedNameListing{
+const base::Feature __attribute__((no_destroy)) kMdnsResponderGeneratedNameListing{
     "MdnsResponderGeneratedNameListing", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Provides a mechanism to disable DoH upgrades for some subset of the hardcoded
@@ -140,18 +140,18 @@ const base::FeatureParam<std::string>
 // Disable special treatment on requests with keepalive set (see
 // https://fetch.spec.whatwg.org/#request-keepalive-flag). This is introduced
 // for investigation on the memory usage, and should not be enabled widely.
-const base::Feature kDisableKeepaliveFetch{"DisableKeepaliveFetch",
+const base::Feature __attribute__((no_destroy)) kDisableKeepaliveFetch{"DisableKeepaliveFetch",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Attach the origin of the destination URL to the "origin" header
-const base::Feature
+const base::Feature __attribute__((no_destroy))
     kDeriveOriginFromUrlForNeitherGetNorHeadRequestWhenHavingSpecialAccess{
         "DeriveOriginFromUrlForNeitherGetNorHeadRequestWhenHavingSpecialAccess",
         base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Emergency switch for legacy cookie access semantics on given patterns, as
 // specified by the param, comma separated.
-const base::Feature kEmergencyLegacyCookieAccess{
+const base::Feature __attribute__((no_destroy)) kEmergencyLegacyCookieAccess{
     "EmergencyLegacyCookieAccess", base::FEATURE_DISABLED_BY_DEFAULT};
 const char kEmergencyLegacyCookieAccessParamName[] = "Patterns";
 const base::FeatureParam<std::string> kEmergencyLegacyCookieAccessParam{
@@ -163,7 +163,7 @@ const base::FeatureParam<std::string> kEmergencyLegacyCookieAccessParam{
 //
 // [1]
 // https://www.chromium.org/Home/chromium-security/extension-content-script-fetches
-const base::Feature kCorbAllowlistAlsoAppliesToOorCors = {
+const base::Feature __attribute__((no_destroy)) kCorbAllowlistAlsoAppliesToOorCors = {
     "CorbAllowlistAlsoAppliesToOorCors", base::FEATURE_ENABLED_BY_DEFAULT};
 const char kCorbAllowlistAlsoAppliesToOorCorsParamName[] =
     "AllowlistForCorbAndCors";
@@ -175,7 +175,7 @@ const char kCorbAllowlistAlsoAppliesToOorCorsParamName[] =
 // and does *not* lead to a renderer kill).
 //
 // See also https://crbug.com/920634
-const base::Feature kRequestInitiatorSiteLockEnfocement = {
+const base::Feature __attribute__((no_destroy)) kRequestInitiatorSiteLockEnfocement = {
     "RequestInitiatorSiteLockEnfocement",
 #if defined(OS_ANDROID)
     base::FEATURE_DISABLED_BY_DEFAULT};
@@ -186,13 +186,13 @@ const base::Feature kRequestInitiatorSiteLockEnfocement = {
 // When the CertVerifierService is enabled, certificate verification will not be
 // performed in the network service, but will instead be brokered to a separate
 // cert verification service potentially running in a different process.
-const base::Feature kCertVerifierService{"CertVerifierService",
+const base::Feature __attribute__((no_destroy)) kCertVerifierService{"CertVerifierService",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables preprocessing requests with the Trust Tokens API Fetch flags set,
 // and handling their responses, according to the protocol.
 // (See https://github.com/WICG/trust-token-api.)
-const base::Feature kTrustTokens{"TrustTokens",
+const base::Feature __attribute__((no_destroy)) kTrustTokens{"TrustTokens",
                                  base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Determines which Trust Tokens operations require the TrustTokens origin trial
@@ -226,14 +226,14 @@ const base::FeatureParam<TrustTokenOriginTrialSpec>
         &kTrustTokenOriginTrialParamOptions};
 
 // Enables the Content Security Policy Embedded Enforcement check out of blink
-const base::Feature kOutOfBlinkCSPEE{"OutOfBlinkCSPEE",
+const base::Feature __attribute__((no_destroy)) kOutOfBlinkCSPEE{"OutOfBlinkCSPEE",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kWebSocketReassembleShortMessages{
+const base::Feature __attribute__((no_destroy)) kWebSocketReassembleShortMessages{
     "WebSocketReassembleShortMessages", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables usage of First Party Sets to determine cookie availability.
-constexpr base::Feature kFirstPartySets{"FirstPartySets",
+const base::Feature __attribute__((no_destroy)) kFirstPartySets{"FirstPartySets",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

@@ -44,7 +44,7 @@ using storage::SpecialStoragePolicy;
 namespace {
 // Kill switch for default app protected storage. Enable this make
 // default-installed hosted apps have protected storage.
-const base::Feature kDefaultHostedAppsNeedProtection{
+const base::Feature __attribute__((no_destroy)) kDefaultHostedAppsNeedProtection{
     "DefaultHostedAppsNeedProtection", base::FEATURE_DISABLED_BY_DEFAULT};
 }  // namespace
 

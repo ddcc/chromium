@@ -34,19 +34,19 @@ namespace media_router {
 // Enables the media router. Can be useful to disable for local
 // development on Mac because DIAL local discovery opens a local port
 // and triggers a permission prompt. Only toggleable for developer builds.
-const base::Feature kMediaRouter{"MediaRouter",
+const base::Feature __attribute__((no_destroy)) kMediaRouter{"MediaRouter",
                                  base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // !defined(OFFICIAL_BUILD)
 // Controls if browser side DialMediaRouteProvider is enabled.
-const base::Feature kDialMediaRouteProvider{"DialMediaRouteProvider",
+const base::Feature __attribute__((no_destroy)) kDialMediaRouteProvider{"DialMediaRouteProvider",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kCastMediaRouteProvider{"CastMediaRouteProvider",
+const base::Feature __attribute__((no_destroy)) kCastMediaRouteProvider{"CastMediaRouteProvider",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kCastAllowAllIPsFeature{"CastAllowAllIPs",
+const base::Feature __attribute__((no_destroy)) kCastAllowAllIPsFeature{"CastAllowAllIPs",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kGlobalMediaControlsCastStartStop{
+const base::Feature __attribute__((no_destroy)) kGlobalMediaControlsCastStartStop{
     "GlobalMediaControlsCastStartStop", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kAllowAllSitesToInitiateMirroring{
+const base::Feature __attribute__((no_destroy)) kAllowAllSitesToInitiateMirroring{
     "AllowAllSitesToInitiateMirroring", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // !defined(OS_ANDROID)
 

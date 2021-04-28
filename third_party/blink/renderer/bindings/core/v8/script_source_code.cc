@@ -48,7 +48,7 @@ String SourceMapUrlFromResponse(const ResourceResponse& response) {
   return response.HttpHeaderField(http_names::kXSourceMap);
 }
 
-const base::Feature kUnsafeScriptReportPostRedirectURL{
+const base::Feature __attribute__((no_destroy)) kUnsafeScriptReportPostRedirectURL{
     "UnsafeScriptReportPostRedirectURL", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace

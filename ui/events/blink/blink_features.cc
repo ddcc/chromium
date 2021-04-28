@@ -6,10 +6,10 @@
 
 namespace features {
 
-const base::Feature kSendMouseLeaveEvents{"SendMouseLeaveEvents",
+const base::Feature __attribute__((no_destroy)) kSendMouseLeaveEvents{"SendMouseLeaveEvents",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDontSendKeyEventsToJavascript{
+const base::Feature __attribute__((no_destroy)) kDontSendKeyEventsToJavascript{
     "DontSendKeyEventsToJavascript", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

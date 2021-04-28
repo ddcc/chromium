@@ -7,10 +7,13 @@
 
 #include <functional>
 #include <map>
+#include <hq_map>
 #include <memory>
 #include <string>
+#include <hq_string>
 #include <utility>
 #include <vector>
+#include <hq_wrapper>
 
 #include "base/base_export.h"
 #include "base/gtest_prod_util.h"
@@ -42,12 +45,12 @@ struct BASE_EXPORT Feature {
   // for enabling/disabling features via command line flags and experiments.
   // It is strongly recommended to use CamelCase style for feature names, e.g.
   // "MyGreatFeature".
-  const char* const name;
+  std::hq_wrapper<const char* const> name;
 
   // The default state (i.e. enabled or disabled) for this feature.
   // NOTE: The actual runtime state may be different, due to a field trial or a
   // command line switch.
-  const FeatureState default_state;
+  std::hq_wrapper<const FeatureState> default_state;
 };
 
 #if defined(DCHECK_IS_CONFIGURABLE)
@@ -285,7 +288,7 @@ class BASE_EXPORT FeatureList {
 
   struct OverrideEntry {
     // The overridden enable (on/off) state of the feature.
-    const OverrideState overridden_state;
+    std::hq_wrapper<const OverrideState> overridden_state;
 
     // An optional associated field trial, which will be activated when the
     // state of the feature is queried for the first time. Weak pointer to the
@@ -356,7 +359,7 @@ class BASE_EXPORT FeatureList {
 
   // Map from feature name to an OverrideEntry struct for the feature, if it
   // exists.
-  std::map<std::string, OverrideEntry, std::less<>> overrides_;
+  std::hq_map<std::hq_string, OverrideEntry, std::less<>> overrides_;
 
   // Locked map that keeps track of seen features, to ensure a single feature is
   // only defined once. This verification is only done in builds with DCHECKs
@@ -373,10 +376,10 @@ class BASE_EXPORT FeatureList {
 
   // Whether this object has been fully initialized. This gets set to true as a
   // result of FinalizeInitialization().
-  bool initialized_ = false;
+  std::hq_wrapper<bool> initialized_ = false;
 
   // Whether this object has been initialized from command line.
-  bool initialized_from_command_line_ = false;
+  std::hq_wrapper<bool> initialized_from_command_line_ = false;
 };
 
 }  // namespace base

@@ -19,9 +19,9 @@ namespace feature_engagement {
 
 namespace {
 
-const base::Feature kEventStorageTestFeatureFoo{
+const base::Feature __attribute__((no_destroy)) kEventStorageTestFeatureFoo{
     "test_foo", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kEventStorageTestFeatureBar{
+const base::Feature __attribute__((no_destroy)) kEventStorageTestFeatureBar{
     "test_bar", base::FEATURE_DISABLED_BY_DEFAULT};
 
 FeatureConfig kNeverStored;

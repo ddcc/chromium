@@ -49,12 +49,12 @@ String GenerateFakeUrlFromScriptId(int script_id) {
 namespace features {
 // Controls whether the AdTracker will look across async stacks to determine if
 // the currently running stack is ad related.
-const base::Feature kAsyncStackAdTagging{"AsyncStackAdTagging",
+const base::Feature __attribute__((no_destroy)) kAsyncStackAdTagging{"AsyncStackAdTagging",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Controls whether the AdTracker analyzes the bottom and top of the stack or
 // just the top of the stack when detecting ads.
-const base::Feature kTopOfStackAdTagging{"TopOfStackAdTagging",
+const base::Feature __attribute__((no_destroy)) kTopOfStackAdTagging{"TopOfStackAdTagging",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 }  // namespace features
 

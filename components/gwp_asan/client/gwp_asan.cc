@@ -65,8 +65,8 @@ constexpr base::FeatureState kDefaultEnabled =
     base::FEATURE_DISABLED_BY_DEFAULT;
 #endif
 
-const base::Feature kGwpAsanMalloc{"GwpAsanMalloc", kDefaultEnabled};
-const base::Feature kGwpAsanPartitionAlloc{"GwpAsanPartitionAlloc",
+const base::Feature __attribute__((no_destroy)) kGwpAsanMalloc{"GwpAsanMalloc", kDefaultEnabled};
+const base::Feature __attribute__((no_destroy)) kGwpAsanPartitionAlloc{"GwpAsanPartitionAlloc",
                                            kDefaultEnabled};
 
 // Returns whether this process should be sampled to enable GWP-ASan.

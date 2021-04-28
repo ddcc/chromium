@@ -34,7 +34,7 @@ namespace discardable_memory {
 // called. Enabling this causes |ReleaseFreeMemory| to release all
 // unlocked memory instances, as well as release all free memory (as opposed to
 // merely releasing all free memory).
-const base::Feature kPurgeUnlockedMemory{"PurgeUnlockedMemory",
+const base::Feature __attribute__((no_destroy)) kPurgeUnlockedMemory{"PurgeUnlockedMemory",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 // This controls whether unlocked memory is periodically purged from the
@@ -42,7 +42,7 @@ const base::Feature kPurgeUnlockedMemory{"PurgeUnlockedMemory",
 // intervals to purge unlocked memory that hasn't been touched in a while. This
 // task is stopped if no discardable memory is left, and restarted at the next
 // allocation.
-const base::Feature kSchedulePeriodicPurge{"SchedulePeriodicPurge",
+const base::Feature __attribute__((no_destroy)) kSchedulePeriodicPurge{"SchedulePeriodicPurge",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
 namespace {

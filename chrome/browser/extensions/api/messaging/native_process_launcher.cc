@@ -256,7 +256,7 @@ void NativeProcessLauncherImpl::Core::DoLaunchOnThreadPool(
     reconnect_command_line.AppendSwitchASCII(
         ::switches::kNativeMessagingConnectExtension, origin.host());
     reconnect_command_line.AppendSwitchASCII(::switches::kEnableFeatures,
-                                             features::kOnConnectNative.name);
+                                             features::kOnConnectNative.name.v());
     reconnect_command_line.AppendSwitchPath(::switches::kProfileDirectory,
                                             profile_directory_.BaseName());
     reconnect_command_line.AppendSwitchPath(::switches::kUserDataDir,

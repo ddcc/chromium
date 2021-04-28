@@ -10,7 +10,7 @@ namespace features {
 
 // Enables or disables the ability to bind mojo connections through chrome for
 // Cfm specific mojom based system services.
-const base::Feature kCfmMojoServices{"CfmMojoServices",
+const base::Feature __attribute__((no_destroy)) kCfmMojoServices{"CfmMojoServices",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

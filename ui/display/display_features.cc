@@ -11,7 +11,7 @@ namespace features {
 
 #if defined(OS_CHROMEOS)
 // Enables using HDR transfer function if the monitor says it supports it.
-const base::Feature kUseHDRTransferFunction {
+const base::Feature __attribute__((no_destroy)) kUseHDRTransferFunction {
   "UseHDRTransferFunction",
   // TODO(b/168843009): Temporarily disable on ARM while investigating.
 #if defined(ARCH_CPU_ARM_FAMILY)
@@ -25,7 +25,7 @@ const base::Feature kUseHDRTransferFunction {
 // This features allows listing all display modes of external displays in the
 // display settings and setting any one of them exactly as requested, which can
 // be very useful for debugging and development purposes.
-const base::Feature kListAllDisplayModes = {"ListAllDisplayModes",
+const base::Feature __attribute__((no_destroy)) kListAllDisplayModes = {"ListAllDisplayModes",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 
 bool IsListAllDisplayModesEnabled() {

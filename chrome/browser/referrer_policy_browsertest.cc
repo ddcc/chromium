@@ -922,7 +922,7 @@ INSTANTIATE_TEST_SUITE_P(
         -> std::string {
       if (info.param.feature_to_enable)
         return base::StringPrintf(
-            "Param%s_ForceLegacyPolicy%s", info.param.feature_to_enable->name,
+            "Param%s_ForceLegacyPolicy%s", info.param.feature_to_enable->name.v(),
             info.param.force_no_referrer_when_downgrade_default ? "True"
                                                                 : "False");
       return "NoFeature";

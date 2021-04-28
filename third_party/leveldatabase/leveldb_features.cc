@@ -6,6 +6,6 @@
 
 namespace leveldb {
 
-const base::Feature kLevelDBRewriteFeature{"LevelDBPerformRewrite",
+const base::Feature __attribute__((no_destroy)) kLevelDBRewriteFeature{"LevelDBPerformRewrite",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 }  // namespace leveldb

@@ -22,7 +22,7 @@ namespace features {
 
 // Enables the syncing of the Optimization Hints component, which provides
 // hints for what Previews can be applied on a page load.
-const base::Feature kOptimizationHints {
+const base::Feature __attribute__((no_destroy)) kOptimizationHints {
   "OptimizationHints",
 #if defined(OS_ANDROID)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -33,11 +33,11 @@ const base::Feature kOptimizationHints {
 
 // Feature flag that contains a feature param that specifies the field trials
 // that are allowed to be sent up to the Optimization Guide Server.
-const base::Feature kOptimizationHintsFieldTrials{
+const base::Feature __attribute__((no_destroy)) kOptimizationHintsFieldTrials{
     "OptimizationHintsFieldTrials", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables fetching from a remote Optimization Guide Service.
-const base::Feature kRemoteOptimizationGuideFetching {
+const base::Feature __attribute__((no_destroy)) kRemoteOptimizationGuideFetching {
   "OptimizationHintsFetching",
 #if defined(OS_ANDROID)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -46,16 +46,16 @@ const base::Feature kRemoteOptimizationGuideFetching {
 #endif  // defined(OS_ANDROID)
 };
 
-const base::Feature kRemoteOptimizationGuideFetchingAnonymousDataConsent{
+const base::Feature __attribute__((no_destroy)) kRemoteOptimizationGuideFetchingAnonymousDataConsent{
     "OptimizationHintsFetchingAnonymousDataConsent",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the prediction of optimization targets.
-const base::Feature kOptimizationTargetPrediction{
+const base::Feature __attribute__((no_destroy)) kOptimizationTargetPrediction{
     "OptimizationTargetPrediction", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables out-of-service evaluation of prediction models via the ML Service.
-const base::Feature kOptimizationTargetPredictionUsingMLService{
+const base::Feature __attribute__((no_destroy)) kOptimizationTargetPredictionUsingMLService{
     "OptimizationGuidePredictionUsingMLService",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

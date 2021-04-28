@@ -69,7 +69,7 @@
 
 namespace variations {
 
-const base::Feature kHttpRetryFeature{"VariationsHttpRetry",
+const base::Feature __attribute__((no_destroy)) kHttpRetryFeature{"VariationsHttpRetry",
                                       base::FEATURE_ENABLED_BY_DEFAULT};
 
 namespace {

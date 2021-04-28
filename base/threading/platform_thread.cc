@@ -14,7 +14,7 @@ namespace {
 
 // Whether thread priorities should be used. When disabled,
 // PlatformThread::SetCurrentThreadPriority() no-ops.
-const Feature kThreadPrioritiesFeature{"ThreadPriorities",
+const Feature __attribute__((no_destroy)) kThreadPrioritiesFeature{"ThreadPriorities",
                                        FEATURE_ENABLED_BY_DEFAULT};
 
 // Whether thread priorities should be used.

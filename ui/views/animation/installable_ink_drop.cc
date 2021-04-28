@@ -44,7 +44,7 @@ InstallableInkDropConfig GetPlaceholderInstallableInkDropConfig() {
 
 }  // namespace
 
-const base::Feature kInstallableInkDropFeature{
+const base::Feature __attribute__((no_destroy)) kInstallableInkDropFeature{
     "InstallableInkDrop", base::FEATURE_DISABLED_BY_DEFAULT};
 
 InstallableInkDrop::InstallableInkDrop(View* view)

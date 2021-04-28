@@ -6,13 +6,13 @@
 
 namespace supervised_users {
 
-const base::Feature kSupervisedUserIframeFilter{
+const base::Feature __attribute__((no_destroy)) kSupervisedUserIframeFilter{
     "SupervisedUserIframeFilter", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSupervisedUserInitiatedExtensionInstall{
+const base::Feature __attribute__((no_destroy)) kSupervisedUserInitiatedExtensionInstall{
     "SupervisedUserInitiatedExtensionInstall",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kEduCoexistenceFlowV2{"EduCoexistenceV2",
+const base::Feature __attribute__((no_destroy)) kEduCoexistenceFlowV2{"EduCoexistenceV2",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 }  // namespace supervised_users

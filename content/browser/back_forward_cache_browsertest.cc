@@ -106,7 +106,7 @@ const char kUnloadRunsAfterCommitHistogramName[] =
 // hash for std::unordered_map.
 struct FeatureHash {
   size_t operator()(base::Feature feature) const {
-    return base::FastHash(feature.name);
+    return base::FastHash(feature.name.v());
   }
 };
 

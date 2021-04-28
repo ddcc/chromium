@@ -10,7 +10,7 @@
 namespace features {
 
 // Enable exposing "display: none" nodes to the browser process AXTree
-const base::Feature kEnableAccessibilityExposeDisplayNone{
+const base::Feature __attribute__((no_destroy)) kEnableAccessibilityExposeDisplayNone{
     "AccessibilityExposeDisplayNone", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsAccessibilityExposeDisplayNoneEnabled() {
@@ -20,7 +20,7 @@ bool IsAccessibilityExposeDisplayNoneEnabled() {
 
 // Enable exposing the <html> element to the browser process AXTree
 // (as an ignored node).
-const base::Feature kEnableAccessibilityExposeHTMLElement{
+const base::Feature __attribute__((no_destroy)) kEnableAccessibilityExposeHTMLElement{
     "AccessibilityExposeHTMLElement", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsAccessibilityExposeHTMLElementEnabled() {
@@ -30,7 +30,7 @@ bool IsAccessibilityExposeHTMLElementEnabled() {
 
 // Enable language detection to determine language used in page text, exposed
 // on the browser process AXTree.
-const base::Feature kEnableAccessibilityLanguageDetection{
+const base::Feature __attribute__((no_destroy)) kEnableAccessibilityLanguageDetection{
     "AccessibilityLanguageDetection", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsAccessibilityLanguageDetectionEnabled() {
@@ -40,7 +40,7 @@ bool IsAccessibilityLanguageDetectionEnabled() {
 
 // Serializes accessibility information from the Views tree and deserializes it
 // into an AXTree in the browser process.
-const base::Feature kEnableAccessibilityTreeForViews{
+const base::Feature __attribute__((no_destroy)) kEnableAccessibilityTreeForViews{
     "AccessibilityTreeForViews", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsAccessibilityTreeForViewsEnabled() {
@@ -48,7 +48,7 @@ bool IsAccessibilityTreeForViewsEnabled() {
       ::features::kEnableAccessibilityTreeForViews);
 }
 
-const base::Feature kAccessibilityFocusHighlight{
+const base::Feature __attribute__((no_destroy)) kAccessibilityFocusHighlight{
     "AccessibilityFocusHighlight", base::FEATURE_ENABLED_BY_DEFAULT};
 
 bool IsAccessibilityFocusHighlightEnabled() {
@@ -56,7 +56,7 @@ bool IsAccessibilityFocusHighlightEnabled() {
 }
 
 #if defined(OS_WIN)
-const base::Feature kIChromeAccessible{"IChromeAccessible",
+const base::Feature __attribute__((no_destroy)) kIChromeAccessible{"IChromeAccessible",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsIChromeAccessibleEnabled() {
@@ -65,7 +65,7 @@ bool IsIChromeAccessibleEnabled() {
 #endif  // defined(OS_WIN)
 
 #if defined(OS_CHROMEOS)
-const base::Feature kAccessibilityCursorColor{"AccessibilityCursorColor",
+const base::Feature __attribute__((no_destroy)) kAccessibilityCursorColor{"AccessibilityCursorColor",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
 bool IsAccessibilityCursorColorEnabled() {
@@ -73,14 +73,14 @@ bool IsAccessibilityCursorColorEnabled() {
 }
 #endif  // defined(OS_CHROMEOS)
 
-const base::Feature kAugmentExistingImageLabels{
+const base::Feature __attribute__((no_destroy)) kAugmentExistingImageLabels{
     "AugmentExistingImageLabels", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsAugmentExistingImageLabelsEnabled() {
   return base::FeatureList::IsEnabled(::features::kAugmentExistingImageLabels);
 }
 
-const base::Feature kUseAXPositionForDocumentMarkers{
+const base::Feature __attribute__((no_destroy)) kUseAXPositionForDocumentMarkers{
     "UseAXPositionForDocumentMarkers", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsUseAXPositionForDocumentMarkersEnabled() {

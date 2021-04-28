@@ -143,7 +143,7 @@ base::TimeDelta g_commit_timeout = kDefaultCommitTimeout;
 // crbug.com/954271: This feature is a part of an ablation study which makes
 // history navigations slower.
 // TODO(altimin): Clean this up after the study finishes.
-constexpr base::Feature kHistoryNavigationDoNotUseCacheAblationStudy{
+const base::Feature __attribute__((no_destroy)) kHistoryNavigationDoNotUseCacheAblationStudy{
     "HistoryNavigationDoNotUseCacheAblationStudy",
     base::FEATURE_DISABLED_BY_DEFAULT};
 constexpr base::FeatureParam<double> kDoNotUseCacheProbability{

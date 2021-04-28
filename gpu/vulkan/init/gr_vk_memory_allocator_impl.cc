@@ -15,7 +15,7 @@ namespace gpu {
 
 namespace {
 
-const base::Feature kCpuWritesGpuReadsCached{"CpuWritesGpuReadsCached",
+const base::Feature __attribute__((no_destroy)) kCpuWritesGpuReadsCached{"CpuWritesGpuReadsCached",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
 class GrVkMemoryAllocatorImpl : public GrVkMemoryAllocator {

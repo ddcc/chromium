@@ -10,7 +10,7 @@ namespace base {
 
 // If enabled, PartitionAllocator reserves an address space(named, giga cage)
 // initially and uses a part of the address space for each allocation.
-const Feature kPartitionAllocGigaCage{"PartitionAllocGigaCage",
+const Feature __attribute__((no_destroy)) kPartitionAllocGigaCage{"PartitionAllocGigaCage",
                                       FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace base

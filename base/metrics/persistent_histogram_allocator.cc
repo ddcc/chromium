@@ -97,7 +97,7 @@ size_t CalculateRequiredCountsBytes(size_t bucket_count) {
 
 }  // namespace
 
-const Feature kPersistentHistogramsFeature{
+const Feature __attribute__((no_destroy)) kPersistentHistogramsFeature{
   "PersistentHistograms", FEATURE_DISABLED_BY_DEFAULT
 };
 

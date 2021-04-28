@@ -22,7 +22,7 @@ const char kEnableLocalSyncBackend[] = "enable-local-sync-backend";
 const char kLocalSyncBackendDir[] = "local-sync-backend-dir";
 
 #if defined(OS_ANDROID)
-const base::Feature kSyncUseSessionsUnregisterDelay{
+const base::Feature __attribute__((no_destroy)) kSyncUseSessionsUnregisterDelay{
     "SyncUseSessionsUnregisterDelay", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_ANDROID)
 

@@ -228,7 +228,7 @@ class AnnouncementNotificationServiceImpl
   DISALLOW_COPY_AND_ASSIGN(AnnouncementNotificationServiceImpl);
 };
 
-const base::Feature kAnnouncementNotification{
+const base::Feature __attribute__((no_destroy)) kAnnouncementNotification{
     "AnnouncementNotificationService", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // static

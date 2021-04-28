@@ -15,7 +15,7 @@
 
 namespace dom_distiller {
 
-const base::Feature kReaderMode{"ReaderMode",
+const base::Feature __attribute__((no_destroy)) kReaderMode{"ReaderMode",
                                 base::FEATURE_DISABLED_BY_DEFAULT};
 
 void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {

@@ -22,7 +22,7 @@
 
 namespace features {
 // Feature to control preconnect to search.
-const base::Feature kPreconnectToSearch {
+const base::Feature __attribute__((no_destroy)) kPreconnectToSearch {
   "PreconnectToSearch",
 
 #if defined(OS_ANDROID)
@@ -33,7 +33,7 @@ const base::Feature kPreconnectToSearch {
 };
 
 // Feature to limit experimentation to Google search only.
-const base::Feature kPreconnectToSearchNonGoogle{
+const base::Feature __attribute__((no_destroy)) kPreconnectToSearchNonGoogle{
     "PreconnectToSearchNonGoogle", base::FEATURE_DISABLED_BY_DEFAULT};
 }  // namespace features
 

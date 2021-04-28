@@ -11,62 +11,62 @@ namespace chromeos {
 namespace assistant {
 namespace features {
 
-const base::Feature kAssistantAudioEraser{"AssistantAudioEraser",
+const base::Feature __attribute__((no_destroy)) kAssistantAudioEraser{"AssistantAudioEraser",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAssistantAppSupport{"AssistantAppSupport",
+const base::Feature __attribute__((no_destroy)) kAssistantAppSupport{"AssistantAppSupport",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAssistantBetterOnboarding{
+const base::Feature __attribute__((no_destroy)) kAssistantBetterOnboarding{
     "AssistantBetterOnboarding", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAssistantConversationStartersV2{
+const base::Feature __attribute__((no_destroy)) kAssistantConversationStartersV2{
     "AssistantConversationStartersV2", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAssistantDebugging{"AssistantDebugging",
+const base::Feature __attribute__((no_destroy)) kAssistantDebugging{"AssistantDebugging",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAssistantLauncherChipIntegration{
+const base::Feature __attribute__((no_destroy)) kAssistantLauncherChipIntegration{
     "AssistantLauncherChipIntegration", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAssistantResponseProcessingV2{
+const base::Feature __attribute__((no_destroy)) kAssistantResponseProcessingV2{
     "AssistantResponseProcessingV2", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAssistantRoutines{"AssistantRoutines",
+const base::Feature __attribute__((no_destroy)) kAssistantRoutines{"AssistantRoutines",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAssistantTimersV2{"AssistantTimersV2",
+const base::Feature __attribute__((no_destroy)) kAssistantTimersV2{"AssistantTimersV2",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAssistantWaitScheduling{"AssistantWaitScheduling",
+const base::Feature __attribute__((no_destroy)) kAssistantWaitScheduling{"AssistantWaitScheduling",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kEnableBloom{"EnableBloom",
+const base::Feature __attribute__((no_destroy)) kEnableBloom{"EnableBloom",
                                  base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnableAmbientAssistant{"EnableAmbientAssistant",
+const base::Feature __attribute__((no_destroy)) kEnableAmbientAssistant{"EnableAmbientAssistant",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnableDspHotword{"EnableDspHotword",
+const base::Feature __attribute__((no_destroy)) kEnableDspHotword{"EnableDspHotword",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnableStereoAudioInput{"AssistantEnableStereoAudioInput",
+const base::Feature __attribute__((no_destroy)) kEnableStereoAudioInput{"AssistantEnableStereoAudioInput",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnablePowerManager{"ChromeOSAssistantEnablePowerManager",
+const base::Feature __attribute__((no_destroy)) kEnablePowerManager{"ChromeOSAssistantEnablePowerManager",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnableOnDeviceAssistant{"OnDeviceAssistant",
+const base::Feature __attribute__((no_destroy)) kEnableOnDeviceAssistant{"OnDeviceAssistant",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnableLibAssistantBetaBackend{
+const base::Feature __attribute__((no_destroy)) kEnableLibAssistantBetaBackend{
     "LibAssistantBetaBackend", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnableMediaSessionIntegration{
+const base::Feature __attribute__((no_destroy)) kEnableMediaSessionIntegration{
     "AssistantEnableMediaSessionIntegration", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Disable voice match for test purpose.
-const base::Feature kDisableVoiceMatch{"DisableVoiceMatch",
+const base::Feature __attribute__((no_destroy)) kDisableVoiceMatch{"DisableVoiceMatch",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsAmbientAssistantEnabled() {

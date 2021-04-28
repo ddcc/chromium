@@ -14,7 +14,7 @@
 
 namespace heap_profiling {
 
-const base::Feature kOOPHeapProfilingFeature{"OOPHeapProfiling",
+const base::Feature __attribute__((no_destroy)) kOOPHeapProfilingFeature{"OOPHeapProfiling",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 const char kOOPHeapProfilingFeatureMode[] = "mode";
 

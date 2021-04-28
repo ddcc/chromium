@@ -12,7 +12,7 @@
 
 namespace ukm {
 
-const base::Feature kUkmFeature = {"Ukm", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kUkmFeature = {"Ukm", base::FEATURE_ENABLED_BY_DEFAULT};
 
 UkmRecorder::UkmRecorder() = default;
 

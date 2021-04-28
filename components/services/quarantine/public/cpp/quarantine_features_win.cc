@@ -9,7 +9,7 @@ namespace quarantine {
 // This feature controls whether the quarantine service should run in
 // the browser process or a new utility process.
 // Unused until quarantine service is fully implemented.
-const base::Feature kOutOfProcessQuarantine{"OutOfProcessQuarantine",
+const base::Feature __attribute__((no_destroy)) kOutOfProcessQuarantine{"OutOfProcessQuarantine",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 
 }  // namespace quarantine

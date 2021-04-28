@@ -7,7 +7,7 @@
 namespace browsing_data {
 namespace features {
 
-const base::Feature kEnableRemovingAllThirdPartyCookies{
+const base::Feature __attribute__((no_destroy)) kEnableRemovingAllThirdPartyCookies{
     "EnableRemovingAllThirdPartyCookies", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

@@ -26,7 +26,7 @@ namespace features {
 // If enabled, the installability criteria for granting PBS permission is
 // dropped and the content setting is checked. This only applies if the
 // requesting origin matches that of the browser's default search engine.
-const base::Feature kPeriodicSyncPermissionForDefaultSearchEngine{
+const base::Feature __attribute__((no_destroy)) kPeriodicSyncPermissionForDefaultSearchEngine{
     "PeriodicSyncPermissionForDefaultSearchEngine",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

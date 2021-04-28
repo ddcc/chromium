@@ -14,7 +14,7 @@ const char kClearTokenService[] = "clear-token-service";
 const char kDisableSigninScopedDeviceId[] = "disable-signin-scoped-device-id";
 
 #if defined(OS_CHROMEOS)
-const base::Feature kAccountIdMigration{"AccountIdMigration",
+const base::Feature __attribute__((no_destroy)) kAccountIdMigration{"AccountIdMigration",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 

@@ -13,16 +13,16 @@ namespace blink {
 
 namespace {
 
-mojom::FeaturePolicyFeature kDefaultOnFeature =
+mojom::FeaturePolicyFeature __attribute__((no_destroy)) kDefaultOnFeature =
     static_cast<mojom::FeaturePolicyFeature>(
         static_cast<int>(mojom::FeaturePolicyFeature::kMaxValue) + 1);
 
-mojom::FeaturePolicyFeature kDefaultSelfFeature =
+mojom::FeaturePolicyFeature __attribute__((no_destroy)) kDefaultSelfFeature =
     static_cast<mojom::FeaturePolicyFeature>(
         static_cast<int>(mojom::FeaturePolicyFeature::kMaxValue) + 2);
 
 // This feature is defined in code, but not present in the feature list.
-mojom::FeaturePolicyFeature kUnavailableFeature =
+mojom::FeaturePolicyFeature __attribute__((no_destroy)) kUnavailableFeature =
     static_cast<mojom::FeaturePolicyFeature>(
         static_cast<int>(mojom::FeaturePolicyFeature::kMaxValue) + 4);
 

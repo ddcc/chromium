@@ -33,13 +33,13 @@
 namespace feature_engagement {
 
 namespace {
-const base::Feature kTrackerTestFeatureFoo{"test_foo",
+const base::Feature __attribute__((no_destroy)) kTrackerTestFeatureFoo{"test_foo",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTrackerTestFeatureBar{"test_bar",
+const base::Feature __attribute__((no_destroy)) kTrackerTestFeatureBar{"test_bar",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTrackerTestFeatureBaz{"test_baz",
+const base::Feature __attribute__((no_destroy)) kTrackerTestFeatureBaz{"test_baz",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTrackerTestFeatureQux{"test_qux",
+const base::Feature __attribute__((no_destroy)) kTrackerTestFeatureQux{"test_qux",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
 void RegisterFeatureConfig(EditableConfiguration* configuration,
@@ -48,8 +48,8 @@ void RegisterFeatureConfig(EditableConfiguration* configuration,
                            bool tracking_only) {
   FeatureConfig config;
   config.valid = valid;
-  config.used.name = feature.name + std::string("_used");
-  config.trigger.name = feature.name + std::string("_trigger");
+  config.used.name = feature.name.v() + std::string("_used");
+  config.trigger.name = feature.name.v() + std::string("_trigger");
   config.trigger.storage = 1u;
   config.tracking_only = tracking_only;
   configuration->SetConfiguration(&feature, config);
@@ -871,8 +871,8 @@ TEST_F(TrackerImplTest, TestNotifyEvent) {
   tracker_->NotifyEvent("foo");
   tracker_->NotifyEvent("foo");
   tracker_->NotifyEvent("bar");
-  tracker_->NotifyEvent(kTrackerTestFeatureFoo.name + std::string("_used"));
-  tracker_->NotifyEvent(kTrackerTestFeatureFoo.name + std::string("_trigger"));
+  tracker_->NotifyEvent(kTrackerTestFeatureFoo.name.v() + std::string("_used"));
+  tracker_->NotifyEvent(kTrackerTestFeatureFoo.name.v() + std::string("_trigger"));
 
   // Used event will record both NotifyEvent and NotifyUsedEvent. Explicitly
   // specify the whole user action string here.

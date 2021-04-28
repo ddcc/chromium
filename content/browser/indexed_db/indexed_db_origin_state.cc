@@ -75,7 +75,7 @@ base::Time GenerateNextGlobalSweepTime(base::Time now) {
 
 }  // namespace
 
-const base::Feature kCompactIDBOnClose{"CompactIndexedDBOnClose",
+const base::Feature __attribute__((no_destroy)) kCompactIDBOnClose{"CompactIndexedDBOnClose",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 
 constexpr const base::TimeDelta

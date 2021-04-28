@@ -7,26 +7,26 @@
 namespace chrome_pdf {
 namespace features {
 
-const base::Feature kAccessiblePDFForm = {"AccessiblePDFForm",
+const base::Feature __attribute__((no_destroy)) kAccessiblePDFForm = {"AccessiblePDFForm",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPdfHonorJsContentSettings = {
+const base::Feature __attribute__((no_destroy)) kPdfHonorJsContentSettings = {
     "PdfHonorJsContentSettings", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // "Incremental loading" refers to loading the PDF as it arrives.
 // TODO(crbug.com/1064175): Remove this once incremental loading is fixed.
-const base::Feature kPdfIncrementalLoading = {"PdfIncrementalLoading",
+const base::Feature __attribute__((no_destroy)) kPdfIncrementalLoading = {"PdfIncrementalLoading",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
 // "Partial loading" refers to loading only specific parts of the PDF.
 // TODO(crbug.com/1064175): Remove this once partial loading is fixed.
-const base::Feature kPdfPartialLoading = {"PdfPartialLoading",
+const base::Feature __attribute__((no_destroy)) kPdfPartialLoading = {"PdfPartialLoading",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kPDFViewerUpdate = {"PDFViewerUpdate",
+const base::Feature __attribute__((no_destroy)) kPDFViewerUpdate = {"PDFViewerUpdate",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSaveEditedPDFForm = {"SaveEditedPDFForm",
+const base::Feature __attribute__((no_destroy)) kSaveEditedPDFForm = {"SaveEditedPDFForm",
 #if defined(OS_CHROMEOS)
                                           base::FEATURE_ENABLED_BY_DEFAULT
 #else
@@ -34,7 +34,7 @@ const base::Feature kSaveEditedPDFForm = {"SaveEditedPDFForm",
 #endif  // defined(OS_CHROMEOS)
 };
 
-const base::Feature kTabAcrossPDFAnnotations = {
+const base::Feature __attribute__((no_destroy)) kTabAcrossPDFAnnotations = {
     "TabAcrossPDFAnnotations", base::FEATURE_ENABLED_BY_DEFAULT};
 
 }  // namespace features

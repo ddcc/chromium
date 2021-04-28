@@ -374,7 +374,7 @@ TEST_F(NativeMessagingTest, MAYBE_ReconnectArgs) {
   EXPECT_EQ(
       ScopedTestNativeMessagingHost::kExtensionId,
       cmd_line.GetSwitchValueASCII(switches::kNativeMessagingConnectExtension));
-  EXPECT_EQ(features::kOnConnectNative.name,
+  EXPECT_EQ(features::kOnConnectNative.name.v(),
             cmd_line.GetSwitchValueASCII(switches::kEnableFeatures));
   EXPECT_EQ(profile_.GetPath().BaseName(),
             cmd_line.GetSwitchValuePath(switches::kProfileDirectory));

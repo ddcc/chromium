@@ -4,5 +4,5 @@
 
 #import "components/ukm/ios/features.h"
 
-const base::Feature kUmaCellular{"UmaCellular",
+const base::Feature __attribute__((no_destroy)) kUmaCellular{"UmaCellular",
                                  base::FEATURE_ENABLED_BY_DEFAULT};

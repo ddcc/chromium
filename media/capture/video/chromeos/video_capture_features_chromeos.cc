@@ -9,7 +9,7 @@ namespace features {
 
 // Controls if the camera frame is rotated to the upright display orientation in
 // the Chrome OS VideoCaptureDevice implementation.
-const base::Feature kDisableCameraFrameRotationAtSource{
+const base::Feature __attribute__((no_destroy)) kDisableCameraFrameRotationAtSource{
     "DisableCameraFrameRotationAtSource", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

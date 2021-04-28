@@ -1296,7 +1296,7 @@ TEST_F(RTCPeerConnectionHandlerTest, ThermalResourceIsEnabledByDefault) {
 
 TEST_F(RTCPeerConnectionHandlerTest,
        ThermalStateChangeDoesNothingIfThermalResourceIsDisabled) {
-  // Overwrite base::Feature kWebRtcThermalResource's default to DISABLED.
+  // Overwrite base::Feature __attribute__((no_destroy)) kWebRtcThermalResource's default to DISABLED.
   base::test::ScopedFeatureList scoped_feature_list;
   scoped_feature_list.InitAndDisableFeature(kWebRtcThermalResource);
 
@@ -1309,7 +1309,7 @@ TEST_F(RTCPeerConnectionHandlerTest,
 
 TEST_F(RTCPeerConnectionHandlerTest,
        ThermalStateChangeTriggersThermalResourceIfEnabled) {
-  // Overwrite base::Feature kWebRtcThermalResource's default to ENABLED.
+  // Overwrite base::Feature __attribute__((no_destroy)) kWebRtcThermalResource's default to ENABLED.
   base::test::ScopedFeatureList scoped_feature_list;
   scoped_feature_list.InitAndEnableFeature(kWebRtcThermalResource);
 

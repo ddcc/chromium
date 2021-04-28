@@ -60,13 +60,13 @@ namespace internal {
 // Metrics reporting feature. This feature, along with user consent, controls if
 // recording and reporting are enabled. If the feature is enabled, but no
 // consent is given, then there will be no recording or reporting.
-const base::Feature kMetricsReportingFeature{"MetricsReporting",
+const base::Feature __attribute__((no_destroy)) kMetricsReportingFeature{"MetricsReporting",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
 // A feature controlling whether all clients in the OutOfReportingSample group
 // should discard their uploads, regardless of which user consent flow they
 // went through. When disabled, only opt-out users will discard uploads.
-const base::Feature kMetricsDownsampleConsistentlyFeature{
+const base::Feature __attribute__((no_destroy)) kMetricsDownsampleConsistentlyFeature{
     "MetricsDownsampleConsistently", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace internal
@@ -211,7 +211,7 @@ void ChromeMetricsServicesManagerClient::CreateFallbackSamplingTrial(
   // GetGroupNameWithoutActivation() will finalize the group choice.
   const std::string& group_name = trial->GetGroupNameWithoutActivation();
   feature_list->RegisterFieldTrialOverride(
-      metrics::internal::kMetricsReportingFeature.name,
+      metrics::internal::kMetricsReportingFeature.name.v(),
       group_name == kSampledOutGroup
           ? base::FeatureList::OVERRIDE_DISABLE_FEATURE
           : base::FeatureList::OVERRIDE_ENABLE_FEATURE,

@@ -47,7 +47,7 @@
 
 namespace net {
 
-const base::Feature kEnforceCTForNewCerts{"EnforceCTForNewCerts",
+const base::Feature __attribute__((no_destroy)) kEnforceCTForNewCerts{"EnforceCTForNewCerts",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
 namespace {
@@ -399,7 +399,7 @@ bool DecodeHSTSPreload(const std::string& search_hostname, PreloadResult* out) {
 }  // namespace
 
 // static
-const base::Feature TransportSecurityState::kDynamicExpectCTFeature{
+const base::Feature __attribute__((no_destroy)) TransportSecurityState::kDynamicExpectCTFeature{
     "DynamicExpectCT", base::FEATURE_ENABLED_BY_DEFAULT};
 
 void SetTransportSecurityStateSourceForTesting(

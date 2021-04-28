@@ -36,7 +36,7 @@ void LogAction(SafeBrowsingTriggeredPopupBlocker::Action action) {
 
 using safe_browsing::SubresourceFilterLevel;
 
-const base::Feature kAbusiveExperienceEnforce{"AbusiveExperienceEnforce",
+const base::Feature __attribute__((no_destroy)) kAbusiveExperienceEnforce{"AbusiveExperienceEnforce",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
 SafeBrowsingTriggeredPopupBlocker::PageData::PageData() = default;

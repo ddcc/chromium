@@ -24,7 +24,7 @@ namespace page_load_metrics {
 namespace {
 const int kInitialTimerDelayMillis = 50;
 const int64_t kInputDelayAdjustmentMillis = int64_t(50);
-const base::Feature kPageLoadMetricsTimerDelayFeature{
+const base::Feature __attribute__((no_destroy)) kPageLoadMetricsTimerDelayFeature{
     "PageLoadMetricsTimerDelay", base::FEATURE_DISABLED_BY_DEFAULT};
 }  // namespace
 

@@ -4,5 +4,5 @@
 
 #include "chrome/browser/share/features.h"
 
-const base::Feature kSharingQrCodeAndroid{"SharingQrCodeAndroid",
+const base::Feature __attribute__((no_destroy)) kSharingQrCodeAndroid{"SharingQrCodeAndroid",
                                           base::FEATURE_DISABLED_BY_DEFAULT};

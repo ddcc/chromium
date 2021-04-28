@@ -168,7 +168,7 @@ void ZoomMenuModel::Build() {
 // HelpMenuModel
 // Only used in branded builds.
 
-const base::Feature kIncludeBetaForumMenuItem{
+const base::Feature __attribute__((no_destroy)) kIncludeBetaForumMenuItem{
     "IncludeBetaForumMenuItem", base::FEATURE_DISABLED_BY_DEFAULT};
 
 class HelpMenuModel : public ui::SimpleMenuModel {

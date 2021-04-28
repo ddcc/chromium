@@ -983,7 +983,7 @@ bool CertVerifyProc::HasTooLongValidity(const X509Certificate& cert) {
 }
 
 // static
-const base::Feature CertVerifyProc::kLegacySymantecPKIEnforcement{
+const base::Feature __attribute__((no_destroy)) CertVerifyProc::kLegacySymantecPKIEnforcement{
     "LegacySymantecPKI", base::FEATURE_ENABLED_BY_DEFAULT};
 
 }  // namespace net

@@ -35,7 +35,7 @@ namespace {
 // This is for finch. See also crbug.com/633704 for details.
 // TODO(hidehiko): More comments of the intention how this works, when
 // we unify the commandline flags.
-const base::Feature kEnableArcFeature{"EnableARC",
+const base::Feature __attribute__((no_destroy)) kEnableArcFeature{"EnableARC",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Possible values for --arc-availability flag.

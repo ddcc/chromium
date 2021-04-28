@@ -6,7 +6,7 @@
 
 namespace features {
 
-const base::Feature kIdentifiabilityStudy = {"IdentifiabilityStudy",
+const base::Feature __attribute__((no_destroy)) kIdentifiabilityStudy = {"IdentifiabilityStudy",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kIdentifiabilityStudyGeneration = {

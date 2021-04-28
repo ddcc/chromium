@@ -14,31 +14,31 @@ namespace features {
 
 // Enables Biometrics for the Touch To Fill feature. This only effects Android
 // and requires autofill::features::kAutofillTouchToFill to be enabled as well.
-const base::Feature kBiometricTouchToFill = {"BiometricTouchToFill",
+const base::Feature __attribute__((no_destroy)) kBiometricTouchToFill = {"BiometricTouchToFill",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables creating Affiliation Service and prefetching change password info for
 // requested sites.
-const base::Feature kChangePasswordAffiliationInfo = {
+const base::Feature __attribute__((no_destroy)) kChangePasswordAffiliationInfo = {
     "ChangePasswordAffiliationInfo", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // After saving/updating a password show a bubble reminder about the status of
 // other compromised credentials.
-const base::Feature kCompromisedPasswordsReengagement = {
+const base::Feature __attribute__((no_destroy)) kCompromisedPasswordsReengagement = {
     "CompromisedPasswordsReengagement", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the editing of passwords in Chrome settings.
-const base::Feature kEditPasswordsInSettings = {
+const base::Feature __attribute__((no_destroy)) kEditPasswordsInSettings = {
     "EditPasswordsInSettings", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the overwriting of prefilled username fields if the server predicted
 // the field to contain a placeholder value.
-const base::Feature kEnableOverwritingPlaceholderUsernames{
+const base::Feature __attribute__((no_destroy)) kEnableOverwritingPlaceholderUsernames{
     "EnableOverwritingPlaceholderUsernames", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables a second, Gaia-account-scoped password store for users who are signed
 // in but not syncing.
-const base::Feature kEnablePasswordsAccountStorage = {
+const base::Feature __attribute__((no_destroy)) kEnablePasswordsAccountStorage = {
     "EnablePasswordsAccountStorage", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::Feature KEnablePasswordGenerationForClearTextFields = {
@@ -48,24 +48,24 @@ const base::Feature KEnablePasswordGenerationForClearTextFields = {
 // Enables showing UI button in password fallback sheet.
 // The button opens a different sheet that allows filling a password from any
 // origin.
-const base::Feature kFillingPasswordsFromAnyOrigin{
+const base::Feature __attribute__((no_destroy)) kFillingPasswordsFromAnyOrigin{
     "FillingPasswordsFromAnyOrigin", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the experiment for the password manager to only fill on account
 // selection, rather than autofilling on page load, with highlighting of fields.
-const base::Feature kFillOnAccountSelect = {"fill-on-account-select",
+const base::Feature __attribute__((no_destroy)) kFillOnAccountSelect = {"fill-on-account-select",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables password change flow from leaked password dialog.
-const base::Feature kPasswordChange = {"PasswordChange",
+const base::Feature __attribute__((no_destroy)) kPasswordChange = {"PasswordChange",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables password change flow from bulk leak check in settings.
-const base::Feature kPasswordChangeInSettings = {
+const base::Feature __attribute__((no_destroy)) kPasswordChangeInSettings = {
     "PasswordChangeInSettings", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the bulk Password Check feature for signed in users.
-const base::Feature kPasswordCheck = {"PasswordCheck",
+const base::Feature __attribute__((no_destroy)) kPasswordCheck = {"PasswordCheck",
 #if defined(OS_ANDROID) || defined(OS_IOS)
                                       base::FEATURE_DISABLED_BY_DEFAULT
 #else
@@ -74,28 +74,28 @@ const base::Feature kPasswordCheck = {"PasswordCheck",
 };
 
 // Controls the ability to import passwords from Chrome's settings page.
-const base::Feature kPasswordImport = {"PasswordImport",
+const base::Feature __attribute__((no_destroy)) kPasswordImport = {"PasswordImport",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables password scripts fetching for the |PasswordChangeInSettings| feature.
-const base::Feature kPasswordScriptsFetching = {
+const base::Feature __attribute__((no_destroy)) kPasswordScriptsFetching = {
     "PasswordScriptsFetching", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables checking credentials for weakness in Password Check.
-const base::Feature kPasswordsWeaknessCheck = {
+const base::Feature __attribute__((no_destroy)) kPasswordsWeaknessCheck = {
     "PasswordsWeaknessCheck", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables showing UI which allows users to easily revert their choice to
 // never save passwords on a certain website.
-const base::Feature kRecoverFromNeverSaveAndroid = {
+const base::Feature __attribute__((no_destroy)) kRecoverFromNeverSaveAndroid = {
     "RecoverFromNeverSaveAndroid", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables support of filling and saving on username first flow.
-const base::Feature kUsernameFirstFlow = {"UsernameFirstFlow",
+const base::Feature __attribute__((no_destroy)) kUsernameFirstFlow = {"UsernameFirstFlow",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enable support for .well-known/change-password URLs.
-const base::Feature kWellKnownChangePassword = {
+const base::Feature __attribute__((no_destroy)) kWellKnownChangePassword = {
     "WellKnownChangePassword", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Field trial identifier for password generation requirements.

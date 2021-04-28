@@ -20,7 +20,7 @@
 
 namespace {
 
-const base::Feature kInstallIconExperiment{"InstallIconExperiment",
+const base::Feature __attribute__((no_destroy)) kInstallIconExperiment{"InstallIconExperiment",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
 enum class ExperimentIcon { kDownloadToDevice, kDownload };

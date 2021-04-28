@@ -18,19 +18,19 @@ namespace features {
 
 #if defined(OS_WIN)
 // Empty the working set of processes in which all frames are frozen.
-const base::Feature kEmptyWorkingSet{"EmptyWorkingSet",
+const base::Feature __attribute__((no_destroy)) kEmptyWorkingSet{"EmptyWorkingSet",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_WIN)
 
 #if defined(OS_CHROMEOS)
 
-const base::Feature kTrimOnMemoryPressure{"TrimOnMemoryPressure",
+const base::Feature __attribute__((no_destroy)) kTrimOnMemoryPressure{"TrimOnMemoryPressure",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTrimArcOnMemoryPressure{"TrimArcOnMemoryPressure",
+const base::Feature __attribute__((no_destroy)) kTrimArcOnMemoryPressure{"TrimArcOnMemoryPressure",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTrimOnFreeze{"TrimOnFreeze",
+const base::Feature __attribute__((no_destroy)) kTrimOnFreeze{"TrimOnFreeze",
                                   base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kGraphWalkBackoffTimeSec = {
@@ -103,7 +103,7 @@ TrimOnMemoryPressureParams TrimOnMemoryPressureParams::GetParams() {
 #if BUILDFLAG(USE_TCMALLOC)
 // This flag will allow the browser process to adjust the tcmalloc tunables to
 // balance performance and memory utilization.
-const base::Feature kDynamicTcmallocTuning{"DynamicTcmallocTuning",
+const base::Feature __attribute__((no_destroy)) kDynamicTcmallocTuning{"DynamicTcmallocTuning",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
 // The time between attempting to update tcmalloc tunables.
@@ -119,10 +119,10 @@ const base::FeatureParam<int> kDynamicTuningScaleInvisibleTimeSec = {
 #endif  // defined(OS_CHROMEOS)
 
 #if !defined(OS_ANDROID)
-const base::Feature kPageFreezingFromPerformanceManager{
+const base::Feature __attribute__((no_destroy)) kPageFreezingFromPerformanceManager{
     "PageFreezingFromPerformanceManager", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kUrgentDiscardingFromPerformanceManager{
+const base::Feature __attribute__((no_destroy)) kUrgentDiscardingFromPerformanceManager{
   "UrgentDiscardingFromPerformanceManager",
 #if defined(OS_CHROMEOS) || defined(OS_LINUX)
       base::FEATURE_DISABLED_BY_DEFAULT
@@ -146,11 +146,11 @@ UrgentDiscardingParams UrgentDiscardingParams::GetParams() {
   return params;
 }
 
-const base::Feature kBackgroundTabLoadingFromPerformanceManager{
+const base::Feature __attribute__((no_destroy)) kBackgroundTabLoadingFromPerformanceManager{
     "BackgroundTabLoadingFromPerformanceManager",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kHighPMFDiscardPolicy{"HighPMFDiscardPolicy",
+const base::Feature __attribute__((no_destroy)) kHighPMFDiscardPolicy{"HighPMFDiscardPolicy",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 

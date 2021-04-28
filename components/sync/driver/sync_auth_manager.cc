@@ -57,7 +57,7 @@ constexpr net::BackoffEntry::Policy kRequestAccessTokenBackoffPolicy = {
 
 // Enables the retry of the token fetch without backoff on the first fetch
 // cancellation.
-const base::Feature kSyncRetryFirstCanceledTokenFetch = {
+const base::Feature __attribute__((no_destroy)) kSyncRetryFirstCanceledTokenFetch = {
     "SyncRetryFirstCanceledTokenFetch", base::FEATURE_ENABLED_BY_DEFAULT};
 
 SyncAuthManager::SyncAuthManager(

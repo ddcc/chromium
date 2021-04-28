@@ -32,7 +32,7 @@ const size_t kDefaultCacheTimeoutSeconds = 3600;
 }  // namespace
 
 // Consider all URLs within a google domain to be safe.
-const base::Feature kAllowAllGoogleUrls{"SafeSearchAllowAllGoogleURLs",
+const base::Feature __attribute__((no_destroy)) kAllowAllGoogleUrls{"SafeSearchAllowAllGoogleURLs",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 struct URLChecker::Check {

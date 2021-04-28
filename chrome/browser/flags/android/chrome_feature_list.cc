@@ -283,378 +283,378 @@ const base::Feature* FindFeatureExposedToJava(const std::string& feature_name) {
 }  // namespace
 
 // Alphabetical:
-const base::Feature kAdjustWebApkInstallationSpace = {
+const base::Feature __attribute__((no_destroy)) kAdjustWebApkInstallationSpace = {
     "AdjustWebApkInstallationSpace", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAndroidDefaultBrowserPromo{
+const base::Feature __attribute__((no_destroy)) kAndroidDefaultBrowserPromo{
     "AndroidDefaultBrowserPromo", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAndroidManagedByMenuItem{"AndroidManagedByMenuItem",
+const base::Feature __attribute__((no_destroy)) kAndroidManagedByMenuItem{"AndroidManagedByMenuItem",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAndroidMultipleDisplay{"AndroidMultipleDisplay",
+const base::Feature __attribute__((no_destroy)) kAndroidMultipleDisplay{"AndroidMultipleDisplay",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAndroidNightModeTabReparenting{
+const base::Feature __attribute__((no_destroy)) kAndroidNightModeTabReparenting{
     "AndroidNightModeTabReparenting", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAllowNewIncognitoTabIntents{
+const base::Feature __attribute__((no_destroy)) kAllowNewIncognitoTabIntents{
     "AllowNewIncognitoTabIntents", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kFocusOmniboxInIncognitoTabIntents{
+const base::Feature __attribute__((no_destroy)) kFocusOmniboxInIncognitoTabIntents{
     "FocusOmniboxInIncognitoTabIntents", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAllowRemoteContextForNotifications{
+const base::Feature __attribute__((no_destroy)) kAllowRemoteContextForNotifications{
     "AllowRemoteContextForNotifications", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAndroidPartnerCustomizationPhenotype{
+const base::Feature __attribute__((no_destroy)) kAndroidPartnerCustomizationPhenotype{
     "AndroidPartnerCustomizationPhenotype", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // TODO(rouslan): Remove this. (Currently used in
 // GooglePayPaymentAppFactory.java)
-const base::Feature kAndroidPayIntegrationV2{"AndroidPayIntegrationV2",
+const base::Feature __attribute__((no_destroy)) kAndroidPayIntegrationV2{"AndroidPayIntegrationV2",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAndroidSearchEngineChoiceNotification{
+const base::Feature __attribute__((no_destroy)) kAndroidSearchEngineChoiceNotification{
     "AndroidSearchEngineChoiceNotification", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kBackgroundTaskComponentUpdate{
+const base::Feature __attribute__((no_destroy)) kBackgroundTaskComponentUpdate{
     "BackgroundTaskComponentUpdate", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kBentoOffline{"BentoOffline",
+const base::Feature __attribute__((no_destroy)) kBentoOffline{"BentoOffline",
                                   base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kConditionalTabStripAndroid{
+const base::Feature __attribute__((no_destroy)) kConditionalTabStripAndroid{
     "ConditionalTabStripAndroid", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Used in downstream code.
-const base::Feature kCastDeviceFilter{"CastDeviceFilter",
+const base::Feature __attribute__((no_destroy)) kCastDeviceFilter{"CastDeviceFilter",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCloseTabSuggestions{"CloseTabSuggestions",
+const base::Feature __attribute__((no_destroy)) kCloseTabSuggestions{"CloseTabSuggestions",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCriticalPersistedTabData{
+const base::Feature __attribute__((no_destroy)) kCriticalPersistedTabData{
     "CriticalPersistedTabData", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCCTBackgroundTab{"CCTBackgroundTab",
+const base::Feature __attribute__((no_destroy)) kCCTBackgroundTab{"CCTBackgroundTab",
                                       base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kCCTClientDataHeader{"CCTClientDataHeader",
+const base::Feature __attribute__((no_destroy)) kCCTClientDataHeader{"CCTClientDataHeader",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCCTExternalLinkHandling{"CCTExternalLinkHandling",
+const base::Feature __attribute__((no_destroy)) kCCTExternalLinkHandling{"CCTExternalLinkHandling",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kCCTIncognito{"CCTIncognito",
+const base::Feature __attribute__((no_destroy)) kCCTIncognito{"CCTIncognito",
                                   base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCCTPostMessageAPI{"CCTPostMessageAPI",
+const base::Feature __attribute__((no_destroy)) kCCTPostMessageAPI{"CCTPostMessageAPI",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kCCTRedirectPreconnect{"CCTRedirectPreconnect",
+const base::Feature __attribute__((no_destroy)) kCCTRedirectPreconnect{"CCTRedirectPreconnect",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kCCTReportParallelRequestStatus{
+const base::Feature __attribute__((no_destroy)) kCCTReportParallelRequestStatus{
     "CCTReportParallelRequestStatus", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCCTResourcePrefetch{"CCTResourcePrefetch",
+const base::Feature __attribute__((no_destroy)) kCCTResourcePrefetch{"CCTResourcePrefetch",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDontAutoHideBrowserControls{
+const base::Feature __attribute__((no_destroy)) kDontAutoHideBrowserControls{
     "DontAutoHideBrowserControls", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kChromeShareHighlightsAndroid{
+const base::Feature __attribute__((no_destroy)) kChromeShareHighlightsAndroid{
     "ChromeShareHighlightsAndroid", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kChromeShareQRCode{"ChromeShareQRCode",
+const base::Feature __attribute__((no_destroy)) kChromeShareQRCode{"ChromeShareQRCode",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kChromeShareScreenshot{"ChromeShareScreenshot",
+const base::Feature __attribute__((no_destroy)) kChromeShareScreenshot{"ChromeShareScreenshot",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kChromeSharingHub{"ChromeSharingHub",
+const base::Feature __attribute__((no_destroy)) kChromeSharingHub{"ChromeSharingHub",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kChromeSharingHubV15{"ChromeSharingHubV15",
+const base::Feature __attribute__((no_destroy)) kChromeSharingHubV15{"ChromeSharingHubV15",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCommandLineOnNonRooted{"CommandLineOnNonRooted",
+const base::Feature __attribute__((no_destroy)) kCommandLineOnNonRooted{"CommandLineOnNonRooted",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContentSuggestionsScrollToLoad{
+const base::Feature __attribute__((no_destroy)) kContentSuggestionsScrollToLoad{
     "ContentSuggestionsScrollToLoad", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextMenuEnableLensShoppingAllowlist{
+const base::Feature __attribute__((no_destroy)) kContextMenuEnableLensShoppingAllowlist{
     "ContextMenuEnableLensShoppingAllowlist",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextMenuGoogleLensChip{
+const base::Feature __attribute__((no_destroy)) kContextMenuGoogleLensChip{
     "ContextMenuGoogleLensChip", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextMenuSearchWithGoogleLens{
+const base::Feature __attribute__((no_destroy)) kContextMenuSearchWithGoogleLens{
     "ContextMenuSearchWithGoogleLens", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kContextMenuShopWithGoogleLens{
+const base::Feature __attribute__((no_destroy)) kContextMenuShopWithGoogleLens{
     "ContextMenuShopWithGoogleLens", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextMenuSearchAndShopWithGoogleLens{
+const base::Feature __attribute__((no_destroy)) kContextMenuSearchAndShopWithGoogleLens{
     "ContextMenuSearchAndShopWithGoogleLens",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextualSearchDebug{"ContextualSearchDebug",
+const base::Feature __attribute__((no_destroy)) kContextualSearchDebug{"ContextualSearchDebug",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextualSearchDefinitions{
+const base::Feature __attribute__((no_destroy)) kContextualSearchDefinitions{
     "ContextualSearchDefinitions", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kContextualSearchLegacyHttpPolicy{
+const base::Feature __attribute__((no_destroy)) kContextualSearchLegacyHttpPolicy{
     "ContextualSearchLegacyHttpPolicy", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextualSearchLongpressResolve{
+const base::Feature __attribute__((no_destroy)) kContextualSearchLongpressResolve{
     "ContextualSearchLongpressResolve", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextualSearchMlTapSuppression{
+const base::Feature __attribute__((no_destroy)) kContextualSearchMlTapSuppression{
     "ContextualSearchMlTapSuppression", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextualSearchSecondTap{
+const base::Feature __attribute__((no_destroy)) kContextualSearchSecondTap{
     "ContextualSearchSecondTap", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextualSearchTapDisableOverride{
+const base::Feature __attribute__((no_destroy)) kContextualSearchTapDisableOverride{
     "ContextualSearchTapDisableOverride", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextualSearchTranslations{
+const base::Feature __attribute__((no_destroy)) kContextualSearchTranslations{
     "ContextualSearchTranslations", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDarkenWebsitesCheckboxInThemesSetting{
+const base::Feature __attribute__((no_destroy)) kDarkenWebsitesCheckboxInThemesSetting{
     "DarkenWebsitesCheckboxInThemesSetting", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDirectActions{"DirectActions",
+const base::Feature __attribute__((no_destroy)) kDirectActions{"DirectActions",
                                    base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDownloadAutoResumptionThrottling{
+const base::Feature __attribute__((no_destroy)) kDownloadAutoResumptionThrottling{
     "DownloadAutoResumptionThrottling", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDownloadProgressInfoBar{"DownloadProgressInfoBar",
+const base::Feature __attribute__((no_destroy)) kDownloadProgressInfoBar{"DownloadProgressInfoBar",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDownloadFileProvider{"DownloadFileProvider",
+const base::Feature __attribute__((no_destroy)) kDownloadFileProvider{"DownloadFileProvider",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDownloadNotificationBadge{
+const base::Feature __attribute__((no_destroy)) kDownloadNotificationBadge{
     "DownloadNotificationBadge", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDownloadRename{"DownloadRename",
+const base::Feature __attribute__((no_destroy)) kDownloadRename{"DownloadRename",
                                     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDuetTabStripIntegrationAndroid{
+const base::Feature __attribute__((no_destroy)) kDuetTabStripIntegrationAndroid{
     "DuetTabStripIntegrationAndroid", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnhancedProtectionPromoCard{
+const base::Feature __attribute__((no_destroy)) kEnhancedProtectionPromoCard{
     "EnhancedProtectionPromoCard", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEphemeralTabUsingBottomSheet{
+const base::Feature __attribute__((no_destroy)) kEphemeralTabUsingBottomSheet{
     "EphemeralTabUsingBottomSheet", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kExploreSites{"ExploreSites",
+const base::Feature __attribute__((no_destroy)) kExploreSites{"ExploreSites",
                                   base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kHandleMediaIntents{"HandleMediaIntents",
+const base::Feature __attribute__((no_destroy)) kHandleMediaIntents{"HandleMediaIntents",
                                         base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enable the HomePage Location feature that allows enterprise policy set and
 // force the home page url for managed devices.
-const base::Feature kHomepageLocation{"HomepageLocationPolicy",
+const base::Feature __attribute__((no_destroy)) kHomepageLocation{"HomepageLocationPolicy",
                                       base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kHomepagePromoCard{"HomepagePromoCard",
+const base::Feature __attribute__((no_destroy)) kHomepagePromoCard{"HomepagePromoCard",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Homepage Promo experiment group for synthetic field trial.
-const base::Feature kHomepagePromoSyntheticPromoSeenEnabled{
+const base::Feature __attribute__((no_destroy)) kHomepagePromoSyntheticPromoSeenEnabled{
     "HomepagePromoSyntheticPromoSeenEnabled",
     base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kHomepagePromoSyntheticPromoSeenTracking{
+const base::Feature __attribute__((no_destroy)) kHomepagePromoSyntheticPromoSeenTracking{
     "HomepagePromoSyntheticPromoSeenTracking",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kHomepageSettingsUIConversion{
+const base::Feature __attribute__((no_destroy)) kHomepageSettingsUIConversion{
     "HomepageSettingsUIConversion", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kHorizontalTabSwitcherAndroid{
+const base::Feature __attribute__((no_destroy)) kHorizontalTabSwitcherAndroid{
     "HorizontalTabSwitcherAndroid", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kImmersiveUiMode{"ImmersiveUiMode",
+const base::Feature __attribute__((no_destroy)) kImmersiveUiMode{"ImmersiveUiMode",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kInlineUpdateFlow{"InlineUpdateFlow",
+const base::Feature __attribute__((no_destroy)) kInlineUpdateFlow{"InlineUpdateFlow",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kInstantStart{"InstantStart",
+const base::Feature __attribute__((no_destroy)) kInstantStart{"InstantStart",
                                   base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kKitKatSupported{"KitKatSupported",
+const base::Feature __attribute__((no_destroy)) kKitKatSupported{"KitKatSupported",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSearchEnginePromoExistingDevice{
+const base::Feature __attribute__((no_destroy)) kSearchEnginePromoExistingDevice{
     "SearchEnginePromo.ExistingDevice", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSearchEnginePromoNewDevice{
+const base::Feature __attribute__((no_destroy)) kSearchEnginePromoNewDevice{
     "SearchEnginePromo.NewDevice", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kNewPhotoPicker{"NewPhotoPicker",
+const base::Feature __attribute__((no_destroy)) kNewPhotoPicker{"NewPhotoPicker",
                                     base::FEATURE_ENABLED_BY_DEFAULT};
 
 // TODO(knollr): This is a temporary kill switch, it can be removed once we feel
 // okay about leaving it on.
-const base::Feature kNotificationSuspender{"NotificationSuspender",
+const base::Feature __attribute__((no_destroy)) kNotificationSuspender{"NotificationSuspender",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kOfflineIndicatorV2{"OfflineIndicatorV2",
+const base::Feature __attribute__((no_destroy)) kOfflineIndicatorV2{"OfflineIndicatorV2",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOmniboxSpareRenderer{"OmniboxSpareRenderer",
+const base::Feature __attribute__((no_destroy)) kOmniboxSpareRenderer{"OmniboxSpareRenderer",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOverlayNewLayout{"OverlayNewLayout",
+const base::Feature __attribute__((no_destroy)) kOverlayNewLayout{"OverlayNewLayout",
                                       base::FEATURE_ENABLED_BY_DEFAULT};
 
 // TODO(rouslan): Remove this. (Currently used in
 // GooglePayPaymentAppFactory.java)
-const base::Feature kPayWithGoogleV1{"PayWithGoogleV1",
+const base::Feature __attribute__((no_destroy)) kPayWithGoogleV1{"PayWithGoogleV1",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kPhotoPickerVideoSupport{"PhotoPickerVideoSupport",
+const base::Feature __attribute__((no_destroy)) kPhotoPickerVideoSupport{"PhotoPickerVideoSupport",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPhotoPickerZoom{"PhotoPickerZoom",
+const base::Feature __attribute__((no_destroy)) kPhotoPickerZoom{"PhotoPickerZoom",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kProbabilisticCryptidRenderer{
+const base::Feature __attribute__((no_destroy)) kProbabilisticCryptidRenderer{
     "ProbabilisticCryptidRenderer", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kReachedCodeProfiler{"ReachedCodeProfiler",
+const base::Feature __attribute__((no_destroy)) kReachedCodeProfiler{"ReachedCodeProfiler",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kReaderModeInCCT{"ReaderModeInCCT",
+const base::Feature __attribute__((no_destroy)) kReaderModeInCCT{"ReaderModeInCCT",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kReengagementNotification{
+const base::Feature __attribute__((no_destroy)) kReengagementNotification{
     "ReengagementNotification", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kRelatedSearches{"RelatedSearches",
+const base::Feature __attribute__((no_destroy)) kRelatedSearches{"RelatedSearches",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kServiceManagerForBackgroundPrefetch{
+const base::Feature __attribute__((no_destroy)) kServiceManagerForBackgroundPrefetch{
     "ServiceManagerForBackgroundPrefetch", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kServiceManagerForDownload{
+const base::Feature __attribute__((no_destroy)) kServiceManagerForDownload{
     "ServiceManagerForDownload", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kShareButtonInTopToolbar{"ShareButtonInTopToolbar",
+const base::Feature __attribute__((no_destroy)) kShareButtonInTopToolbar{"ShareButtonInTopToolbar",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kShoppingAssist{"ShoppingAssist",
+const base::Feature __attribute__((no_destroy)) kShoppingAssist{"ShoppingAssist",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSpannableInlineAutocomplete{
+const base::Feature __attribute__((no_destroy)) kSpannableInlineAutocomplete{
     "SpannableInlineAutocomplete", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSpecialLocaleWrapper{"SpecialLocaleWrapper",
+const base::Feature __attribute__((no_destroy)) kSpecialLocaleWrapper{"SpecialLocaleWrapper",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSpecialUserDecision{"SpecialUserDecision",
+const base::Feature __attribute__((no_destroy)) kSpecialUserDecision{"SpecialUserDecision",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSwapPixelFormatToFixConvertFromTranslucent{
+const base::Feature __attribute__((no_destroy)) kSwapPixelFormatToFixConvertFromTranslucent{
     "SwapPixelFormatToFixConvertFromTranslucent",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTabEngagementReportingAndroid{
+const base::Feature __attribute__((no_destroy)) kTabEngagementReportingAndroid{
     "TabEngagementReportingAndroid", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTabGroupsAndroid{"TabGroupsAndroid",
+const base::Feature __attribute__((no_destroy)) kTabGroupsAndroid{"TabGroupsAndroid",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTabGroupsContinuationAndroid{
+const base::Feature __attribute__((no_destroy)) kTabGroupsContinuationAndroid{
     "TabGroupsContinuationAndroid", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTabGroupsUiImprovementsAndroid{
+const base::Feature __attribute__((no_destroy)) kTabGroupsUiImprovementsAndroid{
     "TabGroupsUiImprovementsAndroid", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTabGridLayoutAndroid{"TabGridLayoutAndroid",
+const base::Feature __attribute__((no_destroy)) kTabGridLayoutAndroid{"TabGridLayoutAndroid",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTabReparenting{"TabReparenting",
+const base::Feature __attribute__((no_destroy)) kTabReparenting{"TabReparenting",
                                     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTabSwitcherOnReturn{"TabSwitcherOnReturn",
+const base::Feature __attribute__((no_destroy)) kTabSwitcherOnReturn{"TabSwitcherOnReturn",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTabToGTSAnimation{"TabToGTSAnimation",
+const base::Feature __attribute__((no_destroy)) kTabToGTSAnimation{"TabToGTSAnimation",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTabbedAppOverflowMenuIcons{
+const base::Feature __attribute__((no_destroy)) kTabbedAppOverflowMenuIcons{
     "TabbedAppOverflowMenuIcons", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTabbedAppOverflowMenuRegroup{
+const base::Feature __attribute__((no_destroy)) kTabbedAppOverflowMenuRegroup{
     "TabbedAppOverflowMenuRegroup", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTabbedAppOverflowMenuThreeButtonActionbar{
+const base::Feature __attribute__((no_destroy)) kTabbedAppOverflowMenuThreeButtonActionbar{
     "TabbedAppOverflowMenuThreeButtonActionbar",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTestDefaultDisabled{"TestDefaultDisabled",
+const base::Feature __attribute__((no_destroy)) kTestDefaultDisabled{"TestDefaultDisabled",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTestDefaultEnabled{"TestDefaultEnabled",
+const base::Feature __attribute__((no_destroy)) kTestDefaultEnabled{"TestDefaultEnabled",
                                         base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTrustedWebActivityLocationDelegation{
+const base::Feature __attribute__((no_destroy)) kTrustedWebActivityLocationDelegation{
     "TrustedWebActivityLocationDelegation", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTrustedWebActivityNewDisclosure{
+const base::Feature __attribute__((no_destroy)) kTrustedWebActivityNewDisclosure{
     "TrustedWebActivityNewDisclosure", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTrustedWebActivityPostMessage{
+const base::Feature __attribute__((no_destroy)) kTrustedWebActivityPostMessage{
     "TrustedWebActivityPostMessage", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTrustedWebActivityQualityEnforcement{
+const base::Feature __attribute__((no_destroy)) kTrustedWebActivityQualityEnforcement{
     "TrustedWebActivityQualityEnforcement", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTrustedWebActivityQualityEnforcementForced{
+const base::Feature __attribute__((no_destroy)) kTrustedWebActivityQualityEnforcementForced{
     "TrustedWebActivityQualityEnforcementForced",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kStartSurfaceAndroid{"StartSurfaceAndroid",
+const base::Feature __attribute__((no_destroy)) kStartSurfaceAndroid{"StartSurfaceAndroid",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 // If enabled, keep logging and reporting UMA while chrome is backgrounded.
-const base::Feature kUmaBackgroundSessions{"UMABackgroundSessions",
+const base::Feature __attribute__((no_destroy)) kUmaBackgroundSessions{"UMABackgroundSessions",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kUpdateNotificationSchedulingIntegration{
+const base::Feature __attribute__((no_destroy)) kUpdateNotificationSchedulingIntegration{
     "UpdateNotificationSchedulingIntegration",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPrefetchNotificationSchedulingIntegration{
+const base::Feature __attribute__((no_destroy)) kPrefetchNotificationSchedulingIntegration{
     "PrefetchNotificationSchedulingIntegration",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kUpdateNotificationScheduleServiceImmediateShowOption{
+const base::Feature __attribute__((no_destroy)) kUpdateNotificationScheduleServiceImmediateShowOption{
     "UpdateNotificationScheduleServiceImmediateShowOption",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kUsageStatsFeature{"UsageStats",
+const base::Feature __attribute__((no_destroy)) kUsageStatsFeature{"UsageStats",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kUserMediaScreenCapturing{
+const base::Feature __attribute__((no_destroy)) kUserMediaScreenCapturing{
     "UserMediaScreenCapturing", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kVrBrowsingFeedback{"VrBrowsingFeedback",
+const base::Feature __attribute__((no_destroy)) kVrBrowsingFeedback{"VrBrowsingFeedback",
                                         base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kWebApkAdaptiveIcon{"WebApkAdaptiveIcon",
+const base::Feature __attribute__((no_destroy)) kWebApkAdaptiveIcon{"WebApkAdaptiveIcon",
                                         base::FEATURE_ENABLED_BY_DEFAULT};
 
 static jboolean JNI_ChromeFeatureList_IsEnabled(

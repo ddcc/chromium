@@ -26,7 +26,7 @@ bool SiteIsolationPolicy::IsIsolationForPasswordSitesEnabled() {
   // chrome://flags switch for this feature takes precedence over any memory
   // threshold restrictions and over a switch for disabling site isolation.
   if (base::FeatureList::GetInstance()->IsFeatureOverriddenFromCommandLine(
-          features::kSiteIsolationForPasswordSites.name,
+          features::kSiteIsolationForPasswordSites.name.v(),
           base::FeatureList::OVERRIDE_ENABLE_FEATURE)) {
     return true;
   }

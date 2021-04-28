@@ -712,7 +712,7 @@ IN_PROC_BROWSER_TEST_F(
        "https://example.com/", "https://dummy.com/"});
 }
 
-const base::Feature kNavigationPredictorMultiplePrerenders{
+const base::Feature __attribute__((no_destroy)) kNavigationPredictorMultiplePrerenders{
     "NavigationPredictorMultiplePrerenders", base::FEATURE_ENABLED_BY_DEFAULT};
 
 class NavigationPredictorBrowserTestMultiplePrerender

@@ -12,11 +12,11 @@
 
 namespace blink {
 
-constexpr const mojom::blink::DocumentPolicyFeature kDefault =
+constexpr const mojom::blink::DocumentPolicyFeature __attribute__((no_destroy)) kDefault =
     mojom::blink::DocumentPolicyFeature::kDefault;
-constexpr const mojom::blink::DocumentPolicyFeature kBoolFeature =
+constexpr const mojom::blink::DocumentPolicyFeature __attribute__((no_destroy)) kBoolFeature =
     static_cast<mojom::blink::DocumentPolicyFeature>(1);
-constexpr const mojom::blink::DocumentPolicyFeature kDoubleFeature =
+constexpr const mojom::blink::DocumentPolicyFeature __attribute__((no_destroy)) kDoubleFeature =
     static_cast<mojom::blink::DocumentPolicyFeature>(2);
 
 // This is the test version of |PolicyParserMessageBuffer::Message| as

@@ -9,30 +9,30 @@
 namespace device {
 
 #if defined(OS_MAC)
-const base::Feature kNewUsbBackend{"NewUsbBackend",
+const base::Feature __attribute__((no_destroy)) kNewUsbBackend{"NewUsbBackend",
                                    base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_MAC)
 
 #if defined(OS_WIN)
-const base::Feature kNewUsbBackend{"NewUsbBackend",
+const base::Feature __attribute__((no_destroy)) kNewUsbBackend{"NewUsbBackend",
                                    base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // defined(OS_WIN)
 
 #if defined(OS_WIN)
-const base::Feature kNewBLEWinImplementation{"NewBLEWinImplementation",
+const base::Feature __attribute__((no_destroy)) kNewBLEWinImplementation{"NewBLEWinImplementation",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Controls whether a more reliable GATT session handling
 // implementation is used on Windows 10 1709 (RS3) and beyond.
 //
 // Disabled due to crbug/1120338.
-const base::Feature kNewBLEGattSessionHandling{
+const base::Feature __attribute__((no_destroy)) kNewBLEGattSessionHandling{
     "NewBLEGattSessionHandling", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_WIN)
 
 #if BUILDFLAG(ENABLE_VR)
 // Controls whether the orientation sensor based device is enabled.
-const base::Feature kWebXrOrientationSensorDevice {
+const base::Feature __attribute__((no_destroy)) kWebXrOrientationSensorDevice {
   "WebXROrientationSensorDevice",
 #if defined(OS_ANDROID)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -46,12 +46,12 @@ const base::Feature kWebXrOrientationSensorDevice {
 namespace features {
 #if BUILDFLAG(ENABLE_OPENXR)
 // Controls WebXR support for the OpenXR Runtime.
-const base::Feature kOpenXR{"OpenXR", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kOpenXR{"OpenXR", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // ENABLE_OPENXR
 
 #if BUILDFLAG(ENABLE_WINDOWS_MR)
 // Controls WebXR support for the Windows Mixed Reality Runtime.
-const base::Feature kWindowsMixedReality{"WindowsMixedReality",
+const base::Feature __attribute__((no_destroy)) kWindowsMixedReality{"WindowsMixedReality",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // ENABLE_WINDOWS_MR
 }  // namespace features

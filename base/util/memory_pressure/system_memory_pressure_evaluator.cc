@@ -21,7 +21,7 @@
 namespace util {
 
 #if defined(OS_WIN)
-constexpr base::Feature kUseWinOSMemoryPressureSignals{
+constexpr base::Feature __attribute__((no_destroy)) kUseWinOSMemoryPressureSignals{
     "UseWinOSMemoryPressureSignals", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 

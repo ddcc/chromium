@@ -12,7 +12,7 @@ namespace features {
 // Kill switch (or holdback) for all previews. No previews will be allowed
 // if this feature is disabled. If enabled, which specific previews that
 // are enabled are controlled by other features.
-const base::Feature kPreviews {
+const base::Feature __attribute__((no_destroy)) kPreviews {
   "Previews",
 #if defined(OS_ANDROID) || defined(OS_LINUX) || defined(OS_CHROMEOS)
       // Previews allowed for Android (but also allow on Linux for dev/debug).
@@ -23,20 +23,20 @@ const base::Feature kPreviews {
 };
 
 // Enables the Offline previews on android slow connections.
-const base::Feature kOfflinePreviews{"OfflinePreviews",
+const base::Feature __attribute__((no_destroy)) kOfflinePreviews{"OfflinePreviews",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Support for enabling NoScript previews which includes a base feature
 // and a UserConsistent-specific experiment feature.
 const base::FeatureState kNoScriptDefaultFeatureState =
     base::FEATURE_DISABLED_BY_DEFAULT;
-const base::Feature kNoScriptPreviews{"NoScriptPreviews",
+const base::Feature __attribute__((no_destroy)) kNoScriptPreviews{"NoScriptPreviews",
                                       kNoScriptDefaultFeatureState};
-const base::Feature kNoScriptPreviewsUserConsistentStudy{
+const base::Feature __attribute__((no_destroy)) kNoScriptPreviewsUserConsistentStudy{
     "NoScriptPreviewsUserConsistentStudy", kNoScriptDefaultFeatureState};
 
 // Enables the Stale Previews timestamp on Previews infobars.
-const base::Feature kStalePreviewsTimestamp{"StalePreviewsTimestamp",
+const base::Feature __attribute__((no_destroy)) kStalePreviewsTimestamp{"StalePreviewsTimestamp",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Support for enabling the application of the resource loading hints when
@@ -44,24 +44,24 @@ const base::Feature kStalePreviewsTimestamp{"StalePreviewsTimestamp",
 // experiment feature.
 const base::FeatureState kResourceLoadingHintsDefaultFeatureState =
     base::FEATURE_DISABLED_BY_DEFAULT;
-const base::Feature kResourceLoadingHints{
+const base::Feature __attribute__((no_destroy)) kResourceLoadingHints{
     "ResourceLoadingHints", kResourceLoadingHintsDefaultFeatureState};
-const base::Feature kResourceLoadingHintsUserConsistentStudy{
+const base::Feature __attribute__((no_destroy)) kResourceLoadingHintsUserConsistentStudy{
     "ResourceLoadingHintsUserConsistentStudy",
     kResourceLoadingHintsDefaultFeatureState};
 
 // Provides slow page triggering parameters.
-const base::Feature kSlowPageTriggering{"PreviewsSlowPageTriggering",
+const base::Feature __attribute__((no_destroy)) kSlowPageTriggering{"PreviewsSlowPageTriggering",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables a per-page load holdback experiment using a random coin flip.
-const base::Feature kCoinFlipHoldback{"PreviewsCoinFlipHoldback_UKMOnly",
+const base::Feature __attribute__((no_destroy)) kCoinFlipHoldback{"PreviewsCoinFlipHoldback_UKMOnly",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables filtering navigation URLs by suffix to exclude navigation that look
 // like media resources from triggering previews. For example,
 // http://chromium.org/video.mp4 would be excluded.
-const base::Feature kExcludedMediaSuffixes{"PreviewsExcludedMediaSuffixes",
+const base::Feature __attribute__((no_destroy)) kExcludedMediaSuffixes{"PreviewsExcludedMediaSuffixes",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Support for enabling DeferAllScript previews which includes a base feature
@@ -72,14 +72,14 @@ const base::FeatureState kDeferAllScriptDefaultFeatureState =
 #else   // !defined(OS_ANDROID)
     base::FEATURE_DISABLED_BY_DEFAULT;
 #endif  // defined(OS_ANDROID)
-const base::Feature kDeferAllScriptPreviews{"DeferAllScript",
+const base::Feature __attribute__((no_destroy)) kDeferAllScriptPreviews{"DeferAllScript",
                                             kDeferAllScriptDefaultFeatureState};
-const base::Feature kDeferAllScriptPreviewsUserConsistentStudy{
+const base::Feature __attribute__((no_destroy)) kDeferAllScriptPreviewsUserConsistentStudy{
     "DeferAllScriptUserConsistentStudy", kDeferAllScriptDefaultFeatureState};
 
 // Specifies whether the client is eligible to be part of a UserConsistent
 // study. That is, the UserConsistent-specific features should be considered.
-const base::Feature kEligibleForUserConsistentStudy{
+const base::Feature __attribute__((no_destroy)) kEligibleForUserConsistentStudy{
     "EligibleForUserConsistentStudy", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

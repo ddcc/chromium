@@ -11,52 +11,52 @@
 
 namespace app_list_features {
 
-const base::Feature kEnableAnswerCard{"EnableAnswerCard",
+const base::Feature __attribute__((no_destroy)) kEnableAnswerCard{"EnableAnswerCard",
                                       base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kEnableAppDataSearch{"EnableAppDataSearch",
+const base::Feature __attribute__((no_destroy)) kEnableAppDataSearch{"EnableAppDataSearch",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kEnableSettingsShortcutSearch{
+const base::Feature __attribute__((no_destroy)) kEnableSettingsShortcutSearch{
     "EnableSettingsShortcutSearch", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kEnableZeroStateSuggestions{
+const base::Feature __attribute__((no_destroy)) kEnableZeroStateSuggestions{
     "EnableZeroStateSuggestions", base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kEnableAppListSearchAutocomplete{
+const base::Feature __attribute__((no_destroy)) kEnableAppListSearchAutocomplete{
     "EnableAppListSearchAutocomplete", base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kEnableAppRanker{"EnableAppRanker",
+const base::Feature __attribute__((no_destroy)) kEnableAppRanker{"EnableAppRanker",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kEnableZeroStateAppsRanker{
+const base::Feature __attribute__((no_destroy)) kEnableZeroStateAppsRanker{
     "EnableZeroStateAppsRanker", base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kEnableQueryBasedMixedTypesRanker{
+const base::Feature __attribute__((no_destroy)) kEnableQueryBasedMixedTypesRanker{
     "EnableQueryBasedMixedTypesRanker", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kEnableZeroStateMixedTypesRanker{
+const base::Feature __attribute__((no_destroy)) kEnableZeroStateMixedTypesRanker{
     "EnableZeroStateMixedTypesRanker", base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kEnableAppReinstallZeroState{
+const base::Feature __attribute__((no_destroy)) kEnableAppReinstallZeroState{
     "EnableAppReinstallZeroState", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kEnableSuggestedFiles{"EnableSuggestedFiles",
+const base::Feature __attribute__((no_destroy)) kEnableSuggestedFiles{"EnableSuggestedFiles",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
 // "EnableEmbeddedAssistantUI" is used in finch experiment therefore we cannot
 // change it until fully launched. It is used to redirect Launcher search to
 // Assistant search.
-const base::Feature kEnableAssistantSearch{"EnableEmbeddedAssistantUI",
+const base::Feature __attribute__((no_destroy)) kEnableAssistantSearch{"EnableEmbeddedAssistantUI",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kEnableAppGridGhost{"EnableAppGridGhost",
+const base::Feature __attribute__((no_destroy)) kEnableAppGridGhost{"EnableAppGridGhost",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kEnableAppListLaunchRecording{
+const base::Feature __attribute__((no_destroy)) kEnableAppListLaunchRecording{
     "EnableAppListLaunchRecording", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kEnableAggregatedMlAppRanking{
+const base::Feature __attribute__((no_destroy)) kEnableAggregatedMlAppRanking{
     "EnableAggregatedMlAppRanking", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kLauncherSettingsSearch{"LauncherSettingsSearch",
+const base::Feature __attribute__((no_destroy)) kLauncherSettingsSearch{"LauncherSettingsSearch",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kEnableFuzzyAppSearch{"EnableFuzzyAppSearch",
+const base::Feature __attribute__((no_destroy)) kEnableFuzzyAppSearch{"EnableFuzzyAppSearch",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kEnableExactMatchForNonLatinLocale{
+const base::Feature __attribute__((no_destroy)) kEnableExactMatchForNonLatinLocale{
     "EnableExactMatchForNonLatinLocale", base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kEnableAggregatedMlSearchRanking{
+const base::Feature __attribute__((no_destroy)) kEnableAggregatedMlSearchRanking{
     "EnableAggregatedMlSearchRanking", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kNewDragSpecInLauncher{"NewDragSpecInLauncher",
+const base::Feature __attribute__((no_destroy)) kNewDragSpecInLauncher{"NewDragSpecInLauncher",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kEnableOmniboxRichEntities{
+const base::Feature __attribute__((no_destroy)) kEnableOmniboxRichEntities{
     "EnableOmniboxRichEntities", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsAnswerCardEnabled() {

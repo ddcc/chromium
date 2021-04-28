@@ -28,7 +28,7 @@ using memory_instrumentation::mojom::VmRegion;
 
 // NOTE: Descriptions for these feature params can be found in the userspace
 // swap header file for the UserspaceSwapConfig struct.
-const base::Feature kUserspaceSwap{"UserspaceSwapEnabled",
+const base::Feature __attribute__((no_destroy)) kUserspaceSwap{"UserspaceSwapEnabled",
                                    base::FEATURE_DISABLED_BY_DEFAULT};
 const base::FeatureParam<int> kUserspaceSwapPagesPerRegion = {
     &kUserspaceSwap, "UserspaceSwapPagesPerRegion", 16};

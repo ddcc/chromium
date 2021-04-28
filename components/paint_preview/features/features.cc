@@ -8,10 +8,10 @@
 
 namespace paint_preview {
 
-const base::Feature kPaintPreviewDemo{"PaintPreviewDemo",
+const base::Feature __attribute__((no_destroy)) kPaintPreviewDemo{"PaintPreviewDemo",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPaintPreviewShowOnStartup{
+const base::Feature __attribute__((no_destroy)) kPaintPreviewShowOnStartup{
     "PaintPreviewShowOnStartup", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace paint_preview

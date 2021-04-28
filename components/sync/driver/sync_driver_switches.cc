@@ -41,30 +41,30 @@ const char kSyncShortInitialRetryOverride[] =
 const char kSyncShortNudgeDelayForTest[] = "sync-short-nudge-delay-for-test";
 
 // If enabled, the sync engine will be shut down in the "paused" state.
-const base::Feature kStopSyncInPausedState{"StopSyncInPausedState",
+const base::Feature __attribute__((no_destroy)) kStopSyncInPausedState{"StopSyncInPausedState",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Allows custom passphrase users to receive Wallet data for secondary accounts
 // while in transport-only mode.
-const base::Feature kSyncAllowWalletDataInTransportModeWithCustomPassphrase{
+const base::Feature __attribute__((no_destroy)) kSyncAllowWalletDataInTransportModeWithCustomPassphrase{
     "SyncAllowAutofillWalletDataInTransportModeWithCustomPassphrase",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Controls whether to enable syncing of Autofill Wallet offer data.
-const base::Feature kSyncAutofillWalletOfferData{
+const base::Feature __attribute__((no_destroy)) kSyncAutofillWalletOfferData{
     "SyncAutofillWalletOfferData", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Controls whether to enable syncing of Wi-Fi configurations.
-const base::Feature kSyncWifiConfigurations{"SyncWifiConfigurations",
+const base::Feature __attribute__((no_destroy)) kSyncWifiConfigurations{"SyncWifiConfigurations",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Stops honoring the Android master sync toggle.
-const base::Feature kDecoupleSyncFromAndroidMasterSync{
+const base::Feature __attribute__((no_destroy)) kDecoupleSyncFromAndroidMasterSync{
     "DecoupleSyncFromAndroidMasterSync", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Allows trusted vault implementation to follow key rotation (including device
 // registration).
-const base::Feature kFollowTrustedVaultKeyRotation{
+const base::Feature __attribute__((no_destroy)) kFollowTrustedVaultKeyRotation{
     "FollowTrustedVaultKeyRotation", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace switches

@@ -246,7 +246,7 @@ bool IsCurrentDefaultOrEmpty(const std::set<std::string>& pins_from_sync_raw) {
 
 const char kPinnedAppsPrefAppIDKey[] = "id";
 
-const base::Feature kEnableExtendedShelfLayout{
+const base::Feature __attribute__((no_destroy)) kEnableExtendedShelfLayout{
     "EnableExtendedShelfLayout", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Parameter for the finch experiment with number of default apps on the shelf.

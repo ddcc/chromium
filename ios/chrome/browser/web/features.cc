@@ -6,16 +6,16 @@
 
 namespace web {
 
-const base::Feature kWebPageTextAccessibility{"WebPageTextAccessibility",
+const base::Feature __attribute__((no_destroy)) kWebPageTextAccessibility{"WebPageTextAccessibility",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kWebPageDefaultZoomFromDynamicType{
+const base::Feature __attribute__((no_destroy)) kWebPageDefaultZoomFromDynamicType{
     "WebPageDefaultZoomFromDynamicType", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kWebPageAlternativeTextZoom{
+const base::Feature __attribute__((no_destroy)) kWebPageAlternativeTextZoom{
     "WebPageAlternativeTextZoom", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kMobileGoogleSRP{"MobileGoogleSRP",
+const base::Feature __attribute__((no_destroy)) kMobileGoogleSRP{"MobileGoogleSRP",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace web

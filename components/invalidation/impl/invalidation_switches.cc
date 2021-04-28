@@ -18,15 +18,15 @@ const int kDefaultInstanceIDTokenTTLSeconds = 14 * 24 * 60 * 60;
 }  // namespace
 
 // This feature affects only Android.
-const base::Feature kFCMInvalidationsStartOnceActiveAccountAvailable = {
+const base::Feature __attribute__((no_destroy)) kFCMInvalidationsStartOnceActiveAccountAvailable = {
     "FCMInvalidationsStartOnceActiveAccountAvailable",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kFCMInvalidationsForSyncDontCheckVersion = {
+const base::Feature __attribute__((no_destroy)) kFCMInvalidationsForSyncDontCheckVersion = {
     "FCMInvalidationsForSyncDontCheckVersion",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSyncInstanceIDTokenTTL {
+const base::Feature __attribute__((no_destroy)) kSyncInstanceIDTokenTTL {
   "SyncInstanceIDTokenTTL",
 #if defined(OS_WIN) || defined(OS_MAC) || defined(OS_LINUX) || \
     defined(OS_CHROMEOS) || defined(OS_IOS)
@@ -40,7 +40,7 @@ const base::FeatureParam<int> kSyncInstanceIDTokenTTLSeconds{
     &kSyncInstanceIDTokenTTL, "time_to_live_seconds",
     kDefaultInstanceIDTokenTTLSeconds};
 
-const base::Feature kPolicyInstanceIDTokenTTL{
+const base::Feature __attribute__((no_destroy)) kPolicyInstanceIDTokenTTL{
     "PolicyInstanceIDTokenTTL", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kPolicyInstanceIDTokenTTLSeconds{

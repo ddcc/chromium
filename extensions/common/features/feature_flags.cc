@@ -16,7 +16,7 @@ namespace {
 // Feature flags for extension features. These can be used to implement remote
 // kill switches for extension features. Note any such feature flags must
 // generally be removed once the API has been stable for a few releases.
-constexpr base::Feature kFeatureFlags[] = {
+const base::Feature __attribute__((no_destroy)) kFeatureFlags[] = {
     {"DeclarativeNetRequest", base::FEATURE_ENABLED_BY_DEFAULT}};
 
 const std::vector<base::Feature>* g_feature_flags_test_override = nullptr;
@@ -27,7 +27,7 @@ const base::Feature* GetFeature(T begin,
                                 const std::string& feature_flag) {
   T it =
       std::find_if(begin, end, [&feature_flag](const base::Feature& feature) {
-        return feature.name == feature_flag;
+        return feature.name.v() == feature_flag;
       });
 
   return it == end ? nullptr : &(*it);

@@ -4,5 +4,5 @@
 
 #include "ios/chrome/browser/crash_report/features.h"
 
-const base::Feature kSyntheticCrashReportsForUte{
+const base::Feature __attribute__((no_destroy)) kSyntheticCrashReportsForUte{
     "SyntheticCrashReportsForUte", base::FEATURE_DISABLED_BY_DEFAULT};

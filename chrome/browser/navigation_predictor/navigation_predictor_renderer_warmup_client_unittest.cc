@@ -26,7 +26,7 @@ constexpr char kGoogleSearchURL[] = "https://www.google.com/search?q=test";
 constexpr char kOriginA[] = "https://a.test";
 constexpr char kOriginB[] = "https://b.test";
 
-const base::Feature kNavigationPredictorRendererWarmup{
+const base::Feature __attribute__((no_destroy)) kNavigationPredictorRendererWarmup{
     "NavigationPredictorRendererWarmup", base::FEATURE_DISABLED_BY_DEFAULT};
 
 NavigationPredictorKeyedService::Prediction CreateValidPrediction(

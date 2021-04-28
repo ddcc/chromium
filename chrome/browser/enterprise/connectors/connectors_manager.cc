@@ -19,7 +19,7 @@
 
 namespace enterprise_connectors {
 
-const base::Feature kEnterpriseConnectorsEnabled{
+const base::Feature __attribute__((no_destroy)) kEnterpriseConnectorsEnabled{
     "EnterpriseConnectorsEnabled", base::FEATURE_ENABLED_BY_DEFAULT};
 
 const char kServiceProviderConfig[] = R"({

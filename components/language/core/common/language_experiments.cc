@@ -14,13 +14,13 @@
 
 namespace language {
 // Features:
-const base::Feature kUseHeuristicLanguageModel{
+const base::Feature __attribute__((no_destroy)) kUseHeuristicLanguageModel{
     "UseHeuristicLanguageModel", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kOverrideTranslateTriggerInIndia{
+const base::Feature __attribute__((no_destroy)) kOverrideTranslateTriggerInIndia{
     "OverrideTranslateTriggerInIndia", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kExplicitLanguageAsk{"ExplicitLanguageAsk",
+const base::Feature __attribute__((no_destroy)) kExplicitLanguageAsk{"ExplicitLanguageAsk",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kUseFluentLanguageModel {
+const base::Feature __attribute__((no_destroy)) kUseFluentLanguageModel {
   "UseFluentLanguageModel",
 #if defined(OS_IOS)
       base::FEATURE_DISABLED_BY_DEFAULT
@@ -28,9 +28,9 @@ const base::Feature kUseFluentLanguageModel {
       base::FEATURE_ENABLED_BY_DEFAULT
 #endif
 };
-const base::Feature kNotifySyncOnLanguageDetermined{
+const base::Feature __attribute__((no_destroy)) kNotifySyncOnLanguageDetermined{
     "NotifySyncOnLanguageDetermined", base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kDetailedLanguageSettings{
+const base::Feature __attribute__((no_destroy)) kDetailedLanguageSettings{
     "DetailedLanguageSettings", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Params:

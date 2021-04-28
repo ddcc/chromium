@@ -15,12 +15,12 @@
 namespace {
 
 #if defined(OS_WIN)
-const base::Feature kUseZoomForDsfEnabledByDefault{
+const base::Feature __attribute__((no_destroy)) kUseZoomForDsfEnabledByDefault{
     "use-zoom-for-dsf enabled by default", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
 #if defined(OS_ANDROID)
-const base::Feature kUseZoomForDsfEnabledByDefault{
+const base::Feature __attribute__((no_destroy)) kUseZoomForDsfEnabledByDefault{
     "use-zoom-for-dsf enabled by default", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 

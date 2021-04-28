@@ -12,7 +12,7 @@
 namespace performance_manager {
 namespace features {
 
-const base::Feature kTabLoadingFrameNavigationThrottles{
+const base::Feature __attribute__((no_destroy)) kTabLoadingFrameNavigationThrottles{
     "TabLoadingFrameNavigationThrottles", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Parameters associated with the "TabLoadingFrameNavigationThrottles"

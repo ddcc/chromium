@@ -12,9 +12,9 @@ namespace feature_engagement {
 
 namespace {
 
-const base::Feature kSingleTestFeatureFoo{"test_foo",
+const base::Feature __attribute__((no_destroy)) kSingleTestFeatureFoo{"test_foo",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kSingleTestFeatureBar{"test_bar",
+const base::Feature __attribute__((no_destroy)) kSingleTestFeatureBar{"test_bar",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
 class SingleInvalidConfigurationTest : public ::testing::Test {

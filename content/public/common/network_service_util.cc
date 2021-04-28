@@ -18,7 +18,7 @@ namespace content {
 namespace {
 
 #if defined(OS_ANDROID)
-const base::Feature kNetworkServiceOutOfProcessMemoryThreshold{
+const base::Feature __attribute__((no_destroy)) kNetworkServiceOutOfProcessMemoryThreshold{
     "NetworkServiceOutOfProcessMemoryThreshold",
     base::FEATURE_ENABLED_BY_DEFAULT};
 

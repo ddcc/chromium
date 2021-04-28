@@ -6,7 +6,7 @@
 
 namespace history {
 
-const base::Feature kHideFromApi3Transitions{
+const base::Feature __attribute__((no_destroy)) kHideFromApi3Transitions{
     "HideFromApi3TransitionsFromHistory", base::FEATURE_ENABLED_BY_DEFAULT};
 
 }  // namespace history

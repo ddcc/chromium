@@ -27,14 +27,14 @@
 
 namespace sync_bookmarks {
 
-const base::Feature kInvalidateBookmarkSyncMetadataIfMismatchingGuid{
+const base::Feature __attribute__((no_destroy)) kInvalidateBookmarkSyncMetadataIfMismatchingGuid{
     "InvalidateBookmarkSyncMetadataIfMismatchingGuid",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
 // TODO(crbug.com/1032052): Enable by default once UMA metric
 // Sync.BookmarkModelMetadataClientTagState suggests that most users have
 // received client tag hashes (final GUIDs).
-extern const base::Feature kInvalidateBookmarkSyncMetadataIfClientTagMissing{
+extern const base::Feature __attribute__((no_destroy)) kInvalidateBookmarkSyncMetadataIfClientTagMissing{
     "InvalidateBookmarkSyncMetadataIfClientTagMissing",
     base::FEATURE_DISABLED_BY_DEFAULT};
 // Soft version of the above: it does treat local sync metadata as obsolete if

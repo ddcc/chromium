@@ -7,10 +7,10 @@
 namespace lookalikes {
 namespace features {
 
-const base::Feature kDetectTargetEmbeddingLookalikes{
+const base::Feature __attribute__((no_destroy)) kDetectTargetEmbeddingLookalikes{
     "TargetEmbeddingLookalikes", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kLookalikeInterstitialForPunycode{
+const base::Feature __attribute__((no_destroy)) kLookalikeInterstitialForPunycode{
     "LookalikeInterstitialForPunycode", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

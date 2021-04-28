@@ -182,7 +182,7 @@ void ShowBadFlagsPrompt(content::WebContents* web_contents) {
   for (const base::Feature* feature : kBadFeatureFlagsInAboutFlags) {
     if (base::FeatureList::IsEnabled(*feature)) {
       ShowBadFlagsInfoBarHelper(web_contents, IDS_BAD_FEATURES_WARNING_MESSAGE,
-                                feature->name);
+                                feature->name.v());
       return;
     }
   }

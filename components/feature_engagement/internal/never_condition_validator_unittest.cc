@@ -18,9 +18,9 @@ namespace feature_engagement {
 
 namespace {
 
-const base::Feature kNeverTestFeatureFoo{"test_foo",
+const base::Feature __attribute__((no_destroy)) kNeverTestFeatureFoo{"test_foo",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kNeverTestFeatureBar{"test_bar",
+const base::Feature __attribute__((no_destroy)) kNeverTestFeatureBar{"test_bar",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 // A EventModel that is always postive to show in-product help.

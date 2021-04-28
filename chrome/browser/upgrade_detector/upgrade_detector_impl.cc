@@ -182,7 +182,7 @@ void UpgradeDetectorImpl::DoInitializeThresholds() {
 
 void UpgradeDetectorImpl::StartOutdatedBuildDetector() {
   DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
-  static constexpr base::Feature kOutdatedBuildDetector = {
+  static const base::Feature __attribute__((no_destroy)) kOutdatedBuildDetector = {
       "OutdatedBuildDetector", base::FEATURE_ENABLED_BY_DEFAULT};
 
   if (!base::FeatureList::IsEnabled(kOutdatedBuildDetector))

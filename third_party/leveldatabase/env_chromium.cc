@@ -49,7 +49,7 @@ using leveldb::FileLock;
 using leveldb::Slice;
 using leveldb::Status;
 
-const base::Feature kLevelDBFileHandleEviction{
+const base::Feature __attribute__((no_destroy)) kLevelDBFileHandleEviction{
     "LevelDBFileHandleEviction", base::FEATURE_ENABLED_BY_DEFAULT};
 
 namespace leveldb_env {

@@ -11,13 +11,13 @@
 namespace net {
 namespace features {
 
-const base::Feature kAcceptLanguageHeader{"AcceptLanguageHeader",
+const base::Feature __attribute__((no_destroy)) kAcceptLanguageHeader{"AcceptLanguageHeader",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kCapReferrerToOriginOnCrossOrigin{
+const base::Feature __attribute__((no_destroy)) kCapReferrerToOriginOnCrossOrigin{
     "CapReferrerToOriginOnCrossOrigin", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDnsHttpssvc{"DnsHttpssvc",
+const base::Feature __attribute__((no_destroy)) kDnsHttpssvc{"DnsHttpssvc",
                                  base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<bool> kDnsHttpssvcUseHttpssvc{
@@ -44,7 +44,7 @@ const base::FeatureParam<std::string> kDnsHttpssvcControlDomains{
 const base::FeatureParam<bool> kDnsHttpssvcControlDomainWildcard{
     &kDnsHttpssvc, "DnsHttpssvcControlDomainWildcard", false};
 
-const base::Feature kAvoidH2Reprioritization{"AvoidH2Reprioritization",
+const base::Feature __attribute__((no_destroy)) kAvoidH2Reprioritization{"AvoidH2Reprioritization",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 namespace dns_httpssvc_experiment {
@@ -54,35 +54,35 @@ base::TimeDelta GetExtraTimeAbsolute() {
 }
 }  // namespace dns_httpssvc_experiment
 
-const base::Feature kEnableTLS13EarlyData{"EnableTLS13EarlyData",
+const base::Feature __attribute__((no_destroy)) kEnableTLS13EarlyData{"EnableTLS13EarlyData",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kNetworkQualityEstimator{"NetworkQualityEstimator",
+const base::Feature __attribute__((no_destroy)) kNetworkQualityEstimator{"NetworkQualityEstimator",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSplitCacheByNetworkIsolationKey{
+const base::Feature __attribute__((no_destroy)) kSplitCacheByNetworkIsolationKey{
     "SplitCacheByNetworkIsolationKey", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSplitHostCacheByNetworkIsolationKey{
+const base::Feature __attribute__((no_destroy)) kSplitHostCacheByNetworkIsolationKey{
     "SplitHostCacheByNetworkIsolationKey", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPartitionConnectionsByNetworkIsolationKey{
+const base::Feature __attribute__((no_destroy)) kPartitionConnectionsByNetworkIsolationKey{
     "PartitionConnectionsByNetworkIsolationKey",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPartitionHttpServerPropertiesByNetworkIsolationKey{
+const base::Feature __attribute__((no_destroy)) kPartitionHttpServerPropertiesByNetworkIsolationKey{
     "PartitionHttpServerPropertiesByNetworkIsolationKey",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPartitionSSLSessionsByNetworkIsolationKey{
+const base::Feature __attribute__((no_destroy)) kPartitionSSLSessionsByNetworkIsolationKey{
     "PartitionSSLSessionsByNetworkIsolationKey",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPartitionExpectCTStateByNetworkIsolationKey{
+const base::Feature __attribute__((no_destroy)) kPartitionExpectCTStateByNetworkIsolationKey{
     "PartitionExpectCTStateByNetworkIsolationKey",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kExpectCTPruning{"ExpectCTPruning",
+const base::Feature __attribute__((no_destroy)) kExpectCTPruning{"ExpectCTPruning",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 
 NET_EXPORT extern const base::FeatureParam<int>
@@ -100,28 +100,28 @@ NET_EXPORT extern const base::FeatureParam<int> kExpectCTMaxEntriesPerNik(
 NET_EXPORT extern const base::FeatureParam<int>
     kExpectCTPruneDelaySecs(&kExpectCTPruning, "ExpectCTPruneDelaySecs", 60);
 
-const base::Feature kTLS13KeyUpdate{"TLS13KeyUpdate",
+const base::Feature __attribute__((no_destroy)) kTLS13KeyUpdate{"TLS13KeyUpdate",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPostQuantumCECPQ2{"PostQuantumCECPQ2",
+const base::Feature __attribute__((no_destroy)) kPostQuantumCECPQ2{"PostQuantumCECPQ2",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kNetUnusedIdleSocketTimeout{
+const base::Feature __attribute__((no_destroy)) kNetUnusedIdleSocketTimeout{
     "NetUnusedIdleSocketTimeout", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSameSiteByDefaultCookies{"SameSiteByDefaultCookies",
+const base::Feature __attribute__((no_destroy)) kSameSiteByDefaultCookies{"SameSiteByDefaultCookies",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kCookiesWithoutSameSiteMustBeSecure{
+const base::Feature __attribute__((no_destroy)) kCookiesWithoutSameSiteMustBeSecure{
     "CookiesWithoutSameSiteMustBeSecure", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kShortLaxAllowUnsafeThreshold{
+const base::Feature __attribute__((no_destroy)) kShortLaxAllowUnsafeThreshold{
     "ShortLaxAllowUnsafeThreshold", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSameSiteDefaultChecksMethodRigorously{
+const base::Feature __attribute__((no_destroy)) kSameSiteDefaultChecksMethodRigorously{
     "SameSiteDefaultChecksMethodRigorously", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kRecentHttpSameSiteAccessGrantsLegacyCookieSemantics{
+const base::Feature __attribute__((no_destroy)) kRecentHttpSameSiteAccessGrantsLegacyCookieSemantics{
     "RecentHttpSameSiteAccessGrantsLegacyCookieSemantics",
     base::FEATURE_DISABLED_BY_DEFAULT};
 const base::FeatureParam<int>
@@ -129,7 +129,7 @@ const base::FeatureParam<int>
         &kRecentHttpSameSiteAccessGrantsLegacyCookieSemantics,
         "RecentHttpSameSiteAccessGrantsLegacyCookieSemanticsMilliseconds", 0};
 
-const base::Feature kRecentCreationTimeGrantsLegacyCookieSemantics{
+const base::Feature __attribute__((no_destroy)) kRecentCreationTimeGrantsLegacyCookieSemantics{
     "RecentCreationTimeGrantsLegacyCookieSemantics",
     base::FEATURE_DISABLED_BY_DEFAULT};
 const base::FeatureParam<int>
@@ -138,38 +138,38 @@ const base::FeatureParam<int>
         "RecentCreationTimeGrantsLegacyCookieSemanticsMilliseconds", 0};
 
 #if BUILDFLAG(BUILTIN_CERT_VERIFIER_FEATURE_SUPPORTED)
-const base::Feature kCertVerifierBuiltinFeature{
+const base::Feature __attribute__((no_destroy)) kCertVerifierBuiltinFeature{
     "CertVerifierBuiltin", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
-const base::Feature kAppendFrameOriginToNetworkIsolationKey{
+const base::Feature __attribute__((no_destroy)) kAppendFrameOriginToNetworkIsolationKey{
     "AppendFrameOriginToNetworkIsolationKey", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTurnOffStreamingMediaCachingOnBattery{
+const base::Feature __attribute__((no_destroy)) kTurnOffStreamingMediaCachingOnBattery{
     "TurnOffStreamingMediaCachingOnBattery", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTurnOffStreamingMediaCachingAlways{
+const base::Feature __attribute__((no_destroy)) kTurnOffStreamingMediaCachingAlways{
     "TurnOffStreamingMediaCachingAlways", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kLegacyTLSEnforced{"LegacyTLSEnforced",
+const base::Feature __attribute__((no_destroy)) kLegacyTLSEnforced{"LegacyTLSEnforced",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSchemefulSameSite{"SchemefulSameSite",
+const base::Feature __attribute__((no_destroy)) kSchemefulSameSite{"SchemefulSameSite",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTLSLegacyCryptoFallbackForMetrics{
+const base::Feature __attribute__((no_destroy)) kTLSLegacyCryptoFallbackForMetrics{
     "TLSLegacyCryptoFallbackForMetrics", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kUseLookalikesForNavigationSuggestions{
+const base::Feature __attribute__((no_destroy)) kUseLookalikesForNavigationSuggestions{
     "UseLookalikesForNavigationSuggestions", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kReportPoorConnectivity{"ReportPoorConnectivity",
+const base::Feature __attribute__((no_destroy)) kReportPoorConnectivity{"ReportPoorConnectivity",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPreemptiveMobileNetworkActivation{
+const base::Feature __attribute__((no_destroy)) kPreemptiveMobileNetworkActivation{
     "PreemptiveMobileNetworkActivation", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kLimitOpenUDPSockets{"LimitOpenUDPSockets",
+const base::Feature __attribute__((no_destroy)) kLimitOpenUDPSockets{"LimitOpenUDPSockets",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 
 extern const base::FeatureParam<int> kLimitOpenUDPSocketsMax(
@@ -177,7 +177,7 @@ extern const base::FeatureParam<int> kLimitOpenUDPSocketsMax(
     "LimitOpenUDPSocketsMax",
     6000);
 
-const base::Feature kTimeoutTcpConnectAttempt{
+const base::Feature __attribute__((no_destroy)) kTimeoutTcpConnectAttempt{
     "TimeoutTcpConnectAttempt", base::FEATURE_DISABLED_BY_DEFAULT};
 
 extern const base::FeatureParam<double> kTimeoutTcpConnectAttemptRTTMultiplier(

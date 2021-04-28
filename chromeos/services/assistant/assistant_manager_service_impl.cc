@@ -81,7 +81,7 @@ static bool is_first_init = true;
 
 constexpr char kIntentActionView[] = "android.intent.action.VIEW";
 
-constexpr base::Feature kChromeOSAssistantDogfood{
+constexpr base::Feature __attribute__((no_destroy)) kChromeOSAssistantDogfood{
     "ChromeOSAssistantDogfood", base::FEATURE_DISABLED_BY_DEFAULT};
 
 constexpr char kServersideDogfoodExperimentId[] = "20347368";

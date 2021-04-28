@@ -20,7 +20,7 @@
 namespace {
 
 #if defined(OS_ANDROID)
-constexpr base::Feature kWalletRequiresFirstSyncSetupComplete{
+constexpr base::Feature __attribute__((no_destroy)) kWalletRequiresFirstSyncSetupComplete{
     "WalletRequiresFirstSyncSetupComplete", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 

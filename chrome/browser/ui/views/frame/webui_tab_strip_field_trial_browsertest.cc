@@ -41,11 +41,11 @@ void RegisterFakeFieldTrialWithState(base::FeatureList* feature_list,
       enabled ? base::FeatureList::OVERRIDE_ENABLE_FEATURE
               : base::FeatureList::OVERRIDE_DISABLE_FEATURE;
 
-  feature_list->RegisterFieldTrialOverride(features::kWebUITabStrip.name,
+  feature_list->RegisterFieldTrialOverride(features::kWebUITabStrip.name.v(),
                                            override_state, field_trial);
-  EXPECT_TRUE(feature_list->IsFeatureOverridden(features::kWebUITabStrip.name));
+  EXPECT_TRUE(feature_list->IsFeatureOverridden(features::kWebUITabStrip.name.v()));
   EXPECT_FALSE(feature_list->IsFeatureOverriddenFromCommandLine(
-      features::kWebUITabStrip.name));
+      features::kWebUITabStrip.name.v()));
 }
 
 bool IsInGroup(base::StringPiece group_name) {

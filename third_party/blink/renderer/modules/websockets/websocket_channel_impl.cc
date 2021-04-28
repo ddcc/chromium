@@ -89,7 +89,7 @@ enum WebSocketOpCode {
 //
 // TODO(crbug.com/1121725): Cleanup this feature once field experiments confirm
 // that the opt-out can be removed.
-const base::Feature kAllowAggressiveThrottlingWithWebSocket{
+const base::Feature __attribute__((no_destroy)) kAllowAggressiveThrottlingWithWebSocket{
     "AllowAggressiveThrottlingWithWebSocket",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

@@ -7,7 +7,7 @@
 namespace video_tutorials {
 namespace features {
 
-const base::Feature kVideoTutorials{"VideoTutorials",
+const base::Feature __attribute__((no_destroy)) kVideoTutorials{"VideoTutorials",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

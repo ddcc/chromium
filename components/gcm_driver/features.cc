@@ -14,7 +14,7 @@ namespace gcm {
 
 namespace features {
 
-const base::Feature kInvalidateTokenFeature{"GCMTokenInvalidAfterDays",
+const base::Feature __attribute__((no_destroy)) kInvalidateTokenFeature{"GCMTokenInvalidAfterDays",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 const char kParamNameTokenInvalidationPeriodDays[] =
     "token_invalidation_period";

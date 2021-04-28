@@ -28,11 +28,11 @@ namespace {
 // Pointer to the FeatureList instance singleton that was set via
 // FeatureList::SetInstance(). Does not use base/memory/singleton.h in order to
 // have more control over initialization timing. Leaky.
-FeatureList* g_feature_list_instance = nullptr;
+std::hq_wrapper<FeatureList*> __attribute__((no_destroy)) g_feature_list_instance = nullptr;
 
 // Tracks whether the FeatureList instance was initialized via an accessor, and
 // which Feature that accessor was for, if so.
-const Feature* g_initialized_from_accessor = nullptr;
+std::hq_wrapper<const Feature*> __attribute__((no_destroy)) g_initialized_from_accessor = nullptr;
 
 #if DCHECK_IS_ON()
 const char* g_reason_overrides_disallowed = nullptr;
@@ -170,7 +170,7 @@ bool ParseEnableFeatures(const std::string& enable_features,
 }  // namespace
 
 #if defined(DCHECK_IS_CONFIGURABLE)
-const Feature kDCheckIsFatalFeature{"DcheckIsFatal",
+const Feature __attribute__((no_destroy)) kDCheckIsFatalFeature{"DcheckIsFatal",
                                     FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(DCHECK_IS_CONFIGURABLE)
 
@@ -258,19 +258,19 @@ void FeatureList::InitializeFromSharedMemory(
 }
 
 bool FeatureList::IsFeatureOverridden(const std::string& feature_name) const {
-  return overrides_.count(feature_name);
+  return overrides_.count(std::hq_string(feature_name));
 }
 
 bool FeatureList::IsFeatureOverriddenFromCommandLine(
     const std::string& feature_name) const {
-  auto it = overrides_.find(feature_name);
+  auto it = overrides_.find(std::hq_string(feature_name));
   return it != overrides_.end() && !it->second.overridden_by_field_trial;
 }
 
 bool FeatureList::IsFeatureOverriddenFromCommandLine(
     const std::string& feature_name,
     OverrideState state) const {
-  auto it = overrides_.find(feature_name);
+  auto it = overrides_.find(std::hq_string(feature_name));
   return it != overrides_.end() && !it->second.overridden_by_field_trial &&
          it->second.overridden_state == state;
 }
@@ -284,7 +284,7 @@ void FeatureList::AssociateReportingFieldTrial(
 
   // Only one associated field trial is supported per feature. This is generally
   // enforced server-side.
-  OverrideEntry* entry = &overrides_.find(feature_name)->second;
+  OverrideEntry* entry = &overrides_.find(std::hq_string(feature_name))->second;
   if (entry->field_trial) {
     NOTREACHED() << "Feature " << feature_name
                  << " already has trial: " << entry->field_trial->trial_name()
@@ -299,11 +299,11 @@ void FeatureList::RegisterFieldTrialOverride(const std::string& feature_name,
                                              OverrideState override_state,
                                              FieldTrial* field_trial) {
   DCHECK(field_trial);
-  DCHECK(!Contains(overrides_, feature_name) ||
-         !overrides_.find(feature_name)->second.field_trial)
+  DCHECK(!Contains(overrides_, std::hq_string(feature_name)) ||
+         !overrides_.find(std::hq_string(feature_name))->second.field_trial)
       << "Feature " << feature_name
       << " has conflicting field trial overrides: "
-      << overrides_.find(feature_name)->second.field_trial->trial_name()
+      << overrides_.find(std::hq_string(feature_name))->second.field_trial->trial_name()
       << " / " << field_trial->trial_name()
       << ". Please make sure that the trial (study) name is consistent across:"
       << " (1)The server config, (2)The fieldtrial_testing_config, and"
@@ -315,7 +315,7 @@ void FeatureList::RegisterFieldTrialOverride(const std::string& feature_name,
 void FeatureList::RegisterExtraFeatureOverrides(
     const std::vector<FeatureOverrideInfo>& extra_overrides) {
   for (const FeatureOverrideInfo& override_info : extra_overrides) {
-    RegisterOverride(override_info.first.get().name, override_info.second,
+    RegisterOverride(override_info.first.get().name.v(), override_info.second,
                      /* field_trial = */ nullptr);
   }
 }
@@ -479,10 +479,10 @@ void FeatureList::FinalizeInitialization() {
 
 bool FeatureList::IsFeatureEnabled(const Feature& feature) {
   DCHECK(initialized_);
-  DCHECK(IsValidFeatureOrFieldTrialName(feature.name)) << feature.name;
+  DCHECK(IsValidFeatureOrFieldTrialName(feature.name.v())) << feature.name;
   DCHECK(CheckFeatureIdentity(feature)) << feature.name;
 
-  auto it = overrides_.find(feature.name);
+  auto it = overrides_.find(feature.name.v());
   if (it != overrides_.end()) {
     const OverrideEntry& entry = it->second;
 
@@ -502,10 +502,10 @@ bool FeatureList::IsFeatureEnabled(const Feature& feature) {
 
 FieldTrial* FeatureList::GetAssociatedFieldTrial(const Feature& feature) {
   DCHECK(initialized_);
-  DCHECK(IsValidFeatureOrFieldTrialName(feature.name)) << feature.name;
+  DCHECK(IsValidFeatureOrFieldTrialName(feature.name.v())) << feature.name;
   DCHECK(CheckFeatureIdentity(feature)) << feature.name;
 
-  auto it = overrides_.find(feature.name);
+  auto it = overrides_.find(feature.name.v());
   if (it != overrides_.end()) {
     const OverrideEntry& entry = it->second;
     return entry.field_trial;
@@ -610,10 +610,10 @@ void FeatureList::GetFeatureOverridesImpl(std::string* enable_overrides,
 bool FeatureList::CheckFeatureIdentity(const Feature& feature) {
   AutoLock auto_lock(feature_identity_tracker_lock_);
 
-  auto it = feature_identity_tracker_.find(feature.name);
+  auto it = feature_identity_tracker_.find(feature.name.v());
   if (it == feature_identity_tracker_.end()) {
     // If it's not tracked yet, register it.
-    feature_identity_tracker_[feature.name] = &feature;
+    feature_identity_tracker_[feature.name.v()] = &feature;
     return true;
   }
   // Compare address of |feature| to the existing tracked entry.

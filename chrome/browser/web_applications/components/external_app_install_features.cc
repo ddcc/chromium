@@ -24,13 +24,13 @@ bool g_always_enabled_for_testing = false;
 
 // Enables migration of default installed GSuite apps over to their replacement
 // web apps.
-const base::Feature kMigrateDefaultChromeAppToWebAppsGSuite{
+const base::Feature __attribute__((no_destroy)) kMigrateDefaultChromeAppToWebAppsGSuite{
     "MigrateDefaultChromeAppToWebAppsGSuite",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables migration of default installed non-GSuite apps over to their
 // replacement web apps.
-const base::Feature kMigrateDefaultChromeAppToWebAppsNonGSuite{
+const base::Feature __attribute__((no_destroy)) kMigrateDefaultChromeAppToWebAppsNonGSuite{
     "MigrateDefaultChromeAppToWebAppsNonGSuite",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
@@ -39,7 +39,7 @@ bool IsExternalAppInstallFeatureEnabled(base::StringPiece feature_name) {
     return true;
 
   for (const base::Feature* feature : kExternalAppInstallFeatures) {
-    if (feature->name == feature_name)
+    if (feature->name.v() == feature_name)
       return base::FeatureList::IsEnabled(*feature);
   }
 

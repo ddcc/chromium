@@ -9,14 +9,14 @@
 namespace autofill_assistant {
 namespace features {
 
-const base::Feature kAutofillAssistant{"AutofillAssistant",
+const base::Feature __attribute__((no_destroy)) kAutofillAssistant{"AutofillAssistant",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Controls whether to enable Assistant Autofill in a normal Chrome tab.
-const base::Feature kAutofillAssistantChromeEntry{
+const base::Feature __attribute__((no_destroy)) kAutofillAssistantChromeEntry{
     "AutofillAssistantChromeEntry", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAutofillAssistantDirectActions{
+const base::Feature __attribute__((no_destroy)) kAutofillAssistantDirectActions{
     "AutofillAssistantDirectActions", base::FEATURE_ENABLED_BY_DEFAULT};
 
 }  // namespace features

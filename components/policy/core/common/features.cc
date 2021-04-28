@@ -8,14 +8,14 @@ namespace policy {
 
 namespace features {
 
-const base::Feature kCBCMPolicyInvalidations{"CBCMPolicyInvalidations",
+const base::Feature __attribute__((no_destroy)) kCBCMPolicyInvalidations{"CBCMPolicyInvalidations",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCBCMRemoteCommands{"CBCMRemoteCommands",
+const base::Feature __attribute__((no_destroy)) kCBCMRemoteCommands{"CBCMRemoteCommands",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_APPLE)
-const base::Feature kIgnoreSensitivePoliciesOnUnmanagedMac{
+const base::Feature __attribute__((no_destroy)) kIgnoreSensitivePoliciesOnUnmanagedMac{
     "IgnoreSensitivePoliciesOnUnmanagedMac", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 

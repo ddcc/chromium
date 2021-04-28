@@ -35,7 +35,7 @@ bool AvailabilityModelImpl::IsReady() const {
 
 base::Optional<uint32_t> AvailabilityModelImpl::GetAvailability(
     const base::Feature& feature) const {
-  auto search = feature_availabilities_.find(feature.name);
+  auto search = feature_availabilities_.find(feature.name.v());
   if (search == feature_availabilities_.end())
     return base::nullopt;
 

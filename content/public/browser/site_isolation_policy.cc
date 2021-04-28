@@ -92,7 +92,7 @@ bool SiteIsolationPolicy::IsStrictOriginIsolationEnabled() {
   // below.  This means this takes precedence over memory thresholds or
   // switches to disable site isolation.
   if (base::FeatureList::GetInstance()->IsFeatureOverriddenFromCommandLine(
-          features::kStrictOriginIsolation.name,
+          features::kStrictOriginIsolation.name.v(),
           base::FeatureList::OVERRIDE_ENABLE_FEATURE)) {
     return true;
   }

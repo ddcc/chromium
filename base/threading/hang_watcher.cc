@@ -29,7 +29,7 @@
 namespace base {
 
 // static
-constexpr base::Feature kEnableHangWatcher{"EnableHangWatcher",
+const base::Feature __attribute__((no_destroy)) kEnableHangWatcher{"EnableHangWatcher",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 constexpr base::FeatureParam<bool> kHangWatchIOThread{
     &kEnableHangWatcher, "hang_watch_io_thread", false};

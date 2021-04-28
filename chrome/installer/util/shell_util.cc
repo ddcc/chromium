@@ -761,7 +761,7 @@ bool LaunchDefaultAppsSettingsModernDialog(const wchar_t* protocol) {
       L"windows.immersivecontrolpanel_cw5n1h2txyewy"
       L"!microsoft.windows.immersivecontrolpanel";
 
-  static constexpr base::Feature kHighlightProtocolInWindowsSettings{
+  static constexpr base::Feature __attribute__((no_destroy)) kHighlightProtocolInWindowsSettings{
       "HighlightProtocolInWindowsSettings", base::FEATURE_ENABLED_BY_DEFAULT};
 
   Microsoft::WRL::ComPtr<IApplicationActivationManager> activator;

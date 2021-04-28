@@ -29,7 +29,7 @@ bool IsSimplifiedNtpEnabled() {
 // Holds an experiment ID. So long as the feature is set through a server-side
 // variations config, this feature should exist on the client. This ensures that
 // the experiment ID is visible in chrome://snippets-internals.
-const base::Feature kRemoteSuggestionsBackendFeature{
+const base::Feature __attribute__((no_destroy)) kRemoteSuggestionsBackendFeature{
     "NTPRemoteSuggestionsBackend", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Keep sorted, and keep nullptr at the end.
@@ -38,10 +38,10 @@ const base::Feature* const kAllFeatures[] = {
     &kNotificationsFeature, &kRemoteSuggestionsBackendFeature,
     &kOptionalImagesEnabledFeature};
 
-const base::Feature kArticleSuggestionsFeature{
+const base::Feature __attribute__((no_destroy)) kArticleSuggestionsFeature{
     "NTPArticleSuggestions", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kRemoteSuggestionsEmulateM58FetchingSchedule{
+const base::Feature __attribute__((no_destroy)) kRemoteSuggestionsEmulateM58FetchingSchedule{
     "RemoteSuggestionsEmulateM58FetchingSchedule",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
@@ -54,7 +54,7 @@ std::unique_ptr<CategoryRanker> BuildSelectedCategoryRanker(
   return std::make_unique<ClickBasedCategoryRanker>(pref_service, clock);
 }
 
-const base::Feature kNotificationsFeature = {"ContentSuggestionsNotifications",
+const base::Feature __attribute__((no_destroy)) kNotificationsFeature = {"ContentSuggestionsNotifications",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 const char kNotificationsPriorityParam[] = "priority";
@@ -68,10 +68,10 @@ const char kNotificationsOpenToNTPParam[] = "open_to_ntp";
 const char kNotificationsDailyLimit[] = "daily_limit";
 const char kNotificationsIgnoredLimitParam[] = "ignored_limit";
 
-const base::Feature kKeepPrefetchedContentSuggestions{
+const base::Feature __attribute__((no_destroy)) kKeepPrefetchedContentSuggestions{
     "KeepPrefetchedContentSuggestions", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kOptionalImagesEnabledFeature{
+const base::Feature __attribute__((no_destroy)) kOptionalImagesEnabledFeature{
     "NTPRemoteSuggestionsOptionalImages", base::FEATURE_ENABLED_BY_DEFAULT};
 
 std::vector<const base::Feature*> GetAllFeatures() {

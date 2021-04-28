@@ -14,9 +14,9 @@
 #include "testing/gtest/include/gtest/gtest.h"
 
 namespace {
-base::Feature kTestIPHFeature{"TestIPHFeature",
+base::Feature __attribute__((no_destroy)) kTestIPHFeature{"TestIPHFeature",
                               base::FEATURE_ENABLED_BY_DEFAULT};
-base::Feature kTestIPHFeature2{"TestIPHFeature2",
+base::Feature __attribute__((no_destroy)) kTestIPHFeature2{"TestIPHFeature2",
                                base::FEATURE_ENABLED_BY_DEFAULT};
 }  // namespace
 

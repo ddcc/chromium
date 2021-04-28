@@ -6,6 +6,6 @@
 
 namespace blink {
 // HeapMojo experiments to deprecate kWithoutContextObserver
-const base::Feature kHeapMojoUseContextObserver{
+const base::Feature __attribute__((no_destroy)) kHeapMojoUseContextObserver{
     "HeapMojoUseContextObserver", base::FEATURE_ENABLED_BY_DEFAULT};
 }  // namespace blink

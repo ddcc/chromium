@@ -12,7 +12,7 @@
 namespace predictors {
 
 const char kSpeculativePreconnectFeatureName[] = "SpeculativePreconnect";
-const base::Feature kSpeculativePreconnectFeature{
+const base::Feature __attribute__((no_destroy)) kSpeculativePreconnectFeature{
     kSpeculativePreconnectFeatureName, base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Returns whether the speculative preconnect feature is enabled.

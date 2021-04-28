@@ -5,11 +5,11 @@
 #include "chrome/browser/sharing/click_to_call/feature.h"
 
 #if defined(OS_ANDROID)
-const base::Feature kClickToCallReceiver{"ClickToCallReceiver",
+const base::Feature __attribute__((no_destroy)) kClickToCallReceiver{"ClickToCallReceiver",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // defined(OS_ANDROID)
 
 #if BUILDFLAG(ENABLE_CLICK_TO_CALL)
-const base::Feature kClickToCallUI{"ClickToCallUI",
+const base::Feature __attribute__((no_destroy)) kClickToCallUI{"ClickToCallUI",
                                    base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // BUILDFLAG(ENABLE_CLICK_TO_CALL)

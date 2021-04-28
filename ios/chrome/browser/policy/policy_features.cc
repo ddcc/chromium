@@ -12,13 +12,13 @@
 #include "ios/chrome/common/channel_info.h"
 #include "ios/web/common/features.h"
 
-const base::Feature kEditBookmarksIOS{"EditBookmarksIOS",
+const base::Feature __attribute__((no_destroy)) kEditBookmarksIOS{"EditBookmarksIOS",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kManagedBookmarksIOS{"ManagedBookmarksIOS",
+const base::Feature __attribute__((no_destroy)) kManagedBookmarksIOS{"ManagedBookmarksIOS",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kURLBlocklistIOS{"URLBlocklistIOS",
+const base::Feature __attribute__((no_destroy)) kURLBlocklistIOS{"URLBlocklistIOS",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
 namespace {

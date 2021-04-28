@@ -7,7 +7,7 @@
 namespace features {
 
 // Enables showing the EV certificate details in the Page Info bubble.
-const base::Feature kEvDetailsInPageInfo{"EvDetailsInPageInfo",
+const base::Feature __attribute__((no_destroy)) kEvDetailsInPageInfo{"EvDetailsInPageInfo",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 
 #if BUILDFLAG(ENABLE_EXTENSIONS)
@@ -15,74 +15,74 @@ const base::Feature kEvDetailsInPageInfo{"EvDetailsInPageInfo",
 // extension overrides a setting.
 // TODO(devlin): Remove this feature in M88, since this launched as part of
 // https://crbug.com/1084281.
-const base::Feature kExtensionSettingsOverriddenDialogs{
+const base::Feature __attribute__((no_destroy)) kExtensionSettingsOverriddenDialogs{
     "ExtensionSettingsOverriddenDialogs", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
 // Enables an extension menu in the toolbar. See https://crbug.com/943702
-const base::Feature kExtensionsToolbarMenu{"ExtensionsToolbarMenu",
+const base::Feature __attribute__((no_destroy)) kExtensionsToolbarMenu{"ExtensionsToolbarMenu",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Force enables the legacy chrome://devices page. To be removed in M88.
-const base::Feature kForceEnableDevicesPage{"ForceEnableDevicesPage",
+const base::Feature __attribute__((no_destroy)) kForceEnableDevicesPage{"ForceEnableDevicesPage",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the new profile picker.
 // https:://crbug.com/1063856
-const base::Feature kNewProfilePicker{"NewProfilePicker",
+const base::Feature __attribute__((no_destroy)) kNewProfilePicker{"NewProfilePicker",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables updated tabstrip animations, required for a scrollable tabstrip.
 // https://crbug.com/958173
-const base::Feature kNewTabstripAnimation{"NewTabstripAnimation",
+const base::Feature __attribute__((no_destroy)) kNewTabstripAnimation{"NewTabstripAnimation",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables an experimental permission prompt that uses a chip in the location
 // bar.
-const base::Feature kPermissionChip{"PermissionChip",
+const base::Feature __attribute__((no_destroy)) kPermissionChip{"PermissionChip",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables a more prominent active tab title in dark mode to aid with
 // accessibility.
-const base::Feature kProminentDarkModeActiveTabTitle{
+const base::Feature __attribute__((no_destroy)) kProminentDarkModeActiveTabTitle{
     "ProminentDarkModeActiveTabTitle", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Allow users to save tabs for later. Enables a new button and menu for
 // accessing tabs saved for later. https://crbug.com/1109316
-const base::Feature kReadLater{"ReadLater", base::FEATURE_DISABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kReadLater{"ReadLater", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables tabs to scroll in the tabstrip. https://crbug.com/951078
-const base::Feature kScrollableTabStrip{"ScrollableTabStrip",
+const base::Feature __attribute__((no_destroy)) kScrollableTabStrip{"ScrollableTabStrip",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Revamp of profiles. https://crbug.com/1108289
-const base::Feature kProfilesUIRevamp{"ProfilesUIRevamp",
+const base::Feature __attribute__((no_destroy)) kProfilesUIRevamp{"ProfilesUIRevamp",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables grouping tabs together in the tab strip. https://crbug.com/905491
-const base::Feature kTabGroups{"TabGroups", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kTabGroups{"TabGroups", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Automatically create groups for users based on domain.
 // https://crbug.com/1128703
-const base::Feature kTabGroupsAutoCreate{"TabGroupsAutoCreate",
+const base::Feature __attribute__((no_destroy)) kTabGroupsAutoCreate{"TabGroupsAutoCreate",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables tab groups to be collapsed and expanded. https://crbug.com/1018230
-const base::Feature kTabGroupsCollapse{"TabGroupsCollapse",
+const base::Feature __attribute__((no_destroy)) kTabGroupsCollapse{"TabGroupsCollapse",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables tabs to be frozen when collapsed. https://crbug.com/1110108
-const base::Feature kTabGroupsCollapseFreezing{
+const base::Feature __attribute__((no_destroy)) kTabGroupsCollapseFreezing{
     "TabGroupsCollapseFreezing", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the feedback through the tab group editor bubble.
 // https://crbug.com/1067062
-const base::Feature kTabGroupsFeedback{"TabGroupsFeedback",
+const base::Feature __attribute__((no_destroy)) kTabGroupsFeedback{"TabGroupsFeedback",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables popup cards containing tab information when hovering over a tab.
 // https://crbug.com/910739
-const base::Feature kTabHoverCards{"TabHoverCards",
+const base::Feature __attribute__((no_destroy)) kTabHoverCards{"TabHoverCards",
                                    base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Parameter name used for tab hover cards user study.
@@ -91,22 +91,22 @@ const char kTabHoverCardsFeatureParameterName[] = "setting";
 
 // Enables preview images in hover cards. See kTabHoverCards.
 // https://crbug.com/928954
-const base::Feature kTabHoverCardImages{"TabHoverCardImages",
+const base::Feature __attribute__((no_destroy)) kTabHoverCardImages{"TabHoverCardImages",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables tab outlines in additional situations for accessibility.
-const base::Feature kTabOutlinesInLowContrastThemes{
+const base::Feature __attribute__((no_destroy)) kTabOutlinesInLowContrastThemes{
     "TabOutlinesInLowContrastThemes", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables searching tabs across multiple windows.
-const base::Feature kTabSearch{"TabSearch", base::FEATURE_DISABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kTabSearch{"TabSearch", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the tab search submit feedback button.
-const base::Feature kTabSearchFeedback{"TabSearchFeedback",
+const base::Feature __attribute__((no_destroy)) kTabSearchFeedback{"TabSearchFeedback",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the tab search bubble having a fixed tab strip position.
-const base::Feature kTabSearchFixedEntrypoint{
+const base::Feature __attribute__((no_destroy)) kTabSearchFixedEntrypoint{
     "TabSearchFixedEntrypoint", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<bool> kTabSearchSearchIgnoreLocation{
@@ -123,28 +123,28 @@ const base::FeatureParam<double> kTabSearchTitleToHostnameWeightRatio{
 
 // Enables showing text next to the 3-dot menu when an update is available.
 // See https://crbug.com/1001731
-const base::Feature kUseTextForUpdateButton{"UseTextForUpdateButton",
+const base::Feature __attribute__((no_destroy)) kUseTextForUpdateButton{"UseTextForUpdateButton",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables a web-based separator that's only used for performance testing. See
 // https://crbug.com/993502.
-const base::Feature kWebFooterExperiment{"WebFooterExperiment",
+const base::Feature __attribute__((no_destroy)) kWebFooterExperiment{"WebFooterExperiment",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables a web-based tab strip. See https://crbug.com/989131. Note this
 // feature only works when the ENABLE_WEBUI_TAB_STRIP buildflag is enabled.
-const base::Feature kWebUITabStrip{"WebUITabStrip",
+const base::Feature __attribute__((no_destroy)) kWebUITabStrip{"WebUITabStrip",
                                    base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_CHROMEOS)
 // Enables a warning about connecting to hidden WiFi networks.
 // https://crbug.com/903908
-const base::Feature kHiddenNetworkWarning{"HiddenNetworkWarning",
+const base::Feature __attribute__((no_destroy)) kHiddenNetworkWarning{"HiddenNetworkWarning",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables a separate group of settings (speed, button swap, and acceleration)
 // for pointing sticks (such as TrackPoints).
-const base::Feature kSeparatePointingStickSettings{
+const base::Feature __attribute__((no_destroy)) kSeparatePointingStickSettings{
     "SeparatePointingStickSettings", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_CHROMEOS)
 }  // namespace features

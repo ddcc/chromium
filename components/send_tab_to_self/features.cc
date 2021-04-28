@@ -9,10 +9,10 @@
 
 namespace send_tab_to_self {
 
-const base::Feature kSendTabToSelfOmniboxSendingAnimation{
+const base::Feature __attribute__((no_destroy)) kSendTabToSelfOmniboxSendingAnimation{
     "SendTabToSelfOmniboxSendingAnimation", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSendTabToSelfWhenSignedIn{
+const base::Feature __attribute__((no_destroy)) kSendTabToSelfWhenSignedIn{
     "SendTabToSelfWhenSignedIn", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsReceivingEnabledByUserOnThisDevice(PrefService* prefs) {

@@ -100,7 +100,7 @@ void LogTabUnderAttempt(content::NavigationHandle* handle) {
 
 }  // namespace
 
-const base::Feature TabUnderNavigationThrottle::kBlockTabUnders{
+const base::Feature __attribute__((no_destroy)) TabUnderNavigationThrottle::kBlockTabUnders{
     "BlockTabUnders", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // static

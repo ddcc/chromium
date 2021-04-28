@@ -11,13 +11,13 @@
 
 namespace prerender {
 
-const base::Feature kNoStatePrefetchFeature{"NoStatePrefetch",
+const base::Feature __attribute__((no_destroy)) kNoStatePrefetchFeature{"NoStatePrefetch",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kGWSPrefetchHoldback{"GWSPrefetchHoldback",
+const base::Feature __attribute__((no_destroy)) kGWSPrefetchHoldback{"GWSPrefetchHoldback",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kNavigationPredictorPrefetchHoldback{
+const base::Feature __attribute__((no_destroy)) kNavigationPredictorPrefetchHoldback{
     "NavigationPredictorPrefetchHoldback", base::FEATURE_DISABLED_BY_DEFAULT};
 
 void ConfigureNoStatePrefetch() {

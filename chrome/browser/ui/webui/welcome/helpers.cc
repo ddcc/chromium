@@ -40,9 +40,9 @@ const char kDefaultNewUserModules[] =
 const char kDefaultReturningUserModules[] = "nux-set-as-default";
 
 // Feature flag.
-const base::Feature kFeature{"NuxOnboarding", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kFeature{"NuxOnboarding", base::FEATURE_ENABLED_BY_DEFAULT};
 // For testing purposes
-const base::Feature kForceEnabled = {"NuxOnboardingForceEnabled",
+const base::Feature __attribute__((no_destroy)) kForceEnabled = {"NuxOnboardingForceEnabled",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
 // The value of these FeatureParam values should be a comma-delimited list
@@ -119,13 +119,13 @@ static bool CanExperimentWithVariations(Profile* profile) {
 // These feature flags are used to tie our experiment to specific studies.
 // go/navi-app-variation for details.
 // TODO(hcarmona): find a solution that scales better.
-const base::Feature kNaviControlEnabled = {"NaviControlEnabled",
+const base::Feature __attribute__((no_destroy)) kNaviControlEnabled = {"NaviControlEnabled",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kNaviAppVariationEnabled = {
+const base::Feature __attribute__((no_destroy)) kNaviAppVariationEnabled = {
     "NaviAppVariationEnabled", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kNaviNTPVariationEnabled = {
+const base::Feature __attribute__((no_destroy)) kNaviNTPVariationEnabled = {
     "NaviNTPVariationEnabled", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kNaviShortcutVariationEnabled = {
+const base::Feature __attribute__((no_destroy)) kNaviShortcutVariationEnabled = {
     "NaviShortcutVariationEnabled", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Get the group for users who onboard in this experiment.

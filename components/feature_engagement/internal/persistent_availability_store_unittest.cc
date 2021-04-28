@@ -26,18 +26,18 @@
 namespace feature_engagement {
 
 namespace {
-const base::Feature kPersistentTestFeatureFoo{
+const base::Feature __attribute__((no_destroy)) kPersistentTestFeatureFoo{
     "test_foo", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kPersistentTestFeatureBar{
+const base::Feature __attribute__((no_destroy)) kPersistentTestFeatureBar{
     "test_bar", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kPersistentTestFeatureQux{
+const base::Feature __attribute__((no_destroy)) kPersistentTestFeatureQux{
     "test_qux", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kPersistentTestFeatureNop{
+const base::Feature __attribute__((no_destroy)) kPersistentTestFeatureNop{
     "test_nop", base::FEATURE_DISABLED_BY_DEFAULT};
 
 Availability CreateAvailability(const base::Feature& feature, uint32_t day) {
   Availability availability;
-  availability.set_feature_name(feature.name);
+  availability.set_feature_name(feature.name.v());
   availability.set_day(day);
   return availability;
 }
@@ -187,19 +187,19 @@ TEST_F(PersistentAvailabilityStoreTest, AllNewFeatures) {
   ASSERT_EQ(2u, load_results_->size());
   ASSERT_EQ(2u, db_availabilities_.size());
 
-  ASSERT_TRUE(load_results_->find(kPersistentTestFeatureFoo.name) !=
+  ASSERT_TRUE(load_results_->find(kPersistentTestFeatureFoo.name.v()) !=
               load_results_->end());
-  EXPECT_EQ(14u, (*load_results_)[kPersistentTestFeatureFoo.name]);
-  ASSERT_TRUE(db_availabilities_.find(kPersistentTestFeatureFoo.name) !=
+  EXPECT_EQ(14u, (*load_results_)[kPersistentTestFeatureFoo.name.v()]);
+  ASSERT_TRUE(db_availabilities_.find(kPersistentTestFeatureFoo.name.v()) !=
               db_availabilities_.end());
-  EXPECT_EQ(14u, db_availabilities_[kPersistentTestFeatureFoo.name].day());
+  EXPECT_EQ(14u, db_availabilities_[kPersistentTestFeatureFoo.name.v()].day());
 
-  ASSERT_TRUE(load_results_->find(kPersistentTestFeatureBar.name) !=
+  ASSERT_TRUE(load_results_->find(kPersistentTestFeatureBar.name.v()) !=
               load_results_->end());
-  EXPECT_EQ(14u, (*load_results_)[kPersistentTestFeatureBar.name]);
-  ASSERT_TRUE(db_availabilities_.find(kPersistentTestFeatureBar.name) !=
+  EXPECT_EQ(14u, (*load_results_)[kPersistentTestFeatureBar.name.v()]);
+  ASSERT_TRUE(db_availabilities_.find(kPersistentTestFeatureBar.name.v()) !=
               db_availabilities_.end());
-  EXPECT_EQ(14u, db_availabilities_[kPersistentTestFeatureBar.name].day());
+  EXPECT_EQ(14u, db_availabilities_[kPersistentTestFeatureBar.name.v()].day());
 }
 
 TEST_F(PersistentAvailabilityStoreTest, TestAllFilterCombinations) {
@@ -213,9 +213,9 @@ TEST_F(PersistentAvailabilityStoreTest, TestAllFilterCombinations) {
   feature_filter.push_back(&kPersistentTestFeatureQux);  // Disabled. Not in DB.
   feature_filter.push_back(&kPersistentTestFeatureNop);  // Disabled. In DB.
 
-  db_availabilities_[kPersistentTestFeatureBar.name] =
+  db_availabilities_[kPersistentTestFeatureBar.name.v()] =
       CreateAvailability(kPersistentTestFeatureBar, 10u);
-  db_availabilities_[kPersistentTestFeatureNop.name] =
+  db_availabilities_[kPersistentTestFeatureNop.name.v()] =
       CreateAvailability(kPersistentTestFeatureNop, 8u);
 
   PersistentAvailabilityStore::LoadAndUpdateStore(
@@ -234,19 +234,19 @@ TEST_F(PersistentAvailabilityStoreTest, TestAllFilterCombinations) {
   ASSERT_EQ(2u, load_results_->size());
   ASSERT_EQ(2u, db_availabilities_.size());
 
-  ASSERT_TRUE(load_results_->find(kPersistentTestFeatureFoo.name) !=
+  ASSERT_TRUE(load_results_->find(kPersistentTestFeatureFoo.name.v()) !=
               load_results_->end());
-  EXPECT_EQ(14u, (*load_results_)[kPersistentTestFeatureFoo.name]);
-  ASSERT_TRUE(db_availabilities_.find(kPersistentTestFeatureFoo.name) !=
+  EXPECT_EQ(14u, (*load_results_)[kPersistentTestFeatureFoo.name.v()]);
+  ASSERT_TRUE(db_availabilities_.find(kPersistentTestFeatureFoo.name.v()) !=
               db_availabilities_.end());
-  EXPECT_EQ(14u, db_availabilities_[kPersistentTestFeatureFoo.name].day());
+  EXPECT_EQ(14u, db_availabilities_[kPersistentTestFeatureFoo.name.v()].day());
 
-  ASSERT_TRUE(load_results_->find(kPersistentTestFeatureBar.name) !=
+  ASSERT_TRUE(load_results_->find(kPersistentTestFeatureBar.name.v()) !=
               load_results_->end());
-  EXPECT_EQ(10u, (*load_results_)[kPersistentTestFeatureBar.name]);
-  ASSERT_TRUE(db_availabilities_.find(kPersistentTestFeatureBar.name) !=
+  EXPECT_EQ(10u, (*load_results_)[kPersistentTestFeatureBar.name.v()]);
+  ASSERT_TRUE(db_availabilities_.find(kPersistentTestFeatureBar.name.v()) !=
               db_availabilities_.end());
-  EXPECT_EQ(10u, db_availabilities_[kPersistentTestFeatureBar.name].day());
+  EXPECT_EQ(10u, db_availabilities_[kPersistentTestFeatureBar.name.v()].day());
 }
 
 TEST_F(PersistentAvailabilityStoreTest, TestAllCombinationsEmptyFilter) {
@@ -260,9 +260,9 @@ TEST_F(PersistentAvailabilityStoreTest, TestAllCombinationsEmptyFilter) {
   // kPersistentTestFeatureQux: Disabled. Not in DB.
   // kPersistentTestFeatureNop: Disabled. In DB.
 
-  db_availabilities_[kPersistentTestFeatureBar.name] =
+  db_availabilities_[kPersistentTestFeatureBar.name.v()] =
       CreateAvailability(kPersistentTestFeatureBar, 10u);
-  db_availabilities_[kPersistentTestFeatureNop.name] =
+  db_availabilities_[kPersistentTestFeatureNop.name.v()] =
       CreateAvailability(kPersistentTestFeatureNop, 8u);
 
   PersistentAvailabilityStore::LoadAndUpdateStore(

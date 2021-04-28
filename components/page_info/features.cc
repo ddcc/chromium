@@ -10,7 +10,7 @@
 namespace page_info {
 
 #if defined(OS_ANDROID)
-const base::Feature kPageInfoV2{"PageInfoV2",
+const base::Feature __attribute__((no_destroy)) kPageInfoV2{"PageInfoV2",
                                 base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 

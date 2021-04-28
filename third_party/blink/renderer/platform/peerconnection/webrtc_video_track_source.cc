@@ -87,7 +87,7 @@ webrtc::VideoRotation GetFrameRotation(const media::VideoFrame* frame) {
 
 namespace blink {
 
-const base::Feature kWebRtcLogWebRtcVideoFrameAdapter{
+const base::Feature __attribute__((no_destroy)) kWebRtcLogWebRtcVideoFrameAdapter{
     "WebRtcLogWebRtcVideoFrameAdapter", base::FEATURE_DISABLED_BY_DEFAULT};
 
 WebRtcVideoTrackSource::WebRtcVideoTrackSource(

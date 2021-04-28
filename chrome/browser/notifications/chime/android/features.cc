@@ -13,7 +13,7 @@ jboolean JNI_ChimeSession_IsEnabled(JNIEnv* env) {
 namespace notifications {
 namespace features {
 
-const base::Feature kUseChimeAndroidSdk{"UseChimeAndroidSdk",
+const base::Feature __attribute__((no_destroy)) kUseChimeAndroidSdk{"UseChimeAndroidSdk",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

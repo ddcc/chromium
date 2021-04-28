@@ -10,12 +10,12 @@
 
 namespace feed {
 
-const base::Feature kInterestFeedContentSuggestions{
+const base::Feature __attribute__((no_destroy)) kInterestFeedContentSuggestions{
     "InterestFeedContentSuggestions", base::FEATURE_ENABLED_BY_DEFAULT};
 // InterestFeedV2 takes precedence over InterestFeedContentSuggestions.
 // InterestFeedV2 is cached in ChromeCachedFlags. If the default value here is
 // changed, please update the cached one's default value in CachedFeatureFlags.
-const base::Feature kInterestFeedV2{"InterestFeedV2",
+const base::Feature __attribute__((no_destroy)) kInterestFeedV2{"InterestFeedV2",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<std::string> kDisableTriggerTypes{
@@ -30,20 +30,20 @@ const base::FeatureParam<bool> kOnlySetLastRefreshAttemptOnSuccess{
     &kInterestFeedContentSuggestions,
     "only_set_last_refresh_attempt_on_success", true};
 
-const base::Feature kInterestFeedFeedback{"InterestFeedFeedback",
+const base::Feature __attribute__((no_destroy)) kInterestFeedFeedback{"InterestFeedFeedback",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kReportFeedUserActions{"ReportFeedUserActions",
+const base::Feature __attribute__((no_destroy)) kReportFeedUserActions{"ReportFeedUserActions",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Determines whether conditions should be reached before enabling the upload of
 // click and view actions in the feed (e.g., the user needs to view X cards).
 // For example, This is needed when the notice card is at the second position in
 // the feed.
-const base::Feature kInterestFeedV1ClicksAndViewsConditionalUpload{
+const base::Feature __attribute__((no_destroy)) kInterestFeedV1ClicksAndViewsConditionalUpload{
     "InterestFeedV1ClickAndViewActionsConditionalUpload",
     base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kInterestFeedV2ClicksAndViewsConditionalUpload{
+const base::Feature __attribute__((no_destroy)) kInterestFeedV2ClicksAndViewsConditionalUpload{
     "InterestFeedV2ClickAndViewActionsConditionalUpload",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

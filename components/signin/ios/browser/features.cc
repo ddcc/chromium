@@ -6,14 +6,14 @@
 
 namespace signin {
 
-const base::Feature kForceStartupSigninPromo{"ForceStartupSigninPromo",
+const base::Feature __attribute__((no_destroy)) kForceStartupSigninPromo{"ForceStartupSigninPromo",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool ForceStartupSigninPromo() {
   return base::FeatureList::IsEnabled(kForceStartupSigninPromo);
 }
 
-const base::Feature kRestoreGaiaCookiesIfDeleted{
+const base::Feature __attribute__((no_destroy)) kRestoreGaiaCookiesIfDeleted{
     "RestoreGAIACookiesIfDeleted", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const char kDelayThresholdMinutesToUpdateGaiaCookie[] =

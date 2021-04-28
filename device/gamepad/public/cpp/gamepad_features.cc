@@ -17,14 +17,14 @@ namespace features {
 
 // Enables gamepadbuttondown, gamepadbuttonup, gamepadbuttonchange,
 // gamepadaxismove non-standard gamepad events.
-const base::Feature kEnableGamepadButtonAxisEvents{
+const base::Feature __attribute__((no_destroy)) kEnableGamepadButtonAxisEvents{
     "EnableGamepadButtonAxisEvents", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the Windows.Gaming.Input data fetcher.
-const base::Feature kEnableWindowsGamingInputDataFetcher{
+const base::Feature __attribute__((no_destroy)) kEnableWindowsGamingInputDataFetcher{
     "EnableWindowsGamingInputDataFetcher", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kRestrictGamepadAccess{"RestrictGamepadAccess",
+const base::Feature __attribute__((no_destroy)) kRestrictGamepadAccess{"RestrictGamepadAccess",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool AreGamepadButtonAxisEventsEnabled() {

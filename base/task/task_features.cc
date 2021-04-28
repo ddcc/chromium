@@ -8,21 +8,21 @@
 
 namespace base {
 
-const Feature kAllTasksUserBlocking{"AllTasksUserBlocking",
+const Feature __attribute__((no_destroy)) kAllTasksUserBlocking{"AllTasksUserBlocking",
                                     FEATURE_DISABLED_BY_DEFAULT};
 
-const Feature kNoDetachBelowInitialCapacity = {
+const Feature __attribute__((no_destroy)) kNoDetachBelowInitialCapacity = {
     "NoDetachBelowInitialCapacity", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const Feature kMayBlockWithoutDelay = {"MayBlockWithoutDelay",
+const Feature __attribute__((no_destroy)) kMayBlockWithoutDelay = {"MayBlockWithoutDelay",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_WIN) || defined(OS_APPLE)
-const Feature kUseNativeThreadPool = {"UseNativeThreadPool",
+const Feature __attribute__((no_destroy)) kUseNativeThreadPool = {"UseNativeThreadPool",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
-const Feature kUseFiveMinutesThreadReclaimTime = {
+const Feature __attribute__((no_destroy)) kUseFiveMinutesThreadReclaimTime = {
     "UseFiveMinutesThreadReclaimTime", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace base

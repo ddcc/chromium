@@ -9,10 +9,10 @@
 namespace download {
 namespace features {
 
-const base::Feature kUseDownloadOfflineContentProvider{
+const base::Feature __attribute__((no_destroy)) kUseDownloadOfflineContentProvider{
     "UseDownloadOfflineContentProvider", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDownloadAutoResumptionNative {
+const base::Feature __attribute__((no_destroy)) kDownloadAutoResumptionNative {
   "DownloadsAutoResumptionNative",
 #if defined(OS_ANDROID)
       base::FEATURE_DISABLED_BY_DEFAULT
@@ -21,7 +21,7 @@ const base::Feature kDownloadAutoResumptionNative {
 #endif
 };
 
-const base::Feature kParallelDownloading {
+const base::Feature __attribute__((no_destroy)) kParallelDownloading {
   "ParallelDownloading",
 #if defined(OS_ANDROID)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -30,22 +30,22 @@ const base::Feature kParallelDownloading {
 #endif
 };
 
-const base::Feature kDownloadLater{"DownloadLater",
+const base::Feature __attribute__((no_destroy)) kDownloadLater{"DownloadLater",
                                    base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_ANDROID)
-const base::Feature kSmartSuggestionForLargeDownloads{
+const base::Feature __attribute__((no_destroy)) kSmartSuggestionForLargeDownloads{
     "SmartSuggestionForLargeDownloads", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kRefreshExpirationDate{"RefreshExpirationDate",
+const base::Feature __attribute__((no_destroy)) kRefreshExpirationDate{"RefreshExpirationDate",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
-const base::Feature kUseInProgressDownloadManagerForDownloadService{
+const base::Feature __attribute__((no_destroy)) kUseInProgressDownloadManagerForDownloadService{
     "UseInProgressDownloadManagerForDownloadService",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAllowDownloadResumptionWithoutStrongValidators{
+const base::Feature __attribute__((no_destroy)) kAllowDownloadResumptionWithoutStrongValidators{
   "AllowDownloadResumptionWithoutStrongValidators",
 #if defined(OS_ANDROID)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -54,17 +54,17 @@ const base::Feature kAllowDownloadResumptionWithoutStrongValidators{
 #endif
 };
 
-const base::Feature kUseParallelRequestsForUnknwonRangeSupport{
+const base::Feature __attribute__((no_destroy)) kUseParallelRequestsForUnknwonRangeSupport{
     "UseParallelRequestForUnknownRangeSupport",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kUseParallelRequestsForHTTP2{
+const base::Feature __attribute__((no_destroy)) kUseParallelRequestsForHTTP2{
     "UseParallelRequestsForHTTP2", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kUseParallelRequestsForQUIC{
+const base::Feature __attribute__((no_destroy)) kUseParallelRequestsForQUIC{
     "UseParallelRequestsForQUIC", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDeleteExpiredDownloads{"DeleteExpiredDownloads",
+const base::Feature __attribute__((no_destroy)) kDeleteExpiredDownloads{"DeleteExpiredDownloads",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 
 }  // namespace features

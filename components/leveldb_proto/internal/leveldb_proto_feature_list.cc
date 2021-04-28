@@ -6,7 +6,7 @@
 
 namespace leveldb_proto {
 
-const base::Feature kProtoDBSharedMigration{"ProtoDBSharedMigration",
+const base::Feature __attribute__((no_destroy)) kProtoDBSharedMigration{"ProtoDBSharedMigration",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace leveldb_proto

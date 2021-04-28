@@ -44,7 +44,7 @@ const int kMaxBytesPerCopyOperation = 1024 * 1024 * 4;
 // at normal thread priority.
 // TODO(https://crbug.com/1072756): Enable by default and remove the feature
 // once experiments confirm that this prevents priority inversions.
-const base::Feature kOneCopyRasterBufferPlaybackNormalThreadPriority{
+const base::Feature __attribute__((no_destroy)) kOneCopyRasterBufferPlaybackNormalThreadPriority{
     "OneCopyRasterBufferPlaybackNormalThreadPriority",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

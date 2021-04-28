@@ -12,16 +12,16 @@ namespace content_capture {
 namespace features {
 
 #if defined(OS_ANDROID)
-const base::Feature kContentCapture{"ContentCapture",
+const base::Feature __attribute__((no_destroy)) kContentCapture{"ContentCapture",
                                     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kContentCaptureTriggeringForExperiment{
+const base::Feature __attribute__((no_destroy)) kContentCaptureTriggeringForExperiment{
     "ContentCaptureTriggeringForExperiment", base::FEATURE_DISABLED_BY_DEFAULT};
 #else
-const base::Feature kContentCapture{"ContentCapture",
+const base::Feature __attribute__((no_destroy)) kContentCapture{"ContentCapture",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContentCaptureTriggeringForExperiment{
+const base::Feature __attribute__((no_destroy)) kContentCaptureTriggeringForExperiment{
     "ContentCaptureTriggeringForExperiment", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 

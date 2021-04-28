@@ -564,7 +564,7 @@ std::vector<std::string> FlagsState::RegisterAllFeatureVariationParameters(
           std::string trial_name = entry.feature.feature_trial_name;
           // The user has chosen to enable the feature by this option.
           enabled_features_by_trial_name[trial_name].insert(
-              entry.feature.feature->name);
+              entry.feature.feature->name.v());
 
           const FeatureEntry::FeatureVariation* variation =
               entry.VariationForOption(j);

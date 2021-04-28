@@ -12,19 +12,19 @@
 
 namespace chromeos {
 
-const base::Feature kCrOSTuneMinFilelist{"CrOSTuneMinFilelist",
+const base::Feature __attribute__((no_destroy)) kCrOSTuneMinFilelist{"CrOSTuneMinFilelist",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kCrOSMinFilelistMb{&kCrOSTuneMinFilelist,
                                                  "CrOSMinFilelistMb", -1};
 
-const base::Feature kCrOSTuneRamVsSwapWeight{"CrOSTuneRamVsSwapWeight",
+const base::Feature __attribute__((no_destroy)) kCrOSTuneRamVsSwapWeight{"CrOSTuneRamVsSwapWeight",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kCrOSRamVsSwapWeight{&kCrOSTuneRamVsSwapWeight,
                                                    "CrOSRamVsSwapWeight", -1};
 
-const base::Feature kCrOSTuneExtraFree{"CrOSTuneExtraFree",
+const base::Feature __attribute__((no_destroy)) kCrOSTuneExtraFree{"CrOSTuneExtraFree",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kCrOSExtraFreeMb{&kCrOSTuneExtraFree,

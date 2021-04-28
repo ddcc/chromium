@@ -33,13 +33,13 @@ constexpr char kSRTX64StableDownloadURL[] =
 
 namespace safe_browsing {
 
-const base::Feature kChromeCleanupInBrowserPromptFeature{
+const base::Feature __attribute__((no_destroy)) kChromeCleanupInBrowserPromptFeature{
     "InBrowserCleanerUI", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kChromeCleanupDistributionFeature{
+const base::Feature __attribute__((no_destroy)) kChromeCleanupDistributionFeature{
     "ChromeCleanupDistribution", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kChromeCleanupExtensionsFeature{
+const base::Feature __attribute__((no_destroy)) kChromeCleanupExtensionsFeature{
     "ChromeCleanupExtensions", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsSRTPromptFeatureEnabled() {

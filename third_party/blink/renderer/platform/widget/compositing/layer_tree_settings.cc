@@ -30,7 +30,7 @@ namespace blink {
 
 namespace {
 
-const base::Feature kUnpremultiplyAndDitherLowBitDepthTiles = {
+const base::Feature __attribute__((no_destroy)) kUnpremultiplyAndDitherLowBitDepthTiles = {
     "UnpremultiplyAndDitherLowBitDepthTiles", base::FEATURE_ENABLED_BY_DEFAULT};
 
 #if defined(OS_ANDROID)

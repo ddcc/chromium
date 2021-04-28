@@ -28,9 +28,9 @@ ConditionValidator::Result OnceConditionValidator::MeetsConditions(
   result.config_ok = config.valid;
 
   result.trigger_ok =
-      shown_features_.find(feature.name) == shown_features_.end();
+      shown_features_.find(feature.name.v()) == shown_features_.end();
   result.session_rate_ok =
-      shown_features_.find(feature.name) == shown_features_.end();
+      shown_features_.find(feature.name.v()) == shown_features_.end();
 
   return result;
 }
@@ -40,13 +40,13 @@ void OnceConditionValidator::NotifyIsShowing(
     const FeatureConfig& config,
     const std::vector<std::string>& all_feature_names) {
   DCHECK(currently_showing_feature_.empty());
-  DCHECK(shown_features_.find(feature.name) == shown_features_.end());
-  shown_features_.insert(feature.name);
-  currently_showing_feature_ = feature.name;
+  DCHECK(shown_features_.find(feature.name.v()) == shown_features_.end());
+  shown_features_.insert(feature.name.v());
+  currently_showing_feature_ = feature.name.v();
 }
 
 void OnceConditionValidator::NotifyDismissed(const base::Feature& feature) {
-  DCHECK(feature.name == currently_showing_feature_);
+  DCHECK(feature.name.v() == currently_showing_feature_);
   currently_showing_feature_.clear();
 }
 

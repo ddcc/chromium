@@ -34,7 +34,7 @@
 namespace base {
 
 #if defined(OS_CHROMEOS)
-const Feature kSchedUtilHints{"SchedUtilHints", base::FEATURE_ENABLED_BY_DEFAULT};
+const Feature __attribute__((no_destroy)) kSchedUtilHints{"SchedUtilHints", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
 namespace {

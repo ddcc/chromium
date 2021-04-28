@@ -184,46 +184,46 @@ namespace features {
 // Forces Chrome's main backbuffer to full damage if the actual damage
 // is large enough and allows DWM to consider the main backbuffer as an
 // an overlay candidate.
-const base::Feature kDirectCompositionForceFullDamage{
+const base::Feature __attribute__((no_destroy)) kDirectCompositionForceFullDamage{
     "DirectCompositionForceFullDamage", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Use presentation feedback event queries (must be enabled) to limit latency.
-const base::Feature kDirectCompositionLowLatencyPresentation{
+const base::Feature __attribute__((no_destroy)) kDirectCompositionLowLatencyPresentation{
     "DirectCompositionLowLatencyPresentation",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Overrides preferred overlay format to NV12 instead of YUY2.
-const base::Feature kDirectCompositionPreferNV12Overlays{
+const base::Feature __attribute__((no_destroy)) kDirectCompositionPreferNV12Overlays{
     "DirectCompositionPreferNV12Overlays", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Allow overlay swapchain to present on all GPUs even if they only support
 // software overlays.
-const base::Feature kDirectCompositionSoftwareOverlays{
+const base::Feature __attribute__((no_destroy)) kDirectCompositionSoftwareOverlays{
     "DirectCompositionSoftwareOverlays", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Allow putting a video swapchain underneath the main swapchain, so overlays
 // can be used even if there are controls on top of the video. It can be
 // enabled only when overlay is supported.
-const base::Feature kDirectCompositionUnderlays{
+const base::Feature __attribute__((no_destroy)) kDirectCompositionUnderlays{
     "DirectCompositionUnderlays", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Use decode swap chain created from compatible video decoder buffers.
-const base::Feature kDirectCompositionUseNV12DecodeSwapChain{
+const base::Feature __attribute__((no_destroy)) kDirectCompositionUseNV12DecodeSwapChain{
     "DirectCompositionUseNV12DecodeSwapChain",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Default to using ANGLE's OpenGL backend
-const base::Feature kDefaultANGLEOpenGL{"DefaultANGLEOpenGL",
+const base::Feature __attribute__((no_destroy)) kDefaultANGLEOpenGL{"DefaultANGLEOpenGL",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Default to using ANGLE's Metal backend.
-const base::Feature kDefaultANGLEMetal{"DefaultANGLEMetal",
+const base::Feature __attribute__((no_destroy)) kDefaultANGLEMetal{"DefaultANGLEMetal",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Track current program's shaders at glUseProgram() call for crash report
 // purpose. Only effective on Windows because the attached shaders may only
 // be reliably retrieved with ANGLE backend.
-const base::Feature kTrackCurrentShaders{"TrackCurrentShaders",
+const base::Feature __attribute__((no_destroy)) kTrackCurrentShaders{"TrackCurrentShaders",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

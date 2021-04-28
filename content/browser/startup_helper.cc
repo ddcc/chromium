@@ -61,7 +61,7 @@ constexpr double kThreadPoolCoresMultiplier = 0.6;
 constexpr int kThreadPoolOffset = 0;
 #endif
 
-const base::Feature kBrowserThreadPoolAdjustment{
+const base::Feature __attribute__((no_destroy)) kBrowserThreadPoolAdjustment{
     "BrowserThreadPoolAdjustment", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kBrowserThreadPoolMin{

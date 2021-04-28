@@ -24,34 +24,34 @@ using WebFeature = mojom::WebFeature;
 // future decisions about which types can be safely be disallowed. Below
 // is a number of constants about which use counters to report.
 
-const WebFeature kApplicationFeatures[2] = {
+const WebFeature __attribute__((no_destroy)) kApplicationFeatures[2] = {
     WebFeature::kCrossOriginApplicationScript,
     WebFeature::kSameOriginApplicationScript};
 
-const WebFeature kTextFeatures[2] = {WebFeature::kCrossOriginTextScript,
+const WebFeature __attribute__((no_destroy)) kTextFeatures[2] = {WebFeature::kCrossOriginTextScript,
                                      WebFeature::kSameOriginTextScript};
 
-const WebFeature kApplicationOctetStreamFeatures[2] = {
+const WebFeature __attribute__((no_destroy)) kApplicationOctetStreamFeatures[2] = {
     WebFeature::kCrossOriginApplicationOctetStream,
     WebFeature::kSameOriginApplicationOctetStream,
 };
 
-const WebFeature kApplicationXmlFeatures[2] = {
+const WebFeature __attribute__((no_destroy)) kApplicationXmlFeatures[2] = {
     WebFeature::kCrossOriginApplicationXml,
     WebFeature::kSameOriginApplicationXml,
 };
 
-const WebFeature kTextHtmlFeatures[2] = {
+const WebFeature __attribute__((no_destroy)) kTextHtmlFeatures[2] = {
     WebFeature::kCrossOriginTextHtml,
     WebFeature::kSameOriginTextHtml,
 };
 
-const WebFeature kTextPlainFeatures[2] = {
+const WebFeature __attribute__((no_destroy)) kTextPlainFeatures[2] = {
     WebFeature::kCrossOriginTextPlain,
     WebFeature::kSameOriginTextPlain,
 };
 
-const WebFeature kTextXmlFeatures[2] = {
+const WebFeature __attribute__((no_destroy)) kTextXmlFeatures[2] = {
     WebFeature::kCrossOriginTextXml,
     WebFeature::kSameOriginTextXml,
 };

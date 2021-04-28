@@ -20,52 +20,52 @@ const char kOfflinePagesUseTestingSnapshotDelay[] =
 
 namespace offline_pages {
 
-const base::Feature kOffliningRecentPagesFeature{
+const base::Feature __attribute__((no_destroy)) kOffliningRecentPagesFeature{
     "OfflineRecentPages", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesCTFeature{"OfflinePagesCT",
+const base::Feature __attribute__((no_destroy)) kOfflinePagesCTFeature{"OfflinePagesCT",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesLivePageSharingFeature{
+const base::Feature __attribute__((no_destroy)) kOfflinePagesLivePageSharingFeature{
     "OfflinePagesLivePageSharing", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesLoadSignalCollectingFeature{
+const base::Feature __attribute__((no_destroy)) kOfflinePagesLoadSignalCollectingFeature{
     "OfflinePagesLoadSignalCollecting", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesRenovationsFeature{
+const base::Feature __attribute__((no_destroy)) kOfflinePagesRenovationsFeature{
     "OfflinePagesRenovations", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesResourceBasedSnapshotFeature{
+const base::Feature __attribute__((no_destroy)) kOfflinePagesResourceBasedSnapshotFeature{
     "OfflinePagesResourceBasedSnapshot", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPrefetchingOfflinePagesFeature{
+const base::Feature __attribute__((no_destroy)) kPrefetchingOfflinePagesFeature{
     "OfflinePagesPrefetching", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesCTV2Feature{"OfflinePagesCTV2",
+const base::Feature __attribute__((no_destroy)) kOfflinePagesCTV2Feature{"OfflinePagesCTV2",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesDescriptiveFailStatusFeature{
+const base::Feature __attribute__((no_destroy)) kOfflinePagesDescriptiveFailStatusFeature{
     "OfflinePagesDescriptiveFailStatus", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesDescriptivePendingStatusFeature{
+const base::Feature __attribute__((no_destroy)) kOfflinePagesDescriptivePendingStatusFeature{
     "OfflinePagesDescriptivePendingStatus", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesInDownloadHomeOpenInCctFeature{
+const base::Feature __attribute__((no_destroy)) kOfflinePagesInDownloadHomeOpenInCctFeature{
     "OfflinePagesInDownloadHomeOpenInCct", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesCTSuppressNotificationsFeature{
+const base::Feature __attribute__((no_destroy)) kOfflinePagesCTSuppressNotificationsFeature{
     "OfflinePagesCTSuppressNotifications", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOfflinePagesShowAlternateDinoPageFeature{
+const base::Feature __attribute__((no_destroy)) kOfflinePagesShowAlternateDinoPageFeature{
     "OfflinePagesShowAlternateDinoPage", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOfflineIndicatorFeature{"OfflineIndicator",
+const base::Feature __attribute__((no_destroy)) kOfflineIndicatorFeature{"OfflineIndicator",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOfflineIndicatorAlwaysHttpProbeFeature{
+const base::Feature __attribute__((no_destroy)) kOfflineIndicatorAlwaysHttpProbeFeature{
     "OfflineIndicatorAlwaysHttpProbe", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOnTheFlyMhtmlHashComputationFeature{
+const base::Feature __attribute__((no_destroy)) kOnTheFlyMhtmlHashComputationFeature{
     "OnTheFlyMhtmlHashComputation", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const char kPrefetchingOfflinePagesExperimentsOption[] = "exp";

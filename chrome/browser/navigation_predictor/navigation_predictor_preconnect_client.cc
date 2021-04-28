@@ -29,7 +29,7 @@
 namespace {
 
 // Experiment with which event triggers the preconnect after commit.
-const base::Feature kPreconnectOnDidFinishNavigation{
+const base::Feature __attribute__((no_destroy)) kPreconnectOnDidFinishNavigation{
     "PreconnectOnDidFinishNavigation", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace

@@ -9,7 +9,7 @@ namespace features {
 
 // When the audio service in a separate process, kill it when a hang is
 // detected. It will be restarted when needed.
-const base::Feature kAudioServiceOutOfProcessKillAtHang{
+const base::Feature __attribute__((no_destroy)) kAudioServiceOutOfProcessKillAtHang{
   "AudioServiceOutOfProcessKillAtHang",
 #if defined(OS_WIN) || defined(OS_MAC) || defined(OS_LINUX) || \
     defined(OS_CHROMEOS)
@@ -21,30 +21,30 @@ const base::Feature kAudioServiceOutOfProcessKillAtHang{
 
 // If enabled, base::DumpWithoutCrashing is called whenever an audio service
 // hang is detected.
-const base::Feature kDumpOnAudioServiceHang{"DumpOnAudioServiceHang",
+const base::Feature __attribute__((no_destroy)) kDumpOnAudioServiceHang{"DumpOnAudioServiceHang",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_ANDROID)
 // Enables loading and using AAudio instead of OpenSLES on compatible devices,
 // for audio output streams.
-const base::Feature kUseAAudioDriver{"UseAAudioDriver",
+const base::Feature __attribute__((no_destroy)) kUseAAudioDriver{"UseAAudioDriver",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
 #if defined(OS_CHROMEOS)
-const base::Feature kCrOSSystemAEC{"CrOSSystemAEC",
+const base::Feature __attribute__((no_destroy)) kCrOSSystemAEC{"CrOSSystemAEC",
                                    base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kCrOSSystemAECDeactivatedGroups{
+const base::Feature __attribute__((no_destroy)) kCrOSSystemAECDeactivatedGroups{
     "CrOSSystemAECDeactivatedGroups", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
 #if defined(OS_MAC) || defined(OS_CHROMEOS)
-const base::Feature kForceEnableSystemAec{"ForceEnableSystemAec",
+const base::Feature __attribute__((no_destroy)) kForceEnableSystemAec{"ForceEnableSystemAec",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 #if defined(OS_WIN)
-const base::Feature kAllowIAudioClient3{"AllowIAudioClient3",
+const base::Feature __attribute__((no_destroy)) kAllowIAudioClient3{"AllowIAudioClient3",
                                         base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 }  // namespace features

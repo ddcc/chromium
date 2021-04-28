@@ -37,7 +37,7 @@ const int kDiceTokenFetchTimeoutSeconds = 10;
 // there was OAuth outage in Dice.
 const int kLockAccountReconcilorTimeoutHours = 12;
 
-const base::Feature kSupportOAuthOutageInDice{"SupportOAuthOutageInDice",
+const base::Feature __attribute__((no_destroy)) kSupportOAuthOutageInDice{"SupportOAuthOutageInDice",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
 namespace {

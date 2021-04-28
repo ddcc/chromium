@@ -62,7 +62,7 @@
 namespace headless {
 
 namespace features {
-const base::Feature kVirtualTime{"VirtualTime",
+const base::Feature __attribute__((no_destroy)) kVirtualTime{"VirtualTime",
                                  base::FEATURE_DISABLED_BY_DEFAULT};
 }
 

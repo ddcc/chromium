@@ -391,7 +391,7 @@ TEST_F(VariationsSeedSimulatorTest, ParamsAdded) {
 // to server-side, but we should ensure that it still doesn't cause a client
 // side crash.
 TEST_F(VariationsSeedSimulatorTest, NoDefaultGroup) {
-  static struct base::Feature kFeature {
+  static struct base::Feature __attribute__((no_destroy)) kFeature {
     "FeatureName", base::FEATURE_ENABLED_BY_DEFAULT
   };
   CreateTrial("Study1", "VariationsDefaultExperiment", nullptr);

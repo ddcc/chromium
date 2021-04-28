@@ -13,7 +13,7 @@
 
 namespace chromeos {
 
-const base::Feature kCrOSLockMainProgramText{"CrOSLockMainProgramText",
+const base::Feature __attribute__((no_destroy)) kCrOSLockMainProgramText{"CrOSLockMainProgramText",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 // The maximum number of bytes that the browser will attempt to lock.
 const base::FeatureParam<int> kCrOSLockMainProgramTextMaxSize{

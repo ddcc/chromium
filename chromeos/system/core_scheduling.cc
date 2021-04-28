@@ -21,7 +21,7 @@ namespace chromeos {
 namespace system {
 
 namespace {
-const base::Feature kCoreScheduling{"CoreSchedulingEnabled",
+const base::Feature __attribute__((no_destroy)) kCoreScheduling{"CoreSchedulingEnabled",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 }
 

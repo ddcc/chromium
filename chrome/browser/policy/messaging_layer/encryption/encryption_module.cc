@@ -18,7 +18,7 @@ namespace reporting {
 namespace {
 
 // Temporary: enable/disable encryption.
-const base::Feature kEncryptedReportingFeature{
+const base::Feature __attribute__((no_destroy)) kEncryptedReportingFeature{
     EncryptionModule::kEncryptedReporting, base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Helper function for asynchronous encryption.

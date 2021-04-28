@@ -51,8 +51,8 @@ void OnDBLoadComplete(
   // Create map from feature name to Feature.
   std::map<std::string, const base::Feature*> feature_mapping;
   for (const base::Feature* feature : feature_filter) {
-    DCHECK(feature_mapping.find(feature->name) == feature_mapping.end());
-    feature_mapping[feature->name] = feature;
+    DCHECK(feature_mapping.find(feature->name.v()) == feature_mapping.end());
+    feature_mapping[feature->name.v()] = feature;
   }
 
   // Find all availabilities from DB and find out what should be deleted.
@@ -76,8 +76,8 @@ void OnDBLoadComplete(
 
     // Both in |feature_filter| and is enabled, so keep around.
     feature_availabilities->insert(
-        std::make_pair(feature->name, availability.day()));
-    DVLOG(2) << "Keeping availability for " << feature->name << " @ "
+        std::make_pair(feature->name.v(), availability.day()));
+    DVLOG(2) << "Keeping availability for " << feature->name.v() << " @ "
              << availability.day();
   }
 
@@ -85,7 +85,7 @@ void OnDBLoadComplete(
   auto additions = std::make_unique<KeyAvailabilityList>();
   for (const base::Feature* feature : feature_filter) {
     // Check if already in DB.
-    if (feature_availabilities->find(feature->name) !=
+    if (feature_availabilities->find(feature->name.v()) !=
         feature_availabilities->end())
       continue;
 
@@ -95,13 +95,13 @@ void OnDBLoadComplete(
 
     // Both in feature filter, and is enabled, but not in DB, so add to DB.
     Availability availability;
-    availability.set_feature_name(feature->name);
+    availability.set_feature_name(feature->name.v());
     availability.set_day(current_day);
-    additions->push_back({feature->name, std::move(availability)});
+    additions->push_back({feature->name.v(), std::move(availability)});
     // Since it will be written to the DB, also add to the callback result.
-    feature_availabilities->insert({feature->name, current_day});
+    feature_availabilities->insert({feature->name.v(), current_day});
 
-    DVLOG(2) << "Adding availability for " << feature->name << " @ "
+    DVLOG(2) << "Adding availability for " << feature->name.v() << " @ "
              << current_day;
   }
 

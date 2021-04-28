@@ -33,7 +33,7 @@
 
 namespace {
 
-const base::Feature kHttpRetryFeature{"UMAHttpRetry",
+const base::Feature __attribute__((no_destroy)) kHttpRetryFeature{"UMAHttpRetry",
                                       base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Run ablation on UMA collector connectivity to client. This study will
@@ -44,7 +44,7 @@ const base::Feature kHttpRetryFeature{"UMAHttpRetry",
 // |metrics::ReportingService| so, it won't be ablated.
 // similar frequency.
 // To restrict the study to UMA or UKM, set the "service-affected" param.
-const base::Feature kAblateMetricsLogUploadFeature{
+const base::Feature __attribute__((no_destroy)) kAblateMetricsLogUploadFeature{
     "AblateMetricsLogUpload", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Fraction of Collector uploads that should be failed artificially.

@@ -26,7 +26,7 @@
 #include "url/gurl.h"
 
 namespace {
-const base::Feature kNavigationPredictorRendererWarmup{
+const base::Feature __attribute__((no_destroy)) kNavigationPredictorRendererWarmup{
     "NavigationPredictorRendererWarmup", base::FEATURE_DISABLED_BY_DEFAULT};
 }
 

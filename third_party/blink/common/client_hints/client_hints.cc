@@ -38,7 +38,7 @@ const char* const kClientHintsHeaderMapping[] = {
 
 const unsigned kClientHintsNumberOfLegacyHints = 4;
 
-const mojom::FeaturePolicyFeature kClientHintsFeaturePolicyMapping[] = {
+const mojom::FeaturePolicyFeature __attribute__((no_destroy)) kClientHintsFeaturePolicyMapping[] = {
     // Legacy Hints that are sent cross-origin regardless of FeaturePolicy when
     // kAllowClientHintsToThirdParty is enabled
     mojom::FeaturePolicyFeature::kClientHintDeviceMemory,

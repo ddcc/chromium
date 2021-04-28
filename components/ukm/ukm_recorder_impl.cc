@@ -35,7 +35,7 @@
 namespace ukm {
 
 COMPONENT_EXPORT(UKM_RECORDER)
-const base::Feature kUkmSamplingRateFeature{"UkmSamplingRate",
+const base::Feature __attribute__((no_destroy)) kUkmSamplingRateFeature{"UkmSamplingRate",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
 namespace {
@@ -221,7 +221,7 @@ void UkmRecorderImpl::CreateFallbackSamplingTrial(
 
   scoped_refptr<base::FieldTrial> trial(
       base::FieldTrialList::FactoryGetFieldTrial(
-          kUkmSamplingRateFeature.name, 100, sampled_group,
+          kUkmSamplingRateFeature.name.v(), 100, sampled_group,
           base::FieldTrial::ONE_TIME_RANDOMIZED, nullptr));
 
   // Everybody (100%) should have a sampling configuration.
@@ -233,7 +233,7 @@ void UkmRecorderImpl::CreateFallbackSamplingTrial(
 
   // Setup the feature.
   feature_list->RegisterFieldTrialOverride(
-      kUkmSamplingRateFeature.name, base::FeatureList::OVERRIDE_ENABLE_FEATURE,
+      kUkmSamplingRateFeature.name.v(), base::FeatureList::OVERRIDE_ENABLE_FEATURE,
       trial.get());
 }
 

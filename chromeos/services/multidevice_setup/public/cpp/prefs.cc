@@ -76,7 +76,7 @@ bool IsFeatureAllowed(mojom::Feature feature, const PrefService* pref_service) {
       // Note: Does not check sub-features of Phone Hub, since if the top-level
       // Phone Hub feature is prohibited, its sub-features are implicitly
       // prohibited.
-      static const mojom::Feature kTopLevelFeaturesInSuite[] = {
+      static const mojom::Feature __attribute__((no_destroy)) kTopLevelFeaturesInSuite[] = {
           mojom::Feature::kInstantTethering, mojom::Feature::kMessages,
           mojom::Feature::kPhoneHub,         mojom::Feature::kSmartLock,
           mojom::Feature::kWifiSync,

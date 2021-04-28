@@ -6,26 +6,26 @@
 
 namespace ui {
 
-const base::Feature kEnableHeuristicPalmDetectionFilter{
+const base::Feature __attribute__((no_destroy)) kEnableHeuristicPalmDetectionFilter{
     "EnableHeuristicPalmDetectionFilter", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnableNeuralPalmDetectionFilter{
+const base::Feature __attribute__((no_destroy)) kEnableNeuralPalmDetectionFilter{
     "EnableNeuralPalmDetectionFilter", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnableNeuralStylusReportFilter{
+const base::Feature __attribute__((no_destroy)) kEnableNeuralStylusReportFilter{
     "EnableNeuralStylusReportFilter", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // TODO(b/171249701): Remove this flag when we can support this in all cases.
-const base::Feature kEnableOrdinalMotion{"EnableOrdinalMotion",
+const base::Feature __attribute__((no_destroy)) kEnableOrdinalMotion{"EnableOrdinalMotion",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnablePalmOnMaxTouchMajor{
+const base::Feature __attribute__((no_destroy)) kEnablePalmOnMaxTouchMajor{
     "EnablePalmOnMaxTouchMajor", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kEnablePalmOnToolTypePalm{"EnablePalmOnToolTypePalm",
+const base::Feature __attribute__((no_destroy)) kEnablePalmOnToolTypePalm{"EnablePalmOnToolTypePalm",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kEnablePalmSuppression{"EnablePalmSuppression",
+const base::Feature __attribute__((no_destroy)) kEnablePalmSuppression{"EnablePalmSuppression",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
 extern const base::FeatureParam<std::string> kNeuralPalmRadiusPolynomial{

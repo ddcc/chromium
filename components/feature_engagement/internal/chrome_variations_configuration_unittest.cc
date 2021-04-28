@@ -22,11 +22,11 @@ namespace feature_engagement {
 
 namespace {
 
-const base::Feature kChromeTestFeatureFoo{"test_foo",
+const base::Feature __attribute__((no_destroy)) kChromeTestFeatureFoo{"test_foo",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kChromeTestFeatureBar{"test_bar",
+const base::Feature __attribute__((no_destroy)) kChromeTestFeatureBar{"test_bar",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kChromeTestFeatureQux{"test_qux",
+const base::Feature __attribute__((no_destroy)) kChromeTestFeatureQux{"test_qux",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
 const char kFooTrialName[] = "FooTrial";
@@ -52,19 +52,19 @@ class ChromeVariationsConfigurationTest : public ::testing::Test {
         base::FieldTrialList::CreateFieldTrial(kBarTrialName, kGroupName);
     base::FieldTrial* qux_trial =
         base::FieldTrialList::CreateFieldTrial(kQuxTrialName, kGroupName);
-    trials_[kChromeTestFeatureFoo.name] = foo_trial;
-    trials_[kChromeTestFeatureBar.name] = bar_trial;
-    trials_[kChromeTestFeatureQux.name] = qux_trial;
+    trials_[kChromeTestFeatureFoo.name.v()] = foo_trial;
+    trials_[kChromeTestFeatureBar.name.v()] = bar_trial;
+    trials_[kChromeTestFeatureQux.name.v()] = qux_trial;
 
     std::unique_ptr<base::FeatureList> feature_list(new base::FeatureList);
     feature_list->RegisterFieldTrialOverride(
-        kChromeTestFeatureFoo.name, base::FeatureList::OVERRIDE_ENABLE_FEATURE,
+        kChromeTestFeatureFoo.name.v(), base::FeatureList::OVERRIDE_ENABLE_FEATURE,
         foo_trial);
     feature_list->RegisterFieldTrialOverride(
-        kChromeTestFeatureBar.name, base::FeatureList::OVERRIDE_ENABLE_FEATURE,
+        kChromeTestFeatureBar.name.v(), base::FeatureList::OVERRIDE_ENABLE_FEATURE,
         bar_trial);
     feature_list->RegisterFieldTrialOverride(
-        kChromeTestFeatureQux.name, base::FeatureList::OVERRIDE_ENABLE_FEATURE,
+        kChromeTestFeatureQux.name.v(), base::FeatureList::OVERRIDE_ENABLE_FEATURE,
         qux_trial);
 
     scoped_feature_list_.InitWithFeatureList(std::move(feature_list));
@@ -85,7 +85,7 @@ class ChromeVariationsConfigurationTest : public ::testing::Test {
                         std::map<std::string, std::string> params) {
     ASSERT_TRUE(
         base::FieldTrialParamAssociator::GetInstance()
-            ->AssociateFieldTrialParams(trials_[feature.name]->trial_name(),
+            ->AssociateFieldTrialParams(trials_[feature.name.v()]->trial_name(),
                                         kGroupName, params));
 
     std::map<std::string, std::string> actualParams;
@@ -299,7 +299,7 @@ TEST_F(ChromeVariationsConfigurationTest, SessionRateImpactExplicitSelf) {
   base::HistogramTester histogram_tester;
   RunSessionRateImpactTest(
       this, &configuration_, {&kChromeTestFeatureFoo}, "test_foo",
-      CreateSessionRateImpactExplicit({kChromeTestFeatureFoo.name}),
+      CreateSessionRateImpactExplicit({kChromeTestFeatureFoo.name.v()}),
       true /* is_valid */);
 
   histogram_tester.ExpectBucketCount(
@@ -312,7 +312,7 @@ TEST_F(ChromeVariationsConfigurationTest, SessionRateImpactExplicitOther) {
   base::HistogramTester histogram_tester;
   RunSessionRateImpactTest(
       this, &configuration_, {&kChromeTestFeatureFoo, &kChromeTestFeatureBar},
-      "test_bar", CreateSessionRateImpactExplicit({kChromeTestFeatureBar.name}),
+      "test_bar", CreateSessionRateImpactExplicit({kChromeTestFeatureBar.name.v()}),
       true /* is_valid */);
 
   histogram_tester.ExpectBucketCount(
@@ -332,7 +332,7 @@ TEST_F(ChromeVariationsConfigurationTest, SessionRateImpactExplicitMultiple) {
       {&kChromeTestFeatureFoo, &kChromeTestFeatureBar, &kChromeTestFeatureQux},
       "test_bar,test_qux",
       CreateSessionRateImpactExplicit(
-          {kChromeTestFeatureBar.name, kChromeTestFeatureQux.name}),
+          {kChromeTestFeatureBar.name.v(), kChromeTestFeatureQux.name.v()}),
       true /* is_valid */);
 
   histogram_tester.ExpectBucketCount(
@@ -353,7 +353,7 @@ TEST_F(ChromeVariationsConfigurationTest,
       {&kChromeTestFeatureFoo, &kChromeTestFeatureBar, &kChromeTestFeatureQux},
       "test_foo,no_feature",
       CreateSessionRateImpactExplicit(
-          {kChromeTestFeatureBar.name, kChromeTestFeatureQux.name}),
+          {kChromeTestFeatureBar.name.v(), kChromeTestFeatureQux.name.v()}),
       true /* is_valid */);
 
   histogram_tester.ExpectBucketCount(
@@ -379,7 +379,7 @@ TEST_F(ChromeVariationsConfigurationTest,
       {&kChromeTestFeatureFoo, &kChromeTestFeatureBar, &kChromeTestFeatureQux},
       "test_foo, ",
       CreateSessionRateImpactExplicit(
-          {kChromeTestFeatureBar.name, kChromeTestFeatureQux.name}),
+          {kChromeTestFeatureBar.name.v(), kChromeTestFeatureQux.name.v()}),
       true /* is_valid */);
 
   histogram_tester.ExpectBucketCount(
@@ -555,7 +555,7 @@ TEST_F(ChromeVariationsConfigurationTest, WhitespaceIsValid) {
   expected_foo.event_configs.insert(
       EventConfig("e7", Comparator(LESS_THAN_OR_EQUAL, 8), 10, 410));
   expected_foo.session_rate_impact = CreateSessionRateImpactExplicit(
-      {kChromeTestFeatureBar.name, kChromeTestFeatureQux.name});
+      {kChromeTestFeatureBar.name.v(), kChromeTestFeatureQux.name.v()});
   EXPECT_EQ(expected_foo, foo);
   histogram_tester.ExpectBucketCount(
       kConfigParseEventName,

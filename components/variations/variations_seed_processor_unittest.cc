@@ -766,7 +766,7 @@ TEST_F(VariationsSeedProcessorTest, FeatureAssociationAndForcing) {
     const auto& test_case = test_cases[i];
     const int group = test_case.one_hundred_percent_group;
     SCOPED_TRACE(base::StringPrintf(
-        "Test[%" PRIuS "]: %s [%s] [%s] %d", i, test_case.feature.name,
+        "Test[%" PRIuS "]: %s [%s] [%s] %d", i, test_case.feature.name.v(),
         test_case.enable_features_command_line,
         test_case.disable_features_command_line, static_cast<int>(group)));
 
@@ -841,7 +841,7 @@ TEST_F(VariationsSeedProcessorTest, FeaturesInExpiredStudies) {
   for (size_t i = 0; i < base::size(test_cases); i++) {
     const auto& test_case = test_cases[i];
     SCOPED_TRACE(
-        base::StringPrintf("Test[%" PRIuS "]: %s", i, test_case.feature.name));
+        base::StringPrintf("Test[%" PRIuS "]: %s", i, test_case.feature.name.v()));
 
     // Needed for base::FeatureList::GetInstance() when creating field trials.
     base::test::ScopedFeatureList base_scoped_feature_list;
@@ -894,7 +894,7 @@ TEST_F(VariationsSeedProcessorTest, NoDefaultExperiment) {
 }
 
 TEST_F(VariationsSeedProcessorTest, ExistingFieldTrial_ExpiredByConfig) {
-  static struct base::Feature kFeature {
+  static struct base::Feature __attribute__((no_destroy)) kFeature {
     "FeatureName", base::FEATURE_ENABLED_BY_DEFAULT
   };
 
@@ -925,7 +925,7 @@ TEST_F(VariationsSeedProcessorTest, ExistingFieldTrial_ExpiredByConfig) {
 }
 
 TEST_F(VariationsSeedProcessorTest, ExpiredStudy_NoDefaultGroup) {
-  static struct base::Feature kFeature {
+  static struct base::Feature __attribute__((no_destroy)) kFeature {
     "FeatureName", base::FEATURE_ENABLED_BY_DEFAULT
   };
 

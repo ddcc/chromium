@@ -4,5 +4,5 @@
 
 #include "ios/chrome/browser/ntp/features.h"
 
-const base::Feature kBlockNewTabPagePendingLoad{
+const base::Feature __attribute__((no_destroy)) kBlockNewTabPagePendingLoad{
     "BlockNewTabPagePendingLoad", base::FEATURE_DISABLED_BY_DEFAULT};

@@ -12,7 +12,7 @@ namespace features {
 // Enables the Media Session service including audio focus tracking. This allows
 // clients to consume the Media Session Mojo APIs but should not have any
 // changes to behavior. It is enabled by default on all platforms except Android.
-const base::Feature kMediaSessionService {
+const base::Feature __attribute__((no_destroy)) kMediaSessionService {
   "MediaSessionService",
 #if !defined(OS_ANDROID)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -23,7 +23,7 @@ const base::Feature kMediaSessionService {
 
 // Enables Audio Focus enforcement which means that only one media session can
 // have audio focus at any one time.
-const base::Feature kAudioFocusEnforcement {
+const base::Feature __attribute__((no_destroy)) kAudioFocusEnforcement {
   "AudioFocusEnforcement",
 #if defined(OS_CHROMEOS)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -34,7 +34,7 @@ const base::Feature kAudioFocusEnforcement {
 
 // Enables Audio Focus grouping which means that multiple media sessions can
 // share audio focus at the same time provided that they have the same group id.
-const base::Feature kAudioFocusSessionGrouping {
+const base::Feature __attribute__((no_destroy)) kAudioFocusSessionGrouping {
   "AudioFocusSessionGrouping",
 #if defined(OS_CHROMEOS)
       base::FEATURE_ENABLED_BY_DEFAULT

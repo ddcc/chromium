@@ -7,7 +7,7 @@
 namespace notifications {
 namespace features {
 
-const base::Feature kNotificationScheduleService{
+const base::Feature __attribute__((no_destroy)) kNotificationScheduleService{
     "NotificationScheduleService", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

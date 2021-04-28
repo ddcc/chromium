@@ -11,15 +11,15 @@ namespace content_settings {
 
 // Enables an improved UI for third-party cookie blocking in incognito mode.
 #if defined(OS_IOS)
-const base::Feature kImprovedCookieControls{"ImprovedCookieControls",
+const base::Feature __attribute__((no_destroy)) kImprovedCookieControls{"ImprovedCookieControls",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_IOS)
 
-const base::Feature kDisallowWildcardsInPluginContentSettings{
+const base::Feature __attribute__((no_destroy)) kDisallowWildcardsInPluginContentSettings{
     "DisallowWildcardsInPluginContentSettings",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDisallowExtensionsToSetPluginContentSettings{
+const base::Feature __attribute__((no_destroy)) kDisallowExtensionsToSetPluginContentSettings{
     "DisallowExtensionsToSetPluginContentSettings",
     base::FEATURE_ENABLED_BY_DEFAULT};
 

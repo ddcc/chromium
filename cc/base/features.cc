@@ -9,12 +9,12 @@
 namespace features {
 
 // Enables impulse-style scroll animations in place of the default ones.
-const base::Feature kImpulseScrollAnimations = {
+const base::Feature __attribute__((no_destroy)) kImpulseScrollAnimations = {
     "ImpulseScrollAnimations", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Whether the compositor should attempt to sync with the scroll handlers before
 // submitting a frame.
-const base::Feature kSynchronizedScrolling = {
+const base::Feature __attribute__((no_destroy)) kSynchronizedScrolling = {
     "SynchronizedScrolling",
 #if defined(OS_ANDROID)
     base::FEATURE_DISABLED_BY_DEFAULT};
@@ -24,11 +24,11 @@ const base::Feature kSynchronizedScrolling = {
 
 #if !defined(OS_ANDROID)
 // Enables latency recovery on the impl thread.
-const base::Feature kImplLatencyRecovery = {"ImplLatencyRecovery",
+const base::Feature __attribute__((no_destroy)) kImplLatencyRecovery = {"ImplLatencyRecovery",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables latency recovery on the main thread.
-const base::Feature kMainLatencyRecovery = {"MainLatencyRecovery",
+const base::Feature __attribute__((no_destroy)) kMainLatencyRecovery = {"MainLatencyRecovery",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // !defined(OS_ANDROID)
 
@@ -52,7 +52,7 @@ bool IsMainLatencyRecoveryEnabled() {
 #endif
 }
 
-const base::Feature kScrollUnification{"ScrollUnification",
+const base::Feature __attribute__((no_destroy)) kScrollUnification{"ScrollUnification",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

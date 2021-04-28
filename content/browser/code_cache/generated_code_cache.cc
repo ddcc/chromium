@@ -100,7 +100,7 @@ constexpr size_t kLargeDataLimit = 64 * 1024;
 // crbug.com/936107: This is a study to determine a good size threshold to
 // deduplicate JS and WebAssembly cache entries.
 // TODO(bbudge): Remove this after the study finishes.
-constexpr base::Feature kCodeCacheDeduplicationStudy{
+const base::Feature __attribute__((no_destroy)) kCodeCacheDeduplicationStudy{
     "CodeCacheDeduplicationStudy", base::FEATURE_DISABLED_BY_DEFAULT};
 constexpr base::FeatureParam<int> kCodeCacheDeduplicationThreshold{
     &kCodeCacheDeduplicationStudy, "size", kLargeDataLimit};

@@ -27,12 +27,12 @@ WebUITabStripFieldTrial::WebUITabStripFieldTrial() {
   base::FeatureList* const feature_list = base::FeatureList::GetInstance();
 
   if (feature_list->IsFeatureOverriddenFromCommandLine(
-          features::kWebUITabStrip.name))
+          features::kWebUITabStrip.name.v()))
     return;
 
   const char* group_name;
 
-  if (!feature_list->IsFeatureOverridden(features::kWebUITabStrip.name))
+  if (!feature_list->IsFeatureOverridden(features::kWebUITabStrip.name.v()))
     group_name = "Default";
   else if (base::FeatureList::IsEnabled(features::kWebUITabStrip))
     group_name = "Enabled";

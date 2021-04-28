@@ -484,7 +484,7 @@ class PasswordSiteIsolationFieldTrialTest : public BaseSiteIsolationTest {
 
     std::unique_ptr<base::FeatureList> feature_list(new base::FeatureList);
     feature_list->RegisterFieldTrialOverride(
-        features::kSiteIsolationForPasswordSites.name,
+        features::kSiteIsolationForPasswordSites.name.v(),
         should_enable
             ? base::FeatureList::OverrideState::OVERRIDE_ENABLE_FEATURE
             : base::FeatureList::OverrideState::OVERRIDE_DISABLE_FEATURE,
@@ -686,7 +686,7 @@ class StrictOriginIsolationFieldTrialTest : public BaseSiteIsolationTest {
 
     std::unique_ptr<base::FeatureList> feature_list(new base::FeatureList);
     feature_list->RegisterFieldTrialOverride(
-        ::features::kStrictOriginIsolation.name,
+        ::features::kStrictOriginIsolation.name.v(),
         should_enable
             ? base::FeatureList::OverrideState::OVERRIDE_ENABLE_FEATURE
             : base::FeatureList::OverrideState::OVERRIDE_DISABLE_FEATURE,

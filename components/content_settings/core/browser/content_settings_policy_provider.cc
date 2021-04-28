@@ -549,7 +549,7 @@ void PolicyProvider::UpdateManagedDefaultSetting(
   int setting = prefs_->GetInteger(entry.pref_name);
   // TODO(wfh): Remove once HDB is enabled by default.
   if (entry.pref_name == prefs::kManagedDefaultPluginsSetting) {
-    static constexpr base::Feature kIgnoreDefaultPluginsSetting = {
+    static const base::Feature __attribute__((no_destroy)) kIgnoreDefaultPluginsSetting = {
         "IgnoreDefaultPluginsSetting", base::FEATURE_DISABLED_BY_DEFAULT};
     if (base::FeatureList::IsEnabled(kIgnoreDefaultPluginsSetting))
       setting = CONTENT_SETTING_DEFAULT;

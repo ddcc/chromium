@@ -62,11 +62,11 @@ std::unique_ptr<Tracker> CreateDemoModeTracker() {
     // mark that feature with a valid configuration.
     bool valid_config = chosen_feature_name.empty()
                             ? true
-                            : chosen_feature_name == feature->name;
+                            : chosen_feature_name == feature->name.v();
 
     FeatureConfig feature_config;
     feature_config.valid = valid_config;
-    feature_config.trigger.name = feature->name + std::string("_trigger");
+    feature_config.trigger.name = feature->name.v() + std::string("_trigger");
     configuration->SetConfiguration(feature, feature_config);
   }
 
@@ -188,7 +188,7 @@ bool TrackerImpl::ShouldTriggerHelpUI(const base::Feature& feature) {
   }
 
   stats::RecordShouldTriggerHelpUI(feature, feature_config, result);
-  DVLOG(2) << "Trigger result for " << feature.name
+  DVLOG(2) << "Trigger result for " << feature.name.v()
            << ": trigger=" << result.NoErrors()
            << " tracking_only=" << feature_config.tracking_only << " "
            << result;
@@ -200,7 +200,7 @@ bool TrackerImpl::WouldTriggerHelpUI(const base::Feature& feature) const {
   ConditionValidator::Result result = condition_validator_->MeetsConditions(
       feature, feature_config, *event_model_, *availability_model_,
       *display_lock_controller_, time_provider_->GetCurrentDay());
-  DVLOG(2) << "Would trigger result for " << feature.name
+  DVLOG(2) << "Would trigger result for " << feature.name.v()
            << ": trigger=" << result.NoErrors()
            << " tracking_only=" << feature_config.tracking_only << " "
            << result;
@@ -225,7 +225,7 @@ bool TrackerImpl::HasEverTriggered(const base::Feature& feature,
 Tracker::TriggerState TrackerImpl::GetTriggerState(
     const base::Feature& feature) const {
   if (!IsInitialized()) {
-    DVLOG(2) << "TriggerState for " << feature.name << ": "
+    DVLOG(2) << "TriggerState for " << feature.name.v() << ": "
              << static_cast<int>(Tracker::TriggerState::NOT_READY);
     return Tracker::TriggerState::NOT_READY;
   }
@@ -236,18 +236,18 @@ Tracker::TriggerState TrackerImpl::GetTriggerState(
       time_provider_->GetCurrentDay());
 
   if (result.trigger_ok) {
-    DVLOG(2) << "TriggerState for " << feature.name << ": "
+    DVLOG(2) << "TriggerState for " << feature.name.v() << ": "
              << static_cast<int>(Tracker::TriggerState::HAS_NOT_BEEN_DISPLAYED);
     return Tracker::TriggerState::HAS_NOT_BEEN_DISPLAYED;
   }
 
-  DVLOG(2) << "TriggerState for " << feature.name << ": "
+  DVLOG(2) << "TriggerState for " << feature.name.v() << ": "
            << static_cast<int>(Tracker::TriggerState::HAS_BEEN_DISPLAYED);
   return Tracker::TriggerState::HAS_BEEN_DISPLAYED;
 }
 
 void TrackerImpl::Dismissed(const base::Feature& feature) {
-  DVLOG(2) << "Dismissing " << feature.name;
+  DVLOG(2) << "Dismissing " << feature.name.v();
   condition_validator_->NotifyDismissed(feature);
   stats::RecordUserDismiss();
 }

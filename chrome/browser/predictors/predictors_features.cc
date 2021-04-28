@@ -9,37 +9,37 @@
 namespace features {
 
 // Whether local predictions should be used to make preconnect predictions.
-const base::Feature kLoadingPredictorUseLocalPredictions{
+const base::Feature __attribute__((no_destroy)) kLoadingPredictorUseLocalPredictions{
     "LoadingPredictorUseLocalPredictions", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Modifies loading predictor so that it only learns about subresources and
 // origins that are high priority.
-const base::Feature kLoadingOnlyLearnHighPriorityResources{
+const base::Feature __attribute__((no_destroy)) kLoadingOnlyLearnHighPriorityResources{
     "LoadingOnlyLearnHighPriorityResources", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Configures the loading predictor table size and other base parameters.
-const base::Feature kLoadingPredictorTableConfig{
+const base::Feature __attribute__((no_destroy)) kLoadingPredictorTableConfig{
     "LoadingPredictorTableConfig", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Modifies loading predictor so that the predictions also contain origins of
 // the redirect target of the navigation.
-const base::Feature kLoadingPreconnectToRedirectTarget{
+const base::Feature __attribute__((no_destroy)) kLoadingPreconnectToRedirectTarget{
     "LoadingPreconnectToRedirectTarget", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Modifies loading predictor so that the value of the |always_access_network|
 // attribute is not used when computing the predicting score for an origin.
-const base::Feature kLoadingPredictorDisregardAlwaysAccessesNetwork{
+const base::Feature __attribute__((no_destroy)) kLoadingPredictorDisregardAlwaysAccessesNetwork{
     "LoadingPredictorDisregardAlwaysAccessesNetwork",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Modifies loading predictor so that it can also use predictions coming from
 // the optimization guide.
-const base::Feature kLoadingPredictorUseOptimizationGuide{
+const base::Feature __attribute__((no_destroy)) kLoadingPredictorUseOptimizationGuide{
     "LoadingPredictorUseOptimizationGuide", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Modifies loading predictor so that it does prefetches of subresources instead
 // of preconnects.
-const base::Feature kLoadingPredictorPrefetch{
+const base::Feature __attribute__((no_destroy)) kLoadingPredictorPrefetch{
     "LoadingPredictorPrefetch", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<PrefetchSubresourceType>::Option
@@ -53,7 +53,7 @@ const base::FeatureParam<PrefetchSubresourceType>
         &kLoadingPredictorPrefetch, "subresource_type",
         PrefetchSubresourceType::kAll, &kPrefetchSubresourceTypeParamOptions};
 
-const base::Feature kLoadingPredictorInflightPredictiveActions{
+const base::Feature __attribute__((no_destroy)) kLoadingPredictorInflightPredictiveActions{
     "kLoadingPredictorInflightPredictiveActions",
     base::FEATURE_ENABLED_BY_DEFAULT};
 

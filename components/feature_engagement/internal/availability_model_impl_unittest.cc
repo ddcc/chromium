@@ -19,13 +19,13 @@ namespace feature_engagement {
 
 namespace {
 
-const base::Feature kTestFeatureFoo{"test_foo",
+const base::Feature __attribute__((no_destroy)) kTestFeatureFoo{"test_foo",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTestFeatureBar{"test_bar",
+const base::Feature __attribute__((no_destroy)) kTestFeatureBar{"test_bar",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTestFeatureQux{"test_qux",
+const base::Feature __attribute__((no_destroy)) kTestFeatureQux{"test_qux",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTestFeatureNop{"test_nop",
+const base::Feature __attribute__((no_destroy)) kTestFeatureNop{"test_nop",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
 class AvailabilityModelImplTest : public testing::Test {

@@ -13,27 +13,27 @@ namespace features {
 #if !defined(OS_MAC)
 // Enables network service sandbox.
 // (Only causes an effect when feature kNetworkService is enabled.)
-const base::Feature kNetworkServiceSandbox{"NetworkServiceSandbox",
+const base::Feature __attribute__((no_destroy)) kNetworkServiceSandbox{"NetworkServiceSandbox",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // !defined(OS_MAC)
 
 #if defined(OS_WIN)
 // Emergency "off switch" for new Windows sandbox security mitigation,
 // sandbox::MITIGATION_EXTENSION_POINT_DISABLE.
-const base::Feature kWinSboxDisableExtensionPoints{
+const base::Feature __attribute__((no_destroy)) kWinSboxDisableExtensionPoints{
     "WinSboxDisableExtensionPoint", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables GPU AppContainer sandbox on Windows.
-const base::Feature kGpuAppContainer{"GpuAppContainer",
+const base::Feature __attribute__((no_destroy)) kGpuAppContainer{"GpuAppContainer",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables GPU Low Privilege AppContainer when combined with kGpuAppContainer.
-const base::Feature kGpuLPAC{"GpuLPAC", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kGpuLPAC{"GpuLPAC", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // defined(OS_WIN)
 
 #if !defined(OS_ANDROID)
 // Controls whether the isolated XR service is sandboxed.
-const base::Feature kXRSandbox{"XRSandbox", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kXRSandbox{"XRSandbox", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // !defined(OS_ANDROID)
 
 }  // namespace features

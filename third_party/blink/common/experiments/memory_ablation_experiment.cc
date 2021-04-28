@@ -18,9 +18,9 @@
 
 namespace blink {
 
-const base::Feature kMemoryAblationFeature{"MemoryAblation",
+const base::Feature __attribute__((no_destroy)) kMemoryAblationFeature{"MemoryAblation",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kRendererMemoryAblationFeature{
+const base::Feature __attribute__((no_destroy)) kRendererMemoryAblationFeature{
     "RendererMemoryAblation", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const char kMemoryAblationFeatureSizeParam[] = "Size";

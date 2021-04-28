@@ -15,17 +15,17 @@ namespace features {
 
 #if defined(OS_ANDROID)
 // Used to limit GL version to 2.0 for skia raster on Android.
-const base::Feature kUseGles2ForOopR{"UseGles2ForOopR",
+const base::Feature __attribute__((no_destroy)) kUseGles2ForOopR{"UseGles2ForOopR",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Use android SurfaceControl API for managing display compositor's buffer queue
 // and using overlays on Android. Also used by webview to disable surface
 // SurfaceControl.
-const base::Feature kAndroidSurfaceControl{"AndroidSurfaceControl",
+const base::Feature __attribute__((no_destroy)) kAndroidSurfaceControl{"AndroidSurfaceControl",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Use AImageReader for MediaCodec and MediaPlyer on android.
-const base::Feature kAImageReader{"AImageReader",
+const base::Feature __attribute__((no_destroy)) kAImageReader{"AImageReader",
                                   base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
@@ -35,10 +35,10 @@ const base::Feature kAImageReader{"AImageReader",
     defined(OS_ANDROID) || defined(OS_FUCHSIA)
 // DefaultEnableGpuRasterization has launched on Mac, Windows, ChromeOS, and
 // Android.
-const base::Feature kDefaultEnableGpuRasterization{
+const base::Feature __attribute__((no_destroy)) kDefaultEnableGpuRasterization{
     "DefaultEnableGpuRasterization", base::FEATURE_ENABLED_BY_DEFAULT};
 #else
-const base::Feature kDefaultEnableGpuRasterization{
+const base::Feature __attribute__((no_destroy)) kDefaultEnableGpuRasterization{
     "DefaultEnableGpuRasterization", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
@@ -46,81 +46,81 @@ const base::Feature kDefaultEnableGpuRasterization{
 // by --enable-oop-rasterization or --disable-oop-rasterization.
 #if defined(OS_ANDROID) || defined(OS_CHROMEOS) || defined(OS_MAC) || \
     defined(OS_WIN) || defined(OS_FUCHSIA)
-const base::Feature kDefaultEnableOopRasterization{
+const base::Feature __attribute__((no_destroy)) kDefaultEnableOopRasterization{
     "DefaultEnableOopRasterization", base::FEATURE_ENABLED_BY_DEFAULT};
 #else
-const base::Feature kDefaultEnableOopRasterization{
+const base::Feature __attribute__((no_destroy)) kDefaultEnableOopRasterization{
     "DefaultEnableOopRasterization", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 #if defined(OS_WIN)
 // Use a high priority for GPU process on Windows.
-const base::Feature kGpuProcessHighPriorityWin{
+const base::Feature __attribute__((no_destroy)) kGpuProcessHighPriorityWin{
     "GpuProcessHighPriorityWin", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
 // Use ThreadPriority::DISPLAY for GPU main, viz compositor and IO threads.
 #if defined(OS_ANDROID) || defined(OS_CHROMEOS) || defined(OS_WIN)
-const base::Feature kGpuUseDisplayThreadPriority{
+const base::Feature __attribute__((no_destroy)) kGpuUseDisplayThreadPriority{
     "GpuUseDisplayThreadPriority", base::FEATURE_ENABLED_BY_DEFAULT};
 #else
-const base::Feature kGpuUseDisplayThreadPriority{
+const base::Feature __attribute__((no_destroy)) kGpuUseDisplayThreadPriority{
     "GpuUseDisplayThreadPriority", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 // Gpu watchdog V2 to simplify the logic and reduce GPU hangs
-const base::Feature kGpuWatchdogV2{"GpuWatchdogV2",
+const base::Feature __attribute__((no_destroy)) kGpuWatchdogV2{"GpuWatchdogV2",
                                    base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Use a different set of watchdog timeouts on V1
-const base::Feature kGpuWatchdogV1NewTimeout{"GpuWatchdogV1NewTimeout",
+const base::Feature __attribute__((no_destroy)) kGpuWatchdogV1NewTimeout{"GpuWatchdogV1NewTimeout",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Use a different set of watchdog timeouts on V2
-const base::Feature kGpuWatchdogV2NewTimeout{"GpuWatchdogV2NewTimeout",
+const base::Feature __attribute__((no_destroy)) kGpuWatchdogV2NewTimeout{"GpuWatchdogV2NewTimeout",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_MAC)
 // Enable use of Metal for OOP rasterization.
-const base::Feature kMetal{"Metal", base::FEATURE_DISABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kMetal{"Metal", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 // Turns on skia deferred display list for out of process raster.
-const base::Feature kOopRasterizationDDL{"OopRasterizationDDL",
+const base::Feature __attribute__((no_destroy)) kOopRasterizationDDL{"OopRasterizationDDL",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Causes us to use the SharedImageManager, removing support for the old
 // mailbox system. Any consumers of the GPU process using the old mailbox
 // system will experience undefined results.
-const base::Feature kSharedImageManager{"SharedImageManager",
+const base::Feature __attribute__((no_destroy)) kSharedImageManager{"SharedImageManager",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Controls the decode acceleration of JPEG images (as opposed to camera
 // captures) in Chrome OS using the VA-API.
 // TODO(andrescj): remove or enable by default in Chrome OS once
 // https://crbug.com/868400 is resolved.
-const base::Feature kVaapiJpegImageDecodeAcceleration{
+const base::Feature __attribute__((no_destroy)) kVaapiJpegImageDecodeAcceleration{
     "VaapiJpegImageDecodeAcceleration", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Controls the decode acceleration of WebP images in Chrome OS using the
 // VA-API.
 // TODO(gildekel): remove or enable by default in Chrome OS once
 // https://crbug.com/877694 is resolved.
-const base::Feature kVaapiWebPImageDecodeAcceleration{
+const base::Feature __attribute__((no_destroy)) kVaapiWebPImageDecodeAcceleration{
     "VaapiWebPImageDecodeAcceleration", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enable Vulkan graphics backend for compositing and rasterization. Defaults to
 // native implementation if --use-vulkan flag is not used. Otherwise
 // --use-vulkan will be followed.
-const base::Feature kVulkan{"Vulkan", base::FEATURE_DISABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kVulkan{"Vulkan", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enable SkiaRenderer Dawn graphics backend. On Windows this will use D3D12,
 // and on Linux this will use Vulkan.
-const base::Feature kSkiaDawn{"SkiaDawn", base::FEATURE_DISABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kSkiaDawn{"SkiaDawn", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Used to enable shared image mailbox and disable legacy texture mailbox on
 // webview.
-const base::Feature kEnableSharedImageForWebview{
+const base::Feature __attribute__((no_destroy)) kEnableSharedImageForWebview{
     "EnableSharedImageForWebview", base::FEATURE_ENABLED_BY_DEFAULT};
 
 #if defined(OS_ANDROID)

@@ -30,7 +30,7 @@ namespace {
 
 // TODO(crbug/960012): Disabled on chromeos for now due to performance
 // regressions that need to be investigated.
-const base::Feature kCacheStorageSequenceFeature{
+const base::Feature __attribute__((no_destroy)) kCacheStorageSequenceFeature{
   "CacheStorageSequence",
 #if defined(OS_CHROMEOS)
       base::FEATURE_DISABLED_BY_DEFAULT

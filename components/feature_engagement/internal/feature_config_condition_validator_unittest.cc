@@ -24,13 +24,13 @@ namespace feature_engagement {
 
 namespace {
 
-const base::Feature kFeatureConfigTestFeatureFoo{
+const base::Feature __attribute__((no_destroy)) kFeatureConfigTestFeatureFoo{
     "test_foo", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kFeatureConfigTestFeatureBar{
+const base::Feature __attribute__((no_destroy)) kFeatureConfigTestFeatureBar{
     "test_bar", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kFeatureConfigTestFeatureQux{
+const base::Feature __attribute__((no_destroy)) kFeatureConfigTestFeatureQux{
     "test_qux", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kFeatureConfigTestFeatureXyz{
+const base::Feature __attribute__((no_destroy)) kFeatureConfigTestFeatureXyz{
     "test_xyz", base::FEATURE_DISABLED_BY_DEFAULT};
 
 FeatureConfig GetValidFeatureConfig() {
@@ -125,7 +125,7 @@ class TestAvailabilityModel : public AvailabilityModel {
 
   base::Optional<uint32_t> GetAvailability(
       const base::Feature& feature) const override {
-    auto search = availabilities_.find(feature.name);
+    auto search = availabilities_.find(feature.name.v());
     if (search == availabilities_.end())
       return base::nullopt;
 
@@ -134,7 +134,7 @@ class TestAvailabilityModel : public AvailabilityModel {
 
   void SetAvailability(const base::Feature* feature,
                        base::Optional<uint32_t> availability) {
-    availabilities_[feature->name] = availability;
+    availabilities_[feature->name.v()] = availability;
   }
 
  private:
@@ -270,7 +270,7 @@ TEST_F(FeatureConfigConditionValidatorTest, CurrentlyShowing) {
 
   validator_.NotifyIsShowing(
       kFeatureConfigTestFeatureBar, FeatureConfig(),
-      {kFeatureConfigTestFeatureFoo.name, kFeatureConfigTestFeatureBar.name});
+      {kFeatureConfigTestFeatureFoo.name.v(), kFeatureConfigTestFeatureBar.name.v()});
   ConditionValidator::Result result =
       GetResultForDayZero(GetAcceptingFeatureConfig());
   EXPECT_FALSE(result.NoErrors());
@@ -370,7 +370,7 @@ TEST_F(FeatureConfigConditionValidatorTest, SessionRate) {
   scoped_feature_list.InitWithFeatures(
       {kFeatureConfigTestFeatureFoo, kFeatureConfigTestFeatureBar}, {});
   std::vector<std::string> all_feature_names = {
-      kFeatureConfigTestFeatureFoo.name, kFeatureConfigTestFeatureBar.name};
+      kFeatureConfigTestFeatureFoo.name.v(), kFeatureConfigTestFeatureBar.name.v()};
 
   FeatureConfig foo_config = GetAcceptingFeatureConfig();
   foo_config.session_rate = Comparator(LESS_THAN, 2u);
@@ -403,7 +403,7 @@ TEST_F(FeatureConfigConditionValidatorTest, SessionRateImpactAffectsNone) {
   scoped_feature_list.InitWithFeatures(
       {kFeatureConfigTestFeatureFoo, kFeatureConfigTestFeatureBar}, {});
   std::vector<std::string> all_feature_names = {
-      kFeatureConfigTestFeatureFoo.name, kFeatureConfigTestFeatureBar.name};
+      kFeatureConfigTestFeatureFoo.name.v(), kFeatureConfigTestFeatureBar.name.v()};
 
   FeatureConfig foo_config = GetAcceptingFeatureConfig();
   foo_config.session_rate = Comparator(LESS_THAN, 2u);
@@ -436,8 +436,8 @@ TEST_F(FeatureConfigConditionValidatorTest, SessionRateImpactAffectsExplicit) {
        kFeatureConfigTestFeatureQux},
       {});
   std::vector<std::string> all_feature_names = {
-      kFeatureConfigTestFeatureFoo.name, kFeatureConfigTestFeatureBar.name,
-      kFeatureConfigTestFeatureQux.name};
+      kFeatureConfigTestFeatureFoo.name.v(), kFeatureConfigTestFeatureBar.name.v(),
+      kFeatureConfigTestFeatureQux.name.v()};
 
   FeatureConfig foo_config = GetAcceptingFeatureConfig();
   foo_config.session_rate = Comparator(LESS_THAN, 2u);
@@ -446,7 +446,7 @@ TEST_F(FeatureConfigConditionValidatorTest, SessionRateImpactAffectsExplicit) {
 
   FeatureConfig affects_only_foo_config = GetAcceptingFeatureConfig();
   affects_only_foo_config.session_rate_impact =
-      CreateSessionRateImpactTypeExplicit({kFeatureConfigTestFeatureFoo.name});
+      CreateSessionRateImpactTypeExplicit({kFeatureConfigTestFeatureFoo.name.v()});
 
   EXPECT_TRUE(
       GetResultForDayZeroForFeature(kFeatureConfigTestFeatureFoo, foo_config)
@@ -484,7 +484,7 @@ TEST_F(FeatureConfigConditionValidatorTest, SessionRateImpactAffectsSelf) {
        kFeatureConfigTestFeatureQux},
       {});
   std::vector<std::string> all_feature_names = {
-      kFeatureConfigTestFeatureFoo.name, kFeatureConfigTestFeatureBar.name};
+      kFeatureConfigTestFeatureFoo.name.v(), kFeatureConfigTestFeatureBar.name.v()};
 
   FeatureConfig foo_config = GetAcceptingFeatureConfig();
   foo_config.session_rate = Comparator(LESS_THAN, 2u);
@@ -493,7 +493,7 @@ TEST_F(FeatureConfigConditionValidatorTest, SessionRateImpactAffectsSelf) {
 
   FeatureConfig affects_only_foo_config = GetAcceptingFeatureConfig();
   affects_only_foo_config.session_rate_impact =
-      CreateSessionRateImpactTypeExplicit({kFeatureConfigTestFeatureFoo.name});
+      CreateSessionRateImpactTypeExplicit({kFeatureConfigTestFeatureFoo.name.v()});
 
   EXPECT_TRUE(
       GetResultForDayZeroForFeature(kFeatureConfigTestFeatureFoo, foo_config)
@@ -532,8 +532,8 @@ TEST_F(FeatureConfigConditionValidatorTest,
        kFeatureConfigTestFeatureQux, kFeatureConfigTestFeatureXyz},
       {});
   std::vector<std::string> all_feature_names = {
-      kFeatureConfigTestFeatureFoo.name, kFeatureConfigTestFeatureBar.name,
-      kFeatureConfigTestFeatureQux.name, kFeatureConfigTestFeatureXyz.name};
+      kFeatureConfigTestFeatureFoo.name.v(), kFeatureConfigTestFeatureBar.name.v(),
+      kFeatureConfigTestFeatureQux.name.v(), kFeatureConfigTestFeatureXyz.name.v()};
 
   FeatureConfig foo_config = GetAcceptingFeatureConfig();
   foo_config.session_rate = Comparator(LESS_THAN, 2u);
@@ -544,8 +544,8 @@ TEST_F(FeatureConfigConditionValidatorTest,
 
   FeatureConfig affects_foo_and_bar_config = GetAcceptingFeatureConfig();
   affects_foo_and_bar_config.session_rate_impact =
-      CreateSessionRateImpactTypeExplicit({kFeatureConfigTestFeatureFoo.name,
-                                           kFeatureConfigTestFeatureBar.name});
+      CreateSessionRateImpactTypeExplicit({kFeatureConfigTestFeatureFoo.name.v(),
+                                           kFeatureConfigTestFeatureBar.name.v()});
 
   EXPECT_TRUE(
       GetResultForDayZeroForFeature(kFeatureConfigTestFeatureFoo, foo_config)

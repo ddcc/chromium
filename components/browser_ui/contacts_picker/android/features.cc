@@ -9,7 +9,7 @@
 
 namespace browser_ui {
 
-const base::Feature kContactsPickerSelectAll{"ContactsPickerSelectAll",
+const base::Feature __attribute__((no_destroy)) kContactsPickerSelectAll{"ContactsPickerSelectAll",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace browser_ui

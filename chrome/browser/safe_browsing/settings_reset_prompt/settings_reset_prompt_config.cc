@@ -31,7 +31,7 @@ bool IsPromptEnabled() {
 
 }  // namespace.
 
-const base::Feature kSettingsResetPrompt{kSettingsResetPromptFeatureName,
+const base::Feature __attribute__((no_destroy)) kSettingsResetPrompt{kSettingsResetPromptFeatureName,
                                          base::FEATURE_DISABLED_BY_DEFAULT};
 
 // static

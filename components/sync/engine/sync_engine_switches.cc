@@ -6,7 +6,7 @@
 
 namespace switches {
 
-const base::Feature kSyncResetPollIntervalOnStart{
+const base::Feature __attribute__((no_destroy)) kSyncResetPollIntervalOnStart{
     "SyncResetPollIntervalOnStart", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Whether encryption keys should be derived using scrypt when a new custom
@@ -14,17 +14,17 @@ const base::Feature kSyncResetPollIntervalOnStart{
 // used instead. Note that disabling this feature does not disable deriving keys
 // via scrypt when we receive a remote Nigori node that specifies it as the key
 // derivation method.
-const base::Feature kSyncUseScryptForNewCustomPassphrases{
+const base::Feature __attribute__((no_destroy)) kSyncUseScryptForNewCustomPassphrases{
     "SyncUseScryptForNewCustomPassphrases", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSyncSupportTrustedVaultPassphrase{
+const base::Feature __attribute__((no_destroy)) kSyncSupportTrustedVaultPassphrase{
     "SyncSupportTrustedVaultPassphrase", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSyncSupportTrustedVaultPassphraseRecovery{
+const base::Feature __attribute__((no_destroy)) kSyncSupportTrustedVaultPassphraseRecovery{
     "SyncSupportTrustedVaultPassphraseRecovery",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSyncTriggerFullKeystoreMigration{
+const base::Feature __attribute__((no_destroy)) kSyncTriggerFullKeystoreMigration{
     "SyncTriggerFullKeystoreMigration", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace switches

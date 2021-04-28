@@ -7,7 +7,7 @@
 namespace security_state {
 namespace features {
 
-const base::Feature kMarkHttpAsFeature{"MarkHttpAs",
+const base::Feature __attribute__((no_destroy)) kMarkHttpAsFeature{"MarkHttpAs",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 const char kMarkHttpAsFeatureParameterName[] = "treatment";
 const char kMarkHttpAsParameterDangerous[] = "dangerous";
@@ -15,10 +15,10 @@ const char kMarkHttpAsParameterWarningAndDangerousOnFormEdits[] =
     "warning-and-dangerous-on-form-edits";
 const char kMarkHttpAsParameterDangerWarning[] = "danger-warning";
 
-const base::Feature kLegacyTLSWarnings{"LegacyTLSWarnings",
+const base::Feature __attribute__((no_destroy)) kLegacyTLSWarnings{"LegacyTLSWarnings",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSafetyTipUI{"SafetyTip",
+const base::Feature __attribute__((no_destroy)) kSafetyTipUI{"SafetyTip",
                                  base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

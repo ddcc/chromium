@@ -22,7 +22,7 @@ const char kDetectLanguageInSubFrames[] = "detect_language_in_sub_frames";
 
 const char kSecurityOrigin[] = "https://translate.googleapis.com/";
 
-const base::Feature kTranslateSubFrames{"TranslateSubFrames",
+const base::Feature __attribute__((no_destroy)) kTranslateSubFrames{"TranslateSubFrames",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
 GURL GetTranslateSecurityOrigin() {

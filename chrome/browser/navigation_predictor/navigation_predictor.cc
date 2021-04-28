@@ -38,7 +38,7 @@ namespace {
 
 // A feature to allow multiple prerenders. The feature itself is always enabled,
 // but the params it exposes are variable.
-const base::Feature kNavigationPredictorMultiplePrerenders{
+const base::Feature __attribute__((no_destroy)) kNavigationPredictorMultiplePrerenders{
     "NavigationPredictorMultiplePrerenders", base::FEATURE_ENABLED_BY_DEFAULT};
 
 std::string GetURLWithoutRefParams(const GURL& gurl) {

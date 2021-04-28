@@ -92,12 +92,12 @@ const char kDefaultTranslateRankerModelURL[] =
     "translate/2017/03/translate_ranker_model_20170329.pb.bin";
 #endif
 
-const base::Feature kTranslateRankerQuery{"TranslateRankerQuery",
+const base::Feature __attribute__((no_destroy)) kTranslateRankerQuery{"TranslateRankerQuery",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kTranslateRankerEnforcement{
+const base::Feature __attribute__((no_destroy)) kTranslateRankerEnforcement{
     "TranslateRankerEnforcement", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTranslateRankerPreviousLanguageMatchesOverride{
+const base::Feature __attribute__((no_destroy)) kTranslateRankerPreviousLanguageMatchesOverride{
     "TranslateRankerPreviousLanguageMatchesOverride",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

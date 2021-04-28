@@ -150,7 +150,7 @@ const wchar_t* const kTroublesomeDlls[] = {
 };
 
 // This is for finch. See also crbug.com/464430 for details.
-const base::Feature kEnableCsrssLockdownFeature{
+const base::Feature __attribute__((no_destroy)) kEnableCsrssLockdownFeature{
     "EnableCsrssLockdown", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Helps emit trace events for sandbox policy. This mediates memory between

@@ -61,7 +61,7 @@ namespace {
 
 // Feature to control the delay between an extension becoming idle and sending a
 // ShouldSuspend message.
-const base::Feature kChangeExtensionEventPageSuspendDelay{
+const base::Feature __attribute__((no_destroy)) kChangeExtensionEventPageSuspendDelay{
     "ChangeExtensionEventPageSuspendDelay", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // The delay between an extension becoming idle and sending a ShouldSuspend

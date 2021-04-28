@@ -6,10 +6,10 @@
 
 namespace messages {
 
-const base::Feature kMessagesForAndroidInfrastructure{
+const base::Feature __attribute__((no_destroy)) kMessagesForAndroidInfrastructure{
     "MessagesForAndroidInfrastructure", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kMessagesForAndroidPasswords{
+const base::Feature __attribute__((no_destroy)) kMessagesForAndroidPasswords{
     "MessagesForAndroidPasswords", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsPasswordMessagesUiEnabled() {

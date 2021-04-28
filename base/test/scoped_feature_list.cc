@@ -26,7 +26,7 @@ std::vector<StringPiece> GetFeatureVector(
     const std::vector<Feature>& features) {
   std::vector<StringPiece> output;
   for (const Feature& feature : features) {
-    output.push_back(feature.name);
+    output.push_back(feature.name.v());
   }
 
   return output;
@@ -37,7 +37,7 @@ std::vector<StringPiece> GetFeatureVectorFromFeaturesAndParams(
         features_and_params) {
   std::vector<StringPiece> output;
   for (const auto& entry : features_and_params) {
-    output.push_back(entry.feature.name);
+    output.push_back(entry.feature.name.v());
   }
 
   return output;
@@ -250,7 +250,7 @@ void ScopedFeatureList::InitWithFeaturesImpl(
   std::vector<std::string> features_with_trial;
   auto feature_it = merged_features.enabled_feature_list.begin();
   for (const auto& enabled_feature : enabled_features_and_params) {
-    const std::string feature_name = enabled_feature.feature.name;
+    const std::string feature_name = enabled_feature.feature.name.v();
     const std::string trial_name =
         "scoped_feature_list_trial_for_" + feature_name;
 

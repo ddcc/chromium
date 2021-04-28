@@ -24,21 +24,21 @@ namespace features {
 
 // Controls whether or not Autofill client will populate form with CPAN and
 // dCVV, rather than FPAN.
-const base::Feature kAutofillAlwaysReturnCloudTokenizedCard{
+const base::Feature __attribute__((no_destroy)) kAutofillAlwaysReturnCloudTokenizedCard{
     "AutofillAlwaysReturnCloudTokenizedCard",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // If enabled, when a server card is unmasked, its info will be cached until
 // page navigation to simplify consecutive fills on the same page.
-const base::Feature kAutofillCacheServerCardInfo{
+const base::Feature __attribute__((no_destroy)) kAutofillCacheServerCardInfo{
     "AutofillCacheServerCardInfo", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAutofillCreditCardAblationExperiment{
+const base::Feature __attribute__((no_destroy)) kAutofillCreditCardAblationExperiment{
     "AutofillCreditCardAblationExperiment", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables the use of platform authenticators through WebAuthn to retrieve
 // credit cards from Google payments.
-const base::Feature kAutofillCreditCardAuthentication{
+const base::Feature __attribute__((no_destroy)) kAutofillCreditCardAuthentication{
   "AutofillCreditCardAuthentication",
 #if defined(OS_WIN) || defined(OS_MAC)
       // Better Auth project is fully launched on Win/Mac.
@@ -51,61 +51,61 @@ const base::Feature kAutofillCreditCardAuthentication{
 // When enabled, if credit card upload succeeded, the avatar icon will show a
 // highlight otherwise, the credit card icon image will be updated and if user
 // clicks on the icon, a save card failure bubble will pop up.
-const base::Feature kAutofillCreditCardUploadFeedback{
+const base::Feature __attribute__((no_destroy)) kAutofillCreditCardUploadFeedback{
     "AutofillCreditCardUploadFeedback", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When enabled, the credit card nicknames will be manageable. They can be
 // modified locally.
-const base::Feature kAutofillEnableCardNicknameManagement{
+const base::Feature __attribute__((no_destroy)) kAutofillEnableCardNicknameManagement{
     "AutofillEnableCardNicknameManagement", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When enabled, shows the Google Pay logo on CVC prompt on Android.
-const base::Feature kAutofillDownstreamCvcPromptUseGooglePayLogo{
+const base::Feature __attribute__((no_destroy)) kAutofillDownstreamCvcPromptUseGooglePayLogo{
     "AutofillDownstreamCvcPromptUseGooglePayLogo",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When enabled, the credit card nicknames will be manageable. They can be
 // uploaded to Payments.
-const base::Feature kAutofillEnableCardNicknameUpstream{
+const base::Feature __attribute__((no_destroy)) kAutofillEnableCardNicknameUpstream{
     "AutofillEnableCardNicknameUpstream", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When enabled, autofill payments bubbles' result will be recorded as either
 // 'accepted', 'cancelled', 'closed', 'not interacted' or 'lost focus'.
-const base::Feature kAutofillEnableFixedPaymentsBubbleLogging{
+const base::Feature __attribute__((no_destroy)) kAutofillEnableFixedPaymentsBubbleLogging{
     "AutofillEnableFixedPaymentsBubbleLogging",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Controls whether we show a Google-issued card in the suggestions list.
-const base::Feature kAutofillEnableGoogleIssuedCard{
+const base::Feature __attribute__((no_destroy)) kAutofillEnableGoogleIssuedCard{
     "AutofillEnableGoogleIssuedCard", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When enabled, offer data will be retrieved during downstream and shown in
 // the dropdown list.
-const base::Feature kAutofillEnableOffersInDownstream{
+const base::Feature __attribute__((no_destroy)) kAutofillEnableOffersInDownstream{
     "kAutofillEnableOffersInDownstream", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When enabled, all payments related bubbles will not be dismissed upon page
 // navigation.
-const base::Feature kAutofillEnableStickyPaymentsBubble{
+const base::Feature __attribute__((no_destroy)) kAutofillEnableStickyPaymentsBubble{
     "AutofillEnableStickyPaymentsBubble", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When enabled, Autofill data related icons will be shown in the status
 // chip in toolbar along with the avatar toolbar button.
-const base::Feature kAutofillEnableToolbarStatusChip{
+const base::Feature __attribute__((no_destroy)) kAutofillEnableToolbarStatusChip{
     "AutofillEnableToolbarStatusChip", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When enabled, the option of using cloud token virtual card will be offered
 // when all requirements are met.
-const base::Feature kAutofillEnableVirtualCard{
+const base::Feature __attribute__((no_destroy)) kAutofillEnableVirtualCard{
     "AutofillEnableVirtualCard", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When enabled, the Save Card infobar will be dismissed by a user initiated
 // navigation other than one caused by submitted form.
-const base::Feature kAutofillSaveCardDismissOnNavigation{
+const base::Feature __attribute__((no_destroy)) kAutofillSaveCardDismissOnNavigation{
     "AutofillSaveCardDismissOnNavigation", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // When enabled, the Save Card infobar supports editing before submitting.
-const base::Feature kAutofillSaveCardInfobarEditSupport{
+const base::Feature __attribute__((no_destroy)) kAutofillSaveCardInfobarEditSupport{
     "AutofillSaveCardInfobarEditSupport", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Controls offering credit card upload to Google Payments. Cannot ever be
@@ -115,10 +115,10 @@ const base::Feature kAutofillSaveCardInfobarEditSupport{
 // having old versions of Chrome forever do the wrong thing. Enabling it by
 // default would mean that any first-run client without a Finch config won't get
 // the overriding command to NOT turn it on, which becomes an issue.
-const base::Feature kAutofillUpstream{"AutofillUpstream",
+const base::Feature __attribute__((no_destroy)) kAutofillUpstream{"AutofillUpstream",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAutofillUpstreamAllowAllEmailDomains{
+const base::Feature __attribute__((no_destroy)) kAutofillUpstreamAllowAllEmailDomains{
     "AutofillUpstreamAllowAllEmailDomains", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool ShouldShowImprovedUserConsentForCreditCardSave() {

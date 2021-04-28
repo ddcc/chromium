@@ -9,7 +9,7 @@ namespace midi {
 namespace features {
 
 #if defined(OS_WIN)
-const base::Feature kMidiManagerWinrt{"MidiManagerWinrt",
+const base::Feature __attribute__((no_destroy)) kMidiManagerWinrt{"MidiManagerWinrt",
                                       base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 

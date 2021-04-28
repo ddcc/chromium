@@ -6,16 +6,16 @@
 
 #include "build/build_config.h"
 
-const base::Feature kSharingQRCodeGenerator{"SharingQRCodeGenerator",
+const base::Feature __attribute__((no_destroy)) kSharingQRCodeGenerator{"SharingQRCodeGenerator",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSharingDeviceExpiration{"SharingDeviceExpiration",
+const base::Feature __attribute__((no_destroy)) kSharingDeviceExpiration{"SharingDeviceExpiration",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kSharingDeviceExpirationHours = {
     &kSharingDeviceExpiration, "SharingDeviceExpirationHours", 48};
 
-const base::Feature kSharingMatchPulseInterval{
+const base::Feature __attribute__((no_destroy)) kSharingMatchPulseInterval{
     "SharingMatchPulseInterval", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kSharingPulseDeltaDesktopHours = {
@@ -24,28 +24,28 @@ const base::FeatureParam<int> kSharingPulseDeltaDesktopHours = {
 const base::FeatureParam<int> kSharingPulseDeltaAndroidHours = {
     &kSharingMatchPulseInterval, "SharingPulseDeltaAndroidHours", 24};
 
-const base::Feature kSharingMessageTTL{"SharingMessageTTL",
+const base::Feature __attribute__((no_destroy)) kSharingMessageTTL{"SharingMessageTTL",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kSharingMessageTTLSeconds = {
     &kSharingMessageTTL, "SharingMessageTTLSeconds", 16};
 
-const base::Feature kSharingAckMessageTTL{"SharingAckMessageTTL",
+const base::Feature __attribute__((no_destroy)) kSharingAckMessageTTL{"SharingAckMessageTTL",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kSharingAckMessageTTLSeconds = {
     &kSharingAckMessageTTL, "SharingAckMessageTTLSeconds", 8};
 
-const base::Feature kSharingMessageBridgeTimeout{
+const base::Feature __attribute__((no_destroy)) kSharingMessageBridgeTimeout{
     "SharingMessageBridgeTimeout", base::FEATURE_ENABLED_BY_DEFAULT};
 
 const base::FeatureParam<int> kSharingMessageBridgeTimeoutSeconds = {
     &kSharingMessageBridgeTimeout, "SharingMessageBridgeTimeoutSeconds", 5};
 
-const base::Feature kSharingSendViaSync{"SharingSendViaSync",
+const base::Feature __attribute__((no_destroy)) kSharingSendViaSync{"SharingSendViaSync",
                                         base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSharingPreferVapid {
+const base::Feature __attribute__((no_destroy)) kSharingPreferVapid {
   "SharingPreferVapid",
 #if defined(OS_ANDROID)
       base::FEATURE_ENABLED_BY_DEFAULT

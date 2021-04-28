@@ -18,8 +18,8 @@ namespace test {
 
 namespace {
 
-const Feature kTestFeature1{"TestFeature1", FEATURE_DISABLED_BY_DEFAULT};
-const Feature kTestFeature2{"TestFeature2", FEATURE_DISABLED_BY_DEFAULT};
+const Feature __attribute__((no_destroy)) kTestFeature1{"TestFeature1", FEATURE_DISABLED_BY_DEFAULT};
+const Feature __attribute__((no_destroy)) kTestFeature2{"TestFeature2", FEATURE_DISABLED_BY_DEFAULT};
 
 void ExpectFeatures(const std::string& enabled_features,
                     const std::string& disabled_features) {
@@ -390,7 +390,7 @@ TEST_F(ScopedFeatureListTest, FeatureOverrideFeatureWithEnabledFieldTrial) {
   std::unique_ptr<FeatureList> feature_list(new FeatureList);
   FieldTrial* trial = FieldTrialList::CreateFieldTrial("TrialExample", "A");
   feature_list->RegisterFieldTrialOverride(
-      kTestFeature1.name, FeatureList::OVERRIDE_ENABLE_FEATURE, trial);
+      kTestFeature1.name.v(), FeatureList::OVERRIDE_ENABLE_FEATURE, trial);
   feature_list1.InitWithFeatureList(std::move(feature_list));
 
   {
@@ -406,7 +406,7 @@ TEST_F(ScopedFeatureListTest, FeatureOverrideFeatureWithDisabledFieldTrial) {
   std::unique_ptr<FeatureList> feature_list(new FeatureList);
   FieldTrial* trial = FieldTrialList::CreateFieldTrial("TrialExample", "A");
   feature_list->RegisterFieldTrialOverride(
-      kTestFeature1.name, FeatureList::OVERRIDE_DISABLE_FEATURE, trial);
+      kTestFeature1.name.v(), FeatureList::OVERRIDE_DISABLE_FEATURE, trial);
   feature_list1.InitWithFeatureList(std::move(feature_list));
 
   {

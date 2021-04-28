@@ -25,10 +25,10 @@ bool UseBrowserSpellChecker() {
 }
 
 #if defined(OS_WIN)
-const base::Feature kWinUseBrowserSpellChecker{
+const base::Feature __attribute__((no_destroy)) kWinUseBrowserSpellChecker{
     "WinUseBrowserSpellChecker", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kWinDelaySpellcheckServiceInit{
+const base::Feature __attribute__((no_destroy)) kWinDelaySpellcheckServiceInit{
     "WinDelaySpellcheckServiceInit", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool WindowsVersionSupportsSpellchecker() {
@@ -39,11 +39,11 @@ bool WindowsVersionSupportsSpellchecker() {
 
 #if defined(OS_ANDROID)
 // Enables/disables Android spellchecker.
-const base::Feature kAndroidSpellChecker{
+const base::Feature __attribute__((no_destroy)) kAndroidSpellChecker{
     "AndroidSpellChecker", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables/disables Android spellchecker on non low-end Android devices.
-const base::Feature kAndroidSpellCheckerNonLowEnd{
+const base::Feature __attribute__((no_destroy)) kAndroidSpellCheckerNonLowEnd{
     "AndroidSpellCheckerNonLowEnd", base::FEATURE_ENABLED_BY_DEFAULT};
 
 bool IsAndroidSpellCheckFeatureEnabled() {

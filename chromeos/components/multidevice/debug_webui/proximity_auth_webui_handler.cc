@@ -34,7 +34,7 @@ namespace multidevice {
 
 namespace {
 
-constexpr const multidevice::SoftwareFeature kAllSoftareFeatures[] = {
+constexpr const multidevice::SoftwareFeature __attribute__((no_destroy)) kAllSoftareFeatures[] = {
     multidevice::SoftwareFeature::kBetterTogetherHost,
     multidevice::SoftwareFeature::kBetterTogetherClient,
     multidevice::SoftwareFeature::kSmartLockHost,

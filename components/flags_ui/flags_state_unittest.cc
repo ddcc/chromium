@@ -77,11 +77,11 @@ const char kTestParam2[] = "param2";
 const char kTestParam3[] = "param:/3";
 const char kTestParamValue[] = "value";
 
-const base::Feature kTestFeature1{"FeatureName1",
+const base::Feature __attribute__((no_destroy)) kTestFeature1{"FeatureName1",
                                   base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kTestFeature2{"FeatureName2",
+const base::Feature __attribute__((no_destroy)) kTestFeature2{"FeatureName2",
                                   base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kTestFeature3{"FeatureName3",
+const base::Feature __attribute__((no_destroy)) kTestFeature3{"FeatureName3",
                                   base::FEATURE_DISABLED_BY_DEFAULT};
 
 const FeatureEntry::FeatureParam kTestVariationOther1[] = {

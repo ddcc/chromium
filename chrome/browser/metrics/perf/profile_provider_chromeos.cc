@@ -21,7 +21,7 @@ namespace metrics {
 
 namespace {
 
-const base::Feature kBrowserJankinessProfiling{
+const base::Feature __attribute__((no_destroy)) kBrowserJankinessProfiling{
     "BrowserJankinessProfiling", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const char kJankinessTriggerStatusHistogram[] =

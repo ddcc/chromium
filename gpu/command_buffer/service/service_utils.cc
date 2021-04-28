@@ -207,7 +207,7 @@ VulkanImplementationName ParseVulkanImplementationName(
   // If the vulkan feature is enabled from command line, we will force to use
   // vulkan even if it is blocklisted.
   return base::FeatureList::GetInstance()->IsFeatureOverriddenFromCommandLine(
-             features::kVulkan.name, base::FeatureList::OVERRIDE_ENABLE_FEATURE)
+             features::kVulkan.name.v(), base::FeatureList::OVERRIDE_ENABLE_FEATURE)
              ? VulkanImplementationName::kForcedNative
              : VulkanImplementationName::kNative;
 }

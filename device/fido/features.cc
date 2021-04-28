@@ -14,32 +14,32 @@
 namespace device {
 
 #if defined(OS_WIN)
-const base::Feature kWebAuthUseNativeWinApi{"WebAuthenticationUseNativeWinApi",
+const base::Feature __attribute__((no_destroy)) kWebAuthUseNativeWinApi{"WebAuthenticationUseNativeWinApi",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // defined(OS_WIN)
 
-extern const base::Feature kWebAuthBiometricEnrollment{
+extern const base::Feature __attribute__((no_destroy)) kWebAuthBiometricEnrollment{
     "WebAuthenticationBiometricEnrollment", base::FEATURE_ENABLED_BY_DEFAULT};
 
-extern const base::Feature kWebAuthPhoneSupport{
+extern const base::Feature __attribute__((no_destroy)) kWebAuthPhoneSupport{
     "WebAuthenticationPhoneSupport", base::FEATURE_DISABLED_BY_DEFAULT};
 
-extern const base::Feature kWebAuthGetAssertionFeaturePolicy{
+extern const base::Feature __attribute__((no_destroy)) kWebAuthGetAssertionFeaturePolicy{
     "WebAuthenticationGetAssertionFeaturePolicy",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
 #if defined(OS_CHROMEOS) || defined(OS_LINUX)
-const base::Feature kWebAuthCableLowLatency{"WebAuthenticationCableLowLatency",
+const base::Feature __attribute__((no_destroy)) kWebAuthCableLowLatency{"WebAuthenticationCableLowLatency",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 #endif  // defined(OS_CHROMEOS) || defined(OS_LINUX)
 
 #if defined(OS_CHROMEOS)
-const base::Feature kWebAuthCrosPlatformAuthenticator{
+const base::Feature __attribute__((no_destroy)) kWebAuthCrosPlatformAuthenticator{
     "WebAuthenticationCrosPlatformAuthenticator",
     base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_CHROMEOS)
 
-extern const base::Feature kWebAuthAttestationBlockList{
+extern const base::Feature __attribute__((no_destroy)) kWebAuthAttestationBlockList{
     "WebAuthentiationAttestationBlockList", base::FEATURE_DISABLED_BY_DEFAULT};
 
 extern const base::FeatureParam<std::string> kWebAuthAttestationBlockedDomains{

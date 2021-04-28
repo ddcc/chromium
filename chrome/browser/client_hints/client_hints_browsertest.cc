@@ -2101,7 +2101,7 @@ class ClientHintsWebHoldbackBrowserTest : public ClientHintsBrowserTest {
     feature_list->InitializeFromCommandLine(
         "UserAgentClientHint,LangClientHintHeader", "");
     feature_list->RegisterFieldTrialOverride(
-        features::kNetworkQualityEstimatorWebHoldback.name,
+        features::kNetworkQualityEstimatorWebHoldback.name.v(),
         base::FeatureList::OVERRIDE_ENABLE_FEATURE, trial.get());
     return feature_list;
   }

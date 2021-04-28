@@ -6,7 +6,7 @@
 
 namespace browser_watcher {
 
-const base::Feature kExtendedCrashReportingFeature{
+const base::Feature __attribute__((no_destroy)) kExtendedCrashReportingFeature{
     "ExtendedCrashReporting", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const char kInMemoryOnlyParam[] = "in_memory_only";

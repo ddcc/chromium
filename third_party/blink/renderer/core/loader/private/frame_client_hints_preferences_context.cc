@@ -16,7 +16,7 @@ namespace {
 
 // Mapping from WebClientHintsType to WebFeature. The ordering should match the
 // ordering of enums in WebClientHintsType.
-static constexpr WebFeature kWebFeatureMapping[] = {
+static constexpr WebFeature __attribute__((no_destroy)) kWebFeatureMapping[] = {
     WebFeature::kClientHintsDeviceMemory,
     WebFeature::kClientHintsDPR,
     WebFeature::kClientHintsResourceWidth,

@@ -31,7 +31,7 @@ constexpr size_t kChromotingCapabilityCount =
     sizeof(kChromotingCapabilities) /
     sizeof(ftl::ChromotingCapability::Feature);
 
-constexpr remoting::ftl::FtlCapability::Feature kFtlCapabilities[] = {
+constexpr remoting::ftl::FtlCapability::Feature __attribute__((no_destroy)) kFtlCapabilities[] = {
     remoting::ftl::FtlCapability_Feature_RECEIVE_CALLS_FROM_GAIA,
     remoting::ftl::FtlCapability_Feature_GAIA_REACHABLE};
 constexpr size_t kFtlCapabilityCount =

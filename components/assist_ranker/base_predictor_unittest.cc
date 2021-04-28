@@ -48,7 +48,7 @@ const base::flat_set<std::string> kFeatureWhitelist({kBoolFeature, kIntFeature,
                                                      kStringFeature,
                                                      kStringListFeature});
 
-const base::Feature kTestRankerQuery{"TestRankerQuery",
+const base::Feature __attribute__((no_destroy)) kTestRankerQuery{"TestRankerQuery",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 
 const base::FeatureParam<std::string> kTestRankerUrl{

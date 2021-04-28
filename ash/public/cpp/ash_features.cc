@@ -13,133 +13,133 @@
 namespace ash {
 namespace features {
 
-const base::Feature kAllowAmbientEQ{"AllowAmbientEQ",
+const base::Feature __attribute__((no_destroy)) kAllowAmbientEQ{"AllowAmbientEQ",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAutoNightLight{"AutoNightLight",
+const base::Feature __attribute__((no_destroy)) kAutoNightLight{"AutoNightLight",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCaptureMode{"CaptureMode",
+const base::Feature __attribute__((no_destroy)) kCaptureMode{"CaptureMode",
                                  base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kContextualNudges{"ContextualNudges",
+const base::Feature __attribute__((no_destroy)) kContextualNudges{"ContextualNudges",
                                       base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDarkLightMode{"DarkLightMode",
+const base::Feature __attribute__((no_destroy)) kDarkLightMode{"DarkLightMode",
                                    base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDisplayAlignAssist{"DisplayAlignAssist",
+const base::Feature __attribute__((no_destroy)) kDisplayAlignAssist{"DisplayAlignAssist",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDisplayIdentification{"DisplayIdentification",
+const base::Feature __attribute__((no_destroy)) kDisplayIdentification{"DisplayIdentification",
                                            base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDockedMagnifier{"DockedMagnifier",
+const base::Feature __attribute__((no_destroy)) kDockedMagnifier{"DockedMagnifier",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kDragToSnapInClamshellMode{
+const base::Feature __attribute__((no_destroy)) kDragToSnapInClamshellMode{
     "DragToSnapInClamshellMode", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kEnhancedDeskAnimations{"EnhancedDeskAnimations",
+const base::Feature __attribute__((no_destroy)) kEnhancedDeskAnimations{"EnhancedDeskAnimations",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kLimitAltTabToActiveDesk{"LimitAltTabToActiveDesk",
+const base::Feature __attribute__((no_destroy)) kLimitAltTabToActiveDesk{"LimitAltTabToActiveDesk",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kLockScreenNotifications{"LockScreenNotifications",
+const base::Feature __attribute__((no_destroy)) kLockScreenNotifications{"LockScreenNotifications",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kLockScreenInlineReply{"LockScreenInlineReply",
+const base::Feature __attribute__((no_destroy)) kLockScreenInlineReply{"LockScreenInlineReply",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kLockScreenHideSensitiveNotificationsSupport{
+const base::Feature __attribute__((no_destroy)) kLockScreenHideSensitiveNotificationsSupport{
     "LockScreenHideSensitiveNotificationsSupport",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kLockScreenMediaControls{"LockScreenMediaControls",
+const base::Feature __attribute__((no_destroy)) kLockScreenMediaControls{"LockScreenMediaControls",
                                              base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kHideArcMediaNotifications{
+const base::Feature __attribute__((no_destroy)) kHideArcMediaNotifications{
     "HideArcMediaNotifications", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kInteractiveWindowCycleList{
+const base::Feature __attribute__((no_destroy)) kInteractiveWindowCycleList{
     "InteractiveWindowCycleList", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kManagedDeviceUIRedesign{"ManagedDeviceUIRedesign",
+const base::Feature __attribute__((no_destroy)) kManagedDeviceUIRedesign{"ManagedDeviceUIRedesign",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kMediaSessionNotification{"MediaSessionNotification",
+const base::Feature __attribute__((no_destroy)) kMediaSessionNotification{"MediaSessionNotification",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kMediaNotificationsCounter{
+const base::Feature __attribute__((no_destroy)) kMediaNotificationsCounter{
     "MediaNotificationsCounter", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kMovablePartialScreenshot{
+const base::Feature __attribute__((no_destroy)) kMovablePartialScreenshot{
     "MovablePartialScreenshot", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kMultiDisplayOverviewAndSplitView{
+const base::Feature __attribute__((no_destroy)) kMultiDisplayOverviewAndSplitView{
     "MultiDisplayOverviewAndSplitView", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kNightLight{"NightLight", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kNightLight{"NightLight", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kNotificationExpansionAnimation{
+const base::Feature __attribute__((no_destroy)) kNotificationExpansionAnimation{
     "NotificationExpansionAnimation", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kNotificationExperimentalShortTimeouts{
+const base::Feature __attribute__((no_destroy)) kNotificationExperimentalShortTimeouts{
     "NotificationExperimentalShortTimeouts", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kNotificationScrollBar{"NotificationScrollBar",
+const base::Feature __attribute__((no_destroy)) kNotificationScrollBar{"NotificationScrollBar",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPerDeskShelf{"PerDeskShelf",
+const base::Feature __attribute__((no_destroy)) kPerDeskShelf{"PerDeskShelf",
                                   base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPipRoundedCorners{"PipRoundedCorners",
+const base::Feature __attribute__((no_destroy)) kPipRoundedCorners{"PipRoundedCorners",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kReduceDisplayNotifications{
+const base::Feature __attribute__((no_destroy)) kReduceDisplayNotifications{
     "ReduceDisplayNotifications", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSeparateNetworkIcons{"SeparateNetworkIcons",
+const base::Feature __attribute__((no_destroy)) kSeparateNetworkIcons{"SeparateNetworkIcons",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTrilinearFiltering{"TrilinearFiltering",
+const base::Feature __attribute__((no_destroy)) kTrilinearFiltering{"TrilinearFiltering",
                                         base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kUseBluetoothSystemInAsh{"UseBluetoothSystemInAsh",
+const base::Feature __attribute__((no_destroy)) kUseBluetoothSystemInAsh{"UseBluetoothSystemInAsh",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSwapSideVolumeButtonsForOrientation{
+const base::Feature __attribute__((no_destroy)) kSwapSideVolumeButtonsForOrientation{
     "SwapSideVolumeButtonsForOrientation", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kEnableBackgroundBlur{"EnableBackgroundBlur",
+const base::Feature __attribute__((no_destroy)) kEnableBackgroundBlur{"EnableBackgroundBlur",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kHideShelfControlsInTabletMode{
+const base::Feature __attribute__((no_destroy)) kHideShelfControlsInTabletMode{
     "HideShelfControlsInTabletMode", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kReverseScrollGestures{"EnableReverseScrollGestures",
+const base::Feature __attribute__((no_destroy)) kReverseScrollGestures{"EnableReverseScrollGestures",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSystemTrayMicGainSetting{"SystemTrayMicGainSetting",
+const base::Feature __attribute__((no_destroy)) kSystemTrayMicGainSetting{"SystemTrayMicGainSetting",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kWebUITabStripTabDragIntegration{
+const base::Feature __attribute__((no_destroy)) kWebUITabStripTabDragIntegration{
     "WebUITabStripTabDragIntegration", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kShelfAppScaling{"ShelfAppScaling",
+const base::Feature __attribute__((no_destroy)) kShelfAppScaling{"ShelfAppScaling",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kNotificationsInContextMenu{
+const base::Feature __attribute__((no_destroy)) kNotificationsInContextMenu{
     "NotificationsInContextMenu", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kMaintainShelfStateWhenEnteringOverview{
+const base::Feature __attribute__((no_destroy)) kMaintainShelfStateWhenEnteringOverview{
     "MaintainShelfStateWhenEnteringOverview", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTemporaryHoldingSpace{"TemporaryHoldingSpace",
+const base::Feature __attribute__((no_destroy)) kTemporaryHoldingSpace{"TemporaryHoldingSpace",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDragUnpinnedAppToPin{"DragUnpinnedAppToPin",
+const base::Feature __attribute__((no_destroy)) kDragUnpinnedAppToPin{"DragUnpinnedAppToPin",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsAllowAmbientEQEnabled() {

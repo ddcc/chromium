@@ -17,61 +17,61 @@
 
 namespace features {
 
-const base::Feature kForcePreferredIntervalForVideo{
+const base::Feature __attribute__((no_destroy)) kForcePreferredIntervalForVideo{
     "ForcePreferredIntervalForVideo", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Use the SkiaRenderer.
 #if defined(OS_WIN) || \
     (defined(OS_LINUX) && !(defined(OS_CHROMEOS) || BUILDFLAG(IS_CHROMECAST)))
-const base::Feature kUseSkiaRenderer{"UseSkiaRenderer",
+const base::Feature __attribute__((no_destroy)) kUseSkiaRenderer{"UseSkiaRenderer",
                                      base::FEATURE_ENABLED_BY_DEFAULT};
 #else
-const base::Feature kUseSkiaRenderer{"UseSkiaRenderer",
+const base::Feature __attribute__((no_destroy)) kUseSkiaRenderer{"UseSkiaRenderer",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 // Kill-switch to disable de-jelly, even if flags/properties indicate it should
 // be enabled.
-const base::Feature kDisableDeJelly{"DisableDeJelly",
+const base::Feature __attribute__((no_destroy)) kDisableDeJelly{"DisableDeJelly",
                                     base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_ANDROID)
 // When wide color gamut content from the web is encountered, promote our
 // display to wide color gamut if supported.
-const base::Feature kDynamicColorGamut{"DynamicColorGamut",
+const base::Feature __attribute__((no_destroy)) kDynamicColorGamut{"DynamicColorGamut",
                                        base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
 // Viz for WebView architecture.
-const base::Feature kVizForWebView{"VizForWebView",
+const base::Feature __attribute__((no_destroy)) kVizForWebView{"VizForWebView",
                                    base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Submit CompositorFrame from SynchronousLayerTreeFrameSink directly to viz in
 // WebView.
-const base::Feature kVizFrameSubmissionForWebView{
+const base::Feature __attribute__((no_destroy)) kVizFrameSubmissionForWebView{
     "VizFrameSubmissionForWebView", base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_ANDROID)
-const base::Feature kUsePreferredIntervalForVideo{
+const base::Feature __attribute__((no_destroy)) kUsePreferredIntervalForVideo{
     "UsePreferredIntervalForVideo", base::FEATURE_DISABLED_BY_DEFAULT};
 #else
-const base::Feature kUsePreferredIntervalForVideo{
+const base::Feature __attribute__((no_destroy)) kUsePreferredIntervalForVideo{
     "UsePreferredIntervalForVideo", base::FEATURE_ENABLED_BY_DEFAULT};
 #endif
 
 // Whether we should use the real buffers corresponding to overlay candidates in
 // order to do a pageflip test rather than allocating test buffers.
-const base::Feature kUseRealBuffersForPageFlipTest{
+const base::Feature __attribute__((no_destroy)) kUseRealBuffersForPageFlipTest{
     "UseRealBuffersForPageFlipTest", base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_FUCHSIA)
 // Enables SkiaOutputDeviceBufferQueue instead of Vulkan swapchain on Fuchsia.
-const base::Feature kUseSkiaOutputDeviceBufferQueue{
+const base::Feature __attribute__((no_destroy)) kUseSkiaOutputDeviceBufferQueue{
     "UseSkiaOutputDeviceBufferQueue", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 // Whether we should log extra debug information to webrtc native log.
-const base::Feature kWebRtcLogCapturePipeline{
+const base::Feature __attribute__((no_destroy)) kWebRtcLogCapturePipeline{
     "WebRtcLogCapturePipeline", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // The number of frames to wait before toggling to a lower frame rate.
@@ -81,7 +81,7 @@ const base::FeatureParam<int> kNumOfFramesToToggleInterval{
 #if defined(OS_WIN)
 // Enables swap chains to call SetPresentDuration to request DWM/OS to reduce
 // vsync.
-const base::Feature kUseSetPresentDuration{"UseSetPresentDuration",
+const base::Feature __attribute__((no_destroy)) kUseSetPresentDuration{"UseSetPresentDuration",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // OS_WIN
 

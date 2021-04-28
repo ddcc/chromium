@@ -23,7 +23,7 @@ namespace blink {
 namespace {
 
 // Feature for throttling field trial.
-const base::Feature kResourceLoadThrottlingTrial{
+const base::Feature __attribute__((no_destroy)) kResourceLoadThrottlingTrial{
     "ResourceLoadScheduler", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Field trial parameters.

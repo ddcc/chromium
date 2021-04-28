@@ -35,7 +35,7 @@ const base::Feature* FindFeatureExposedToJava(const std::string& feature_name) {
 }  // namespace
 
 // Alphabetical:
-const base::Feature kIntentBlockExternalFormRedirectsNoGesture{
+const base::Feature __attribute__((no_destroy)) kIntentBlockExternalFormRedirectsNoGesture{
     "IntentBlockExternalFormRedirectsNoGesture",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

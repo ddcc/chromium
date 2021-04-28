@@ -60,17 +60,17 @@ const char kImmersiveArModeNotValid[] =
     "Failed to execute '%s' on 'XRSystem': The provided value 'immersive-ar' "
     "is not a valid enum value of type XRSessionMode.";
 
-constexpr device::mojom::XRSessionFeature kDefaultImmersiveVrFeatures[] = {
+constexpr device::mojom::XRSessionFeature __attribute__((no_destroy)) kDefaultImmersiveVrFeatures[] = {
     device::mojom::XRSessionFeature::REF_SPACE_VIEWER,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL,
 };
 
-constexpr device::mojom::XRSessionFeature kDefaultImmersiveArFeatures[] = {
+constexpr device::mojom::XRSessionFeature __attribute__((no_destroy)) kDefaultImmersiveArFeatures[] = {
     device::mojom::XRSessionFeature::REF_SPACE_VIEWER,
     device::mojom::XRSessionFeature::REF_SPACE_LOCAL,
 };
 
-constexpr device::mojom::XRSessionFeature kDefaultInlineFeatures[] = {
+constexpr device::mojom::XRSessionFeature __attribute__((no_destroy)) kDefaultInlineFeatures[] = {
     device::mojom::XRSessionFeature::REF_SPACE_VIEWER,
 };
 

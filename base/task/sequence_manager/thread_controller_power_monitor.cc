@@ -15,7 +15,7 @@ namespace internal {
 namespace {
 
 // Activate the power management events that affect task scheduling.
-const Feature kUsePowerMonitorWithThreadController{
+const Feature __attribute__((no_destroy)) kUsePowerMonitorWithThreadController{
     "UsePowerMonitorWithThreadController", FEATURE_ENABLED_BY_DEFAULT};
 
 // TODO(1074332): Remove this when the experiment becomes the default.

@@ -41,7 +41,7 @@ enum class TestType {
 
 const int64_t kTestTimeMs = 1500000000000;
 
-constexpr const multidevice::SoftwareFeature kPotentialHostSoftwareFeatures[] =
+constexpr const multidevice::SoftwareFeature __attribute__((no_destroy)) kPotentialHostSoftwareFeatures[] =
     {multidevice::SoftwareFeature::kSmartLockHost,
      multidevice::SoftwareFeature::kInstantTetheringHost,
      multidevice::SoftwareFeature::kMessagesForWebHost};

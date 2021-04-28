@@ -14,9 +14,9 @@ namespace feature_engagement {
 
 namespace {
 
-const base::Feature kEditableTestFeatureFoo{"test_foo",
+const base::Feature __attribute__((no_destroy)) kEditableTestFeatureFoo{"test_foo",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kEditableTestFeatureBar{"test_bar",
+const base::Feature __attribute__((no_destroy)) kEditableTestFeatureBar{"test_bar",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
 class EditableConfigurationTest : public ::testing::Test {

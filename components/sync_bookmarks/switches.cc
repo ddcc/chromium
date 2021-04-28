@@ -6,17 +6,17 @@
 
 namespace switches {
 
-const base::Feature kSyncDoNotCommitBookmarksWithoutFavicon = {
+const base::Feature __attribute__((no_destroy)) kSyncDoNotCommitBookmarksWithoutFavicon = {
     "SyncDoNotCommitBookmarksWithoutFavicon", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSyncReuploadBookmarkFullTitles{
+const base::Feature __attribute__((no_destroy)) kSyncReuploadBookmarkFullTitles{
     "SyncReuploadBookmarkFullTitles", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSyncDeduplicateAllBookmarksWithSameGUID{
+const base::Feature __attribute__((no_destroy)) kSyncDeduplicateAllBookmarksWithSameGUID{
     "SyncDeduplicateAllBookmarksWithSameGUID",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSyncIgnoreChangesInTouchIcons{
+const base::Feature __attribute__((no_destroy)) kSyncIgnoreChangesInTouchIcons{
     "SyncIgnoreChangesInTouchIcons", base::FEATURE_ENABLED_BY_DEFAULT};
 
 }  // namespace switches

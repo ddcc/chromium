@@ -378,7 +378,7 @@ TEST_F(ProfileProviderTest, JankinessCollectionThrottled) {
 class ProfileProviderJankinessTest : public ProfileProviderTest {
  public:
   ProfileProviderJankinessTest() : ProfileProviderTest() {
-    const base::Feature kBrowserJankinessProfiling{
+    const base::Feature __attribute__((no_destroy)) kBrowserJankinessProfiling{
         "BrowserJankinessProfiling", base::FEATURE_DISABLED_BY_DEFAULT};
     scoped_feature_list_.InitAndEnableFeature(kBrowserJankinessProfiling);
   }
@@ -439,7 +439,7 @@ TEST(ProfileProviderJankinessParamTest, SetFeatureParam) {
   content::BrowserTaskEnvironment task_environment;
 
   // Enable the jankiness profiler feature.
-  const base::Feature kBrowserJankinessProfiling{
+  const base::Feature __attribute__((no_destroy)) kBrowserJankinessProfiling{
       "BrowserJankinessProfiling", base::FEATURE_DISABLED_BY_DEFAULT};
   base::test::ScopedFeatureList scoped_feature_list;
   scoped_feature_list.InitAndEnableFeature(kBrowserJankinessProfiling);

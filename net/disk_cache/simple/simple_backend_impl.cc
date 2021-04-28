@@ -178,7 +178,7 @@ void RecordIndexLoad(net::CacheType cache_type,
 
 }  // namespace
 
-const base::Feature SimpleBackendImpl::kPrioritizedSimpleCacheTasks{
+const base::Feature __attribute__((no_destroy)) SimpleBackendImpl::kPrioritizedSimpleCacheTasks{
     "PrioritizedSimpleCacheTasks", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Static function which is called by base::trace_event::EstimateMemoryUsage()

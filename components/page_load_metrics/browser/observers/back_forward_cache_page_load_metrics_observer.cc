@@ -39,7 +39,7 @@ extern const char kHistogramCumulativeShiftScoreAfterBackForwardCacheRestore[] =
 //
 // For cumulative layout shift scores, we use actual score values for back-
 // forward cache navigations instead of 0s.
-const base::Feature kBackForwardCacheEmitZeroSamplesForKeyMetrics{
+const base::Feature __attribute__((no_destroy)) kBackForwardCacheEmitZeroSamplesForKeyMetrics{
     "BackForwardCacheEmitZeroSamplesForKeyMetrics",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

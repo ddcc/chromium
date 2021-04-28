@@ -43,7 +43,7 @@ class FieldTrialParamsTest : public ::testing::Test {
                               FeatureList::OverrideState override_state,
                               FieldTrial* trial) {
     std::unique_ptr<FeatureList> feature_list(new FeatureList);
-    feature_list->RegisterFieldTrialOverride(feature.name, override_state,
+    feature_list->RegisterFieldTrialOverride(feature.name.v(), override_state,
                                              trial);
     scoped_feature_list_.InitWithFeatureList(std::move(feature_list));
   }

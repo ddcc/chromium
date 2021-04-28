@@ -35,7 +35,7 @@ class SiteInstance;
 // without enabling it. To control the URLs list by using this feature by
 // generating the metrics only for "allowed_websites" param. Mainly, to ensure
 // that metrics from the control and experiment groups are consistent.
-constexpr base::Feature kRecordBackForwardCacheMetricsWithoutEnabling{
+const base::Feature __attribute__((no_destroy)) kRecordBackForwardCacheMetricsWithoutEnabling{
     "RecordBackForwardCacheMetricsWithoutEnabling",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

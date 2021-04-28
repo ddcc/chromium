@@ -15,9 +15,9 @@ namespace feature_engagement {
 
 namespace {
 
-const base::Feature kAvailabilityTestFeatureFoo{
+const base::Feature __attribute__((no_destroy)) kAvailabilityTestFeatureFoo{
     "test_foo", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kAvailabilityTestFeatureBar{
+const base::Feature __attribute__((no_destroy)) kAvailabilityTestFeatureBar{
     "test_bar", base::FEATURE_DISABLED_BY_DEFAULT};
 
 class NeverAvailabilityModelTest : public ::testing::Test {

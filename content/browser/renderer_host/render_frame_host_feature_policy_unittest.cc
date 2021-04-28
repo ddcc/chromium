@@ -28,9 +28,9 @@ class RenderFrameHostFeaturePolicyTest
   static constexpr const char* kOrigin3 = "https://example.com";
   static constexpr const char* kOrigin4 = "https://test.com";
 
-  static const blink::mojom::FeaturePolicyFeature kDefaultEnabledFeature =
+  static const blink::mojom::FeaturePolicyFeature __attribute__((no_destroy)) kDefaultEnabledFeature =
       blink::mojom::FeaturePolicyFeature::kSyncXHR;
-  static const blink::mojom::FeaturePolicyFeature kDefaultSelfFeature =
+  static const blink::mojom::FeaturePolicyFeature __attribute__((no_destroy)) kDefaultSelfFeature =
       blink::mojom::FeaturePolicyFeature::kGeolocation;
 
   RenderFrameHost* GetMainRFH(const char* origin) {

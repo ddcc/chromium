@@ -9,12 +9,12 @@
 namespace performance_hints {
 namespace features {
 
-const base::Feature kPerformanceHintsObserver{
+const base::Feature __attribute__((no_destroy)) kPerformanceHintsObserver{
     "PerformanceHintsObserver", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kPerformanceHintsTreatUnknownAsFast{
+const base::Feature __attribute__((no_destroy)) kPerformanceHintsTreatUnknownAsFast{
     "PerformanceHintsTreatUnknownAsFast", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPerformanceHintsHandleRewrites{
+const base::Feature __attribute__((no_destroy)) kPerformanceHintsHandleRewrites{
     "PerformanceHintsHandleRewrites", base::FEATURE_ENABLED_BY_DEFAULT};
 constexpr base::FeatureParam<std::string> kRewriteConfig{
     &kPerformanceHintsHandleRewrites, "rewrite_config",
@@ -23,12 +23,12 @@ constexpr base::FeatureParam<std::string> kRewriteConfig{
 constexpr base::FeatureParam<bool> kUseFastHostHints{
     &kPerformanceHintsObserver, "use_fast_host_hints", true};
 
-const base::Feature kContextMenuPerformanceInfo{
+const base::Feature __attribute__((no_destroy)) kContextMenuPerformanceInfo{
     "ContextMenuPerformanceInfo", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kContextMenuPerformanceInfoAndRemoteHintFetching{
+const base::Feature __attribute__((no_destroy)) kContextMenuPerformanceInfoAndRemoteHintFetching{
     "ContextMenuPerformanceInfoAndRemoteHintFetching",
     base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kPageInfoPerformanceHints{
+const base::Feature __attribute__((no_destroy)) kPageInfoPerformanceHints{
     "PageInfoPerformanceHints", base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsPerformanceHintsObserverEnabled() {

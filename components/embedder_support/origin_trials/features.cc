@@ -13,7 +13,7 @@ namespace embedder_support {
 // Users from experiment group will behave the same as default.
 // Users from control group will have the feature disabled, excluding them
 // from the origin trial.
-const base::Feature kOriginTrialsSampleAPIThirdPartyAlternativeUsage{
+const base::Feature __attribute__((no_destroy)) kOriginTrialsSampleAPIThirdPartyAlternativeUsage{
     "OriginTrialsSampleAPIThirdPartyAlternativeUsage",
     base::FEATURE_ENABLED_BY_DEFAULT};
 

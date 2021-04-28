@@ -6,17 +6,17 @@
 
 namespace query_tiles {
 namespace features {
-const base::Feature kQueryTilesGeoFilter{"QueryTilesGeoFilter",
+const base::Feature __attribute__((no_destroy)) kQueryTilesGeoFilter{"QueryTilesGeoFilter",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kQueryTiles{"QueryTiles",
+const base::Feature __attribute__((no_destroy)) kQueryTiles{"QueryTiles",
                                 base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kQueryTilesInNTP{"QueryTilesInNTP",
+const base::Feature __attribute__((no_destroy)) kQueryTilesInNTP{"QueryTilesInNTP",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kQueryTilesInOmnibox{"QueryTilesInOmnibox",
+const base::Feature __attribute__((no_destroy)) kQueryTilesInOmnibox{"QueryTilesInOmnibox",
                                          base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kQueryTilesEnableQueryEditing{
+const base::Feature __attribute__((no_destroy)) kQueryTilesEnableQueryEditing{
     "QueryTilesEnableQueryEditing", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kQueryTilesLocalOrdering{"QueryTilesLocalOrdering",
+const base::Feature __attribute__((no_destroy)) kQueryTilesLocalOrdering{"QueryTilesLocalOrdering",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 bool IsEnabledQueryTilesInOmnibox() {

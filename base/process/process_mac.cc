@@ -20,7 +20,7 @@
 namespace base {
 
 // Enables backgrounding hidden renderers on Mac.
-const Feature kMacAllowBackgroundingProcesses{"MacAllowBackgroundingProcesses",
+const Feature __attribute__((no_destroy)) kMacAllowBackgroundingProcesses{"MacAllowBackgroundingProcesses",
                                               FEATURE_DISABLED_BY_DEFAULT};
 
 Time Process::CreationTime() const {

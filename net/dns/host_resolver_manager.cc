@@ -198,7 +198,7 @@ bool ConfigureAsyncDnsNoFallbackFieldTrial() {
 const base::FeatureParam<base::TaskPriority>::Option prio_modes[] = {
     {base::TaskPriority::USER_VISIBLE, "default"},
     {base::TaskPriority::USER_BLOCKING, "user_blocking"}};
-const base::Feature kSystemResolverPriorityExperiment = {
+const base::Feature __attribute__((no_destroy)) kSystemResolverPriorityExperiment = {
     "SystemResolverPriorityExperiment", base::FEATURE_DISABLED_BY_DEFAULT};
 const base::FeatureParam<base::TaskPriority> priority_mode{
     &kSystemResolverPriorityExperiment, "mode",

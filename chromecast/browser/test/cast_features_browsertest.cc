@@ -71,25 +71,25 @@ namespace {
 // which is based at the next available multiple of 10.
 
 // For use in TestFeaturesActivateOnBoot only.
-const base::Feature kTestFeat1{"test_feat_1",
+const base::Feature __attribute__((no_destroy)) kTestFeat1{"test_feat_1",
                                base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTestFeat2{"test_feat_2", base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kTestFeat3{"test_feat_3",
+const base::Feature __attribute__((no_destroy)) kTestFeat2{"test_feat_2", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kTestFeat3{"test_feat_3",
                                base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTestFeat4{"test_feat_4", base::FEATURE_ENABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kTestFeat4{"test_feat_4", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // For use in TestParamsActivateOnBoot only.
-const base::Feature kTestFeat11{"test_feat_11",
+const base::Feature __attribute__((no_destroy)) kTestFeat11{"test_feat_11",
                                 base::FEATURE_DISABLED_BY_DEFAULT};
 
 // For use in TestOnlyWellFormedFeaturesPersisted only.
-const base::Feature kTestFeat21{"test_feat_21",
+const base::Feature __attribute__((no_destroy)) kTestFeat21{"test_feat_21",
                                 base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTestFeat22{"test_feat_22",
+const base::Feature __attribute__((no_destroy)) kTestFeat22{"test_feat_22",
                                 base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kTestFeat23{"test_feat_23",
+const base::Feature __attribute__((no_destroy)) kTestFeat23{"test_feat_23",
                                 base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTestFeat24{"test_feat_24",
+const base::Feature __attribute__((no_destroy)) kTestFeat24{"test_feat_24",
                                 base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Extend the default features with test features only used in this browsertest.

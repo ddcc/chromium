@@ -22,11 +22,11 @@ namespace features {
 
 // Causes the BackgroundTracingManager to upload proto messages via UMA,
 // rather than JSON via the crash frontend.
-const base::Feature kBackgroundTracingProtoOutput{
+const base::Feature __attribute__((no_destroy)) kBackgroundTracingProtoOutput{
     "BackgroundTracingProtoOutput", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Runs the tracing service as an in-process browser service.
-const base::Feature kTracingServiceInProcess {
+const base::Feature __attribute__((no_destroy)) kTracingServiceInProcess {
   "TracingServiceInProcess",
 #if defined(OS_ANDROID) || BUILDFLAG(IS_CHROMECAST)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -35,12 +35,12 @@ const base::Feature kTracingServiceInProcess {
 #endif
 };
 
-const base::Feature kEnablePerfettoSystemTracing{
+const base::Feature __attribute__((no_destroy)) kEnablePerfettoSystemTracing{
     "EnablePerfettoSystemTracing", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Controls whether trace points are implemented using Perfetto's client library
 // (enabled) or legacy TraceLog (disabled).
-const base::Feature kEnablePerfettoClientApiProducer {
+const base::Feature __attribute__((no_destroy)) kEnablePerfettoClientApiProducer {
   "EnablePerfettoClientApiProducer",
 #if BUILDFLAG(USE_PERFETTO_CLIENT_LIBRARY)
       base::FEATURE_ENABLED_BY_DEFAULT

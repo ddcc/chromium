@@ -103,7 +103,7 @@ std::string MalwareRuleToThreatType(const std::string& rule_name) {
 
 namespace extensions {
 
-const base::Feature SafeBrowsingPrivateEventRouter::kRealtimeReportingFeature{
+const base::Feature __attribute__((no_destroy)) SafeBrowsingPrivateEventRouter::kRealtimeReportingFeature{
     "SafeBrowsingRealtimeReporting", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Key names used with when building the dictionary to pass to the real-time

@@ -219,7 +219,7 @@ const char kDotGoogleDotCom[] = ".google.com";
 using LifecycleState = RenderFrameHostImpl::LifecycleState;
 
 // TODO(crbug.com/1059903): Clean up after the initial investigation.
-constexpr base::Feature kCheckWebContentsAccessFromNonCurrentFrame{
+const base::Feature __attribute__((no_destroy)) kCheckWebContentsAccessFromNonCurrentFrame{
     "CheckWebContentsAccessFromNonCurrentFrame",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

@@ -22,13 +22,13 @@ TEST(ScopedAddFeatureFlags, ConflictWithExistingFlags) {
   command_line.AppendSwitchASCII(switches::kDisableFeatures,
                                  "ExistingDisabledFoo,ExistingDisabledBar");
 
-  const base::Feature kExistingEnabledFoo{"ExistingEnabledFoo",
+  const base::Feature __attribute__((no_destroy)) kExistingEnabledFoo{"ExistingEnabledFoo",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
-  const base::Feature kExistingDisabledFoo{"ExistingDisabledFoo",
+  const base::Feature __attribute__((no_destroy)) kExistingDisabledFoo{"ExistingDisabledFoo",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
-  const base::Feature kEnabledBaz{"EnabledBaz",
+  const base::Feature __attribute__((no_destroy)) kEnabledBaz{"EnabledBaz",
                                   base::FEATURE_DISABLED_BY_DEFAULT};
-  const base::Feature kDisabledBaz{"DisabledBaz",
+  const base::Feature __attribute__((no_destroy)) kDisabledBaz{"DisabledBaz",
                                    base::FEATURE_DISABLED_BY_DEFAULT};
   {
     ScopedAddFeatureFlags scoped_add(&command_line);

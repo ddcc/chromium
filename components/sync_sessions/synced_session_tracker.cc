@@ -15,7 +15,7 @@
 
 namespace sync_sessions {
 
-const base::Feature kDeferRecyclingOfSyncTabNodesIfUnsynced{
+const base::Feature __attribute__((no_destroy)) kDeferRecyclingOfSyncTabNodesIfUnsynced{
     "DeferRecyclingOfSyncTabNodesIfUnsynced", base::FEATURE_ENABLED_BY_DEFAULT};
 
 namespace {

@@ -8,7 +8,7 @@
 namespace assist_ranker {
 
 #if defined(OS_ANDROID)
-const base::Feature kContextualSearchRankerQuery{
+const base::Feature __attribute__((no_destroy)) kContextualSearchRankerQuery{
     "ContextualSearchRankerQuery", base::FEATURE_DISABLED_BY_DEFAULT};
 
 namespace {

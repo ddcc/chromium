@@ -65,11 +65,11 @@ namespace features {
 //
 // Currently this feature only changes AdTagging behavior for metrics recorded
 // in AdsPageLoadMetricsObserver, and for triggering the Heavy Ad Intervention.
-const base::Feature kRestrictedNavigationAdTagging{
+const base::Feature __attribute__((no_destroy)) kRestrictedNavigationAdTagging{
     "RestrictedNavigationAdTagging", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables or disables per-frame memory monitoring.
-const base::Feature kV8PerAdFrameMemoryMonitoring{
+const base::Feature __attribute__((no_destroy)) kV8PerAdFrameMemoryMonitoring{
     "V8PerAdFrameMemoryMonitoring", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Minimum time between memory measurements.

@@ -8,7 +8,7 @@ namespace variations {
 
 namespace internal {
 
-const base::Feature kRestrictGoogleWebVisibility{
+const base::Feature __attribute__((no_destroy)) kRestrictGoogleWebVisibility{
     "RestrictGoogleWebVisibility", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace internal

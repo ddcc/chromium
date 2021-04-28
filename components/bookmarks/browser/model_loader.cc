@@ -25,7 +25,7 @@ namespace {
 
 // TODO(mastiz): Remove this kill switch asap since the UMA metrics entail
 // negligible risks for stability or performance overhead.
-const base::Feature kEmitExperimentalBookmarkLoadUma{
+const base::Feature __attribute__((no_destroy)) kEmitExperimentalBookmarkLoadUma{
     "EmitExperimentalBookmarkLoadUma", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Adds node to the model's index, recursing through all children as well.

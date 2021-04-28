@@ -44,7 +44,7 @@ long kNonceExpirationTimeInHours = 24;
 // This flags only controls the enforcement. Revocation is checked regardless.
 //
 // This flag tracks the changes necessary to fully enforce revocation.
-const base::Feature kEnforceRevocationChecking{
+const base::Feature __attribute__((no_destroy)) kEnforceRevocationChecking{
     "CastCertificateRevocation", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enforce nonce checking when enabled.
@@ -52,14 +52,14 @@ const base::Feature kEnforceRevocationChecking{
 // the one sent to the device. As a result, the nonce can be empty and omitted
 // from the signature. This allows backwards compatibility with legacy Cast
 // receivers.
-const base::Feature kEnforceNonceChecking{"CastNonceEnforced",
+const base::Feature __attribute__((no_destroy)) kEnforceNonceChecking{"CastNonceEnforced",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enforce the use of SHA256 digest for signatures.
 // If disabled, the device may respond with a signature with SHA1 digest even
 // though a signature with SHA256 digest was requested in the challenge. This
 // allows for backwards compatibility with legacy Cast receivers.
-const base::Feature kEnforceSHA256Checking{"CastSHA256Enforced",
+const base::Feature __attribute__((no_destroy)) kEnforceSHA256Checking{"CastSHA256Enforced",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
 namespace cast_crypto = ::cast_certificate;

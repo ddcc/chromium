@@ -7,7 +7,7 @@
 namespace games {
 namespace features {
 
-const base::Feature kGamesHub{"GamesHub", base::FEATURE_DISABLED_BY_DEFAULT};
+const base::Feature __attribute__((no_destroy)) kGamesHub{"GamesHub", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features
 }  // namespace games

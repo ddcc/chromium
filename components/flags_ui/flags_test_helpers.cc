@@ -178,7 +178,7 @@ bool IsUnexpireFlagFor(const flags_ui::FeatureEntry& entry, int milestone) {
   std::string expected_feature =
       base::StringPrintf("UnexpireFlagsM%d", milestone);
   const auto* feature = entry.feature.feature;
-  if (!feature || feature->name != expected_feature)
+  if (!feature || feature->name.v() != expected_feature)
     return false;
   return true;
 }

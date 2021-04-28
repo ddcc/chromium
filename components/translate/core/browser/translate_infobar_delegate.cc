@@ -43,10 +43,10 @@ const int kMaxNumberOfAutoNever = 2;
 
 namespace translate {
 
-const base::Feature kTranslateAutoSnackbars{"TranslateAutoSnackbars",
+const base::Feature __attribute__((no_destroy)) kTranslateAutoSnackbars{"TranslateAutoSnackbars",
                                             base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kTranslateCompactUI{"TranslateCompactUI",
+const base::Feature __attribute__((no_destroy)) kTranslateCompactUI{"TranslateCompactUI",
                                         base::FEATURE_ENABLED_BY_DEFAULT};
 
 const size_t TranslateInfoBarDelegate::kNoIndex = TranslateUIDelegate::kNoIndex;

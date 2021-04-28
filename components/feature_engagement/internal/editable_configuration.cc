@@ -19,12 +19,12 @@ EditableConfiguration::~EditableConfiguration() = default;
 void EditableConfiguration::SetConfiguration(
     const base::Feature* feature,
     const FeatureConfig& feature_config) {
-  configs_[feature->name] = feature_config;
+  configs_[feature->name.v()] = feature_config;
 }
 
 const FeatureConfig& EditableConfiguration::GetFeatureConfig(
     const base::Feature& feature) const {
-  auto it = configs_.find(feature.name);
+  auto it = configs_.find(feature.name.v());
   DCHECK(it != configs_.end());
   return it->second;
 }

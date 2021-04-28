@@ -25,7 +25,7 @@ namespace multidevice_setup {
 namespace {
 
 // Software features which, when enabled, represent a verified host.
-constexpr const multidevice::SoftwareFeature kPotentialHostFeatures[] = {
+constexpr const multidevice::SoftwareFeature __attribute__((no_destroy)) kPotentialHostFeatures[] = {
     multidevice::SoftwareFeature::kSmartLockHost,
     multidevice::SoftwareFeature::kInstantTetheringHost,
     multidevice::SoftwareFeature::kMessagesForWebHost};

@@ -43,7 +43,7 @@ using base::FilePath;
 namespace storage {
 
 // static
-const base::Feature
+const base::Feature __attribute__((no_destroy))
     BlobMemoryController::kInhibitBlobMemoryControllerMemoryPressureResponse{
         "InhibitBlobMemoryControllerMemoryPressureResponse",
         base::FEATURE_DISABLED_BY_DEFAULT};

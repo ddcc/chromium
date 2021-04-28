@@ -28,7 +28,7 @@ namespace {
 using safe_browsing::SafeBrowsingApiHandler;
 
 // Whether to use the process start time for startup metrics.
-const base::Feature kUseProcessStartTimeForMetrics{
+const base::Feature __attribute__((no_destroy)) kUseProcessStartTimeForMetrics{
     "UseProcessStartTimeForMetrics", base::FEATURE_DISABLED_BY_DEFAULT};
 }  // namespace
 

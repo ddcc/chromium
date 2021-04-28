@@ -19,12 +19,12 @@ namespace features {
 #if defined(OS_POSIX)
 // Feature flag allowing the use of MADV_FREE discardable memory when there are
 // multiple supported discardable memory backings.
-const base::Feature kMadvFreeDiscardableMemory{
+const base::Feature __attribute__((no_destroy)) kMadvFreeDiscardableMemory{
     "MadvFreeDiscardableMemory", base::FEATURE_DISABLED_BY_DEFAULT};
 #endif  // defined(OS_POSIX)
 
 #if defined(OS_ANDROID) || defined(OS_LINUX) || defined(OS_CHROMEOS)
-const base::Feature kDiscardableMemoryBackingTrial{
+const base::Feature __attribute__((no_destroy)) kDiscardableMemoryBackingTrial{
     "DiscardableMemoryBackingTrial", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Association of trial group names to trial group enum. Array order must match

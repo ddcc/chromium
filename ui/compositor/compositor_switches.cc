@@ -33,7 +33,7 @@ namespace features {
 // If enabled, all draw commands recorded on canvas are done in pixel aligned
 // measurements. This also enables scaling of all elements in views and layers
 // to be done via corner points. See https://crbug.com/720596 for details.
-const base::Feature kEnablePixelCanvasRecording {
+const base::Feature __attribute__((no_destroy)) kEnablePixelCanvasRecording {
   "enable-pixel-canvas-recording",
 #if defined(OS_CHROMEOS)
       base::FEATURE_ENABLED_BY_DEFAULT

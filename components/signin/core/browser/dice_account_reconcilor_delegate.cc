@@ -13,7 +13,7 @@
 #include "components/signin/public/base/signin_client.h"
 #include "components/signin/public/base/signin_pref_names.h"
 
-const base::Feature kUseMultiloginEndpoint{"UseMultiloginEndpoint",
+const base::Feature __attribute__((no_destroy)) kUseMultiloginEndpoint{"UseMultiloginEndpoint",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
 namespace signin {

@@ -202,7 +202,7 @@ bool ParseEventConfig(const base::StringPiece& definition,
 bool IsKnownFeature(const base::StringPiece& feature_name,
                     const FeatureVector& features) {
   for (const auto* feature : features) {
-    if (feature->name == feature_name.as_string())
+    if (feature->name.v() == feature_name.as_string())
       return true;
   }
   return false;
@@ -237,18 +237,18 @@ bool ParseSessionRateImpact(const base::StringPiece& definition,
   for (const auto& feature_name : parsed_feature_names) {
     if (feature_name.length() == 0) {
       DVLOG(1) << "Empty feature name when parsing session_rate_impact "
-               << "for feature " << this_feature->name;
+               << "for feature " << this_feature->name.v();
       continue;
     }
     if (base::LowerCaseEqualsASCII(feature_name, kSessionRateImpactTypeAll) ||
         base::LowerCaseEqualsASCII(feature_name, kSessionRateImpactTypeNone)) {
       DVLOG(1) << "Illegal feature name when parsing session_rate_impact "
-               << "for feature " << this_feature->name << ": " << feature_name;
+               << "for feature " << this_feature->name.v() << ": " << feature_name;
       return false;
     }
     if (!IsKnownFeature(feature_name, all_features)) {
       DVLOG(1) << "Unknown feature name found when parsing session_rate_impact "
-               << "for feature " << this_feature->name << ": " << feature_name;
+               << "for feature " << this_feature->name.v() << ": " << feature_name;
       stats::RecordConfigParsingEvent(
           stats::ConfigParsingEvent::
               FAILURE_SESSION_RATE_IMPACT_UNKNOWN_FEATURE);
@@ -297,9 +297,9 @@ void ChromeVariationsConfiguration::ParseFeatureConfig(
     const base::Feature* feature,
     const FeatureVector& all_features) {
   DCHECK(feature);
-  DCHECK(configs_.find(feature->name) == configs_.end());
+  DCHECK(configs_.find(feature->name.v()) == configs_.end());
 
-  DVLOG(3) << "Parsing feature config for " << feature->name;
+  DVLOG(3) << "Parsing feature config for " << feature->name.v();
 
   std::map<std::string, std::string> params;
   bool result = base::GetFieldTrialParamsByFeature(*feature, &params);
@@ -314,26 +314,26 @@ void ChromeVariationsConfiguration::ParseFeatureConfig(
     if (MaybeAddClientSideFeatureConfig(feature)) {
       stats::RecordConfigParsingEvent(
           stats::ConfigParsingEvent::SUCCESS_FROM_SOURCE);
-      DVLOG(3) << "Read checked in config for " << feature->name;
+      DVLOG(3) << "Read checked in config for " << feature->name.v();
       return;
     }
 
     // No server-side, nor client side configuration available, but the feature
     // was passed in as one of all the feature available, so give it an invalid
     // config.
-    FeatureConfig& config = configs_[feature->name];
+    FeatureConfig& config = configs_[feature->name.v()];
     config.valid = false;
 
     stats::RecordConfigParsingEvent(
         stats::ConfigParsingEvent::FAILURE_NO_FIELD_TRIAL);
     // Returns early. If no field trial, ConfigParsingEvent::FAILURE will not be
     // recorded.
-    DVLOG(3) << "No field trial or checked in config for " << feature->name;
+    DVLOG(3) << "No field trial or checked in config for " << feature->name.v();
     return;
   }
 
   // Initially all new configurations are considered invalid.
-  FeatureConfig& config = configs_[feature->name];
+  FeatureConfig& config = configs_[feature->name.v()];
   config.valid = false;
   uint32_t parse_errors = 0;
 
@@ -425,11 +425,11 @@ void ChromeVariationsConfiguration::ParseFeatureConfig(
 
   if (config.valid) {
     stats::RecordConfigParsingEvent(stats::ConfigParsingEvent::SUCCESS);
-    DVLOG(2) << "Config for " << feature->name << " is valid.";
-    DVLOG(3) << "Config for " << feature->name << " = " << config;
+    DVLOG(2) << "Config for " << feature->name.v() << " is valid.";
+    DVLOG(3) << "Config for " << feature->name.v() << " = " << config;
   } else {
     stats::RecordConfigParsingEvent(stats::ConfigParsingEvent::FAILURE);
-    DVLOG(2) << "Config for " << feature->name << " is invalid.";
+    DVLOG(2) << "Config for " << feature->name.v() << " is invalid.";
   }
 
   // Notice parse errors for used and trigger events will also cause the
@@ -449,9 +449,9 @@ bool ChromeVariationsConfiguration::MaybeAddClientSideFeatureConfig(
   if (!base::FeatureList::IsEnabled(*feature))
     return false;
 
-  DCHECK(configs_.find(feature->name) == configs_.end());
+  DCHECK(configs_.find(feature->name.v()) == configs_.end());
   if (auto config = GetClientSideFeatureConfig(feature)) {
-    configs_[feature->name] = *config;
+    configs_[feature->name.v()] = *config;
     return true;
   }
   return false;
@@ -459,7 +459,7 @@ bool ChromeVariationsConfiguration::MaybeAddClientSideFeatureConfig(
 
 const FeatureConfig& ChromeVariationsConfiguration::GetFeatureConfig(
     const base::Feature& feature) const {
-  auto it = configs_.find(feature.name);
+  auto it = configs_.find(feature.name.v());
   DCHECK(it != configs_.end());
   return it->second;
 }

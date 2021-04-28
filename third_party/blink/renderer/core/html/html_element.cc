@@ -132,7 +132,7 @@ bool IsEditable(const Node& node) {
   return !element && node.parentNode()->IsHTMLElement();
 }
 
-const WebFeature kNoWebFeature = static_cast<WebFeature>(0);
+const WebFeature __attribute__((no_destroy)) kNoWebFeature = static_cast<WebFeature>(0);
 
 }  // anonymous namespace
 

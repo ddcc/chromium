@@ -32,7 +32,7 @@ namespace gpu {
 
 // Main feature flag to control the entire experiment, encompassing bot CPU and
 // GPU ablations.
-const base::Feature kGPUMemoryAblationFeature{
+const base::Feature __attribute__((no_destroy)) kGPUMemoryAblationFeature{
     "GPUMemoryAblation", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Field Trial Parameter that defines the size of memory allocations.

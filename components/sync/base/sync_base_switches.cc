@@ -9,7 +9,7 @@ namespace switches {
 // Overrides the default server used for profile sync.
 const char kSyncServiceURL[] = "sync-url";
 
-const base::Feature kSyncNigoriRemoveMetadataOnCacheGuidMismatch{
+const base::Feature __attribute__((no_destroy)) kSyncNigoriRemoveMetadataOnCacheGuidMismatch{
     "SyncNigoriRemoveMetadataOnCacheGuidMismatch",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
@@ -17,14 +17,14 @@ const base::Feature kSyncNigoriRemoveMetadataOnCacheGuidMismatch{
 // is enabled, scrypt will be considered as an unsupported method, and Chrome
 // will not be able to access data encrypted using scrypt-derived keys (valid
 // passphrases will be rejected).
-const base::Feature kSyncForceDisableScryptForCustomPassphrase{
+const base::Feature __attribute__((no_destroy)) kSyncForceDisableScryptForCustomPassphrase{
     "SyncForceDisableScryptForCustomPassphrase",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSyncE2ELatencyMeasurement = {
+const base::Feature __attribute__((no_destroy)) kSyncE2ELatencyMeasurement = {
     "SyncE2ELatencyMeasurement", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSyncCustomSharingMessageNudgeDelay = {
+const base::Feature __attribute__((no_destroy)) kSyncCustomSharingMessageNudgeDelay = {
     "SyncCustomSharingMessageNudgeDelay", base::FEATURE_ENABLED_BY_DEFAULT};
 const base::FeatureParam<int> kSyncSharingMessageNudgeDelayMilliseconds{
     &kSyncCustomSharingMessageNudgeDelay,

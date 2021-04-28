@@ -155,7 +155,7 @@ void WebEngineContentBrowserClient::
 }
 
 bool WebEngineContentBrowserClient::ShouldEnableStrictSiteIsolation() {
-  constexpr base::Feature kSitePerProcess{"site-per-process",
+  constexpr base::Feature __attribute__((no_destroy)) kSitePerProcess{"site-per-process",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
   static bool enable_strict_isolation =
       base::FeatureList::IsEnabled(kSitePerProcess);

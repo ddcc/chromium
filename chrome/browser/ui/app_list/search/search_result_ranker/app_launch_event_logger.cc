@@ -37,7 +37,7 @@ namespace app_list {
 const int kEmptyTotal = -1;
 const int kTopRank = 1;
 
-const base::Feature kUkmAppLaunchEventLogging{"UkmAppLaunchEventLogging",
+const base::Feature __attribute__((no_destroy)) kUkmAppLaunchEventLogging{"UkmAppLaunchEventLogging",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Keys for Arc app specific preferences. Defined in

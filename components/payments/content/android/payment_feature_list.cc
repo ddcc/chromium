@@ -53,10 +53,10 @@ const base::Feature* FindFeatureExposedToJava(const std::string& feature_name) {
 }  // namespace
 
 // Android only features.
-const base::Feature kAndroidAppPaymentUpdateEvents{
+const base::Feature __attribute__((no_destroy)) kAndroidAppPaymentUpdateEvents{
     "AndroidAppPaymentUpdateEvents", base::FEATURE_ENABLED_BY_DEFAULT};
 // TODO(crbug.com/1094549): clean up after being stable.
-const base::Feature kScrollToExpandPaymentHandler{
+const base::Feature __attribute__((no_destroy)) kScrollToExpandPaymentHandler{
     "ScrollToExpandPaymentHandler", base::FEATURE_ENABLED_BY_DEFAULT};
 
 static jboolean JNI_PaymentFeatureList_IsEnabled(

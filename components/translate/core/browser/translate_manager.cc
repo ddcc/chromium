@@ -101,10 +101,10 @@ void MoveSkippedLanguagesToEndIfNecessary(
 
 }  // namespace
 
-const base::Feature kOverrideLanguagePrefsForHrefTranslate{
+const base::Feature __attribute__((no_destroy)) kOverrideLanguagePrefsForHrefTranslate{
     "OverrideLanguagePrefsForHrefTranslate", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kOverrideSitePrefsForHrefTranslate{
+const base::Feature __attribute__((no_destroy)) kOverrideSitePrefsForHrefTranslate{
     "OverrideSitePrefsForHrefTranslate", base::FEATURE_DISABLED_BY_DEFAULT};
 
 const char kForceAutoTranslateKey[] = "force-auto-translate";

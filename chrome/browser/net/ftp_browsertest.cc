@@ -250,6 +250,6 @@ IN_PROC_BROWSER_TEST_F(FtpDisabledFeatureBrowserTest, ExternalProtocolHandler) {
 IN_PROC_BROWSER_TEST_F(FtpEnabledBySwitchBrowserTest, SwitchWorks) {
   ASSERT_TRUE(
       base::FeatureList::GetInstance()->IsFeatureOverriddenFromCommandLine(
-          blink::features::kFtpProtocol.name,
+          blink::features::kFtpProtocol.name.v(),
           base::FeatureList::OVERRIDE_ENABLE_FEATURE));
 }

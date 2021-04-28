@@ -13,10 +13,10 @@
 namespace blink {
 namespace scheduler {
 
-const base::Feature kDedicatedWorkerThrottling{
+const base::Feature __attribute__((no_destroy)) kDedicatedWorkerThrottling{
     "BlinkSchedulerWorkerThrottling", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kBestEffortPriorityForFindInPage{
+const base::Feature __attribute__((no_destroy))kBestEffortPriorityForFindInPage{
     "BlinkSchedulerBestEffortPriorityForFindInPage",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
@@ -24,20 +24,20 @@ const base::Feature kBestEffortPriorityForFindInPage{
 
 // If enabled, the compositor will always be set to kVeryHighPriority if it
 // is not already set to kHighestPriority.
-const base::Feature kVeryHighPriorityForCompositingAlways{
+const base::Feature __attribute__((no_destroy))kVeryHighPriorityForCompositingAlways{
     "BlinkSchedulerVeryHighPriorityForCompositingAlways",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // If enabled, compositor priority will be set to kVeryHighPriority if it will
 // be fast and is not already set to kHighestPriority.
-const base::Feature kVeryHighPriorityForCompositingWhenFast{
+const base::Feature __attribute__((no_destroy))kVeryHighPriorityForCompositingWhenFast{
     "BlinkSchedulerVeryHighPriorityForCompositingWhenFast",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // If enabled, compositor priority will be set to kVeryHighPriority if the last
 // task completed was not a compositor task, and kNormalPriority if the last
 // task completed was a compositor task.
-const base::Feature kVeryHighPriorityForCompositingAlternating{
+const base::Feature __attribute__((no_destroy))kVeryHighPriorityForCompositingAlternating{
     "BlinkSchedulerVeryHighPriorityForCompositingAlternating",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
@@ -45,7 +45,7 @@ const base::Feature kVeryHighPriorityForCompositingAlternating{
 // compositor task has run for some time determined by the finch parameter
 // kCompositingDelayLength. Once a compositor task runs, it will be reset
 // to kNormalPriority.
-const base::Feature kVeryHighPriorityForCompositingAfterDelay{
+const base::Feature __attribute__((no_destroy))kVeryHighPriorityForCompositingAfterDelay{
     "BlinkSchedulerVeryHighPriorityForCompositingAfterDelay",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
@@ -57,7 +57,7 @@ constexpr base::FeatureParam<int> kCompositingDelayLength{
 // If enabled, compositor priority will be set to kVeryHighPriority until
 // a budget has been exhausted. Once the budget runs out, the priority will
 // be set to kNormalPriority until there is enough budget to reprioritize.
-const base::Feature kVeryHighPriorityForCompositingBudget{
+const base::Feature __attribute__((no_destroy))kVeryHighPriorityForCompositingBudget{
     "BlinkSchedulerVeryHighPriorityForCompositingBudget",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
@@ -74,13 +74,13 @@ constexpr base::FeatureParam<double> kCompositorBudgetRecoveryRate{
     &kVeryHighPriorityForCompositingBudget, "CompositorBudgetRecoveryRate",
     0.25};
 
-// This feature functions as an experiment parameter for the
+// This Feature __attribute__((no_destroy))functions as an experiment parameter for the
 // VeryHighPriorityForCompositing alternating, delay, and budget experiments.
 // When enabled, it does nothing unless one of these experiments is also
 // enabled. If one of these experiments is enabled it will change the behavior
 // of that experiment such that the stop signal for prioritzation of the
 // compositor is a BeginMainFrame task instead of any compositor task.
-const base::Feature kPrioritizeCompositingUntilBeginMainFrame{
+const base::Feature __attribute__((no_destroy))kPrioritizeCompositingUntilBeginMainFrame{
     "BlinkSchedulerPrioritizeCompositingUntilBeginMainFrame",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
@@ -88,36 +88,36 @@ const base::Feature kPrioritizeCompositingUntilBeginMainFrame{
 
 // Enables setting the priority of background (with no audio) pages'
 // task queues to low priority.
-const base::Feature kLowPriorityForBackgroundPages{
+const base::Feature __attribute__((no_destroy))kLowPriorityForBackgroundPages{
     "BlinkSchedulerLowPriorityForBackgroundPages",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables setting the priority of background (with no audio) pages'
 // task queues to best effort.
-const base::Feature kBestEffortPriorityForBackgroundPages{
+const base::Feature __attribute__((no_destroy))kBestEffortPriorityForBackgroundPages{
     "BlinkSchedulerBestEffortPriorityForBackgroundPages",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables setting the priority of sub-frame task queues to low
 // priority.
-const base::Feature kLowPriorityForSubFrame{
+const base::Feature __attribute__((no_destroy))kLowPriorityForSubFrame{
     "BlinkSchedulerLowPriorityForSubFrame", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables setting the priority of throttleable task queues to
 // low priority.
-const base::Feature kLowPriorityForThrottleableTask{
+const base::Feature __attribute__((no_destroy))kLowPriorityForThrottleableTask{
     "BlinkSchedulerLowPriorityForThrottleableTask",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables setting the priority of sub-frame throttleable
 // task queues to low priority.
-const base::Feature kLowPriorityForSubFrameThrottleableTask{
+const base::Feature __attribute__((no_destroy))kLowPriorityForSubFrameThrottleableTask{
     "BlinkSchedulerLowPriorityForSubFrameThrottleableTask",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables setting the priority of hidden frame task queues to
 // low priority.
-const base::Feature kLowPriorityForHiddenFrame{
+const base::Feature __attribute__((no_destroy))kLowPriorityForHiddenFrame{
     "BlinkSchedulerLowPriorityForHiddenFrame",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
@@ -125,60 +125,60 @@ const base::Feature kLowPriorityForHiddenFrame{
 // |kLowPriorityForSubFrameThrottleableTask|, |kLowPriorityForThrottleableTask|,
 // |kLowPriorityForSubFrame| to enable one of these experiments only during the
 // load use case.
-const base::Feature kFrameExperimentOnlyWhenLoading{
+const base::Feature __attribute__((no_destroy))kFrameExperimentOnlyWhenLoading{
     "BlinkSchedulerFrameExperimentOnlyWhenLoading",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables setting the priority of an ad frame to low priority.
-const base::Feature kLowPriorityForAdFrame{
+const base::Feature __attribute__((no_destroy))kLowPriorityForAdFrame{
     "BlinkSchedulerLowPriorityForAdFrame", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables setting the priority of an ad frame to best effort priority.
-const base::Feature kBestEffortPriorityForAdFrame{
+const base::Feature __attribute__((no_destroy))kBestEffortPriorityForAdFrame{
     "BlinkSchedulerBestEffortPriorityForAdFrame",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Used along with |kLowPriorityForAdFrame| or |kBestEffortPriorityForAdFrame|
 // to enable one of these experiments only during the load use case.
-const base::Feature kAdFrameExperimentOnlyWhenLoading{
+const base::Feature __attribute__((no_destroy))kAdFrameExperimentOnlyWhenLoading{
     "BlinkSchedulerAdFrameExperimentOnlyWhenLoading",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables using a resource's fetch priority to determine the priority of the
 // resource's loading tasks posted to blink's scheduler.
-const base::Feature kUseResourceFetchPriority{
+const base::Feature __attribute__((no_destroy))kUseResourceFetchPriority{
     "BlinkSchedulerResourceFetchPriority", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables using a resource's fetch priority to determine the priority of the
 // resource's loading tasks posted to blink's scheduler only for resources
 // requested during the loading phase.
-const base::Feature kUseResourceFetchPriorityOnlyWhenLoading{
+const base::Feature __attribute__((no_destroy))kUseResourceFetchPriorityOnlyWhenLoading{
     "BlinkSchedulerResourceFetchPriorityOnlyWhenLoading",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables setting the priority of cross-origin task queues to
 // low priority.
-const base::Feature kLowPriorityForCrossOrigin{
+const base::Feature __attribute__((no_destroy))kLowPriorityForCrossOrigin{
     "BlinkSchedulerLowPriorityForCrossOrigin",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enables setting the priority of cross-origin task queues to
 // low priority during loading only.
-const base::Feature kLowPriorityForCrossOriginOnlyWhenLoading{
+const base::Feature __attribute__((no_destroy))kLowPriorityForCrossOriginOnlyWhenLoading{
     "BlinkSchedulerLowPriorityForCrossOriginOnlyWhenLoading",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Prioritizes loading and compositing tasks while loading.
-const base::Feature kPrioritizeCompositingAndLoadingDuringEarlyLoading{
+const base::Feature __attribute__((no_destroy))kPrioritizeCompositingAndLoadingDuringEarlyLoading{
     "PrioritizeCompositingAndLoadingDuringEarlyLoading",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Prioritizes one BeginMainFrame after input.
-const base::Feature kPrioritizeCompositingAfterInput{
+const base::Feature __attribute__((no_destroy))kPrioritizeCompositingAfterInput{
     "PrioritizeCompositingAfterInput", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Enable setting high priority database task type from field trial parameters.
-const base::Feature kHighPriorityDatabaseTaskType{
+const base::Feature __attribute__((no_destroy))kHighPriorityDatabaseTaskType{
     "HighPriorityDatabaseTaskType", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // When features::kIntensiveWakeUpThrottling is enabled, wake ups from timers
@@ -235,7 +235,7 @@ GetTimeToInhibitIntensiveThrottlingOnTitleOrFaviconUpdate();
 PLATFORM_EXPORT bool CanIntensivelyThrottleLowNestingLevel();
 
 // Per-agent scheduling experiments.
-constexpr base::Feature kPerAgentSchedulingExperiments{
+const base::Feature __attribute__((no_destroy))kPerAgentSchedulingExperiments{
     "BlinkSchedulerPerAgentSchedulingExperiments",
     base::FEATURE_DISABLED_BY_DEFAULT};
 

@@ -98,18 +98,18 @@ void ConfigureFeaturesIfNotSet(
   }
 
   for (const auto& feature : features_to_enable) {
-    if (!base::Contains(disabled_features, feature.name) &&
-        !base::Contains(enabled_features, feature.name)) {
-      enabled_features.push_back(feature.name);
+    if (!base::Contains(disabled_features, feature.name.v()) &&
+        !base::Contains(enabled_features, feature.name.v())) {
+      enabled_features.push_back(feature.name.v());
     }
   }
   cl->AppendSwitchASCII(::switches::kEnableFeatures,
                         base::JoinString(enabled_features, ","));
 
   for (const auto& feature : features_to_disable) {
-    if (!base::Contains(disabled_features, feature.name) &&
-        !base::Contains(enabled_features, feature.name)) {
-      disabled_features.push_back(feature.name);
+    if (!base::Contains(disabled_features, feature.name.v()) &&
+        !base::Contains(enabled_features, feature.name.v())) {
+      disabled_features.push_back(feature.name.v());
     }
   }
   cl->AppendSwitchASCII(::switches::kDisableFeatures,

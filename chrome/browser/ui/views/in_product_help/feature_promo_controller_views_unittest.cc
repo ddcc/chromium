@@ -33,9 +33,9 @@ using ::testing::Ref;
 using ::testing::Return;
 
 namespace {
-base::Feature kTestIPHFeature{"TestIPHFeature",
+base::Feature __attribute__((no_destroy)) kTestIPHFeature{"TestIPHFeature",
                               base::FEATURE_ENABLED_BY_DEFAULT};
-base::Feature kSecondIPHFeature{"SecondIPHFeature",
+base::Feature __attribute__((no_destroy)) kSecondIPHFeature{"SecondIPHFeature",
                                 base::FEATURE_ENABLED_BY_DEFAULT};
 }  // namespace
 

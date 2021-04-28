@@ -8,11 +8,11 @@ namespace features {
 
 // Forces all eligible prerenders to be done in an isolated manner such that no
 // user-identifying information is used during the prefetch.
-const base::Feature kIsolatePrerenders{"IsolatePrerenders",
+const base::Feature __attribute__((no_destroy)) kIsolatePrerenders{"IsolatePrerenders",
                                        base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Forces Chrome to probe the origin before reusing a cached response.
-const base::Feature kIsolatePrerendersMustProbeOrigin{
+const base::Feature __attribute__((no_destroy)) kIsolatePrerendersMustProbeOrigin{
     "IsolatePrerendersMustProbeOrigin", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

@@ -49,7 +49,7 @@
 namespace exo {
 
 // Controls Pointer capture in exo/wayland.
-const base::Feature kPointerCapture{"ExoPointerCapture",
+const base::Feature __attribute__((no_destroy)) kPointerCapture{"ExoPointerCapture",
                                     base::FEATURE_ENABLED_BY_DEFAULT};
 
 namespace {

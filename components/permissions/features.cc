@@ -9,18 +9,18 @@ namespace features {
 
 // Enables or disables whether permission prompts are automatically blocked
 // after the user has explicitly dismissed them too many times.
-const base::Feature kBlockPromptsIfDismissedOften{
+const base::Feature __attribute__((no_destroy)) kBlockPromptsIfDismissedOften{
     "BlockPromptsIfDismissedOften", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Enables or disables whether permission prompts are automatically blocked
 // after the user has ignored them too many times.
-const base::Feature kBlockPromptsIfIgnoredOften{
+const base::Feature __attribute__((no_destroy)) kBlockPromptsIfIgnoredOften{
     "BlockPromptsIfIgnoredOften", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // Once the user declines a notification permission prompt in a WebContents,
 // automatically dismiss subsequent prompts in the same WebContents, from any
 // origin, until the next user-initiated navigation.
-const base::Feature kBlockRepeatedNotificationPermissionPrompts{
+const base::Feature __attribute__((no_destroy)) kBlockRepeatedNotificationPermissionPrompts{
     "BlockRepeatedNotificationPermissionPrompts",
     base::FEATURE_ENABLED_BY_DEFAULT};
 

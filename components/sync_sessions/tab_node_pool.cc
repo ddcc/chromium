@@ -19,7 +19,7 @@ namespace sync_sessions {
 const size_t TabNodePool::kFreeNodesLowWatermark = 25;
 const size_t TabNodePool::kFreeNodesHighWatermark = 100;
 
-const base::Feature kTabNodePoolImmediateDeletion{
+const base::Feature __attribute__((no_destroy)) kTabNodePoolImmediateDeletion{
     "TabNodePoolImmediateDeletion", base::FEATURE_ENABLED_BY_DEFAULT};
 
 TabNodePool::TabNodePool() : max_used_tab_node_id_(kInvalidTabNodeID) {}

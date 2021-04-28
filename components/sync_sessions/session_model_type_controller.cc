@@ -16,7 +16,7 @@
 namespace sync_sessions {
 namespace {
 
-const base::Feature kStopSessionsIfSyncPaused{"StopSessionsIfSyncPaused",
+const base::Feature __attribute__((no_destroy)) kStopSessionsIfSyncPaused{"StopSessionsIfSyncPaused",
                                               base::FEATURE_ENABLED_BY_DEFAULT};
 
 }  // namespace

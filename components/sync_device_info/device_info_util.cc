@@ -21,7 +21,7 @@ namespace {
 
 // Feature flag for configuring the pulse interval.
 // TODO(crbug.com/1045940): Remove this when the experiment concludes.
-const base::Feature kPulseInterval{"PulseInterval",
+const base::Feature __attribute__((no_destroy)) kPulseInterval{"PulseInterval",
                                    base::FEATURE_DISABLED_BY_DEFAULT};
 
 // The delay between periodic updates to the entry corresponding to this device.

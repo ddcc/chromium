@@ -19,24 +19,24 @@ namespace safe_browsing {
 // Please define any new SafeBrowsing related features in this file, and add
 // them to the ExperimentalFeaturesList below to start displaying their status
 // on the chrome://safe-browsing page.
-const base::Feature kAdPopupTriggerFeature{"SafeBrowsingAdPopupTrigger",
+const base::Feature __attribute__((no_destroy)) kAdPopupTriggerFeature{"SafeBrowsingAdPopupTrigger",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kAdRedirectTriggerFeature{
+const base::Feature __attribute__((no_destroy)) kAdRedirectTriggerFeature{
     "SafeBrowsingAdRedirectTrigger", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // Controls various parameters related to occasionally collecting ad samples,
 // for example to control how often collection should occur.
-const base::Feature kAdSamplerTriggerFeature{"SafeBrowsingAdSamplerTrigger",
+const base::Feature __attribute__((no_destroy)) kAdSamplerTriggerFeature{"SafeBrowsingAdSamplerTrigger",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kCaptureInlineJavascriptForGoogleAds{
+const base::Feature __attribute__((no_destroy)) kCaptureInlineJavascriptForGoogleAds{
     "CaptureInlineJavascriptForGoogleAds", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kClientSideDetectionForAndroid{
+const base::Feature __attribute__((no_destroy)) kClientSideDetectionForAndroid{
     "ClientSideDetectionModelOnAndroid", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDelayedWarnings{"SafeBrowsingDelayedWarnings",
+const base::Feature __attribute__((no_destroy)) kDelayedWarnings{"SafeBrowsingDelayedWarnings",
                                      base::FEATURE_DISABLED_BY_DEFAULT};
 
 // If true, a delayed warning will be shown when the user clicks on the page.
@@ -46,13 +46,13 @@ const base::FeatureParam<bool> kDelayedWarningsEnableMouseClicks{
     &kDelayedWarnings, "mouse",
     /*default_value=*/false};
 
-const base::Feature kSimplifiedUrlDisplay{"SimplifiedUrlDisplay",
+const base::Feature __attribute__((no_destroy)) kSimplifiedUrlDisplay{"SimplifiedUrlDisplay",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDownloadRequestWithToken{
+const base::Feature __attribute__((no_destroy)) kDownloadRequestWithToken{
     "SafeBrowsingDownloadRequestWithToken", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kEnhancedProtection {
+const base::Feature __attribute__((no_destroy)) kEnhancedProtection {
   "SafeBrowsingEnhancedProtection",
 #if BUILDFLAG(FULL_SAFE_BROWSING)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -61,22 +61,22 @@ const base::Feature kEnhancedProtection {
 #endif
 };
 
-const base::Feature kEnhancedProtectionMessageInInterstitials{
+const base::Feature __attribute__((no_destroy)) kEnhancedProtectionMessageInInterstitials{
     "SafeBrowsingEnhancedProtectionMessageInInterstitials",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kLimitedListSizeForIOS{"SafeBrowsingLimitedListSizeForIOS",
+const base::Feature __attribute__((no_destroy)) kLimitedListSizeForIOS{"SafeBrowsingLimitedListSizeForIOS",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPasswordProtectionForSavedPasswords{
+const base::Feature __attribute__((no_destroy)) kPasswordProtectionForSavedPasswords{
     "SafeBrowsingPasswordProtectionForSavedPasswords",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kPasswordProtectionShowDomainsForSavedPasswords{
+const base::Feature __attribute__((no_destroy)) kPasswordProtectionShowDomainsForSavedPasswords{
     "SafeBrowsingPasswordProtectionShowDomainsForSavedPasswords",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kPasswordProtectionForSignedInUsers{
+const base::Feature __attribute__((no_destroy)) kPasswordProtectionForSignedInUsers{
   "SafeBrowsingPasswordProtectionForSignedInUsers",
 #if BUILDFLAG(FULL_SAFE_BROWSING)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -85,10 +85,10 @@ const base::Feature kPasswordProtectionForSignedInUsers{
 #endif
 };
 
-const base::Feature kPromptAppForDeepScanning{
+const base::Feature __attribute__((no_destroy)) kPromptAppForDeepScanning{
     "SafeBrowsingPromptAppForDeepScanning", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kRealTimeUrlLookupEnabled{
+const base::Feature __attribute__((no_destroy)) kRealTimeUrlLookupEnabled{
   "SafeBrowsingRealTimeUrlLookupEnabled",
 #if defined(OS_IOS)
       base::FEATURE_DISABLED_BY_DEFAULT
@@ -97,23 +97,23 @@ const base::Feature kRealTimeUrlLookupEnabled{
 #endif
 };
 
-const base::Feature kRealTimeUrlLookupEnabledForAllAndroidDevices{
+const base::Feature __attribute__((no_destroy)) kRealTimeUrlLookupEnabledForAllAndroidDevices{
     "SafeBrowsingRealTimeUrlLookupEnabledForAllAndroidDevices",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kRealTimeUrlLookupEnabledForEnterprise{
+const base::Feature __attribute__((no_destroy)) kRealTimeUrlLookupEnabledForEnterprise{
     "SafeBrowsingRealTimeUrlLookupEnabledForEnterprise",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kRealTimeUrlLookupEnabledForEP{
+const base::Feature __attribute__((no_destroy)) kRealTimeUrlLookupEnabledForEP{
     "SafeBrowsingRealTimeUrlLookupEnabledForEP",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kRealTimeUrlLookupEnabledForEPWithToken{
+const base::Feature __attribute__((no_destroy)) kRealTimeUrlLookupEnabledForEPWithToken{
     "SafeBrowsingRealTimeUrlLookupEnabledForEPWithToken",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kRealTimeUrlLookupEnabledWithToken{
+const base::Feature __attribute__((no_destroy)) kRealTimeUrlLookupEnabledWithToken{
   "SafeBrowsingRealTimeUrlLookupEnabledWithToken",
 #if BUILDFLAG(FULL_SAFE_BROWSING)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -122,35 +122,35 @@ const base::Feature kRealTimeUrlLookupEnabledWithToken{
 #endif
 };
 
-const base::Feature kRealTimeUrlLookupNonMainframeEnabledForEP{
+const base::Feature __attribute__((no_destroy)) kRealTimeUrlLookupNonMainframeEnabledForEP{
     "SafeBrowsingRealTimeUrlLookupNonMainframeEnabledForEP",
     base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSafeBrowsingAvailableOnIOS{
+const base::Feature __attribute__((no_destroy)) kSafeBrowsingAvailableOnIOS{
     "SafeBrowsingAvailableOnIOS", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kSafeBrowsingSeparateNetworkContexts{
+const base::Feature __attribute__((no_destroy)) kSafeBrowsingSeparateNetworkContexts{
     "SafeBrowsingSeparateNetworkContexts", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSafeBrowsingRemoveCookies{
+const base::Feature __attribute__((no_destroy)) kSafeBrowsingRemoveCookies{
     "SafeBrowsingRemoveCookies", base::FEATURE_DISABLED_BY_DEFAULT};
 
 constexpr base::FeatureParam<bool> kShouldFillOldPhishGuardProto{
     &kPasswordProtectionForSignedInUsers, "DeprecateOldProto", false};
 
-const base::Feature kSafeBrowsingSecuritySectionUIAndroid{
+const base::Feature __attribute__((no_destroy)) kSafeBrowsingSecuritySectionUIAndroid{
     "SafeBrowsingSecuritySectionUIAndroid", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSuspiciousSiteTriggerQuotaFeature{
+const base::Feature __attribute__((no_destroy)) kSuspiciousSiteTriggerQuotaFeature{
     "SafeBrowsingSuspiciousSiteTriggerQuota", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kThreatDomDetailsTagAndAttributeFeature{
+const base::Feature __attribute__((no_destroy)) kThreatDomDetailsTagAndAttributeFeature{
     "ThreatDomDetailsTagAttributes", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kTriggerThrottlerDailyQuotaFeature{
+const base::Feature __attribute__((no_destroy)) kTriggerThrottlerDailyQuotaFeature{
     "SafeBrowsingTriggerThrottlerDailyQuota",
     base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kUseNewDownloadWarnings{"UseNewDownloadWarnings",
+const base::Feature __attribute__((no_destroy)) kUseNewDownloadWarnings{"UseNewDownloadWarnings",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 
 namespace {

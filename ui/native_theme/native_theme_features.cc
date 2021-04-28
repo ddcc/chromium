@@ -19,16 +19,16 @@ constexpr base::FeatureState kOverlayScrollbarFeatureState =
 // Enables or disables overlay scrollbars in Blink (i.e. web content) on Aura
 // or Linux.  The status of native UI overlay scrollbars is determined in
 // PlatformStyle::CreateScrollBar. Does nothing on Mac.
-const base::Feature kOverlayScrollbar{"OverlayScrollbar",
+const base::Feature __attribute__((no_destroy)) kOverlayScrollbar{"OverlayScrollbar",
                                       kOverlayScrollbarFeatureState};
 
 // Enables will flash all scrollbars in page after any scroll update.
-const base::Feature kOverlayScrollbarFlashAfterAnyScrollUpdate{
+const base::Feature __attribute__((no_destroy)) kOverlayScrollbarFlashAfterAnyScrollUpdate{
     "OverlayScrollbarFlashAfterAnyScrollUpdate", kOverlayScrollbarFeatureState};
 
 // Experiment: Enables will flash scorllbar when user move mouse enter a
 // scrollable area.
-const base::Feature kOverlayScrollbarFlashWhenMouseEnter{
+const base::Feature __attribute__((no_destroy)) kOverlayScrollbarFlashWhenMouseEnter{
     "OverlayScrollbarFlashWhenMouseEnter", base::FEATURE_DISABLED_BY_DEFAULT};
 
 }  // namespace features

@@ -97,7 +97,7 @@ const int kTrackingIdForUnusedSlot = -1;
 
 namespace ui {
 
-const base::Feature kEnableSingleCancelTouch{"EnableSingleTouchCancel",
+const base::Feature __attribute__((no_destroy)) kEnableSingleCancelTouch{"EnableSingleTouchCancel",
                                              base::FEATURE_DISABLED_BY_DEFAULT};
 
 TouchEventConverterEvdev::TouchEventConverterEvdev(

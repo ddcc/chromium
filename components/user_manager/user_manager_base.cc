@@ -89,7 +89,7 @@ UserType GetStoredUserType(const base::DictionaryValue* prefs_user_types,
 }  // namespace
 
 // Feature that hides Supervised Users.
-const base::Feature kHideSupervisedUsers{"HideSupervisedUsers",
+const base::Feature __attribute__((no_destroy)) kHideSupervisedUsers{"HideSupervisedUsers",
                                          base::FEATURE_ENABLED_BY_DEFAULT};
 
 // static

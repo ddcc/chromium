@@ -9,40 +9,40 @@
 namespace payments {
 namespace features {
 
-const base::Feature kWebPaymentsExperimentalFeatures{
+const base::Feature __attribute__((no_destroy)) kWebPaymentsExperimentalFeatures{
     "WebPaymentsExperimentalFeatures", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kReturnGooglePayInBasicCard{
+const base::Feature __attribute__((no_destroy)) kReturnGooglePayInBasicCard{
     "ReturnGooglePayInBasicCard", base::FEATURE_DISABLED_BY_DEFAULT};
 
 #if defined(OS_IOS)
-const base::Feature kWebPaymentsNativeApps{"WebPaymentsNativeApps",
+const base::Feature __attribute__((no_destroy)) kWebPaymentsNativeApps{"WebPaymentsNativeApps",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 #endif
 
 // TODO(rouslan): Remove this.
-const base::Feature kWebPaymentsMethodSectionOrderV2{
+const base::Feature __attribute__((no_destroy)) kWebPaymentsMethodSectionOrderV2{
     "WebPaymentsMethodSectionOrderV2", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // TODO(rouslan): Remove this.
-const base::Feature kWebPaymentsModifiers{"WebPaymentsModifiers",
+const base::Feature __attribute__((no_destroy)) kWebPaymentsModifiers{"WebPaymentsModifiers",
                                           base::FEATURE_ENABLED_BY_DEFAULT};
 
 // TODO(rouslan): Remove this.
-const base::Feature kWebPaymentsSingleAppUiSkip{
+const base::Feature __attribute__((no_destroy)) kWebPaymentsSingleAppUiSkip{
     "WebPaymentsSingleAppUiSkip", base::FEATURE_ENABLED_BY_DEFAULT};
 
 // TODO(rouslan): Remove this.
-const base::Feature kWebPaymentsJustInTimePaymentApp{
+const base::Feature __attribute__((no_destroy)) kWebPaymentsJustInTimePaymentApp{
     "WebPaymentsJustInTimePaymentApp", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAlwaysAllowJustInTimePaymentApp{
+const base::Feature __attribute__((no_destroy)) kAlwaysAllowJustInTimePaymentApp{
     "AlwaysAllowJustInTimePaymentApp", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kWebPaymentsRedactShippingAddress{
+const base::Feature __attribute__((no_destroy)) kWebPaymentsRedactShippingAddress{
     "WebPaymentsRedactShippingAddress", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAppStoreBilling {
+const base::Feature __attribute__((no_destroy)) kAppStoreBilling {
   "AppStoreBilling",
 #if defined(OS_ANDROID)
       base::FEATURE_ENABLED_BY_DEFAULT
@@ -51,35 +51,35 @@ const base::Feature kAppStoreBilling {
 #endif  // OS_ANDROID
 };
 
-const base::Feature kAppStoreBillingDebug{"AppStoreBillingDebug",
+const base::Feature __attribute__((no_destroy)) kAppStoreBillingDebug{"AppStoreBillingDebug",
                                           base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kStrictHasEnrolledAutofillInstrument{
+const base::Feature __attribute__((no_destroy)) kStrictHasEnrolledAutofillInstrument{
     "StrictHasEnrolledAutofillInstrument", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPaymentRequestSkipToGPay{
+const base::Feature __attribute__((no_destroy)) kPaymentRequestSkipToGPay{
     "PaymentRequestSkipToGPay", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPaymentRequestSkipToGPayIfNoCard{
+const base::Feature __attribute__((no_destroy)) kPaymentRequestSkipToGPayIfNoCard{
     "PaymentRequestSkipToGPayIfNoCard", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kDownRankJustInTimePaymentApp{
+const base::Feature __attribute__((no_destroy)) kDownRankJustInTimePaymentApp{
     "DownRankJustInTimePaymentApp", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPaymentHandlerPopUpSizeWindow{
+const base::Feature __attribute__((no_destroy)) kPaymentHandlerPopUpSizeWindow{
     "PaymentHandlerPopUpSizeWindow", base::FEATURE_ENABLED_BY_DEFAULT};
 
-const base::Feature kAllowJITInstallationWhenAppIconIsMissing{
+const base::Feature __attribute__((no_destroy)) kAllowJITInstallationWhenAppIconIsMissing{
     "AllowJITInstallationWhenAppIconIsMissing",
     base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kPaymentHandlerSecurityIcon{
+const base::Feature __attribute__((no_destroy)) kPaymentHandlerSecurityIcon{
     "PaymentHandlerSecurityIcon", base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kEnforceFullDelegation{"EnforceFullDelegation",
+const base::Feature __attribute__((no_destroy)) kEnforceFullDelegation{"EnforceFullDelegation",
                                            base::FEATURE_DISABLED_BY_DEFAULT};
 
-const base::Feature kSecurePaymentConfirmation {
+const base::Feature __attribute__((no_destroy)) kSecurePaymentConfirmation {
   "SecurePaymentConfirmation",
 #if defined(OS_MAC)
       base::FEATURE_ENABLED_BY_DEFAULT

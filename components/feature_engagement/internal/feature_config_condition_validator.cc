@@ -131,7 +131,7 @@ bool FeatureConfigConditionValidator::AvailabilityMeetsConditions(
 bool FeatureConfigConditionValidator::SessionRateMeetsConditions(
     const Comparator session_rate,
     const base::Feature& feature) const {
-  const auto it = times_shown_for_feature_.find(feature.name);
+  const auto it = times_shown_for_feature_.find(feature.name.v());
   if (it == times_shown_for_feature_.end())
     return session_rate.MeetsCriteria(0u);
   return session_rate.MeetsCriteria(it->second);

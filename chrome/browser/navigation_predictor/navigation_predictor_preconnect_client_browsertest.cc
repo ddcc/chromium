@@ -251,7 +251,7 @@ IN_PROC_BROWSER_TEST_F(
   EXPECT_EQ(2, preresolve_done_count_);
 }
 
-const base::Feature kPreconnectOnDidFinishNavigation{
+const base::Feature __attribute__((no_destroy)) kPreconnectOnDidFinishNavigation{
     "PreconnectOnDidFinishNavigation", base::FEATURE_DISABLED_BY_DEFAULT};
 
 class
@@ -356,7 +356,7 @@ IN_PROC_BROWSER_TEST_F(
 
 namespace {
 // Feature to control preconnect to search.
-const base::Feature kPreconnectToSearchTest{"PreconnectToSearch",
+const base::Feature __attribute__((no_destroy)) kPreconnectToSearchTest{"PreconnectToSearch",
                                             base::FEATURE_DISABLED_BY_DEFAULT};
 }  // namespace
 

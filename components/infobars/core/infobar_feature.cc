@@ -4,5 +4,5 @@
 
 #include "components/infobars/core/infobar_feature.h"
 
-const base::Feature kIOSInfobarUIReboot{"InfobarUIReboot",
+const base::Feature __attribute__((no_destroy)) kIOSInfobarUIReboot{"InfobarUIReboot",
                                         base::FEATURE_ENABLED_BY_DEFAULT};

@@ -23,7 +23,7 @@
 
 namespace syncer {
 
-constexpr base::Feature kInvalidationsSkipUnsubscription{
+const base::Feature __attribute__((no_destroy)) kInvalidationsSkipUnsubscription{
     "InvalidationsSkipUnsubscription", base::FEATURE_DISABLED_BY_DEFAULT};
 
 // A single request to subscribe to a topic on the per-user-topic service.

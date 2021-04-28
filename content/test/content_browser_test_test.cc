@@ -288,13 +288,13 @@ IN_PROC_BROWSER_TEST_F(ContentBrowserTestSanityTest, SingleProcess) {
 
 namespace {
 
-const base::Feature kTestFeatureForBrowserTest1{
+const base::Feature __attribute__((no_destroy)) kTestFeatureForBrowserTest1{
     "TestFeatureForBrowserTest1", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTestFeatureForBrowserTest2{
+const base::Feature __attribute__((no_destroy)) kTestFeatureForBrowserTest2{
     "TestFeatureForBrowserTest2", base::FEATURE_ENABLED_BY_DEFAULT};
-const base::Feature kTestFeatureForBrowserTest3{
+const base::Feature __attribute__((no_destroy)) kTestFeatureForBrowserTest3{
     "TestFeatureForBrowserTest3", base::FEATURE_DISABLED_BY_DEFAULT};
-const base::Feature kTestFeatureForBrowserTest4{
+const base::Feature __attribute__((no_destroy)) kTestFeatureForBrowserTest4{
     "TestFeatureForBrowserTest4", base::FEATURE_ENABLED_BY_DEFAULT};
 
 }  // namespace

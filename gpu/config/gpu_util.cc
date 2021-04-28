@@ -175,7 +175,7 @@ GpuFeatureStatus GetGpuRasterizationFeatureStatus(
   // commandline.
   if (base::FeatureList::IsEnabled(features::kVulkan) &&
       !base::FeatureList::GetInstance()->IsFeatureOverriddenFromCommandLine(
-          features::kDefaultEnableGpuRasterization.name,
+          features::kDefaultEnableGpuRasterization.name.v(),
           base::FeatureList::OVERRIDE_DISABLE_FEATURE)) {
     return kGpuFeatureStatusEnabled;
   }
@@ -221,7 +221,7 @@ GpuFeatureStatus GetOopRasterizationFeatureStatus(
   // commandline.
   if (base::FeatureList::IsEnabled(features::kVulkan) &&
       !base::FeatureList::GetInstance()->IsFeatureOverriddenFromCommandLine(
-          features::kDefaultEnableOopRasterization.name,
+          features::kDefaultEnableOopRasterization.name.v(),
           base::FeatureList::OVERRIDE_DISABLE_FEATURE)) {
     return kGpuFeatureStatusEnabled;
   }
