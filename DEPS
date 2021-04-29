@@ -374,7 +374,7 @@ vars = {
   # Also, if you change these, update buildtools/DEPS too. Also update the
   # libc++ svn_revision in //buildtools/deps_revisions.gni.
   'clang_format_revision': '96636aa0e9f047f17447f2d45a094d0b59ed7917',
-  'libcxx_revision':       'f76a7301d9b43bef90d030463a65d75a8561b3fe',
+  'libcxx_revision':       'f1f7cc1e8ccab5f3cbb78eb0cc86895aad954c96',
   'libcxxabi_revision':    '196ba1aaa8ac285d94f4ea8d9836390a45360533',
   'libunwind_revision':    'd999d54f4bca789543a2eb6c995af2d9b5a1f3ed',
 }

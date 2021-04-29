@@ -46,7 +46,7 @@ class PasswordSaveManager {
 
   virtual const PasswordForm& GetPendingCredentials() const = 0;
 
-  virtual const base::hq_string16& GetGeneratedPassword() const = 0;
+  virtual const base::hq_private_string16& GetGeneratedPassword() const = 0;
 
   virtual FormSaver* GetFormSaver() const = 0;
 

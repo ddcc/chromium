@@ -596,7 +596,7 @@ TEST_P(CredentialManagerImplTest,
   const auto& pending_cred =
       client_->pending_manager()->GetPendingCredentials();
   EXPECT_EQ(info.id, pending_cred.username_value);
-  EXPECT_EQ(info.password, pending_cred.password_value);
+  EXPECT_EQ(info.password, pending_cred.password_value.str());
 }
 
 TEST_P(CredentialManagerImplTest,
@@ -628,7 +628,7 @@ TEST_P(CredentialManagerImplTest,
   const auto& pending_cred =
       client_->pending_manager()->GetPendingCredentials();
   EXPECT_EQ(info.id, pending_cred.username_value);
-  EXPECT_EQ(info.password, pending_cred.password_value);
+  EXPECT_EQ(info.password, pending_cred.password_value.str());
 }
 
 TEST_P(CredentialManagerImplTest, CredentialManagerStoreOverwriteZeroClick) {

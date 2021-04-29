@@ -278,6 +278,43 @@ void CheckField(const std::vector<FormFieldData>& fields,
     EXPECT_EQ(expected_value, *element_value);
 }
 
+void CheckFieldPrivate(const std::vector<FormFieldData>& fields,
+                autofill::FieldRendererId renderer_id,
+                const base::hq_string16& element_name,
+                const base::hq_private_string16* element_value,
+                const char* element_kind) {
+  SCOPED_TRACE(testing::Message("Looking for element of kind ")
+               << element_kind);
+
+  if (renderer_id.is_null()) {
+    EXPECT_EQ(base::hq_string16(), element_name);
+    if (element_value)
+      EXPECT_EQ(base::hq_private_string16(), *element_value);
+    return;
+  }
+
+  auto field_it = std::find_if(fields.begin(), fields.end(),
+                               [renderer_id](const FormFieldData& field) {
+                                 return field.unique_renderer_id == renderer_id;
+                               });
+  ASSERT_TRUE(field_it != fields.end())
+      << "Could not find a field with renderer ID " << renderer_id;
+
+// On iOS |unique_id| is used for identifying DOM elements, so the parser should
+// return it. See crbug.com/896594
+#if defined(OS_IOS)
+  EXPECT_EQ(element_name, field_it->unique_id);
+#else
+  EXPECT_EQ(element_name, field_it->name);
+#endif
+
+  base::hq_private_string16 expected_value =
+      field_it->typed_value.empty() ? field_it->value : field_it->typed_value;
+
+  if (element_value)
+    EXPECT_EQ(expected_value, *element_value);
+}
+
 // Describes the |form_data| including field values and names. Use this in
 // SCOPED_TRACE if other logging messages might refer to the form.
 testing::Message DescribeFormData(const FormData& form_data) {
@@ -303,7 +340,7 @@ void CheckPasswordFormFields(const PasswordForm& password_form,
   EXPECT_EQ(expectations.username_id,
             password_form.username_element_renderer_id);
 
-  CheckField(form_data.fields, expectations.password_id,
+  CheckFieldPrivate(form_data.fields, expectations.password_id,
              password_form.password_element, &password_form.password_value,
              "password");
   EXPECT_EQ(expectations.password_id,

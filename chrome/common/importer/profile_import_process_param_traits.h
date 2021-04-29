@@ -77,7 +77,7 @@ struct StructTraits<chrome::mojom::ImportedPasswordFormDataView,
     return r.password_element;
   }
 
-  static const base::hq_string16& password_value(const autofill::PasswordForm& r) {
+  static const base::hq_private_string16& password_value(const autofill::PasswordForm& r) {
     return r.password_value;
   }
 

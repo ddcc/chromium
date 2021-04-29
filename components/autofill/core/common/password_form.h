@@ -196,7 +196,7 @@ struct PasswordForm {
   // meant to be persisted to the password store.
   //
   // When parsing an HTML form, this is typically empty.
-  base::hq_string16 password_value;
+  base::hq_private_string16 password_value;
 
   // The current encrypted password. Must be non-empty for PasswordForm
   // instances retrieved from the password store or coming in a

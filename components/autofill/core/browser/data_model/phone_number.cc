@@ -225,7 +225,7 @@ bool PhoneNumber::SetInfoWithVerificationStatusImpl(
   // Store a formatted (i.e., pretty printed) version of the number if either
   // the number doesn't contain formatting marks.
   UpdateCacheIfNeeded(app_locale);
-  if (base::ContainsOnlyChars(number_, base::ASCIIToUTF16("+0123456789"))) {
+  if (base::ContainsOnlyChars(number_.str(), base::ASCIIToUTF16("+0123456789"))) {
     number_ = cached_parsed_phone_.GetFormattedNumber();
   } else if (i18n::NormalizePhoneNumber(number_,
                                         GetRegion(*profile_, app_locale))

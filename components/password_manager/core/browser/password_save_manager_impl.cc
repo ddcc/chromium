@@ -134,7 +134,7 @@ const PasswordForm& PasswordSaveManagerImpl::GetPendingCredentials() const {
   return pending_credentials_;
 }
 
-const base::hq_string16& PasswordSaveManagerImpl::GetGeneratedPassword() const {
+const base::hq_private_string16& PasswordSaveManagerImpl::GetGeneratedPassword() const {
   DCHECK(generation_manager_);
   return generation_manager_->generated_password();
 }

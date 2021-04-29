@@ -1015,8 +1015,8 @@ void PasswordManager::MaybeSavePasswordHash(
     username = gaia::CanonicalizeEmail(username);
   bool is_password_change = !submitted_form->new_password_element.empty();
   const base::string16 password = is_password_change
-                                      ? submitted_form->new_password_value
-                                      : submitted_form->password_value;
+                                      ? submitted_form->new_password_value.str()
+                                      : submitted_form->password_value.str();
 
   if (should_save_enterprise_pw) {
     store->SaveEnterprisePasswordHash(username, password);

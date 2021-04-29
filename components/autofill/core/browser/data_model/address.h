@@ -82,7 +82,7 @@ class Address : public FormGroup {
   // TODO(crbug.com/1130194): Clean legacy implementation once structured
   // addresses are fully launched.
   // The lines of the street address.
-  std::hq_vector<base::hq_string16> street_address_;
+  std::hq_vector<base::hq_private_string16> street_address_;
   // A subdivision of city, e.g. inner-city district or suburb.
   base::hq_string16 dependent_locality_;
   base::hq_string16 city_;

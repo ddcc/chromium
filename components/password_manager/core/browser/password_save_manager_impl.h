@@ -30,7 +30,7 @@ class PasswordSaveManagerImpl : public PasswordSaveManager {
       const PasswordManagerClient* client);
 
   const PasswordForm& GetPendingCredentials() const override;
-  const base::hq_string16& GetGeneratedPassword() const override;
+  const base::hq_private_string16& GetGeneratedPassword() const override;
   FormSaver* GetFormSaver() const override;
 
   // |metrics_recorder| and |votes_uploader| can both be nullptr.

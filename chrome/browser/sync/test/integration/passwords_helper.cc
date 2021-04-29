@@ -93,7 +93,7 @@ sync_pb::PasswordSpecificsData SpecificsDataFromPasswordForm(
   password_data.set_username_value(
       base::UTF16ToUTF8(password_form.username_value));
   password_data.set_password_value(
-      base::UTF16ToUTF8(password_form.password_value));
+      base::UTF16ToUTF8(password_form.password_value.str()));
   password_data.set_date_last_used(
       password_form.date_last_used.ToDeltaSinceWindowsEpoch().InMicroseconds());
   password_data.set_date_created(

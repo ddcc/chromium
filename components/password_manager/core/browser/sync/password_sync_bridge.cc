@@ -71,7 +71,7 @@ sync_pb::PasswordSpecifics SpecificsFromPassword(
   password_data->set_username_value(
       base::UTF16ToUTF8(password_form.username_value));
   password_data->set_password_value(
-      base::UTF16ToUTF8(password_form.password_value));
+      base::UTF16ToUTF8(password_form.password_value.str()));
   password_data->set_date_last_used(
       password_form.date_last_used.ToDeltaSinceWindowsEpoch().InMicroseconds());
   password_data->set_date_created(
@@ -162,7 +162,7 @@ bool AreLocalAndRemotePasswordsEqual(
               password_specifics.password_element() &&
           base::UTF16ToUTF8(password_form.username_value) ==
               password_specifics.username_value() &&
-          base::UTF16ToUTF8(password_form.password_value) ==
+          base::UTF16ToUTF8(password_form.password_value.str()) ==
               password_specifics.password_value() &&
           password_form.date_last_used ==
               base::Time::FromDeltaSinceWindowsEpoch(

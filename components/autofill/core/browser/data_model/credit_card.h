@@ -218,7 +218,7 @@ class CreditCard : public AutofillDataModel {
   bool IsValid() const;
 
   // Returns the card number.
-  const base::hq_string16& number() const { return number_; }
+  const base::hq_private_string16& number() const { return number_; }
   // Sets |number_| to |number| and computes the appropriate card issuer
   // |network_|.
   void SetNumber(const base::string16& number);
@@ -345,7 +345,7 @@ class CreditCard : public AutofillDataModel {
 
   // The card number. For MASKED_SERVER_CARDs, this number will just contain the
   // last four digits of the card number.
-  base::hq_string16 number_;
+  base::hq_private_string16 number_;
 
   // The cardholder's name. May be empty.
   base::hq_string16 name_on_card_;

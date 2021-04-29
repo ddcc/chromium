@@ -498,7 +498,9 @@ class PasswordManagerTest : public testing::TestWithParam<bool> {
   PasswordForm MakeFormWithOnlyNewPasswordField() {
     PasswordForm form = MakeSimpleForm();
     form.new_password_element.swap(form.password_element);
-    form.new_password_value.swap(form.password_value);
+    const auto old = form.password_value.str();
+    form.password_value = form.new_password_value;
+    form.new_password_value = std::move(old);
     form.form_data.fields[1].autocomplete_attribute = "new-password";
     return form;
   }
@@ -647,7 +649,9 @@ TEST_P(PasswordManagerTest, FormSubmitWithOnlyNewPasswordField) {
   // The value of the new password field should have been promoted to, and saved
   // to the password store as the current password.
   PasswordForm expected_form(form);
-  expected_form.password_value.swap(expected_form.new_password_value);
+  auto old = expected_form.password_value.str();
+  expected_form.password_value = expected_form.new_password_value;
+  expected_form.new_password_value = std::move(old);
   expected_form.password_element.swap(expected_form.new_password_element);
   EXPECT_THAT(saved_form, FormMatches(expected_form));
 }

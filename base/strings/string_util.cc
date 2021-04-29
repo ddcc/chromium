@@ -111,6 +111,11 @@ const std::hq_string& EmptyHQString() {
   return *hqs;
 }
 
+const std::hq_private_string& EmptyHQPrivateString() {
+  static const base::NoDestructor<std::hq_private_string> hqs;
+  return *hqs;
+}
+
 const string16& EmptyString16() {
   static const base::NoDestructor<string16> s16;
   return *s16;

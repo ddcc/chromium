@@ -125,7 +125,7 @@ std::vector<std::pair<std::string, std::string>> GetUsernamesAndPasswords(
   result.reserve(forms.size());
   for (const auto& form : forms) {
     result.emplace_back(base::UTF16ToUTF8(form.username_value),
-                        base::UTF16ToUTF8(form.password_value));
+                        base::UTF16ToUTF8(form.password_value.str()));
   }
 
   return result;

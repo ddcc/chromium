@@ -27,7 +27,15 @@ std::ostream& operator<<(std::ostream& out, const hq_string16& str) {
   return out << base::StringPiece16(str.str());
 }
 
+std::ostream& operator<<(std::ostream& out, const hq_private_string16& str) {
+  return out << base::StringPiece16(str.str());
+}
+
 void PrintTo(const hq_string16& str, std::ostream* out) {
+  *out << str;
+}
+
+void PrintTo(const hq_private_string16& str, std::ostream* out) {
   *out << str;
 }
 

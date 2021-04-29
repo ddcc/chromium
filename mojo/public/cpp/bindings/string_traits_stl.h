@@ -32,6 +32,16 @@ struct StringTraits<std::hq_string> {
   }
 };
 
+template <>
+struct StringTraits<std::hq_private_string> {
+  static const std::hq_private_string& GetUTF8(const std::hq_private_string& input) { return input; }
+
+  static bool Read(StringDataView input, std::hq_private_string* output) {
+    output->assign(input.storage(), input.size());
+    return true;
+  }
+};
+
 }  // namespace mojo
 
 #endif  // MOJO_PUBLIC_CPP_BINDINGS_STRING_TRAITS_STL_H_

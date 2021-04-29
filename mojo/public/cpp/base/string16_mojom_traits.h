@@ -52,6 +52,18 @@ struct COMPONENT_EXPORT(MOJO_BASE_TRAITS)
 
 template <>
 struct COMPONENT_EXPORT(MOJO_BASE_TRAITS)
+    StructTraits<mojo_base::mojom::String16DataView, base::hq_private_string16> {
+  static base::span<const uint16_t> data(const base::hq_private_string16& str) {
+    return StructTraits<mojo_base::mojom::String16DataView,
+                        base::StringPiece16>::data(str.str());
+  }
+
+  static bool Read(mojo_base::mojom::String16DataView data,
+                   base::hq_private_string16* out);
+};
+
+template <>
+struct COMPONENT_EXPORT(MOJO_BASE_TRAITS)
     StructTraits<mojo_base::mojom::BigString16DataView, base::string16> {
   static mojo_base::BigBuffer data(const base::string16& str);
 

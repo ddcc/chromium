@@ -130,7 +130,7 @@ class EmailInfo : public FormGroup {
   // FormGroup:
   void GetSupportedTypes(ServerFieldTypeSet* supported_types) const override;
 
-  base::hq_string16 email_;
+  base::hq_private_string16 email_;
 };
 
 class CompanyInfo : public FormGroup {

@@ -94,13 +94,13 @@ base::string16 Address::GetRawInfo(ServerFieldType type) const {
 
   switch (type) {
     case ADDRESS_HOME_LINE1:
-      return street_address_.size() > 0 ? street_address_[0] : base::hq_string16();
+      return street_address_.size() > 0 ? street_address_[0] : base::hq_private_string16();
 
     case ADDRESS_HOME_LINE2:
-      return street_address_.size() > 1 ? street_address_[1] : base::hq_string16();
+      return street_address_.size() > 1 ? street_address_[1] : base::hq_private_string16();
 
     case ADDRESS_HOME_LINE3:
-      return street_address_.size() > 2 ? street_address_[2] : base::hq_string16();
+      return street_address_.size() > 2 ? street_address_[2] : base::hq_private_string16();
 
     case ADDRESS_HOME_DEPENDENT_LOCALITY:
       return dependent_locality_;

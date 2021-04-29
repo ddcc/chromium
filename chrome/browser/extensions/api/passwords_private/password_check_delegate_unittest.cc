@@ -708,7 +708,7 @@ TEST_F(PasswordCheckDelegateTest, ChangeInsecureCredentialRemovesDupes) {
   EXPECT_EQ(
       kPassword2,
       base::UTF16ToUTF8(
-          store().stored_passwords().at(kExampleCom).at(0).password_value));
+          store().stored_passwords().at(kExampleCom).at(0).password_value.str()));
 }
 
 // Test that removing a insecure password fails if the ids don't match.

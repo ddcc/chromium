@@ -135,7 +135,7 @@ class InsecureCredentialsManagerTest : public ::testing::Test {
     for (const auto& form : saved_passwords) {
       if (form.signon_realm == signon_realm &&
           form.username_value == base::UTF8ToUTF16(username)) {
-        return base::UTF16ToUTF8(form.password_value);
+        return base::UTF16ToUTF8(form.password_value.str());
       }
     }
     return std::string();

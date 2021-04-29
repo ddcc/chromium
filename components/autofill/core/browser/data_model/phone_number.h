@@ -92,7 +92,7 @@ class PhoneNumber : public FormGroup {
   void UpdateCacheIfNeeded(const std::string& app_locale) const;
 
   // The phone number.
-  base::hq_string16 number_;
+  base::hq_private_string16 number_;
   // Profile which stores the region used as hint when normalizing the number.
   const AutofillProfile* profile_;  // WEAK
 

@@ -44,7 +44,7 @@ std::map<std::string, std::string> PasswordCSVWriter::PasswordFormToRecord(
   std::map<std::string, std::string> record;
   record[kUrlColumnName] = form.url.spec();
   record[kUsernameColumnName] = base::UTF16ToUTF8(form.username_value);
-  record[kPasswordColumnName] = base::UTF16ToUTF8(form.password_value);
+  record[kPasswordColumnName] = base::UTF16ToUTF8(form.password_value.str());
   record[kTitleColumnName] = form.url.host();
   return record;
 }

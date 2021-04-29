@@ -156,7 +156,7 @@ TEST_F(PasswordStoreXTest, MigrationCompleted) {
   EXPECT_EQ(1U, stored_forms.size());
   // Password values don't match because they have been stored encrypted and
   // read unencrypted.
-  EXPECT_NE(kPassword, base::UTF16ToUTF8(stored_forms[0]->password_value));
+  EXPECT_NE(kPassword, base::UTF16ToUTF8(stored_forms[0]->password_value.str()));
   EXPECT_THAT(migration_step_pref_.GetValue(),
               PasswordStoreX::LOGIN_DB_REPLACED);
 }
@@ -197,7 +197,7 @@ TEST_F(PasswordStoreXTest, MigrationNotAttemptedEmptyDB) {
   EXPECT_EQ(1U, stored_forms.size());
   // Password values don't match because they have been stored encrypted and
   // read unencrypted.
-  EXPECT_NE(kPassword, base::UTF16ToUTF8(stored_forms[0]->password_value));
+  EXPECT_NE(kPassword, base::UTF16ToUTF8(stored_forms[0]->password_value.str()));
   EXPECT_THAT(migration_step_pref_.GetValue(),
               PasswordStoreX::LOGIN_DB_REPLACED);
 }

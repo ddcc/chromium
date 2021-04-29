@@ -2025,7 +2025,7 @@ TEST_F(LoginDatabaseTest, EncryptionDisabled) {
   }
   EXPECT_EQ(
       GetColumnValuesFromDatabase<std::string>(file, "password_value").at(0),
-      base::UTF16ToUTF8(password_form.password_value));
+      base::UTF16ToUTF8(password_form.password_value.str()));
 }
 #endif  // defined(OS_LINUX) || defined(OS_CHROMEOS)
 

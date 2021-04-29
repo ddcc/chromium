@@ -46,6 +46,7 @@ namespace base {
 
 typedef wchar_t char16;
 typedef std::hq_wstring hq_string16;
+typedef std::hq_private_wstring hq_private_string16;
 
 }  // namespace base
 
@@ -58,16 +59,25 @@ namespace base {
 typedef uint16_t char16;
 
 typedef std::hq_basic_string<char16,
-                          base::string16_internals::string16_char_traits>
+                          base::string16_internals::string16_char_traits, std::allocator<char16>, false>
     hq_string16;
+typedef std::hq_basic_string<char16,
+                          base::string16_internals::string16_char_traits, std::allocator<char16>, true>
+    hq_private_string16;
 
 namespace hq_string16_internals {
 
 BASE_EXPORT extern std::ostream& operator<<(std::ostream& out,
                                             const hq_string16& str);
 
+BASE_EXPORT extern std::ostream& operator<<(std::ostream& out,
+                                            const hq_private_string16& str);
+
 // This is required by googletest to print a readable output on test failures.
 BASE_EXPORT extern void PrintTo(const hq_string16& str, std::ostream* out);
+
+// This is required by googletest to print a readable output on test failures.
+BASE_EXPORT extern void PrintTo(const hq_private_string16& str, std::ostream* out);
 
 }  // namespace hq_string16_internals
 
@@ -123,6 +133,16 @@ namespace std {
 template <>
 struct hash<base::hq_string16> {
   std::size_t operator()(const base::hq_string16& s) const {
+    std::size_t result = 0;
+    for (base::char16 c : s)
+      result = (result * 131) + c;
+    return result;
+  }
+};
+
+template <>
+struct hash<base::hq_private_string16> {
+  std::size_t operator()(const base::hq_private_string16& s) const {
     std::size_t result = 0;
     for (base::char16 c : s)
       result = (result * 131) + c;

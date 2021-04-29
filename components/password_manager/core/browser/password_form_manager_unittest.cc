@@ -2377,7 +2377,7 @@ class MockPasswordSaveManager : public PasswordSaveManager {
                     scoped_refptr<PasswordFormMetricsRecorder>,
                     VotesUploader*));
   MOCK_CONST_METHOD0(GetPendingCredentials, const PasswordForm&());
-  MOCK_CONST_METHOD0(GetGeneratedPassword, const base::hq_string16&());
+  MOCK_CONST_METHOD0(GetGeneratedPassword, const base::hq_private_string16&());
   MOCK_CONST_METHOD0(GetFormSaver, FormSaver*());
   MOCK_METHOD5(CreatePendingCredentials,
                void(const PasswordForm&,
@@ -2551,7 +2551,7 @@ TEST_F(PasswordFormManagerTestWithMockedSaver, UpdatePasswordValueFromPrompt) {
   EXPECT_CALL(
       *mock_password_save_manager(),
       CreatePendingCredentials(
-          FormHasPassword(parsed_submitted_form_.password_value), _, _, _, _));
+          FormHasPassword(parsed_submitted_form_.password_value.str()), _, _, _, _));
   form_manager_->ProvisionallySave(submitted_form_, &driver_, nullptr);
   base::string16 new_password = ASCIIToUTF16("new_password");
   EXPECT_CALL(

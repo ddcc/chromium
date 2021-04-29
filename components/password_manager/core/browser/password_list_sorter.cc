@@ -62,7 +62,7 @@ std::string CreateSortKey(const PasswordForm& form, IgnoreStore ignore_store) {
 
   if (!form.blocked_by_user) {
     key += kSortKeyPartsSeparator + base::UTF16ToUTF8(form.username_value) +
-           kSortKeyPartsSeparator + base::UTF16ToUTF8(form.password_value);
+           kSortKeyPartsSeparator + base::UTF16ToUTF8(form.password_value.str());
 
     key += kSortKeyPartsSeparator;
     if (!form.federation_origin.opaque())

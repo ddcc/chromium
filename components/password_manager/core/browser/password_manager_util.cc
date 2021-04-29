@@ -283,8 +283,8 @@ const PasswordForm* GetMatchForUpdating(
       return username_match;
 
     const auto& password_to_save = submitted_form.new_password_value.empty()
-                                       ? submitted_form.password_value
-                                       : submitted_form.new_password_value;
+                                       ? submitted_form.password_value.str()
+                                       : submitted_form.new_password_value.str();
     // Normally, the copy of the PSL matched credentials, adapted for the
     // current domain, is saved automatically without asking the user, because
     // the copy likely represents the same account, i.e., the one for which
