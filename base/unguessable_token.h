@@ -64,12 +64,12 @@ class BASE_EXPORT UnguessableToken {
 
   // Creates an empty UnguessableToken.
   // Assign to it with Create() before using it.
-  UnguessableToken() = default;
+  constexpr UnguessableToken() = default;
 
-  UnguessableToken(const UnguessableToken&) = default;
-  UnguessableToken& operator=(const UnguessableToken&) = default;
-  UnguessableToken(UnguessableToken&&) noexcept = default;
-  UnguessableToken& operator=(UnguessableToken&&) = default;
+  constexpr UnguessableToken(const UnguessableToken&) = default;
+  constexpr UnguessableToken& operator=(const UnguessableToken&) = default;
+  constexpr UnguessableToken(UnguessableToken&&) noexcept = default;
+  constexpr UnguessableToken& operator=(UnguessableToken&&) = default;
 
   // NOTE: Serializing an empty UnguessableToken is an illegal operation.
   uint64_t GetHighForSerialization() const {

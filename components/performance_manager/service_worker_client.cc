@@ -17,15 +17,12 @@ ServiceWorkerClient::ServiceWorkerClient(
     : type_(blink::mojom::ServiceWorkerClientType::kSharedWorker),
       worker_token_(shared_worker_token) {}
 
-ServiceWorkerClient::ServiceWorkerClient(const ServiceWorkerClient& other) : type_(other.type_), worker_token_(other.worker_token_) {}
+ServiceWorkerClient::ServiceWorkerClient(const ServiceWorkerClient& other) =
+    default;
 ServiceWorkerClient& ServiceWorkerClient::operator=(
-    const ServiceWorkerClient& other) {
-    type_ = other.type_;
-    worker_token_ = other.worker_token_;
-    return *this;
-}
+    const ServiceWorkerClient& other) = default;
 
-ServiceWorkerClient::~ServiceWorkerClient() {}
+ServiceWorkerClient::~ServiceWorkerClient() = default;
 
 content::GlobalFrameRoutingId ServiceWorkerClient::GetRenderFrameHostId()
     const {

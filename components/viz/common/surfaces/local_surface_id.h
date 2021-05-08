@@ -64,29 +64,29 @@ constexpr uint32_t kMaxChildSequenceNumber =
 // for the child.
 class VIZ_COMMON_EXPORT LocalSurfaceId {
  public:
-  LocalSurfaceId()
+  constexpr LocalSurfaceId()
       : parent_sequence_number_(kInvalidParentSequenceNumber),
         child_sequence_number_(kInvalidChildSequenceNumber) {}
 
-  LocalSurfaceId(const LocalSurfaceId& other)
+  constexpr LocalSurfaceId(const LocalSurfaceId& other)
       : parent_sequence_number_(other.parent_sequence_number_),
         child_sequence_number_(other.child_sequence_number_),
         embed_token_(other.embed_token_) {}
 
-  LocalSurfaceId(uint32_t parent_sequence_number,
+  constexpr LocalSurfaceId(uint32_t parent_sequence_number,
                            const base::UnguessableToken& embed_token)
       : parent_sequence_number_(parent_sequence_number),
         child_sequence_number_(kInitialChildSequenceNumber),
         embed_token_(embed_token) {}
 
-  LocalSurfaceId(uint32_t parent_sequence_number,
+  constexpr LocalSurfaceId(uint32_t parent_sequence_number,
                            uint32_t child_sequence_number,
                            const base::UnguessableToken& embed_token)
       : parent_sequence_number_(parent_sequence_number),
         child_sequence_number_(child_sequence_number),
         embed_token_(embed_token) {}
 
-  static LocalSurfaceId MaxSequenceId() {
+  static constexpr LocalSurfaceId MaxSequenceId() {
     return LocalSurfaceId(kMaxParentSequenceNumber, kMaxChildSequenceNumber,
                           base::UnguessableToken());
   }

@@ -10,7 +10,7 @@
 namespace base {
 
 // Verifies that we can support constexpr Token construction.
-Token kTestToken{1234, 5678};
+constexpr Token kTestToken{1234, 5678};
 
 TEST(TokenTest, Constructors) {
   Token zero_token;

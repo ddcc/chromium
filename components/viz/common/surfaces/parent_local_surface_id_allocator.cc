@@ -9,7 +9,7 @@
 
 namespace viz {
 
-LocalSurfaceId g_invalid_local_surface_id;
+constexpr LocalSurfaceId g_invalid_local_surface_id;
 
 ParentLocalSurfaceIdAllocator::ParentLocalSurfaceIdAllocator()
     : current_local_surface_id_(kInvalidParentSequenceNumber,
