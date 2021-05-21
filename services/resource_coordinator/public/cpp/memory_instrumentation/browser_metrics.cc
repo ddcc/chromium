@@ -53,11 +53,12 @@ base::TimeDelta GetDelayForNextMemoryLog() {
 #if defined(OS_ANDROID)
   base::TimeDelta mean_time = base::TimeDelta::FromMinutes(5);
 #else
-  base::TimeDelta mean_time = base::TimeDelta::FromMinutes(30);
+  base::TimeDelta mean_time = base::TimeDelta::FromMinutes(1);
 #endif
-  // Compute the actual delay before sampling using a Poisson process.
-  double uniform = base::RandDouble();
-  return -std::log(uniform) * mean_time;
+  return mean_time;
+// Compute the actual delay before sampling using a Poisson process.
+//  double uniform = base::RandDouble();
+//  return -std::log(uniform) * mean_time;
 }
 
 }  // namespace memory_instrumentation
