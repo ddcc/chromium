@@ -85,23 +85,23 @@ static inline bool HerQulesParseMessageHandles(
     return false;
   }
 
+  std::vector<int64_t> fds(num_handles);
+  struct fdvec vec = { .addr = fds.data(), .sz = num_handles };
+  if (fcntl(fd, F_POPFDV, &vec)) {
+    PLOG(ERROR) << "Cannot pop vector from file descriptor " << fd;
+    return false;
+  }
+
   handles->resize(num_handles);
   for (size_t i = 0; i < num_handles; ++i) {
-    int recv_fd = -1;
-
-    if (fcntl(fd, F_POPFD, &recv_fd)) {
-      PLOG(ERROR) << "Cannot pop from file descriptor " << fd;
-      return false;
-    }
-
     auto type =
         static_cast<mojo::PlatformHandle::Type>(header->entries[i].type);
     if (type == PlatformHandle::Type::kFd) {
-      (*handles)[i] = PlatformHandle(base::ScopedFD(recv_fd));
+      (*handles)[i] = PlatformHandle(base::ScopedFD(fds[i]));
     } else if (type == PlatformHandle::Type::kFdShmRx) {
-      (*handles)[i] = PlatformHandle(base::ScopedFD(recv_fd), true);
+      (*handles)[i] = PlatformHandle(base::ScopedFD(fds[i]), true);
     } else if (type == PlatformHandle::Type::kFdShmTx) {
-      (*handles)[i] = PlatformHandle(base::ScopedFD(recv_fd), false);
+      (*handles)[i] = PlatformHandle(base::ScopedFD(fds[i]), false);
     } else {
       LOG(ERROR) << "Unexpected handle type!";
       return false;
@@ -216,17 +216,18 @@ static inline bool HerQulesSend(int fd,
   const auto sz = message->data_num_bytes();
   memcpy(memory, message->data(), sz);
 
-  if (message->has_handles()) {
-    std::vector<PlatformHandleInTransit> handles = message->TakeHandles();
+  if (!message->has_handles())
+    return true;
 
-    for (auto& handle : handles) {
-      DCHECK(handle.handle().is_valid());
-      int push_fd = handle.TakeHandle().TakeFD().release();
-      if (fcntl(fd, F_PUSHFD, push_fd)) {
-        PLOG(ERROR) << "Cannot push to file descriptor " << fd;
-        return false;
-      }
-    }
+  std::vector<PlatformHandleInTransit> handles = message->TakeHandles();
+  std::vector<int64_t> fds(handles.size());
+  for (size_t i = 0; i < handles.size(); ++i)
+    fds[i] = handles[i].TakeHandle().TakeFD().release();
+
+  struct fdvec vec = { .addr = fds.data(), .sz = fds.size() };
+  if (fcntl(fd, F_PUSHFDV, &vec)) {
+    PLOG(ERROR) << "Cannot push vector to file descriptor " << fd;
+    return false;
   }
 
   return true;

@@ -254,8 +254,8 @@ ResultExpr RestrictFcntlCommands() {
               F_DUPFD,
               F_DUPFD_CLOEXEC
 #if BUILDFLAG(USE_HERQULES)
-              , mojo::core::F_PUSHFD
-              , mojo::core::F_POPFD
+              , mojo::core::F_PUSHFDV
+              , mojo::core::F_POPFDV
 #endif
               ),
              Allow())

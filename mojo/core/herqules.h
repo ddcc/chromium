@@ -26,6 +26,14 @@ struct HerQulesShmHdr {
 const unsigned F_PUSHFD = 100;
 const unsigned F_POPFD = 101;
 const unsigned F_POPFD_CLOEXEC = 102;
+const unsigned F_PUSHFDV = 103;
+const unsigned F_POPFDV = 104;
+const unsigned F_POPFDV_CLOEXEC = 105;
+
+struct fdvec {
+   int64_t *addr;
+   size_t sz;
+};
 
 constexpr size_t kHerQulesBufferSize = 16UL * 1024UL * 1024UL;
 
