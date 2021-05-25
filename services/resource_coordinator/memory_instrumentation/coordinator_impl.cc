@@ -245,7 +245,7 @@ void CoordinatorImpl::UnregisterClientProcess(base::ProcessId process_id) {
       if (current->process_id != process_id)
         continue;
       RemovePendingResponse(process_id, current->type);
-      request->failed_memory_dump_count++;
+      // request->failed_memory_dump_count++;
     }
     FinalizeGlobalMemoryDumpIfAllManagersReplied();
   }
@@ -435,7 +435,7 @@ void CoordinatorImpl::OnChromeMemoryDumpResponse(
   RemovePendingResponse(process_id, ResponseType::kChromeDump);
 
   if (!base::Contains(clients_, process_id)) {
-    VLOG(1) << "Received a memory dump response from an unregistered client";
+    VLOG(1) << "Received a memory dump response from an unregistered client " << process_id;
     return;
   }
 
@@ -444,7 +444,7 @@ void CoordinatorImpl::OnChromeMemoryDumpResponse(
 
   if (!success) {
     request->failed_memory_dump_count++;
-    VLOG(1) << "RequestGlobalMemoryDump() FAIL: NACK from client process";
+    VLOG(1) << "OnChromeMemoryDumpResponse() FAIL from client process " << process_id;
   }
 
   FinalizeGlobalMemoryDumpIfAllManagersReplied();
@@ -464,7 +464,7 @@ void CoordinatorImpl::OnOSMemoryDumpResponse(uint64_t dump_guid,
   RemovePendingResponse(process_id, ResponseType::kOSDump);
 
   if (!base::Contains(clients_, process_id)) {
-    VLOG(1) << "Received a memory dump response from an unregistered client";
+    VLOG(1) << "Received a memory dump response from an unregistered client " << process_id;
     return;
   }
 
@@ -472,7 +472,15 @@ void CoordinatorImpl::OnOSMemoryDumpResponse(uint64_t dump_guid,
 
   if (!success) {
     request->failed_memory_dump_count++;
-    VLOG(1) << "RequestGlobalMemoryDump() FAIL: NACK from client process";
+    VLOG(1) << "OnOSMemoryDumpResponse() FAIL from client process " << process_id;
+  } else {
+    // Hack to prevent dead clients from breaking subsequent dumps
+    for (auto &d : request->responses[process_id].os_dumps) {
+      if (d.second && !d.second->resident_set_kb && !d.second->peak_resident_set_kb) {
+        DLOG(WARNING) << "Removing non-existent client process " << d.first;
+        UnregisterClientProcess(d.first);
+      }
+    }
   }
 
   FinalizeGlobalMemoryDumpIfAllManagersReplied();

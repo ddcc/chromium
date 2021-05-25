@@ -100,6 +100,7 @@ void ClientProcessImpl::OnChromeMemoryDumpDone(
   }
 
   if (!process_memory_dump) {
+    DLOG(WARNING) << "Chrome dump failed!\n";
     std::move(callback).Run(false, dump_guid, nullptr);
     return;
   }

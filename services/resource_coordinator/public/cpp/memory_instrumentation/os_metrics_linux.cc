@@ -53,8 +53,10 @@ bool GetResidentAndSharedPagesFromStatmFile(int fd,
   lseek(fd, 0, SEEK_SET);
   char line[kMaxLineSize];
   int res = read(fd, line, kMaxLineSize - 1);
-  if (res <= 0)
+  if (res <= 0) {
+    DLOG(ERROR) << "Cannot read statm fd!\n";
     return false;
+  }
   line[res] = '\0';
   int num_scanned =
       sscanf(line, "%*s %" SCNu64 " %" SCNu64, resident_pages, shared_pages);
@@ -286,16 +288,20 @@ bool OSMetrics::FillOSMemoryDump(base::ProcessId pid,
   auto autoclose = base::ScopedFD(open(statm_file.value().c_str(), O_RDONLY));
   int statm_fd = autoclose.get();
 
-  if (statm_fd == -1)
-    return false;
+  if (statm_fd == -1) {
+    DLOG(WARNING) << "PID: " << pid << " No statm fd!\n";
+    return true;
+  }
 
   uint64_t resident_pages;
   uint64_t shared_pages;
   bool success = GetResidentAndSharedPagesFromStatmFile(
       statm_fd, &resident_pages, &shared_pages);
 
-  if (!success)
+  if (!success) {
+    DLOG(WARNING) << "PID: " << pid << " Cannot get pages from statm!\n";
     return false;
+  }
 
   auto process_metrics = CreateProcessMetrics(pid);
 
