@@ -276,3 +276,27 @@ diff -Nur '--exclude=.git' a/src/v8/src/codegen/external-reference-table.cc b/sr
  #define SYMBOLIZE_FUNCTION
  #include <execinfo.h>
  #include <vector>
+diff -Nur '--exclude=.git' a/src/third_party/sqlite/src/amalgamation/sqlite3.c b/src/third_party/sqlite/src/amalgamation/sqlite3.c
+--- chromium-base/src/third_party/sqlite/src/amalgamation/sqlite3.c
++++ chromium-cfidfionly/src/third_party/sqlite/src/amalgamation/sqlite3.c
+@@ -34070,7 +34070,7 @@
+ #define osLstat      ((int(*)(const char*,struct stat*))aSyscall[27].pCurrent)
+ 
+ #if defined(__linux__) && defined(SQLITE_ENABLE_BATCH_ATOMIC_WRITE)
+-# ifdef __ANDROID__
++# if defined(__ANDROID__) || !defined(__GLIBC__)
+   { "ioctl", (sqlite3_syscall_ptr)(int(*)(int, int, ...))ioctl, 0 },
+ #define osIoctl ((int(*)(int,int,...))aSyscall[28].pCurrent)
+ # else
+diff -Nur '--exclude=.git' a/src/third_party/sqlite/src/src/os_unix.c b/src/third_party/sqlite/src/src/os_unix.c
+--- chromium-base/src/third_party/sqlite/src/src/os_unix.c
++++ chromium-cfidfionly/src/third_party/sqlite/src/src/os_unix.c
+@@ -535,7 +535,7 @@
+ #define osLstat      ((int(*)(const char*,struct stat*))aSyscall[27].pCurrent)
+ 
+ #if defined(__linux__) && defined(SQLITE_ENABLE_BATCH_ATOMIC_WRITE)
+-# ifdef __ANDROID__
++# if defined(__ANDROID__) || !defined(__GLIBC__)
+   { "ioctl", (sqlite3_syscall_ptr)(int(*)(int, int, ...))ioctl, 0 },
+ #define osIoctl ((int(*)(int,int,...))aSyscall[28].pCurrent)
+ # else
