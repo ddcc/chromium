@@ -1,5 +1,4 @@
-use_herqules=true
-use_herqules_dfi=true
+is_debug=false
 cc_wrapper="ccache"
 enable_linux_installer=false
 
@@ -15,3 +14,22 @@ rtc_use_pipewire=false
 google_api_key="TODO"
 google_default_client_id="TODO"
 google_default_client_secret="TODO"
+
+# syscall:
+# git checkout 6afac0fa1c720cea03f540d3ca52da337ef30c7d
+# use_herqules_dfi=false
+
+# syscall + dfi:
+# git checkout master
+# use_herqules_dfi=true
+
+# syscall + cfi + dfi:
+# git checkout master
+# use_herqules_dfi=true
+# is_cfi=true
+# use_cfi_icall=true
+# use_cfi_cast=true
+# use_thin_lto=true
+
+# mojo ipc:
+# use_herqules = true
