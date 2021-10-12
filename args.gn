@@ -17,14 +17,17 @@ google_default_client_secret="TODO"
 
 # syscall:
 # git checkout 6afac0fa1c720cea03f540d3ca52da337ef30c7d
-# use_herqules_dfi=false
+# use_herqules=false
+# use_herqules_dfi=true
 
 # syscall + dfi:
 # git checkout master
+# use_herqules=false
 # use_herqules_dfi=true
 
 # syscall + cfi + dfi:
 # git checkout master
+# use_herqules=false
 # use_herqules_dfi=true
 # is_cfi=true
 # use_cfi_icall=true
@@ -32,4 +35,4 @@ google_default_client_secret="TODO"
 # use_thin_lto=true
 
 # mojo ipc:
-# use_herqules = true
+# use_herqules=true
